@@ -1,0 +1,16 @@
+a {
+    text-decoration : none;
+    color:inherit;
+}
+.academyList {
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+.academyList td:first-child {
+    text-align:left;
+}
+td {
+    width: 200px;
+    padding-top: 10px;
+}
