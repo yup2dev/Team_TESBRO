@@ -3,28 +3,39 @@ package com.team.tesbro;
 import com.team.tesbro.Academy.Academy;
 import com.team.tesbro.Academy.AcademyRepository;
 import com.team.tesbro.Academy.AcademyService;
+import com.team.tesbro.Teacher.Teacher;
+import com.team.tesbro.Teacher.TeacherRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class TesbroApplicationTests {
 
 	@Autowired
 	private AcademyService academyService;
+	@Autowired
+	private AcademyRepository academyRepository;
+	@Autowired
+	private TeacherRepository teacherRepository;
 	@Test
 	void contextLoads() {
-		for(int i = 1; i<=10; i++) {
-			String academyName = String.format("테스트[%03d] 필라테스", i);
-			String ceoName= "전세린";
-			String academyAddress = "대전 갈마동 271-7";
-			String academyNum ="010-2556-3643";
-			String introduction="안녕하세요. 테스트 필라테스입니다. 제대로 하는 건지 알수가 없어";
+		Optional<Academy> oa = this.academyRepository.findById(1);
+		assertTrue(oa.isPresent());
+		Academy a = oa.get();
 
-			this.academyService.create(academyName, ceoName, academyAddress, academyNum, introduction);
-		}
+		Teacher t = new Teacher();
+		t.setTeacherName("이승열");
+		t.setQualifications("홈프로텍터 과정 수료");
+		t.setAwards("집에 빨리가기 대회 우승");
+		t.setIntroduction("안녕하세요. 왤캐 바쁘세요. 쉬엄쉬엄 일정 잘 마치시고 과제는 까먹지말고 하세요. 예외없음");
+		t.setAcademy(a);
+		this.teacherRepository.save(t);
 	}
 
 }
