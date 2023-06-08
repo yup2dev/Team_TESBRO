@@ -12,13 +12,16 @@ import java.util.Optional;
 public class AcademyService {
     private final AcademyRepository academyRepository;
 
-    public void create(String academyName, String ceoName, String academyAddress, String academyNum, String introduction) {
+    public void create(String academyName, String ceoName, String academySi, String academyGu, String academyDong, String academyTel, String introduction, String imgLogo) {
         Academy academy = new Academy();
         academy.setAcademyName(academyName);
         academy.setCeoName(ceoName);
-        academy.setAcademyAddress(academyAddress);
-        academy.setAcademyNum(academyNum);
+        academy.setAcademySi(academySi);
+        academy.setAcademyGu(academyGu);
+        academy.setAcademyDong(academyDong);
+        academy.setAcademyTel(academyTel);
         academy.setIntroduction(introduction);
+        academy.setImgLogo(imgLogo);
         academy.setCreateDate(LocalDateTime.now());
         this.academyRepository.save(academy);
     }

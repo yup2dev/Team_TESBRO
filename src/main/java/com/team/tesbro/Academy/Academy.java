@@ -23,15 +23,27 @@ public class Academy {
     private String ceoName;
 
     @Column
-    private String academyAddress;
-
-    @Column
-    private String academyNum;
+    private String academyTel;
 
     @Column(columnDefinition = "TEXT")
     private String introduction;
 
+    @Column(columnDefinition = "TEXT")
+    private String imgLogo;
+
     private LocalDateTime createDate;
+
+    @Column
+    private String academySi;
+
+    @Column
+    private String academyGu;
+
+    @Column
+    private String academyDong;
+
+    @Column
+    private int jjim;
 
     @OneToMany(mappedBy = "academy", cascade = CascadeType.REMOVE)
     private List<Teacher> teacherList;

@@ -1,0 +1,8 @@
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<div class="teacher_pic">
+    <img src="https://cdn.pixabay.com/photo/2023/05/28/13/15/helicopter-8023696_640.jpg" alt="teacher-pic" class="profile_pic">
+</div>
+<h1 class="teacher_name" th:text="${teacher.teacherName}"></h1>
+<h3 class="teacher_qualify" th:text="${teacher.qualifications}"></h3>
+<h3 class="teacher_awards" th:text="${teacher.awards}"></h3>
+<h3 class="teacher_intro" th:text="${teacher.introduction}"></h3>

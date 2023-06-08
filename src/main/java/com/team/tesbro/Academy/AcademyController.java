@@ -21,7 +21,7 @@ public class AcademyController {
     public String academy(Model model) {
         List<Academy> academyList = this.academyRepository.findAll();
         model.addAttribute("academyList", academyList);
-        return "academy_list";
+        return "list";
     }
 
     @GetMapping(value = "/detail/{id}")
