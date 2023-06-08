@@ -2,6 +2,11 @@ body{
   padding: 0 100px;
 }
 
+a{
+  text-decoration: none;
+  color:black;
+}
+
 .border-bottom{
   border-bottom:1px solid #e7eaf3;
 }
