@@ -1,0 +1,112 @@
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+
+<section class="board">
+  <div class="navbar">
+    <!--  내비로고  -->
+    <div class="nav-logo">
+      <a href="#">
+        <img src="https://velog.velcdn.com/images/jsr3643/board/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg" alt="TesbroLogo">
+      </a>
+    </div>
+    <!--  내비로고끝  -->
+    <!--  내비바 메뉴 -->
+    <ul class="nav-bar">
+      <li class="nav-item">
+        <a href="#">예약하기</a>
+        <ul class="sub-bar">
+          <li class="sub-mn">
+            <a href="#">등록하기(기업)</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#">학원조회</a>
+        <ul class="sub-bar">
+          <li class="sub-mn">
+            <a href="#">내 주변</a>
+          </li>
+          <li class="sub-mn">
+            <a href="#">수강권 구매</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#">공지사항</a>
+        <ul class="sub-bar">
+          <li class="sub-mn">
+            <a href="#">이벤트</a>
+          </li>
+          <li class="sub-mn">
+            <a href="#">문의하기</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#">마이</a>
+        <ul class="sub-bar">
+          <li class="sub-mn">
+            <a href="#">예약확인</a>
+          </li>
+          <li class="sub-mn">
+            <a href="#">내 수강권</a>
+          </li>
+          <li class="sub-mn">
+            <a href="#">마이페이지</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <!--  내비바메뉴 끝  -->
+  </div>
+  <!-- 내비바 끝 -->
+
+
+
+<section class="board">
+  <div class="page-title">
+    <div class="container">
+      <h3>공지사항</h3>
+    </div>
+  </div>
+  <!-- 게시판 -->
+  <div id="board-list">
+    <div class="container">
+      <table class="board-table">
+        <thead>
+        <tr>
+          <th scope="col" class="th-num">번호</th>
+          <th scope="col" class="th-title">제목</th>
+          <th scope="col" class="th-author">작성자</th>
+          <th scope="col" class="th-date">작성일</th>
+          <th scope="col" class="th-hit">조회</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board, loop :  ${paging}">
+          <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+
+          <td>
+            <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.subject}"></a>
+          </td>
+          <td>
+            <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.content}"></a>
+          </td>
+          <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        <a th:href="@{/board/create}" class="button">공지 등록하기</a>
+        <a href="" class="prev"><</a>
+        <span class="current pager">1</span>
+        <a href="" class="pager">2</a>
+        <a href="" class="pager">3</a>
+        <a href="" class="pager">4</a>
+        <a href="" class="pager">5</a>
+        <a href="" class="next">></a>
+      </div>
+    </div>
+  </div>
+</section>
+
