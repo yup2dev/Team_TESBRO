@@ -90,7 +90,6 @@ public class BoardController {
 
         boardService.addAnswerToBoard(id, content);
 
-        // 게시물이 속한 카테고리에 따라 리다이렉트 경로를 생성
         Board board = boardService.getBoard(id);
         String boardCategory = board.getBoardCategory();
 
@@ -102,8 +101,13 @@ public class BoardController {
             return "redirect:/board/notice";
         }
 
-        // 위의 조건문에 해당하지 않는 경우 기본적으로 상세 페이지로 리다이렉트
         return "redirect:/board/detail/" + id;
     }
 
+    @GetMapping("/search")
+    public String searchBoard(@RequestParam("keyword") String keyword, Model model) {
+        Page<Board> searchResult = boardService.searchByKeyword(keyword);
+        model.addAttribute("paging", searchResult);
+        return "board_list";
+    }
 }

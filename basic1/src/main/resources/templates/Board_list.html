@@ -104,6 +104,10 @@
         <a th:if="${paging.hasPrevious()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.previousPageable().pageNumber}|}" class="prev">&lt;</a>
         <span class="current pager" th:text="${paging.number + 1}"></span>
         <a th:if="${paging.hasNext()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.nextPageable().pageNumber}|}" class="next">&gt;</a>
+        <form class="search-form" th:action="@{/board/search}" method="get">
+          <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+          <button type="submit">검색</button>
+        </form>
       </div>
     </div>
   </div>

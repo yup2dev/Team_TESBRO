@@ -64,4 +64,10 @@ public class BoardService {
 
         boardRepository.save(board);
     }
+
+    public Page<Board> searchByKeyword(String keyword) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(0, 10, sort);
+        return boardRepository.findBySubjectContainingIgnoreCase(keyword, pageable);
+    }
 }
