@@ -31,13 +31,13 @@
         </ul>
       </li>
       <li class="nav-item">
-        <a href="#">공지사항</a>
+        <a href="/board/notice">공지사항</a>
         <ul class="sub-bar">
           <li class="sub-mn">
-            <a href="#">이벤트</a>
+            <a href="/board/event">이벤트</a>
           </li>
           <li class="sub-mn">
-            <a href="#">문의하기</a>
+            <a href="/board/qna">문의하기</a>
           </li>
         </ul>
       </li>
@@ -82,8 +82,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="board, loop :  ${paging}">
-          <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+        <tr th:each="board, loop : ${paging}">
+          <td th:text="${loop.index + 1}"></td>
 
           <td>
             <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.subject}"></a>
@@ -91,20 +91,19 @@
           <td>
             <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.content}"></a>
           </td>
-          <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+          <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}">
+
+          </td>
+
         </tr>
         </tbody>
       </table>
 
       <div class="pagination">
-        <a th:href="@{/board/create}" class="button">공지 등록하기</a>
-        <a href="" class="prev"><</a>
-        <span class="current pager">1</span>
-        <a href="" class="pager">2</a>
-        <a href="" class="pager">3</a>
-        <a href="" class="pager">4</a>
-        <a href="" class="pager">5</a>
-        <a href="" class="next">></a>
+        <a th:href="@{|/board/${paging.content[0].boardCategory}/create|}" class="button">글쓰기</a>
+        <a th:if="${paging.hasPrevious()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.previousPageable().pageNumber}|}" class="prev">&lt;</a>
+        <span class="current pager" th:text="${paging.number + 1}"></span>
+        <a th:if="${paging.hasNext()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.nextPageable().pageNumber}|}" class="next">&gt;</a>
       </div>
     </div>
   </div>

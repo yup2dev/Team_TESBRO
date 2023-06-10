@@ -1,19 +1,18 @@
 <div layout:fragment="content" class="container">
-    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
-    <form th:action="@{/board/create}" method="board">
+    <h5 class="my-3 border-bottom pb-2">글쓰기</h5>
+    <form th:action="@{/board/{boardCategory}/create(boardCategory=${boardCategory})}" method="post" th:object="${boardForm}">
         <div class="mb-3">
-            <label for="subject" class="form-label">작성자</label>
-            <input type="text" name="managerName" id="managerName" class="form-control">
+            <label for="managerName" class="form-label">작성자</label>
+            <input type="text" th:field="*{managerName}" class="form-control">
         </div>
         <div class="mb-3">
             <label for="subject" class="form-label">제목</label>
-            <input type="text" name="subject" id="subject" class="form-control">
+            <input type="text" th:field="*{subject}" class="form-control">
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">내용</label>
-            <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+            <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
         </div>
         <input type="submit" value="저장하기" class="btn btn-primary my-2">
     </form>
 </div>
-</html>
