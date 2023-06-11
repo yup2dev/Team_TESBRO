@@ -33,6 +33,11 @@ public class Board {
 
     private LocalDateTime modifyDate;
 
+    private LocalDateTime updateDate;
+
+    @Column(name = "views")
+    private Integer views;
+
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Answer> answers;
 
@@ -44,15 +49,8 @@ public class Board {
         answer.setBoard(this);
     }
 
-    private LocalDateTime updateDate;
-
-
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
+    public Integer getViews() {
+        return views != null ? views : 0;
     }
 }
 

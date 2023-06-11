@@ -80,9 +80,11 @@ public class BoardController {
         return "redirect:/board";
     }
 
-
     @GetMapping("/detail/{id}")
     public String getBoardDetail(@PathVariable("id") Integer id, Model model) {
+        // 조회수 증가
+        boardService.Views(id);
+
         Board board = boardService.getBoard(id);
         model.addAttribute("board", board);
         model.addAttribute("answerForm", new AnswerForm());
@@ -130,7 +132,6 @@ public class BoardController {
         return "board_form";
     }
 
-
     @PostMapping("/modify/{id}")
     public String modifyBoard(@PathVariable("id") Integer id, @ModelAttribute("boardForm") BoardForm boardForm) {
         String managerName = boardForm.getManagerName();
@@ -147,5 +148,4 @@ public class BoardController {
         boardService.deleteBoard(id);
         return "redirect:/board/notice";
     }
-
 }

@@ -20,7 +20,9 @@
 <a th:if="${board.boardCategory == 'qna'}" th:href="@{/board/qna}">돌아가기</a>
 <a th:if="${board.boardCategory == 'event'}" th:href="@{/board/event}">돌아가기</a>
 
-<a th:href="@{'/board/modify/' + ${id}}">수정</a>
+
+<a th:href="@{/board/modify/{id}(id=${board.id})}" class="btn btn-primary">수정하기</a>
+
 
 <form th:action="@{'/board/delete/' + ${board.id}}" method="post">
     <input type="hidden" name="_method" value="DELETE" />

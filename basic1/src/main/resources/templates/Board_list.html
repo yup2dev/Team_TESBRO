@@ -66,6 +66,8 @@
   <div class="page-title">
     <div class="container">
       <h3>공지사항</h3>
+      <h4>이벤트</h4>
+      <h5>Q&A</h5>
     </div>
   </div>
   <!-- 게시판 -->
@@ -83,8 +85,7 @@
         </thead>
         <tbody>
         <tr th:each="board, loop : ${paging}">
-          <td th:text="${loop.index + 1}"></td>
-
+          <td th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
           <td>
             <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.subject}"></a>
           </td>
@@ -94,6 +95,7 @@
           <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}">
 
           </td>
+          <td th:text="${board.views}"></td>
 
         </tr>
         </tbody>
@@ -102,7 +104,21 @@
       <div class="pagination">
         <a th:href="@{|/board/${paging.content[0].boardCategory}/create|}" class="button">글쓰기</a>
         <a th:if="${paging.hasPrevious()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.previousPageable().pageNumber}|}" class="prev">&lt;</a>
+
+        <span th:if="${paging.number >= 2}">
+  <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 2}|}" class="pager" th:text="${paging.number - 1}"></a>
+</span>
+        <span th:if="${paging.number >= 1}">
+  <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 1}|}" class="pager" th:text="${paging.number}"></a>
+</span>
         <span class="current pager" th:text="${paging.number + 1}"></span>
+        <span th:if="${paging.number + 1 < paging.totalPages}">
+  <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number + 1}|}" class="pager" th:text="${paging.number + 2}"></a>
+</span>
+        <span th:if="${paging.number + 2 < paging.totalPages}">
+  <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number + 2}|}" class="pager" th:text="${paging.number + 3}"></a>
+</span>
+
         <a th:if="${paging.hasNext()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.nextPageable().pageNumber}|}" class="next">&gt;</a>
         <form class="search-form" th:action="@{/board/search}" method="get">
           <input type="text" name="keyword" placeholder="검색어를 입력하세요">

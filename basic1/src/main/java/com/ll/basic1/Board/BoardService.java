@@ -89,4 +89,11 @@ public class BoardService {
 
         boardRepository.delete(board);
     }
+    public void Views(Integer id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("Board not found with id: " + id));
+
+        board.setViews(board.getViews() + 1);
+        boardRepository.save(board);
+    }
 }
