@@ -7,7 +7,7 @@
     <li th:each="answer : ${board.answers}" th:text="${answer.content}"></li>
 </ul>
 
-<form th:action="@{/board/detail/{id}(id=${board.id})}" th:object="${answerForm}" method="post">
+<form th:action="@{'/board/detail/' + ${board.id}}" th:object="${answerForm}" method="post">
     <input type="hidden" th:field="*{boardId}" th:value="${board.id}" />
     <div>
         <label for="content">답변 작성:</label>
@@ -16,4 +16,13 @@
     <button type="submit">답변 등록</button>
 </form>
 
-<a th:href="@{/board}">게시판으로 돌아가기</a>
+<a th:if="${board.boardCategory == 'notice'}" th:href="@{/board/notice}">돌아가기</a>
+<a th:if="${board.boardCategory == 'qna'}" th:href="@{/board/qna}">돌아가기</a>
+<a th:if="${board.boardCategory == 'event'}" th:href="@{/board/event}">돌아가기</a>
+
+<a th:href="@{'/board/modify/' + ${id}}">수정</a>
+
+<form th:action="@{'/board/delete/' + ${board.id}}" method="post">
+    <input type="hidden" name="_method" value="DELETE" />
+    <button type="submit">삭제</button>
+</form>

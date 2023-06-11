@@ -43,6 +43,17 @@ public class Board {
         answers.add(answer);
         answer.setBoard(this);
     }
+
+    private LocalDateTime updateDate;
+
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
+    }
 }
 
 

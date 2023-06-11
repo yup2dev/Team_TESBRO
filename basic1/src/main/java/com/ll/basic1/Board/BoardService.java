@@ -43,7 +43,7 @@ public class BoardService {
         if (board.isPresent()) {
             return board.get();
         } else {
-            throw new DataNotFoundException("Board not found");
+            throw new DataNotFoundException("");
         }
     }
 
@@ -55,7 +55,7 @@ public class BoardService {
 
     public void addAnswerToBoard(Integer boardId, String content) {
         Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new DataNotFoundException("Board not found"));
+                .orElseThrow(() -> new DataNotFoundException(""));
 
         Answer answer = new Answer();
         answer.setContent(content);
@@ -69,5 +69,24 @@ public class BoardService {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(0, 10, sort);
         return boardRepository.findBySubjectContainingIgnoreCase(keyword, pageable);
+    }
+
+    public void modifyBoard(Integer id, String managerName, String subject, String content) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("Board not found"));
+
+        board.setManagerName(managerName);
+        board.setSubject(subject);
+        board.setContent(content);
+        board.setUpdateDate(LocalDateTime.now());
+
+        boardRepository.save(board);
+    }
+
+    public void deleteBoard(Integer id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("Board not found"));
+
+        boardRepository.delete(board);
     }
 }

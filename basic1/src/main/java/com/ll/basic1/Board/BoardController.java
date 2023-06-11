@@ -1,17 +1,22 @@
 package com.ll.basic1.Board;
 
+import com.ll.basic1.DataNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
     private final BoardService boardService;
+    private final BoardRepository boardRepository;
 
-    public BoardController(BoardService boardService) {
+    public BoardController(BoardService boardService, BoardRepository boardRepository) {
         this.boardService = boardService;
+        this.boardRepository = boardRepository;
     }
 
     @GetMapping("/event")
@@ -110,4 +115,37 @@ public class BoardController {
         model.addAttribute("paging", searchResult);
         return "board_list";
     }
+
+    @GetMapping("/modify/{id}")
+    public String getModifyForm(@PathVariable("id") Integer id, Model model) {
+        Board board = boardService.getBoard(id);
+        BoardForm boardForm = new BoardForm();
+        boardForm.setManagerName(board.getManagerName());
+        boardForm.setSubject(board.getSubject());
+        boardForm.setContent(board.getContent());
+
+        model.addAttribute("boardForm", boardForm);
+        model.addAttribute("boardId", id);
+
+        return "board_form";
+    }
+
+
+    @PostMapping("/modify/{id}")
+    public String modifyBoard(@PathVariable("id") Integer id, @ModelAttribute("boardForm") BoardForm boardForm) {
+        String managerName = boardForm.getManagerName();
+        String subject = boardForm.getSubject();
+        String content = boardForm.getContent();
+
+        boardService.modifyBoard(id, managerName, subject, content);
+
+        return "redirect:/board/detail/" + id;
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteBoard(@PathVariable("id") Integer id) {
+        boardService.deleteBoard(id);
+        return "redirect:/board/notice";
+    }
+
 }
