@@ -220,8 +220,8 @@ form{
   cursor:pointer;
   display: flex;
   flex-wrap: no-wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: 60px;
+  margin-left: 15px;
   align-items:center;
 }
 
