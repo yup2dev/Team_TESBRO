@@ -17,16 +17,32 @@ li {
 
 .content {
   display:flex;
-  justify-content:center;
   flex-wrap:wrap;
+  justify-content:center;
+  border:1px solid black;
   background: transparent;
+}
+
+.top-btn{
+  position:fixed;
+  right:5%;
+  bottom:0;
+  display:flex;
+  justify-content:center;
+  padding-top:10px;
+  width:70px;
+  height:40px;
+  background: white;
+  border:1px solid seagreen;
+  opacity:0.7;
 }
 
 .academy-top {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   position:relative;
   min-width:1200px;
+  max-width:1200px;
   height:200px;
 }
 .academy-top .academy-logo{
@@ -224,7 +240,7 @@ li {
   background: white;
 }
 .academy-mid-3 .detail-btn a {
-  font-size:1rem;
+  font-size:1.4rem;
   width:100%;
   padding:10px;
 }

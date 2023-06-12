@@ -1,3 +1,7 @@
+#datepicker {
+    display:none;
+}
+
 .datepicker--cells{
 display:-webkit-flex;
 display:-ms-flexbox;
@@ -107,7 +111,9 @@ width:14.28571%
 .datepicker--cell-year{width:25%;height:33.33%}
 .datepickers-container{position:absolute;left:0;top:0}
 @media print{.datepickers-container{display:none}}
-.datepicker{background:#fff;
+.datepicker{
+width:500px;
+background:#fff;
 border:1px solid #dbdbdb;
 box-shadow:0 4px 12px rgba(0,0,0,.15);
 border-radius:4px;
@@ -115,7 +121,6 @@ box-sizing:content-box;
 font-family:Tahoma,sans-serif;
 font-size:14px;
 color:#4a4a4a;
-width:250px;
 position:absolute;
 left:-100000px;
 opacity:0;
@@ -154,7 +159,10 @@ opacity:1;
 -webkit-transform:none;
 transform:none
 }
-.datepicker--content{box-sizing:content-box;padding:4px}
+.datepicker--content{box-sizing:content-box;padding:4px;
+    width: 500px;
+}
+
 .datepicker--pointer{
 position:absolute;
 background:#fff;
@@ -196,6 +204,7 @@ top:calc(50% - 10px / 2)}
 .datepicker--body.active{display:block}
 
 .datepicker--nav{
+width:500px;
 display:-webkit-flex;
 display:-ms-flexbox;
 display:flex;
