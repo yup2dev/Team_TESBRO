@@ -43,7 +43,7 @@ public class Academy {
     private String academyDong;
 
     @Column
-    private int jjim;
+    private Integer jjim;
 
     @OneToMany(mappedBy = "academy", cascade = CascadeType.REMOVE)
     private List<Teacher> teacherList;

@@ -1,0 +1,266 @@
+* {
+  padding:0;
+  margin:0;
+}
+a {
+  text-decoration:none;
+  color:inherit;
+}
+button {
+  background: transparent;
+  border:0;
+  cursor:pointer;
+}
+li {
+  list-style:none;
+}
+
+.content {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  background: transparent;
+}
+
+.academy-top {
+  display: flex;
+  flex-wrap: nowrap;
+  position:relative;
+  min-width:1200px;
+  height:200px;
+}
+.academy-top .academy-logo{
+  display:inline-block;
+  margin-top:20px;
+  margin-left:30px;
+}
+.academy-top .academy-logo img{
+  width:150px;
+  height:150px;
+  object-fit:cover;
+}
+.academy-top .atop-items {
+  display:inline-block;
+  height:150px;
+  vertical-align:top;
+  margin:20px;
+}
+.academy-top .atop-items p:first-child {
+  font-size:36px;
+  font-weight:bold;
+  margin-top:15px;
+  margin-bottom:20px;
+}
+.academy-top .atop-items p:last-child {
+  margin-top:10px;
+}
+
+.besides {
+  display:inline-block;
+  position:absolute;
+  top:130px;
+  right:30px;
+}
+.besides a {
+  border-radius:50px;
+}
+.besides a img{
+  margin: 5px;
+  padding:3px;
+  width:20px;
+}
+
+
+
+
+
+
+
+.academy-mid {
+  display: flex;
+  flex-wrap: wrap;
+  min-width:1200px;
+  max-width:1200px;
+  border-top:1px solid lightgray;
+}
+.academy-mid-1 {
+  display:flex;
+  width:100%;
+  height:670px;
+}
+.academy-mid-1 .mid1-photo {
+  min-width:600px;
+  height:600px;
+  margin:30px;
+}
+#img-slide{ width: 600px; margin: 0 auto;}
+.album{
+  height: 600px;
+  width: 100%;
+  overflow: hidden;
+  position:relative;
+}
+.album .images{
+    display: flex; height: 600px; width: 2560px;
+    transition-property: transform;
+    transition-duration: 1s;
+}
+.album .images .image img {
+  width: 600px; height: 600px;
+  object-fit:cover;
+}
+
+.album button{
+    width: 50px; height: 50px; border:none;
+    color: white; background-color: gray;
+  opacity:0.3;
+  position:relative;
+  cursor:pointer;
+}
+.album button:disabled{
+    background-color: gray;
+}
+.album .prev{ position:absolute; top:300px;}
+.album .next{ position:absolute; top:300px; right:0;}
+
+
+.reservation {
+  height:600px;
+  min-width:500px;
+  margin-top:30px;
+}
+.reservation .calender {
+  height:400px;
+}
+.reservation select{
+  font-size:14px;
+  display:flex;
+  margin: 20px auto;
+  padding:10px;
+  width:100%;
+}
+.reservation .btn-r {
+  font-size:1.5rem;
+  font-weight:bold;
+  width:100%;
+  background: seagreen;
+  color:white;
+  padding:10px;
+  margin-top:6px;
+}
+
+
+
+
+
+.academy-mid-2 {
+  width:100%;
+  height: 400px;
+}
+.academy-mid-2 .teachers:first-child {
+  font-size:1.5rem;
+  font-weight:bold;
+  padding-left:30px;
+
+}
+.academy-mid-2 .teachers:last-child {
+  position:absolute;
+  width:1130px;
+  margin:30px;
+}
+#t-slide{ width: 100%; margin: 0 auto;}
+.t-album{
+  overflow: hidden;
+  position:relative;
+}
+.t-album .t-images{
+    display: flex;
+    transition-property: transform;
+    transition-duration: 1s;
+}
+.t-album .t-images .t-image {
+  margin-right:30px;
+  text-align:center;
+  font-size:1.2rem;
+  margin-bottom:10px;
+}
+.t-album .t-images .t-image img {
+  width: 200px; height: 250px;
+  object-fit:cover;
+}
+
+.t-album button{
+    width: 50px; height: 50px; border:none;
+    color: white; background-color: gray;
+    opacity:0.3;
+    position:relative;
+    cursor:pointer;
+}
+.t-album button:disabled{
+    background-color: transparent;
+}
+.t-album .t-prev{ position:absolute; top:125px;}
+.t-album .t-next{ position:absolute; top:125px; right:0;}
+
+
+
+
+
+
+
+
+.academy-mid-3 {
+  width:100%;
+  position:relative;
+}
+.academy-mid-3 .detail-btn {
+  display:flex;
+  position:sticky;
+  top:0;
+  justify-content:space-around;
+  border-top:1px solid lightgray;
+  border-bottom:1px solid lightgray;
+  text-align:center;
+  background: white;
+}
+.academy-mid-3 .detail-btn a {
+  font-size:1rem;
+  width:100%;
+  padding:10px;
+}
+.academy-mid-3 .detail-contents {
+  min-height:500px;
+}
+
+.academy-mid-3 .detail-contents .d-content {
+  margin:30px;
+  min-height:200px;
+  border:1px dotted orange;
+}
+.academy-mid-3 .detail-contents .d-content p{
+  display:flex;
+  justify-content:center;
+}
+.academy-mid-3 .detail-contents .d-content p:first-child {
+  justify-content:flex-start;
+  font-weight:bold;
+  padding-bottom:5px;
+  border-bottom:1px solid lightgray;
+  margin-bottom:30px;
+}
+
+
+
+
+
+
+
+
+
+.academy-btm {
+  display: flex;
+  flex-wrap: nowrap;
+  border:2px solid green;
+  min-width:1200px;
+  height:500px;
+}
