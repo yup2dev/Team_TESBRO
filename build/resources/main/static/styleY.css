@@ -2,6 +2,11 @@ body{
   padding: 0 100px;
 }
 
+a{
+  text-decoration: none;
+  color:black;
+}
+
 .border-bottom{
   border-bottom:1px solid #e7eaf3;
 }
@@ -215,8 +220,8 @@ form{
   cursor:pointer;
   display: flex;
   flex-wrap: no-wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: 60px;
+  margin-left: 15px;
   align-items:center;
 }
 
