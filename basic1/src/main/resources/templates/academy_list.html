@@ -1,0 +1,28 @@
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>academy_list</title>
+</head>
+<body>
+<table class="academyList">
+  <thead>
+  <tr>
+    <th>학원이름</th>
+    <th>대표자</th>
+    <th>학원 주소</th>
+    <th>연락처</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="academy, index : ${academyList}">
+    <td><a th:href="@{|/academy/detail/${academy.id}|}" 1yName}"></a></td>
+    <td><a th:href="@{|/academy/detail/${academy.id}|}" 112th:text="${academy.ceoName}"></a></td>
+    <td><a th:href="@{|/academy/detail/${academy.id}|}" th:text="${academy.academyAddress}"></a></td>
+    <td><a th:href="@{|/academy/detail/${academy.id}|}" th:text="${academy.academyNum}"></a></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

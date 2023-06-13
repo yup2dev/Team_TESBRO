@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  $(document).ready(funtion){
+  $("#selectParentBoxList").change(function(){
+  var thisParam = $(this).val();
+  $.ajax({
+  url:"/multi_box_ajax"
+  data:{"param":thisParam},
+  success: funtion() {
+  console.log("성공")
+  },
+  error: funtion() {
+  console.log("실패")
+  }
+  })
+  })
+  });
+</script>
+</body>
+</html>

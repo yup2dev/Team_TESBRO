@@ -82,7 +82,6 @@ public class BoardController {
 
     @GetMapping("/detail/{id}")
     public String getBoardDetail(@PathVariable("id") Integer id, Model model) {
-        // 조회수 증가
         boardService.Views(id);
 
         Board board = boardService.getBoard(id);

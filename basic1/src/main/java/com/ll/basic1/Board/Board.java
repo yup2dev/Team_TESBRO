@@ -38,6 +38,9 @@ public class Board {
     @Column(name = "views")
     private Integer views;
 
+    @Column(columnDefinition = "TEXT")
+    private String picture;
+
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Answer> answers;
 
