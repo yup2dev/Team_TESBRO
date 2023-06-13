@@ -16,35 +16,31 @@ import java.util.Optional;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public void create(String boardCategory, String managerName, String subject, String content) {
+    public Board create(String boardCategory, String managerName, String subject, String content) {
         Board board = new Board();
         board.setBoardCategory(boardCategory);
         board.setManagerName(managerName);
         board.setSubject(subject);
         board.setContent(content);
         board.setCreateDate(LocalDateTime.now());
-        this.boardRepository.save(board);
+        return boardRepository.save(board);
     }
 
-    public void createEvent(String managerName, String subject, String content) {
-        create("event", managerName, subject, content);
+    public Board createEvent(String managerName, String subject, String content) {
+        return create("event", managerName, subject, content);
     }
 
-    public void createQna(String managerName, String subject, String content) {
-        create("qna", managerName, subject, content);
+    public Board createQna(String managerName, String subject, String content) {
+        return create("qna", managerName, subject, content);
     }
 
-    public void createNotice(String managerName, String subject, String content) {
-        create("notice", managerName, subject, content);
+    public Board createNotice(String managerName, String subject, String content) {
+        return create("notice", managerName, subject, content);
     }
 
     public Board getBoard(Integer id) {
-        Optional<Board> board = this.boardRepository.findById(id);
-        if (board.isPresent()) {
-            return board.get();
-        } else {
-            throw new DataNotFoundException("");
-        }
+        return boardRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("Board not found with id: " + id));
     }
 
     public Page<Board> getListByBoardCategory(String boardCategory, int page) {
@@ -55,7 +51,7 @@ public class BoardService {
 
     public void addAnswerToBoard(Integer boardId, String content) {
         Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new DataNotFoundException(""));
+                .orElseThrow(() -> new DataNotFoundException("Board not found with id: " + boardId));
 
         Answer answer = new Answer();
         answer.setContent(content);
@@ -73,7 +69,7 @@ public class BoardService {
 
     public void modifyBoard(Integer id, String managerName, String subject, String content) {
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Board not found"));
+                .orElseThrow(() -> new DataNotFoundException("Board not found with id: " + id));
 
         board.setManagerName(managerName);
         board.setSubject(subject);
@@ -85,10 +81,11 @@ public class BoardService {
 
     public void deleteBoard(Integer id) {
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Board not found"));
+                .orElseThrow(() -> new DataNotFoundException("Board not found with id: " + id));
 
         boardRepository.delete(board);
     }
+
     public void Views(Integer id) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Board not found with id: " + id));

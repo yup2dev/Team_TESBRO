@@ -1,5 +1,6 @@
 package com.ll.basic1.Board;
 
+import com.ll.basic1.User.SiteUser;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -19,5 +20,8 @@ public class Answer {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;
+
+    @ManyToOne
+    private SiteUser author;
 
 }

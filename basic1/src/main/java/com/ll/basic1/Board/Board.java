@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ll.basic1.User.SiteUser;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -22,6 +23,9 @@ public class Board {
 
     @Column(length = 200)
     private String managerName;
+
+    @ManyToOne
+    private SiteUser author;
 
     @Column(length = 200)
     private String subject;

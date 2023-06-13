@@ -68,47 +68,36 @@ public class BoardController {
         String subject = boardForm.getSubject();
         String content = boardForm.getContent();
 
-        boardService.create(boardCategory, managerName, subject, content);
+        Board createdBoard = boardService.create(boardCategory, managerName, subject, content);
 
-        if (boardCategory.equals("event")) {
-            return "redirect:/board/event";
-        } else if (boardCategory.equals("qna")) {
-            return "redirect:/board/qna";
-        } else if (boardCategory.equals("notice")) {
-            return "redirect:/board/notice";
-        }
-        return "redirect:/board";
+        return "redirect:/board/" + boardCategory + "/detail/" + createdBoard.getId();
     }
 
     @GetMapping("/{boardCategory}/detail/{id}")
-    public String getBoardDetail(@PathVariable("id") Integer id, Model model) {
+    public String getBoardDetail(@PathVariable("boardCategory") String boardCategory,
+                                 @PathVariable("id") Integer id, Model model) {
         boardService.Views(id);
 
         Board board = boardService.getBoard(id);
         model.addAttribute("board", board);
         model.addAttribute("answerForm", new AnswerForm());
-        return "event_detail";
+
+        if (boardCategory.equals("event")) {
+            return "event_detail";
+        } else {
+            return "board_detail";
+        }
     }
-//
-//    @PostMapping("/{boardCategory}/detail/{id}")
-//    public String addAnswerToBoard(@PathVariable("id") Integer id, @ModelAttribute("answerForm") AnswerForm answerForm) {
-//        String content = answerForm.getContent();
-//
-//        boardService.addAnswerToBoard(id, content);
-//
-//        Board board = boardService.getBoard(id);
-//        String boardCategory = board.getBoardCategory();
-//
-//        if (boardCategory.equals("event")) {
-//            return "redirect:/board/event";
-//        } else if (boardCategory.equals("qna")) {
-//            return "redirect:/board/qna";
-//        } else if (boardCategory.equals("notice")) {
-//            return "redirect:/board/notice";
-//        }
-//
-//        return "redirect:/board/detail/" + id;
-//    }
+
+    @PostMapping("/{boardCategory}/detail/{id}")
+    public String addAnswerToBoard(@PathVariable("boardCategory") String boardCategory, @PathVariable("id") Integer id, @ModelAttribute("answerForm") AnswerForm answerForm) {
+        String content = answerForm.getContent();
+
+        boardService.addAnswerToBoard(id, content);
+
+        return "redirect:/board/" + boardCategory + "/detail/" + id;
+
+    }
 
     @GetMapping("/search")
     public String searchBoard(@RequestParam("keyword") String keyword, Model model) {
