@@ -1,0 +1,22 @@
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<div class="teacher_pic">
+    <img src="https://cdn.pixabay.com/photo/2023/05/28/13/15/helicopter-8023696_640.jpg" alt="teacher-pic" class="profile_pic">
+    <div class="gradient"></div>
+</div>
+
+<div class="profile_body">
+    <div class="teacher_name"><p th:text="${teacher.teacherName}"></p></div>
+    <div class="teacher_intro"><p th:text="${teacher.introduction}"></p></div>
+
+    <div class="profile_btm">
+        <div class="teacher_qualify">
+            <p>🏋️‍♂️ 경력사항</p>
+            <div th:text="${teacher.qualifications}" class="qualify_list"></div>
+        </div>
+        <div class="teacher_awards">
+            <p>🏆 수상내역</p>
+            <div th:text="${teacher.awards}" class="awards_list"></div>
+        </div>
+    </div>
+</div>
+

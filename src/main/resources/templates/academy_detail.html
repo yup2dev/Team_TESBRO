@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>academy_detail</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style_academy.css}">
+    <script src="/jquery-3.1.1.min.js"></script> <!-- 값 제어를 위해 jquery -->
+    <link href="/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Air datepicker css -->
+    <script src="/datepicker.js"></script> <!-- Air datepicker js -->
+    <script src="/datepicker.ko.js"></script>
+</head>
+<body>
+<!--새로 하는거-->
+<!--        이름이랑 정보 요약&찜/공유      -->
+<div class="content">
+    <a href="#top"><div class="top-btn">▲</div></a>
+    <div class="academy-top">
+        <div class="academy-logo">
+            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="academy-logo">
+        </div>
+        <div class="atop-items">
+            <p th:text="${academy.academyName}"></p>
+            <p>땡땡시 땡땡구 땡땡동&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a href="#">지도보기</a></p>
+            <p th:text="${academy.academyTel}"></p>
+        </div>
+        <div class="besides">
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1358/1358023.png" alt="share-icon"></a>
+            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon"></a>
+        </div>
+    </div>
+
+
+
+
+    <div class="academy-mid">
+
+        <!--        학원 메인 이미지 & 예약하기      -->
+        <div class="academy-mid-1">
+            <div class="mid1-photo">
+                <div id="img-slide">
+                    <div class="album">
+                        <div class="images">
+                            <div class="image"><img src="https://cdn.pixabay.com/photo/2017/05/25/15/08/jogging-2343558_1280.jpg" alt="">
+                            </div>
+                            <div class="image"><img src="https://cdn.pixabay.com/photo/2018/02/06/14/07/ease-3134828_640.jpg" alt=""></div>
+                            <div class="image"><img src="https://cdn.pixabay.com/photo/2018/01/01/01/56/yoga-3053487_640.jpg" alt=""></div>
+                            <div class="image"><img src="https://cdn.pixabay.com/photo/2016/11/18/14/15/woman-1834827_640.jpg" alt=""></div>
+                        </div>
+                        <button class="prev">◀</button>
+                        <button class="next">▶</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reservation">
+                <div class="calender">
+                    <p><input type="text" id="datepicker"></p>
+                </div>
+
+                <select class="s-class">
+                    <option value="">수업선택</option>
+                    <option value="강의1">강의1</option>
+                    <option value="강의2">강의2</option>
+                    <option value="강의3">강의3</option>
+                </select>
+
+
+                <select class="s-ticket">
+                    <option value="">수강권선택</option>
+                    <option value="프리미엄">프리미엄</option>
+                    <option value="고급">고급</option>
+                    <option value="일반">일반</option>
+                </select>
+
+                <button class="btn-r">예약하기</button>
+            </div>
+        </div>
+
+
+        <!--        강사리스트 구간      -->
+        <div class ="academy-mid-2">
+            <div class="teachers">강사리스트</div>
+            <div class="teachers">
+                <div id="t-slide">
+                    <div class="t-album">
+                        <div class="t-images">
+                            <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
+                                 <a th:href="@{|/teacher/${teacher.id}|}">
+                                     <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg" alt="teacherPic">
+                                     <div th:text="${teacher.teacherName}"></div>
+                                 </a>
+                            </div>
+                        </div>
+                        <button class="t-prev">◀</button>
+                        <button class="t-next">▶</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+<!--        학원 상세정보 구간      -->
+        <div class ="academy-mid-3">
+            <div class="detail-btn">
+                <a href="#학원소개">학원소개</a>
+                <a href="#수업정보">수업정보</a>
+                <a href="#취소환불">취소/환불 규정(?)</a>
+                <a href="#후기">후기</a>
+            </div>
+            <div class="detail-contents">
+                <div id="학원소개" class="d-content">
+                    <p>학원소개</p>
+                    <p th:text="${academy.introduction}"></p>
+                </div>
+                <div id="수업정보" class="d-content">
+                    <p>수업정보</p>
+                </div>
+                <div id="취소환불" class="d-content">
+                    <p>취소/환불 규정</p>
+                </div>
+                <div id="후기" class="d-content">
+                    <p>후기</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!--같은 동 다른 학원 목록. 이전 목록으로 가기 등등-->
+    <div class="academy-btm">아마도 주변 학원 리스트... 목록으로 가기... 기타등등
+    </div>
+</div>
+
+
+
+
+</body>
+<script th:src="@{/academy.js}"></script>
+<script>
+    $("#datepicker").datepicker({
+    	language: 'ko'
+    });
+</script>
+</html>
