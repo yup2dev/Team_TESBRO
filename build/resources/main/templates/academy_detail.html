@@ -1,0 +1,24 @@
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>academy_detail</title>
+</head>
+<body>
+<h1 class="academy_name" th:text="${academy.academyName}"></h1>
+<h3 class="academy_ceo" th:text="${academy.ceoName}"></h3>
+<h3 class="academy_address" th:text="${academy.academyAddress}"></h3>
+<h3 class="academy_num" th:text="${academy.academyNum}"></h3>
+<h3 class="academy_introduction" th:text="${academy.introduction}"></h3>
+<h3 class="academy_createdate" th:text="${#temporals.format(academy.createDate, 'yyyy-MM-dd HH:mm')}"></h3>
+
+<h2>강사리스트</h2>
+<div class="teacher-card" th:each="teacher, index : ${academy.teacherList}">
+    <a th:href="@{|/teacher/${teacher.id}|}">
+        <img src="https://picsum.photos/id/56/200/200" alt="teacherPic">
+        <div th:text="${teacher.teacherName}"></div>
+    </a>
+</div>
+</body>
+</html>

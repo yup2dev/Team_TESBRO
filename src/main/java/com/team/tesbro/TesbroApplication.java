@@ -9,5 +9,4 @@ public class TesbroApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TesbroApplication.class, args);
 	}
-
 }
