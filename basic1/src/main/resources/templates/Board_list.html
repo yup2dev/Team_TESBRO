@@ -60,72 +60,73 @@
   </div>
   <!-- 내비바 끝 -->
 
-
-
-<section class="board">
-  <div class="page-title">
-    <div class="container">
-      <h3>공지사항입니다</h3>
-      <h3>이벤트입니다</h3>
-      <h3>Q&A입니다</h3>
-    </div>
-  </div>
-  <!-- 게시판 -->
-  <div id="board-list">
-    <div class="container">
-      <table class="board-table">
-        <thead>
-        <tr>
-          <th scope="col" class="th-num">번호</th>
-          <th scope="col" class="th-title">제목</th>
-          <th scope="col" class="th-author">작성자</th>
-          <th scope="col" class="th-date">작성일</th>
-          <th scope="col" class="th-hit">조회</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="board, loop : ${paging}">
-          <td th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
-          <td>
-            <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.subject}"></a>
-          </td>
-          <td>
-            <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.content}"></a>
-          </td>
-          <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}">
-
-          </td>
-          <td th:text="${board.views}"></td>
-
-        </tr>
-        </tbody>
-      </table>
-
-      <div class="pagination">
-        <a th:href="@{|/board/${paging.content[0].boardCategory}/create|}" class="button">글쓰기</a>
-        <a th:if="${paging.hasPrevious()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.previousPageable().pageNumber}|}" class="prev">&lt;</a>
-
-        <span th:if="${paging.number >= 2}">
-  <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 2}|}" class="pager" th:text="${paging.number - 1}"></a>
-</span>
-        <span th:if="${paging.number >= 1}">
-  <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 1}|}" class="pager" th:text="${paging.number}"></a>
-</span>
-        <span class="current pager" th:text="${paging.number + 1}"></span>
-        <span th:if="${paging.number + 1 < paging.totalPages}">
-  <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number + 1}|}" class="pager" th:text="${paging.number + 2}"></a>
-</span>
-        <span th:if="${paging.number + 2 < paging.totalPages}">
-  <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number + 2}|}" class="pager" th:text="${paging.number + 3}"></a>
-</span>
-
-        <a th:if="${paging.hasNext()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.nextPageable().pageNumber}|}" class="next">&gt;</a>
-        <form class="search-form" th:action="@{/board/search}" method="get">
-          <input type="text" name="keyword" placeholder="검색어를 입력하세요">
-          <button type="submit">검색</button>
-        </form>
+  <section class="board">
+    <div class="page-title">
+      <div class="container">
+        <h3>공지사항입니다</h3>
+        <h3>이벤트입니다</h3>
+        <h3>Q&A입니다</h3>
       </div>
     </div>
-  </div>
-</section>
-
+    <!-- 게시판 -->
+    <div id="board-list">
+      <div class="container">
+        <!-- 게시판 리스트 -->
+        <table class="board-table">
+          <thead>
+          <tr>
+            <th scope="col" class="th-num">번호</th>
+            <th scope="col" class="th-title">제목</th>
+            <th scope="col" class="th-author">작성자</th>
+            <th scope="col" class="th-date">작성일</th>
+            <th scope="col" class="th-hit">조회</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="board, loop : ${paging}">
+            <td th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
+            <td>
+              <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.subject}"></a>
+            </td>
+            <td>
+              <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.content}"></a>
+            </td>
+            <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}">
+            </td>
+            <td th:text="${board.views}"></td>
+          </tr>
+          </tbody>
+        </table>
+        <!-- 게시판 리스트 끝 -->
+        <div class="pagination">
+          <!--  글 쓰기 -->
+          <a th:href="@{|/board/${paging.content[0].boardCategory}/create|}" class="button">글쓰기</a>
+          <!-- 글 쓰기 끝 -->
+          <!-- 페이징 -->
+          <a th:if="${paging.hasPrevious()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.previousPageable().pageNumber}|}" class="prev">&lt;</a>
+          <span th:if="${paging.number >= 2}">
+          <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 2}|}" class="pager" th:text="${paging.number - 1}"></a>
+            </span>
+          <span th:if="${paging.number >= 1}">
+          <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 1}|}" class="pager" th:text="${paging.number}"></a>
+            </span>
+          <span class="current pager" th:text="${paging.number + 1}"></span>
+          <span th:if="${paging.number + 1 < paging.totalPages}">
+          <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number + 1}|}" class="pager" th:text="${paging.number + 2}"></a>
+            </span>
+          <span th:if="${paging.number + 2 < paging.totalPages}">
+          <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number + 2}|}" class="pager" th:text="${paging.number + 3}"></a>
+            </span>
+          <a th:if="${paging.hasNext()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.nextPageable().pageNumber}|}" class="next">&gt;</a>
+          <!-- 페이징 끝 -->
+          <!-- 검색 -->
+          <form class="search-form" th:action="@{/board/search}" method="get">
+            <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+            <button type="submit">검색</button>
+          </form>
+          <!-- 검색 끝 -->
+        </div>
+      </div>
+    </div>
+    <!-- 게시판 끝 -->
+  </section>
