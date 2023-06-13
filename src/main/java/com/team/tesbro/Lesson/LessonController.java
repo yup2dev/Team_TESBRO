@@ -6,9 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,7 +17,15 @@ public class LessonController {
     @GetMapping("/academy/lesson")
     public String handleSelectedData(Model model) {
         List<Lesson> lessonList = lessonService.getList();
-        model.addAttribute("lessonList", lessonList);
+        List<LocalDate> dateList = new ArrayList<>();
+        for (Lesson lesson : lessonList) {
+            LocalDate lessonDate = lesson.getLessonDate();
+            dateList.add(lessonDate);
+        }
+        Set<LocalDate> uniqueDates = new HashSet<>(dateList);
+        List<LocalDate> uniqueDateList = new ArrayList<>(uniqueDates);
+        Collections.sort(uniqueDateList);
+        model.addAttribute("uniqueDateList", uniqueDateList);
         return "lesson";
     }
 
