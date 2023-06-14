@@ -98,6 +98,8 @@ li {
   min-width:1200px;
   max-width:1200px;
   border-top:1px solid lightgray;
+  position:relative;
+  z-index:0;
 }
 .academy-mid-1 {
   display:flex;
@@ -199,6 +201,7 @@ li {
   text-align:center;
   font-size:1.2rem;
   margin-bottom:10px;
+  cursor:pointer;
 }
 .t-album .t-images .t-image img {
   width: 200px; height: 250px;
@@ -279,4 +282,86 @@ li {
   border:2px solid green;
   min-width:1200px;
   height:500px;
+}
+
+
+
+
+
+.teacher-popup {
+  display:none;
+}
+.teacher-popup .p-content {
+  border:1px solid black;
+  background: white;
+  width:400px;
+  min-height:500px;
+  position:fixed;
+  top: 50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:20px;
+}
+
+.teacher-popup .p-content .p-bg {
+  position:relative;
+}
+.teacher-popup .p-content .p-bg img {
+  width:400px;
+  height:350px;
+  object-fit:cover;
+  position:relative;
+  z-index:1;
+  border-radius:20px;
+}
+
+.teacher-popup .p-content .p-bg .gradient {
+  width: 400px;
+  min-height: 300px;
+  background: linear-gradient(to bottom, transparent, white 40%);
+  position:absolute;
+  top:200px;
+  z-index:2;
+  border-radius:20px;
+}
+
+.p-content .profile {
+  position:relative;
+  top:-150px;
+  width:400px;
+  z-index:3;
+}
+.p-content .profile .profile-item:first-child {
+  font-size: 2rem;
+  font-weight:bold;
+  padding:30px;
+  width:100%;
+}
+.p-content .profile .profile-item:nth-child(2){
+  width:100%;
+  min-height:100px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.p-content .profile-list {
+  margin-top:-150px;
+  padding-top:20px;
+  border-top:1px solid lightgray;
+  display:flex;
+  flex-wrap:nowrap;
+  justify-content:space-around;
+  position:relative;
+  z-index:4;
+  margin-bottom:30px;
+  font-weight:bold;
+}
+.p-content .profile-list li {
+  font-weight:lighter;
+  font-size:14px;
+  padding-top: 10px;
+}
+.p-content .profile-list li:first-child{
+  margin-top:10px;
 }

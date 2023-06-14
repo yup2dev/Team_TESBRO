@@ -1,5 +1,7 @@
 package com.team.tesbro.Academy;
 
+import com.team.tesbro.Teacher.Teacher;
+import com.team.tesbro.Teacher.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import java.util.List;
 public class AcademyController {
     private final AcademyRepository academyRepository;
     private final AcademyService academyService;
+    private final TeacherService teacherService;
 
     @GetMapping("/list")
     public String academy(Model model) {
@@ -28,6 +31,7 @@ public class AcademyController {
     public String detail(Model model, @PathVariable("id") Integer id) {
         Academy academy = this.academyService.getAcademy(id);
         model.addAttribute("academy", academy);
+
         return "academy_detail";
     }
 }
