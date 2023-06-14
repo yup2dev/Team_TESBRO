@@ -19,8 +19,8 @@ public class LessonService {
         return lessonRepository.findAll();
     }
 
-    public List<Lesson> acLesson(Integer id){
-        return lessonRepository.findByLessonId(id);
+    public List<Lesson> getAcLesson(Integer id){
+        return lessonRepository.findByAcademyId(id);
     }
 
     public Lesson getLesson(Integer id) {
