@@ -16,32 +16,34 @@
     </select>
     <select id="childSelectBox" name="childSelectBox">
         <option value="">== 시간 선택 ==</option>
-        <option th:each="time :${lessonTimeList}"
-                th:value="${time.lessonTime}"
-                th:text="${time.lessonTime}">
-        </option>
     </select>
 </div>
 </body>
 <script>
-$(document).ready(function() {
-  $("#selectParentBoxList").change(function(){
-    var thisParam = $(this).val();
-    console.log(thisParam)
-    $.ajax({
-      url: "/multi_box_ajax",
-      data : {"data" : thisParam},
-      //dataType:"json",
-      error: function(xhr, status, error) {
-        console.log('통신실패!!');
-        console.log('에러 메시지:', error);
-      },
-      success: function(response) {
-        console.log("통신성공!!");
-        console.log('서버 응답:', response);
-      }
+    $(document).ready(function() {
+        $("#selectParentBoxList").change(function(){
+            var thisParam = $(this).val();
+            console.log(thisParam);
+            $.ajax({
+                url: "/multi_box_ajax",
+                data : { "data" : thisParam },
+                //dataType: "json",
+                error: function(xhr, status, error) {
+                    console.log('통신실패!!');
+                    console.log('에러 메시지:', error);
+                },
+                success: function(response) {
+                    console.log("통신성공!!");
+                    console.log('서버 응답:', response);
+                    // 2차 박스 업데이트
+                    var childSelectBox = $("#childSelectBox");
+                    childSelectBox.empty();
+                    $.each(response, function(index, value) {
+                        childSelectBox.append('<option value="' + value + '">' + value + '</option>');
+                    });
+                }
+            });
+        });
     });
-  });
-});
 </script>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,18 @@ public class LessonService {
     public List<Lesson> getTimeList(LocalDate data) {
         if (data != null) {
             return lessonRepository.findByLessonDate(data);
+        } return null;
+    }
+
+    public List<LocalTime> getLessonTimes(LocalDate data){
+        List<LocalTime> timeList = new ArrayList<>();
+        List<Lesson> lessonList = new ArrayList<>();
+        if(data != null){
+             lessonList = lessonRepository.findByLessonDate(data);
+            for (Lesson lesson : lessonList) {
+                LocalTime lessonTime = lesson.getLessonTime();
+                timeList.add(lessonTime);
+            } return timeList;
         } return null;
     }
 }
