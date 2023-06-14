@@ -1,5 +1,6 @@
 package com.team.tesbro.Lesson;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -53,4 +55,17 @@ public class LessonController {
         List<LocalTime> lessonTimeList = lessonService.getLessonTimes(data);
         return lessonTimeList;
     }
+
+    @PostMapping("/reserve")
+    public ResponseEntity<String> reserveLesson(@RequestParam String date, @RequestParam String time) {
+        // 선택한 날짜와 시간을 이용하여 예약 처리 등을 수행
+        LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+        LocalTime localTime = LocalTime.parse(time, DateTimeFormatter.ISO_TIME);
+        System.out.println(localDate);
+        System.out.println(localTime);
+
+        // 예약 성공 시 응답
+        return ResponseEntity.ok("예약이 완료되었습니다.");
+    }
+
 }

@@ -19,6 +19,10 @@ public class LessonService {
         return lessonRepository.findAll();
     }
 
+    public List<Lesson> acLesson(Integer id){
+        return lessonRepository.findByLessonId(id);
+    }
+
     public Lesson getLesson(Integer id) {
         Optional<Lesson> lesson = this.lessonRepository.findById(id);
         if (lesson.isPresent()) {

@@ -17,6 +17,7 @@
     <select id="childSelectBox" name="childSelectBox">
         <option value="">== 시간 선택 ==</option>
     </select>
+    <button id="reserveButton">예약하기</button>
 </div>
 </body>
 <script>
@@ -41,6 +42,30 @@
                     $.each(response, function(index, value) {
                         childSelectBox.append('<option value="' + value + '">' + value + '</option>');
                     });
+                }
+            });
+        });
+
+        $("#reserveButton").click(function() {
+            var selectedDate = $("#selectParentBoxList").val();
+            var selectedTime = $("#childSelectBox").val();
+            console.log("선택한 날짜:", selectedDate);
+            console.log("선택한 시간:", selectedTime);
+
+            // 컨트롤러로 선택한 날짜와 시간 전송
+            $.ajax({
+                url: "/reserve",
+                method: "POST",
+                data: { "date": selectedDate, "time": selectedTime },
+                //dataType: "json",
+                error: function(xhr, status, error) {
+                    console.log('통신실패!!');
+                    console.log('에러 메시지:', error);
+                },
+                success: function(response) {
+                    console.log("통신성공!!");
+                    console.log('서버 응답:', response);
+                    // 예약 결과 처리 등 추가 작업 수행
                 }
             });
         });
