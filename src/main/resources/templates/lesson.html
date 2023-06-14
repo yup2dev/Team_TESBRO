@@ -16,9 +16,9 @@
     </select>
     <select id="childSelectBox" name="childSelectBox">
         <option value="">== 시간 선택 ==</option>
-        <option th:each="lesson :${lessonTimeList}"
-                th:value="${lesson.lessonTime}"
-                th:text="${lesson.lessonTime}">
+        <option th:each="time :${lessonTimeList}"
+                th:value="${time.lessonTime}"
+                th:text="${time.lessonTime}">
         </option>
     </select>
 </div>
@@ -31,6 +31,7 @@ $(document).ready(function() {
     $.ajax({
       url: "/multi_box_ajax",
       data : {"data" : thisParam},
+      //dataType:"json",
       error: function(xhr, status, error) {
         console.log('통신실패!!');
         console.log('에러 메시지:', error);
@@ -42,22 +43,5 @@ $(document).ready(function() {
     });
   });
 });
-</script>
-<script>
-
-	var select = {
-		displayChildSelectBox	:	function(lessonTimeList){
-			if (childList.length > 0) {
-				$.each(lessonTimeList, function(i, lessonTimeList){
-					var optionStr = "<option value=" + lessonTimeList.lessonTime + ">" +
-										 lessonTimeList.lessonTime +
-									"</option>";
-					$("#childSelectBox").append(optionStr);
-				})
-			} else {
-				$("#childSelectBox").append("<option value''>없음</option>");
-			}
-		}
-	}
 </script>
 </html>
