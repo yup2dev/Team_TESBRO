@@ -34,10 +34,7 @@
                 </div>
                 <div class="list-item">수상내역
                     <ul>
-                        <li>멋진 상</li>
-                        <li>멋진 상</li>
-                        <li>멋진 상</li>
-                        <li>멋진 상</li>
+                        <li id="teacherAwardsDisplay"></li>
                     </ul>
                 </div>
             </div>
@@ -121,6 +118,7 @@
                                      <input type="hidden" th:value="${teacher.teacherName}" id="teacherName"/>
                                      <input type="hidden" th:value="${teacher.introduction}" id="teacherIntro"/>
                                      <input type="hidden" th:value="${teacher.qualifications}" id="teacherQualify"/>
+                                     <input type="hidden" th:value="${teacher.awards}" id="teacherAwards"/>
                                  </a>
                             </div>
                         </div>
@@ -174,18 +172,23 @@
     });
 
     function getTeacherId(element) {
-        var teacherId = element.querySelector('#teacherId').value;
-        var teacherName = element.querySelector('#teacherName').value;
-        var teacherIntro = element.querySelector('#teacherIntro').value;
-        var teacherQualify = element.querySelector('#teacherQualify').value;
-        console.log(teacherId);  //임시
-        console.log(teacherName);
+    var teacherName = element.querySelector('#teacherName').value;
+    var teacherIntro = element.querySelector('#teacherIntro').value;
+    var teacherQualify = element.querySelector('#teacherQualify').value;
+    var teacherAwards = element.querySelector('#teacherAwards').value;
 
-        document.getElementById('teacherNameDisplay').innerText = teacherName;
-        document.getElementById('teacherIntroDisplay').innerText = teacherIntro;
-        document.getElementById('teacherQualifyDisplay').innerText = teacherQualify;
+
+    document.getElementById('teacherNameDisplay').textContent = teacherName;
+    document.getElementById('teacherIntroDisplay').textContent = teacherIntro;
+    var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
+    if (teacherQualifyDisplay) {
+        teacherQualifyDisplay.textContent = teacherQualify;
     }
-
+    var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
+    if (teacherAwardsDisplay) {
+        teacherAwardsDisplay.textContent = teacherAwards;
+    }
+}
 </script>
 
 </body>
