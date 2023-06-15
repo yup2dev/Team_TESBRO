@@ -7,7 +7,7 @@
     <li th:each="answer : ${board.answers}" th:text="${answer.content}"></li>
 </ul>
 
-<form th:action="@{'/board/detail/' + ${board.id}}" th:object="${answerForm}" method="post">
+<form th:action="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:object="${answerForm}" method="post">
     <input type="hidden" th:field="*{boardId}" th:value="${board.id}" />
     <div>
         <label for="content">답변 작성:</label>

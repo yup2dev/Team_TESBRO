@@ -1,17 +1,46 @@
 <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 
 <section class="board">
+  <!-- 정렬하기 -->
+  <select id="order" onchange="handleOrderChange()">
+    <option value="">정렬하기</option>
+    <option value="outdated">오래된순</option>
+    <option value="views">조회순</option>
+    <option value="recommend">추천순</option>
+    <option value="comments">댓글순</option>
+  </select>
+
+  <script>
+  function handleOrderChange() {
+    var selectedOption = document.getElementById("order").value;
+    var currentUrl = window.location.href;
+    var updatedUrl;
+
+    if (currentUrl.includes("?")) {
+      if (currentUrl.includes("order=")) {
+        updatedUrl = currentUrl.replace(/order=[^&]+/, "order=" + selectedOption);
+      } else {
+        updatedUrl = currentUrl + "&order=" + selectedOption;
+      }
+    } else {
+      updatedUrl = currentUrl + "?order=" + selectedOption;
+    }
+
+    window.location.href = updatedUrl;
+  }
+</script>
+  <!-- 정렬하기 끝 -->
   <div class="login">
     <div class></div>
     <a href="/user/signup">회원가입</a>
-    <a href="/user/login">로그인</a>
-    <a href="/user/logout">로그아웃</a>
+    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
   </div>
   <div class="navbar">
     <!--  내비로고  -->
     <div class="nav-logo">
       <a href="#">
-        <img src="https://velog.velcdn.com/images/jsr3643/board/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg" alt="TesbroLogo">
+        <img src="https://velog.velcdn.com/images/jsr3643/post/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg" alt="TesbroLogo">
       </a>
     </div>
     <!--  내비로고끝  -->
@@ -70,8 +99,7 @@
     <div class="page-title">
       <div class="container">
         <h3>공지사항입니다</h3>
-        <h3>이벤트입니다</h3>
-        <h3>Q&A입니다</h3>
+        </div>
       </div>
     </div>
     <!-- 게시판 -->
@@ -92,10 +120,10 @@
           <tr th:each="board, loop : ${paging}">
             <td th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
             <td>
-              <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.subject}"></a>
+              <a th:href="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:text="${board.subject}"></a>
             </td>
             <td>
-              <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.content}"></a>
+              <span th:if="${board.author != null}" th:text="${board.author.username}"></span>
             </td>
             <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}">
             </td>

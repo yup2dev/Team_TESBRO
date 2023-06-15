@@ -1,0 +1,58 @@
+<style>
+    .box {
+        width: 500px;
+        height: 500px;
+        border: 2px solid red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 10rem;
+    }
+</style>
+
+메인 1
+<hr>
+공간 1
+<button >갱신</button>
+<div class="box count-1-display">
+  <th:block th:text="${count1}"></th:block>
+</div>
+공간 2
+<button >갱신</button>
+<div class="box count-2-display">
+  <th:block th:text="${count2}"></th:block>
+</div>
+
+<!--<script>-->
+<!--function Count1__updateDisplay() {-->
+<!--fetch('/count1')-->
+<!--.then(response => response.json())-->
+<!--.then(json => {-->
+<!--document.querySelector('.count-1-display').innerHTML = json.data;-->
+<!--});-->
+<!--}-->
+<!--function Count2__updateDisplay() {-->
+<!--fetch('/count2')-->
+<!--.then(response => response.json())-->
+<!--.then(json => {-->
+<!--document.querySelector('.count-2-display').innerHTML = json.data;-->
+<!--});-->
+<!--}-->
+<!--</script>-->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script>
+  $.ajax({
+	type: "GET", //요청 메소드 방식
+	url:"/count1",
+	dataType:"json", //서버가 요청 URL을 통해서 응답하는 내용의 타입
+	success : function(result){
+	const json = result.json()
+	document.querySelector('.count-1-display').innerHTML = json.data;
+	},
+	error : function(a, b, c){
+		//통신 실패시 발생하는 함수(콜백)
+		alert(a + b + c);
+	}
+});
+</script>
+

@@ -43,11 +43,20 @@ public class BoardService {
                 .orElseThrow(() -> new DataNotFoundException("Board not found with id: " + id));
     }
 
-    public Page<Board> getListByBoardCategory(String boardCategory, int page) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+    public Page<Board> getBoardListByCategory(String boardCategory, String order, int page) {
+        Sort sort;
+        if (order.equals("views")) {
+            sort = Sort.by(Sort.Direction.DESC, "views");
+        } else if (order.equals("outdated")) {
+            sort = Sort.by(Sort.Direction.ASC, "id");
+        } else {
+            sort = Sort.by(Sort.Direction.DESC, "id");
+        }
+
         Pageable pageable = PageRequest.of(page, 10, sort);
         return boardRepository.findByBoardCategory(boardCategory, pageable);
     }
+
 
     public void addAnswerToBoard(Integer boardId, String content) {
         Board board = boardRepository.findById(boardId)
