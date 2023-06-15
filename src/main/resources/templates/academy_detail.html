@@ -153,13 +153,13 @@
                 <div id="후기" class="d-content">
                     <p>후기</p>
                     <div class="review_box">
-                        <h2 th:text="|${#lists.size(academy.reviewList)}개의 답변이 있습니다.|"></h2>
-                        <ul>
-                            <li th:each="review : ${academy.reviewList}">
-                                <h5 th:text="${review.star_rating}"></h5>
-                                <h5 th:text="${review.content}"></h5>
-                                <h5 th:text="${review.userId}"></h5>
-                                <h5 th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></h5>
+                        <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 답변이 있습니다.|"></div>
+                        <ul class="review-items" th:each="review : ${academy.reviewList}">
+                            <li>
+                                <div th:text="${review.userId}"></div>
+                                <div th:text="${review.star_rating}"></div>
+                                <div th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                                <div th:text="${review.content}"></div>
                             </li>
                         </ul>
                     </div>

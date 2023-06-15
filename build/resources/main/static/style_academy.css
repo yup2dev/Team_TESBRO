@@ -269,48 +269,10 @@ li {
   margin-bottom:30px;
 }
 .academy-mid-3 .detail-contents .d-content .review_box {
-    width:90%;
-    border:2px solid red;
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:100px;
-}
-
-.academy-mid-3 .detail-contents .d-content .review_box .review-size{
-    font-size: 1.3rem;
-    font-weight:bold;
-    padding:10px;
-    margin-bottom: 30px;
-}
-
-.academy-mid-3 .detail-contents .d-content .review_box .review-items {
-    border: 2px solid blue;
     width:100%;
-    margin-bottom:30px;
+    height:100px;
+    border:2px solid red;
 }
-
-.d-content .review_box .review-items li div {
-    font-size:1.2rem;
-    background:red;
-    display:inline-block;
-    padding-left:10px;
-    padding-right: 50px;
-}
-.d-content .review_box .review-items li div:first-child {
-    border-right:1px solid black;
-}
-.d-content .review_box .review-items li div:nth-child(3) {
-    float:right;
-    padding-right:10px;
-}
-.d-content .review_box .review-items li div:last-child {
-    display:block;
-    font-size:1.2rem;
-    padding-top: 20px;
-    padding-bottom:20px;
-    min-height:100px;
-}
-
 
 
 

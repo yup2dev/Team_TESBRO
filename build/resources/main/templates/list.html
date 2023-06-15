@@ -59,19 +59,20 @@
     </div>
 
     <!--    검색된 학원수랑 정렬버튼 끝-->
-    <div class="academy_list">
+    <div class="academy_list" th:each="academy : ${academyList}">
+      <a th:href="@{|/academy/detail/${academy.id}|}">
       <li class="card_frame">
         <div class="academy_box">
           <div class="img_box">
-            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="">
+            <img th:src="${academy.imgLogo}" alt="">
           </div>
           <!--img_box 종료 -->
           <!--아카데미 안에 들어갈 글씨랑 찜까지 시작-->
           <div class="academy_box_text">
             <div class="cardbody">
               <div class="info">
-                <h3>달달어학원</h3>
-                <span class="map">땡땡시</span> <span class="map">땡땡구</span> <span class="map">땡땡동</span>
+                <h3 th:text="${academy.academyName}"></h3>
+                <span class="map" th:text="${academy.academySi}"></span> <span class="map" th:text="${academy.academyGu}"></span> <span class="map" th:text="${academy.academyDong}"></span>
               </div>
               <div class="jjim">
                 <input type="checkbox">
@@ -82,107 +83,7 @@
         </div>
 <!--오른쪽박스 끝-->
       </li>
-
-      <li class="card_frame">
-        <div class="academy_box">
-          <div class="img_box">
-            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="">
-          </div>
-          <!--img_box 종료 -->
-          <div class="academy_box_text">
-            <div class="cardbody">
-              <div class="info">
-                <h3>달달어학원</h3>
-                <span class="map">땡땡시</span> <span class="map">땡땡구</span> <span class="map">땡땡동</span>
-              </div>
-              <div class="jjim">
-                <input type="checkbox">
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li class="card_frame">
-        <div class="academy_box">
-          <div class="img_box">
-            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="">
-          </div>
-          <!--img_box 종료 -->
-          <div class="academy_box_text">
-            <div class="cardbody">
-              <div class="info">
-                <h3>달달어학원</h3>
-                <span class="map">땡땡시 땡땡구 땡땡동</span>
-              </div>
-              <div class="jjim">
-                <input type="checkbox">
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
-
-
-      <li class="card_frame">
-        <div class="academy_box">
-          <div class="img_box">
-            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="">
-          </div>
-          <!--img_box 종료 -->
-          <div class="academy_box_text">
-            <div class="cardbody">
-              <div class="info">
-                <h3>달달어학원</h3>
-                <span class="map">땡땡시</span> <span class="map">땡땡구</span> <span class="map">땡땡동</span>
-              </div>
-              <div class="jjim">
-                <input type="checkbox">
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li class="card_frame">
-        <div class="academy_box">
-          <div class="img_box">
-            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="">
-          </div>
-          <!--img_box 종료 -->
-          <div class="academy_box_text">
-            <div class="cardbody">
-              <div class="info">
-                <h3>달달어학원</h3>
-                <span class="map">땡땡시</span> <span class="map">땡땡구</span> <span class="map">땡땡동</span>
-              </div>
-              <div class="jjim">
-                <input type="checkbox">
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li class="card_frame">
-        <div class="academy_box">
-          <div class="img_box">
-            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="">
-          </div>
-          <!--img_box 종료 -->
-          <div class="academy_box_text">
-            <div class="cardbody">
-              <div class="info">
-                <h3>달달어학원</h3>
-                <span class="map">땡땡시</span> <span class="map">땡땡구</span> <span class="map">땡땡동</span>
-              </div>
-              <div class="jjim">
-                <input type="checkbox">
-              </div>
-            </div>
-          </div>
-        </div>
-      </li>
+      </a>
     </div>
 <!--    아카데미 리스트 끝-->
   </div>
