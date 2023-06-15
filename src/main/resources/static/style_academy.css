@@ -261,6 +261,7 @@ li {
   justify-content:center;
 }
 .academy-mid-3 .detail-contents .d-content p:first-child {
+  font-size: 20px;
   justify-content:flex-start;
   font-weight:bold;
   padding-bottom:5px;
