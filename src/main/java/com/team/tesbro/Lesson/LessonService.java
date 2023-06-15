@@ -38,15 +38,28 @@ public class LessonService {
         } return null;
     }
 
-    public List<LocalTime> getLessonTimes(LocalDate data){
+//    public List<LocalTime> getLessonTimes(LocalDate data){
+//        List<LocalTime> timeList = new ArrayList<>();
+//        List<Lesson> lessonList = new ArrayList<>();
+//        if(data != null){
+//             lessonList = lessonRepository.findByLessonDate(data);
+//            for (Lesson lesson : lessonList) {
+//                LocalTime lessonTime = lesson.getLessonTime();
+//                timeList.add(lessonTime);
+//            } return timeList;
+//        } return null;
+//    }
+
+    public List<LocalTime> getLessonTimes(LocalDate date, List<Lesson> lessonList) {
         List<LocalTime> timeList = new ArrayList<>();
-        List<Lesson> lessonList = new ArrayList<>();
-        if(data != null){
-             lessonList = lessonRepository.findByLessonDate(data);
+        if (date != null && lessonList != null) {
             for (Lesson lesson : lessonList) {
-                LocalTime lessonTime = lesson.getLessonTime();
-                timeList.add(lessonTime);
-            } return timeList;
-        } return null;
+                if (lesson.getLessonDate().equals(date)) {
+                    LocalTime lessonTime = lesson.getLessonTime();
+                    timeList.add(lessonTime);
+                }
+            }
+        }
+        return timeList;
     }
 }
