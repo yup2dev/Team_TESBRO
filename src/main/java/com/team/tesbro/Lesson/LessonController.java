@@ -74,7 +74,7 @@ public class LessonController {
 //    }
 
 
-//    2023-06-15 18:40
+//    2023-06-15 18:40(failed)
 //    @GetMapping("/multi_box_ajax")
 //    @ResponseBody
 //    public List<LocalTime> getLessonTimeList(@RequestParam LocalDate data) {

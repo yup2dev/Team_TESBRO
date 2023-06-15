@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,10 +23,17 @@ public class AcademyController {
         return "list";
     }
 
+    @GetMapping("/list_local_ajax")
+    public List<Academy> LocalData(@RequestParam String si, @RequestParam String gu, @RequestParam String dong){
+    List<Academy> academyList = this.academyService.selectedLocalList(si, gu, dong);
+    return academyList;
+    }
+}
+
 //    @GetMapping(value = "/detail/{id}")
 //    public String detail(Model model, @PathVariable("id") Integer id) {
 //        Academy academy = this.academyService.getAcademy(id);
 //        model.addAttribute("academy", academy);
 //        return "academy_detail";
 //    }
-}
+//}

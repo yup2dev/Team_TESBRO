@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface AcademyRepository extends JpaRepository<Academy, Integer> {
     List<Academy> findByAcademyNameContaining(String keyword);
+    List<Academy> findByAcademySiAndAcademyGuAndAcademyDong(String si, String gu, String dong);
+
 }

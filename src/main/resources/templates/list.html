@@ -1,7 +1,6 @@
 <link rel="stylesheet" type="text/css" th:href="@{/styleY.css}" xmlns="">
-<script type="text/javascript" src="hangjungdong.js"></script>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -114,6 +113,7 @@
         <!--    아카데미 리스트 끝-->
     </div>
 </div>
+<script type="text/javascript" src="/hangjungdong.js"></script>
 </body>
 <script>
 jQuery(document).ready(function(){
@@ -161,21 +161,17 @@ jQuery('#dong option:eq("")').attr('selected', 'selected');
 });
 
 jQuery('#dong').change(function(){
-var sido = jQuery('#sido option:selected').val();
-var sigugun = jQuery('#sigugun option:selected').val();
+var si = jQuery('#sido option:selected').val();
+var gu = jQuery('#sigugun option:selected').val();
 var dong = jQuery('#dong option:selected').val();
 var dongCode = sido + sigugun + dong + '00';
-});
-});
 
-function fn_option(code, name){
-return '<option value="' + code +'">' + name +'</option>';
-}
-
-jQuery.ajax({
-  type: 'POST',
-  url: '/academy/list',
-  data: { sido: sido, sigugun: sigugun, dong: dong },
+$("#searchButton").click(function(){
+$.ajax({
+  //type: 'POST',
+  url: '/list_local_ajax',
+  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+  data: { "si" : si, "gu": gu, "dong": dong },
   success: function(response) {
     // Handle the successful response
     console.log('AJAX request succeeded');
@@ -193,5 +189,14 @@ jQuery.ajax({
     // or perform any necessary error handling
   }
   });
+});
+
+});
+});
+
+function fn_option(code, name){
+return '<option value="' + code +'">' + name +'</option>';
+}
+
 </script>
 </html>

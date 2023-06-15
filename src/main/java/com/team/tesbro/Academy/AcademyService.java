@@ -43,4 +43,8 @@ public class AcademyService {
             throw new DataNotFoundException("academy not found");
         }
     }
+
+    public List<Academy> selectedLocalList(String si, String gu, String dong) {
+        return academyRepository.findByAcademySiAndAcademyGuAndAcademyDong(si, gu, dong);
+    }
 }
