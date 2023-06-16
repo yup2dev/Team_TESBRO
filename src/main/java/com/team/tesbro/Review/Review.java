@@ -36,6 +36,6 @@ public class Review {
 
     @ManyToOne
     private Academy academy;
-}
+}   
 
 // 추천 voter 유저클래스 없어서 킵
