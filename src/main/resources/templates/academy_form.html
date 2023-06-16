@@ -1,0 +1,33 @@
+<div layout:fragment="content" class="container">
+  <h5 class="my-3 border-bottom pb-2">등록하기</h5>
+  <form th:action="@{/academy/create}" method="post" th:object="${AcademyForm}">
+    <div class="mb-3">
+      <label for="academyName" class="form-label">학원이름</label>
+      <input type="text" th:field="*{academyName}" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="ceoName" class="form-label">대표</label>
+      <input type="text" th:field="*{ceoName}" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="academyAddress" class="form-label">학원주소</label>
+      <textarea th:field="*{academyAddress}" class="form-control" rows="10"></textarea>
+      <button type="button" onclick="form()">주소검색</button>
+    </div>
+    <div class="mb-3">
+      <label for="academyTel" class="form-label">전화번호</label>
+      <textarea th:field="*{academyTel}" class="form-control" rows="10"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="introduction" class="form-label">학원소개</label>
+      <textarea th:field="*{introduction}" class="form-control" rows="20"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="imgLogo" class="form-label">학원로고</label>
+      <textarea th:field="*{imgLogo}" class="form-control" rows="10"></textarea>
+    </div>
+    <div>
+      <input type="submit" value="저장하기" class="btn btn-primary my-2">
+    </div>
+  </form>
+</div>

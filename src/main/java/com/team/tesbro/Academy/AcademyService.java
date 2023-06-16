@@ -20,17 +20,15 @@ public class AcademyService {
         return this.academyRepository.findAll();
     }
 
-    public void create(int jjim, String academyName, String ceoName, String academySi, String academyGu, String academyDong, String academyTel, String introduction, String imgLogo) {
+    public void create(String academyName, String ceoName, String academyAddress, String academyTel, String introduction, String imgLogo) {
         Academy academy = new Academy();
         academy.setAcademyName(academyName);
         academy.setCeoName(ceoName);
-        academy.setAcademySi(academySi);
-        academy.setAcademyGu(academyGu);
-        academy.setAcademyDong(academyDong);
+        academy.setAcademyAddress(academyAddress);
         academy.setAcademyTel(academyTel);
         academy.setIntroduction(introduction);
         academy.setImgLogo(imgLogo);
-        academy.setJjim(jjim);
+
         academy.setCreateDate(LocalDateTime.now());
         this.academyRepository.save(academy);
     }

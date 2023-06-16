@@ -35,6 +35,9 @@ public class Academy {
     private LocalDateTime createDate;
 
     @Column
+    private String academyAddress;
+
+    @Column
     private String academySi;
 
     @Column

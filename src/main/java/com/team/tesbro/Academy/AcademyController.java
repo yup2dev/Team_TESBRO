@@ -1,15 +1,14 @@
 package com.team.tesbro.Academy;
 
+import com.team.tesbro.Board.Board;
+import com.team.tesbro.Board.BoardForm;
 import com.team.tesbro.Teacher.Teacher;
 import com.team.tesbro.Teacher.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +19,25 @@ public class AcademyController {
     private final AcademyRepository academyRepository;
     private final AcademyService academyService;
     private final TeacherService teacherService;
+
+    @GetMapping("/create")
+    public String getCreateAcademyForm(Model model) {
+        model.addAttribute("AcademyForm", new AcademyForm());
+        return "academy_form";
+    }
+
+    @PostMapping("/create")
+    public String AcademyCreate(@ModelAttribute AcademyForm academyForm) {
+        String academyName = academyForm.getAcademyName();
+        String CeoName = academyForm.getCeoName();
+        String AcademyAddress = academyForm.getAcademyAddress();
+        String AcademyTel = academyForm.getAcademyTel();
+        String introduction = academyForm.getIntroduction();
+        String imglogo = academyForm.getImgLogo();
+        this.academyService.create(academyName, CeoName, AcademyAddress, AcademyTel, introduction, imglogo);
+        return "redirect:/academy/list";
+    }
+
 
     @RequestMapping("/list")
     public String academy(Model model, @Param("keyword") String keyword) {

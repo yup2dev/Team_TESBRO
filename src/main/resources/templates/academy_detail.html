@@ -42,11 +42,11 @@
     </div>
     <div class="academy-top">
         <div class="academy-logo">
-            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="academy-logo">
+            <img class="imglog" th:src="${academy.imgLogo}" alt="academy-logo">
         </div>
         <div class="atop-items">
             <p class="academy_name" th:text="${academy.academyName}"></p>
-            <p class="academyDong" th:text="${academy.academyDong}"></p>
+            <p class="academy_Address" th:text="${academy.academyAddress}"></p>
                 <a href="#">지도보기</a></p>
             <p th:text="${academy.academyTel}"></p>
         </div>
@@ -220,7 +220,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-var address = document.querySelector('.academyDong').innerText;
+var address = document.querySelector('.academy_Address').innerText;
 geocoder.addressSearch(address, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면
