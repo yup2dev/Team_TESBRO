@@ -3,6 +3,7 @@
 <section class="board">
   <!-- 정렬하기 -->
   <select id="order" onchange="handleOrderChange()">
+    <label for="order"></label>
     <option value="">정렬하기</option>
     <option value="outdated">오래된순</option>
     <option value="views">조회순</option>
@@ -25,7 +26,7 @@
     } else {
       updatedUrl = currentUrl + "?order=" + selectedOption;
     }
-
+    document.getElementById("order").value = selectedOption;
     window.location.href = updatedUrl;
   }
 </script>

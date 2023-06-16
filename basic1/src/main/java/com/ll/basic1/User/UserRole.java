@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @Getter
 public enum UserRole {
-    ADMIN("ROLE_ADMIN"),
-    ACADEMY("ROLE_ACDEMY"),
-    USER("ROLE_USER");
+    ADMIN("ROLE_ADMIN"), // 관리자
+    ACADEMY("ROLE_ACDEMY"), // 학원
+    USER("ROLE_USER"); // 사용자
 
     UserRole(String value) {
         this.value = value;
