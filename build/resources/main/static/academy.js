@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// 학원 이미지 슬라이드
+
+>>>>>>> serin5
 let curPos= 0;
 let position = 0;
 const IMAGE_WIDTH = 600;
@@ -41,7 +46,11 @@ function init(){
 
 init();
 
+<<<<<<< HEAD
 // 강사 리스트
+=======
+// 강사 리스트 슬라이드
+>>>>>>> serin5
 
 let TcurPos= 0;
 let Tposition = 0;
@@ -84,4 +93,30 @@ function Tinit(){
     TnextBtn.addEventListener("click", Tnext)
 }
 
+<<<<<<< HEAD
 Tinit();
+=======
+Tinit();
+
+// 팝업 여닫기
+function Popup1__show() {
+  $('.teacher-popup').css('display', 'block');
+  $('.academy-mid').css('z-index', '-1');
+}
+$('.t-image').click(Popup1__show);
+
+
+
+
+$(document).mouseup(function (e){
+
+    var container = $('.teacher-popup');
+
+    if( container.has(e.target).length === 0){
+
+      container.css('display','none');
+
+    }
+    $('.academy-mid').css('z-index', '0');
+  });
+>>>>>>> serin5

@@ -261,12 +261,57 @@ li {
   justify-content:center;
 }
 .academy-mid-3 .detail-contents .d-content p:first-child {
+  font-size: 20px;
   justify-content:flex-start;
   font-weight:bold;
   padding-bottom:5px;
   border-bottom:1px solid lightgray;
   margin-bottom:30px;
 }
+.academy-mid-3 .detail-contents .d-content .review_box {
+    width:90%;
+    border:2px solid red;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:100px;
+}
+
+.academy-mid-3 .detail-contents .d-content .review_box .review-size{
+    font-size: 1.3rem;
+    font-weight:bold;
+    padding:10px;
+    margin-bottom: 30px;
+}
+
+.academy-mid-3 .detail-contents .d-content .review_box .review-items {
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    width:100%;
+    margin-bottom:30px;
+}
+
+.d-content .review_box .review-items li div {
+    font-size:1.2rem;
+    display:inline-block;
+    padding-left:10px;
+    padding-right: 50px;
+    margin-top:10px;
+}
+.d-content .review_box .review-items li div:first-child {
+    border-right:1px solid lightgray;
+}
+.d-content .review_box .review-items li div:nth-child(3) {
+    float:right;
+    padding-right:10px;
+}
+.d-content .review_box .review-items li div:last-child {
+    display:block;
+    font-size:1.2rem;
+    padding-top: 20px;
+    padding-bottom:20px;
+    min-height:100px;
+}
+
 
 
 
@@ -338,11 +383,15 @@ li {
   width:100%;
 }
 .p-content .profile .profile-item:nth-child(2){
-  width:100%;
+  width:80%;
   min-height:100px;
   display:flex;
-  justify-content:center;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:30px;
+  margin-top:20px;
   align-items:center;
+
 }
 
 .p-content .profile-list {
