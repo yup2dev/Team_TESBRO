@@ -141,4 +141,9 @@ public class BoardController {
         boardService.deleteBoard(id);
         return "redirect:/board/notice";
     }
+
+    @GetMapping("/address")
+    public String address(){
+        return "address_search";
+    }
 }

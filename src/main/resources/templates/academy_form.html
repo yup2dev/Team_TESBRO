@@ -9,11 +9,34 @@
       <label for="ceoName" class="form-label">대표</label>
       <input type="text" th:field="*{ceoName}" class="form-control">
     </div>
-    <div class="mb-3">
-      <label for="academyAddress" class="form-label">학원주소</label>
-      <textarea th:field="*{academyAddress}" class="form-control" rows="10"></textarea>
-      <button type="button" onclick="form()">주소검색</button>
-    </div>
+
+
+
+
+
+      <div>
+          <form name="address_search" action="/static/jusoPopup.jsp" method="get">
+              <textarea th:field="*{academyAddress}" class="form-control" rows="10"></textarea>
+              <button type="button" onclick="openAddressPopup()">주소검색</button>
+          </form>
+      </div>
+
+      <script>
+  function openAddressPopup() {
+    var popupUrl = "/static/jusoPopup.jsp";
+    var popupWindow = window.open(popupUrl, "주소검색", "width=500, height=500");
+    popupWindow.onload = function() {
+      popupWindow.document.forms["address_search"].submit();
+    };
+  }
+</script>
+
+
+
+
+
+
+
     <div class="mb-3">
       <label for="academyTel" class="form-label">전화번호</label>
       <textarea th:field="*{academyTel}" class="form-control" rows="10"></textarea>
