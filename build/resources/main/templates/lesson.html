@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<div>
+    <select id="selectParentBoxList" name="selectParentBoxList">
+        <option value="">== 날짜 선택 ==</option>
+        <option th:each="lesson :${lessonList}"
+                th:value="${lesson.lessonDate}"
+                th:text="${lesson.lessonDate}">
+        </option>
+    </select>
+    <select>
+        <option value="">== 시간 선택 ==</option>
+        <option th:each="lesson :${lessonTimeList}"
+                th:value="${lesson.lessonTime}"
+                th:text="${lesson.lessonTime}">
+        </option>
+    </select>
+</div>
+</body>
+<script>
+$(document).ready(function() {
+  $("#selectParentBoxList").change(function(){
+    var thisParam = $(this).val();
+    console.log(thisParam)
+    $.ajax({
+      url: "/multi_box_ajax",
+      data : {"data" : thisParam},
+      error: function(xhr, status, error) {
+        console.log('통신실패!!');
+        console.log('에러 메시지:', error);
+      },
+      success: function(response) {
+        console.log("통신성공!!");
+        console.log('서버 응답:', response);
+      }
+    });
+  });
+});
+</script>
+</html>

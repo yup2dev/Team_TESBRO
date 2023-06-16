@@ -11,38 +11,10 @@
     <script src="/datepicker.ko.js"></script>
 </head>
 <body>
+<!--새로 하는거-->
 <!--        이름이랑 정보 요약&찜/공유      -->
 <div class="content">
     <a href="#top"><div class="top-btn">▲</div></a>
-    <div class="teacher-popup">
-        <div class="p-content">
-            <div class="p-bg">
-                <img src="https://cdn.pixabay.com/photo/2020/06/10/07/05/yoga-5281457_640.jpg" alt="teacher-pic">
-                <div class="gradient"></div>
-            </div>
-
-            <div class="profile">
-                <div class="profile-item" id="teacherNameDisplay"></div>
-                <div class="profile-item" id="teacherIntroDisplay"></div>
-            </div>
-
-            <div class="profile-list">
-                <div class="list-item">경력사항
-                    <ul>
-                        <li id="teacherQualifyDisplay"></li>
-                    </ul>
-                </div>
-                <div class="list-item">수상내역
-                    <ul>
-                        <li>멋진 상</li>
-                        <li>멋진 상</li>
-                        <li>멋진 상</li>
-                        <li>멋진 상</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="academy-top">
         <div class="academy-logo">
             <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="academy-logo">
@@ -115,12 +87,9 @@
                     <div class="t-album">
                         <div class="t-images">
                             <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
-                                 <a onclick="getTeacherId(this)">
+                                 <a th:href="@{|/teacher/${teacher.id}|}">
                                      <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg" alt="teacherPic">
                                      <div th:text="${teacher.teacherName}"></div>
-                                     <input type="hidden" th:value="${teacher.teacherName}" id="teacherName"/>
-                                     <input type="hidden" th:value="${teacher.introduction}" id="teacherIntro"/>
-                                     <input type="hidden" th:value="${teacher.qualifications}" id="teacherQualify"/>
                                  </a>
                             </div>
                         </div>
@@ -167,27 +136,13 @@
 </div>
 
 
+
+
+</body>
 <script th:src="@{/academy.js}"></script>
 <script>
     $("#datepicker").datepicker({
     	language: 'ko'
     });
-
-    function getTeacherId(element) {
-        var teacherId = element.querySelector('#teacherId').value;
-        var teacherName = element.querySelector('#teacherName').value;
-        var teacherIntro = element.querySelector('#teacherIntro').value;
-        var teacherQualify = element.querySelector('#teacherQualify').value;
-        console.log(teacherId);  //임시
-        console.log(teacherName);
-
-        document.getElementById('teacherNameDisplay').innerText = teacherName;
-        document.getElementById('teacherIntroDisplay').innerText = teacherIntro;
-        document.getElementById('teacherQualifyDisplay').innerText = teacherQualify;
-    }
-
 </script>
-
-</body>
-
 </html>
