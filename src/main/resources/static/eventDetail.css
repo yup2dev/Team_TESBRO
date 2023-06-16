@@ -1,0 +1,164 @@
+
+* {
+  margin: 0; padding: 0;
+
+}
+ul, li { list-style: none }
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button {
+  border:none;
+  background: transparent;
+}
+
+
+.login {
+  display:flex;
+  justify-content:flex-end;
+  width:80%;
+  margin-left:auto;
+  margin-right:auto;
+}
+.login a {
+  padding:10px;
+  margin-top: 5px;
+  margin-left:10px;
+  font-size: 12px;
+  border-radius:20px 20px;
+}
+.login a:last-child {
+  background: rgb(27, 89, 29);
+  color:white;
+}
+.login a {
+  background: gray;
+  color:white;
+  opacity:0.7;
+}
+.login .search-icon img{
+  margin-top:7px;
+  width:20px;
+  height:20px;
+  margin-right:5px;
+}
+
+
+.navbar {
+  background: white;
+  text-align:center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width:80%
+}
+.nav-logo > a > img {
+  width : 150px;
+  height : 150px;
+}
+.nav-logo {
+  display:inline-block;
+}
+
+.nav-bar {
+  display:inline-block;
+  border : 2px solid rgb(27, 89, 29);
+  border-radius : 10px 10px;
+  width: 100%;
+  vertical-align: 63px;
+}
+.nav-bar::after{
+  content: '';
+  display: table;
+  clear: both;
+}
+.nav-logo, .nav-bar{
+  float:center;
+}
+
+.nav-bar > .nav-item {
+  display:inherit;
+  font-weight : bold;
+  width : calc(100% / 5);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  vertical-align:top;
+
+}
+
+.nav-item > a:hover{
+  display:block;
+  color: rgb(27, 89, 29);
+  transform:scale(1.1);
+  transition:transform 0.5s;
+}
+
+.nav-bar:hover .nav-item .sub-bar {
+  display:block;
+  height:auto;
+  margin: 10px;
+  color: black;
+}
+
+.sub-bar{
+  height:0;
+  overflow:hidden;
+}
+.sub-bar .sub-mn {
+  padding-top:10px;
+  display:block;
+}
+.sub-bar .sub-mn:hover {
+  color:seagreen;
+  transform:scale(1.1);
+  transition:transform 0.5s;
+}.wrap{
+  width: 900px;
+  margin:0 auto;
+}
+hr{
+  border:1px solid rgba(27,89,29);
+  margin: 30px auto;
+}
+.event{
+  font-size: 2rem;
+  font-weight: bold;
+
+}
+.event-main{
+  text-align:center;
+}
+.event-main .event-title{
+  font-size: 40px;
+  margin:30px 0;
+}
+
+.event-date{
+  font-size: 15px;
+  color:gray;
+}
+img{
+  margin: 30px 0;
+}
+.left-box>.name, .left-box>.number{
+
+}
+.left-box, .right-box{
+  display:inline-block;
+  font-size: 20px;
+  margin: 10px 10px;
+  width: 40%;
+  height:40px;
+  display:
+}
+
+input{
+  border:1px solid rgb(27, 89, 29);
+  border-radius:3px;
+  width:100%;
+  height:30px;
+  margin:15px 0;
+  font-size: 20px;
+  padding: 10px;
+}
