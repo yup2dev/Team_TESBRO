@@ -11,12 +11,9 @@
     <script src="/datepicker.ko.js"></script>
 </head>
 <body>
-<!--새로 하는거-->
 <!--        이름이랑 정보 요약&찜/공유      -->
 <div class="content">
     <a href="#top"><div class="top-btn">▲</div></a>
-<<<<<<< HEAD
-=======
     <div class="teacher-popup">
         <div class="p-content">
             <div class="p-bg">
@@ -43,7 +40,6 @@
             </div>
         </div>
     </div>
->>>>>>> serin5
     <div class="academy-top">
         <div class="academy-logo">
             <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="academy-logo">
@@ -116,17 +112,14 @@
                     <div class="t-album">
                         <div class="t-images">
                             <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
-                                 <a th:href="@{|/teacher/${teacher.id}|}">
-                                     <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg" alt="teacherPic">
-                                     <div th:text="${teacher.teacherName}"></div>
-<<<<<<< HEAD
-=======
-                                     <input type="hidden" th:value="${teacher.teacherName}" id="teacherName"/>
-                                     <input type="hidden" th:value="${teacher.introduction}" id="teacherIntro"/>
-                                     <input type="hidden" th:value="${teacher.qualifications}" id="teacherQualify"/>
-                                     <input type="hidden" th:value="${teacher.awards}" id="teacherAwards"/>
->>>>>>> serin5
-                                 </a>
+                                <a onclick="getTeacherId(this)">
+                                    <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg" alt="teacherPic">
+                                    <div th:text="${teacher.teacherName}"></div>
+                                    <input type="hidden" th:value="${teacher.teacherName}" id="teacherName"/>
+                                    <input type="hidden" th:value="${teacher.introduction}" id="teacherIntro"/>
+                                    <input type="hidden" th:value="${teacher.qualifications}" id="teacherQualify"/>
+                                    <input type="hidden" th:value="${teacher.awards}" id="teacherAwards"/>
+                                </a>
                             </div>
                         </div>
                         <button class="t-prev">◀</button>
@@ -138,7 +131,7 @@
             </div>
         </div>
 
-<!--        학원 상세정보 구간      -->
+        <!--        학원 상세정보 구간      -->
         <div class ="academy-mid-3">
             <div class="detail-btn">
                 <a href="#학원소개">학원소개</a>
@@ -177,23 +170,17 @@
 
 
 
-<!--같은 동 다른 학원 목록. 이전 목록으로 가기 등등-->
+    <!--같은 동 다른 학원 목록. 이전 목록으로 가기 등등-->
     <div class="academy-btm">아마도 주변 학원 리스트... 목록으로 가기... 기타등등
     </div>
 </div>
 
 
-
-
-</body>
 <script th:src="@{/academy.js}"></script>
 <script>
     $("#datepicker").datepicker({
     	language: 'ko'
     });
-<<<<<<< HEAD
-</script>
-=======
 
     function getTeacherId(element) {
     var teacherName = element.querySelector('#teacherName').value;
@@ -215,5 +202,4 @@
 }
 </script>
 </body>
->>>>>>> serin5
 </html>
