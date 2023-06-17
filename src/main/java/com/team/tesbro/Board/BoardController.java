@@ -2,25 +2,23 @@ package com.team.tesbro.Board;
 
 import com.team.tesbro.User.SiteUser;
 import com.team.tesbro.User.UserService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
 @Controller
 @RequestMapping("/board")
+@RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
-    private final BoardRepository boardRepository;
-    UserService userService;
-
-    public BoardController(BoardService boardService, BoardRepository boardRepository) {
-        this.boardService = boardService;
-        this.boardRepository = boardRepository;
-    }
+    private final UserService userService;
 
     @GetMapping("/event")
     public String getEventList(@RequestParam(defaultValue = "latest") String order,
@@ -48,38 +46,33 @@ public class BoardController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/event/create")
-    public String getCreateEventForm(Model model) {
-        model.addAttribute("boardForm", new BoardForm());
+    public String getCreateEventForm(Model model, BoardForm boardForm) {
         model.addAttribute("boardCategory", "event");
         return "board_form";
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/qna/create")
-    public String getCreateQnaForm(Model model, SiteUser user) {
-        model.addAttribute("boardForm", new BoardForm());
+    public String getCreateQnaForm(Model model, BoardForm boardForm) {
         model.addAttribute("boardCategory", "qna");
         return "board_form";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/notice/create")
-    public String getCreateNoticeForm(Model model, SiteUser user) {
-        model.addAttribute("boardForm", new BoardForm());
+    public String getCreateNoticeForm(Model model, BoardForm boardForm) {
         model.addAttribute("boardCategory", "notice");
         return "board_form";
     }
-
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/{boardCategory}/create")
     public String createBoard(@PathVariable("boardCategory") String boardCategory,
-                              @ModelAttribute("boardForm") BoardForm boardForm, Principal principal) {
-        String managerName = boardForm.getManagerName();
-        String subject = boardForm.getSubject();
-        String content = boardForm.getContent();
-        SiteUser user = this.userService.getUser(principal.getName());
-
-        Board createdBoard = boardService.create(boardCategory, managerName, subject, content, user);
-
+                              @Valid BoardForm boardForm, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "board_form";
+        }
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        boardService.create(boardForm.getBoardCategory(), boardForm.getSubject(), boardForm.getContent(), siteUser);
         return "redirect:/board/" + boardCategory;
     }
 
@@ -113,12 +106,12 @@ public class BoardController {
         model.addAttribute("paging", searchResult);
         return "board_list";
     }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
     public String getModifyForm(@PathVariable("id") Integer id, Model model) {
         Board board = boardService.getBoard(id);
         BoardForm boardForm = new BoardForm();
-        boardForm.setManagerName(board.getManagerName());
         boardForm.setSubject(board.getSubject());
         boardForm.setContent(board.getContent());
 
@@ -131,11 +124,10 @@ public class BoardController {
     @PostMapping("/modify/{id}")
     @PreAuthorize("isAuthenticated()")
     public String modifyBoard(@PathVariable("id") Integer id, @ModelAttribute("boardForm") BoardForm boardForm) {
-        String managerName = boardForm.getManagerName();
         String subject = boardForm.getSubject();
         String content = boardForm.getContent();
 
-        boardService.modifyBoard(id, managerName, subject, content);
+        boardService.modifyBoard(id, subject, content);
 
         return "redirect:/board/detail/" + id;
     }

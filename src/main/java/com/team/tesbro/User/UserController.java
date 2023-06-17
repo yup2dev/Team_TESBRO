@@ -50,7 +50,7 @@ public class UserController {
             return "signup_form";
         }
 
-        return "redirect:/board/notice";
+        return "redirect:/board/event";
         // 메인페이지가 없어서 임시로 notice로 함
     }
 

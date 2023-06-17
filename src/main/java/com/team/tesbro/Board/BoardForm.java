@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class BoardForm {
     private String boardCategory;
-    private String managerName;
     private String subject;
     private String content;
 }

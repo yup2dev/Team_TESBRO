@@ -17,10 +17,9 @@ import java.util.Optional;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public Board create(String boardCategory, String managerName, String subject, String content, SiteUser user) {
+    public Board create(String boardCategory, String subject, String content, SiteUser user) {
         Board board = new Board();
         board.setBoardCategory(boardCategory);
-        board.setManagerName(managerName);
         board.setSubject(subject);
         board.setContent(content);
         board.setAuthor(user);
@@ -28,16 +27,16 @@ public class BoardService {
         return boardRepository.save(board);
     }
 
-    public Board createEvent(String managerName, String subject, String content, SiteUser user) {
-        return create("event", managerName, subject, content, user);
+    public Board createEvent(String subject, String content, SiteUser user) {
+        return create("event", subject, content, user);
     }
 
-    public Board createQna(String managerName, String subject, String content, SiteUser user) {
-        return create("qna", managerName, subject, content, user);
+    public Board createQna(String subject, String content, SiteUser user) {
+        return create("qna", subject, content, user);
     }
 
-    public Board createNotice(String managerName, String subject, String content, SiteUser user) {
-        return create("notice", managerName, subject, content, user);
+    public Board createNotice(String subject, String content, SiteUser user) {
+        return create("notice", subject, content, user);
     }
 
     public Board getBoard(Integer id) {
@@ -78,11 +77,10 @@ public class BoardService {
         return boardRepository.findBySubjectContainingIgnoreCase(keyword, pageable);
     }
 
-    public void modifyBoard(Integer id, String managerName, String subject, String content) {
+    public void modifyBoard(Integer id, String subject, String content) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Board not found with id: " + id));
 
-        board.setManagerName(managerName);
         board.setSubject(subject);
         board.setContent(content);
         board.setUpdateDate(LocalDateTime.now());
