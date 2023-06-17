@@ -1,6 +1,7 @@
 package com.team.tesbro.Board;
 
 import com.team.tesbro.DataNotFoundException;
+import com.team.tesbro.User.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,26 +17,27 @@ import java.util.Optional;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public Board create(String boardCategory, String managerName, String subject, String content) {
+    public Board create(String boardCategory, String managerName, String subject, String content, SiteUser user) {
         Board board = new Board();
         board.setBoardCategory(boardCategory);
         board.setManagerName(managerName);
         board.setSubject(subject);
         board.setContent(content);
+        board.setAuthor(user);
         board.setCreateDate(LocalDateTime.now());
         return boardRepository.save(board);
     }
 
-    public Board createEvent(String managerName, String subject, String content) {
-        return create("event", managerName, subject, content);
+    public Board createEvent(String managerName, String subject, String content, SiteUser user) {
+        return create("event", managerName, subject, content, user);
     }
 
-    public Board createQna(String managerName, String subject, String content) {
-        return create("qna", managerName, subject, content);
+    public Board createQna(String managerName, String subject, String content, SiteUser user) {
+        return create("qna", managerName, subject, content, user);
     }
 
-    public Board createNotice(String managerName, String subject, String content) {
-        return create("notice", managerName, subject, content);
+    public Board createNotice(String managerName, String subject, String content, SiteUser user) {
+        return create("notice", managerName, subject, content, user);
     }
 
     public Board getBoard(Integer id) {

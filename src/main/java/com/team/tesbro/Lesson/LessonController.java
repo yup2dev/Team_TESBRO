@@ -4,6 +4,7 @@ import com.team.tesbro.Academy.Academy;
 import com.team.tesbro.Academy.AcademyService;
 import com.team.tesbro.Review.Review;
 import com.team.tesbro.Review.ReviewService;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -69,21 +70,8 @@ public class LessonController {
 
     @GetMapping("/multi_box_ajax")
     @ResponseBody
-    public List<LocalTime> getLessonTimeList(@RequestParam LocalDate data) {// lessonList를 모델에서 가져옴
-        List<LocalTime> lessonTimeList = lessonService.getLessonTimes(data, lessonList); // lessonList를 전달하여 호출
+    public List<LocalTime> getLessonTimeList(@RequestParam String data) {// lessonList를 모델에서 가져옴
+        List<LocalTime> lessonTimeList = lessonService.getLessonTimes(LocalDate.parse(data, DateTimeFormatter.ISO_DATE), lessonList); // lessonList를 전달하여 호출
         return lessonTimeList;
-    }
-
-
-    @PostMapping("/reserve")
-    @ResponseBody
-    public ResponseEntity<String> reserveLesson(@RequestParam LocalDate date, @RequestParam String time) {
-        // 선택한 날짜와 시간을 이용하여 예약 처리 등을 수행
-        LocalTime localTime = LocalTime.parse(time, DateTimeFormatter.ISO_TIME);
-        System.out.println(date);
-        System.out.println(localTime);
-
-        // 예약 성공 시 응답
-        return ResponseEntity.ok("예약이 완료되었습니다.");
     }
 }

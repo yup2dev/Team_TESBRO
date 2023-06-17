@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>academy_detail</title>
     <link rel="stylesheet" type="text/css" th:href="@{/style_academy.css}">
-    <script src="/jquery-3.1.1.min.js"></script> <!-- 값 제어를 위해 jquery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
     <!-- Air datepicker css -->
     <script src="/datepicker.js"></script> <!-- Air datepicker js -->
@@ -13,7 +13,9 @@
 <body>
 <!--        이름이랑 정보 요약&찜/공유      -->
 <div class="content">
-    <a href="#top"><div class="top-btn">▲</div></a>
+    <a href="#top">
+        <div class="top-btn">▲</div>
+    </a>
     <div class="teacher-popup">
         <div class="p-content">
             <div class="p-bg">
@@ -42,7 +44,8 @@
     </div>
     <div class="academy-top">
         <div class="academy-logo">
-            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg" alt="academy-logo">
+            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg"
+                 alt="academy-logo">
         </div>
         <div class="atop-items">
             <p class="academy_name" th:text="${academy.academyName}"></p>
@@ -57,8 +60,6 @@
     </div>
 
 
-
-
     <div class="academy-mid">
 
         <!--        학원 메인 이미지 & 예약하기      -->
@@ -67,11 +68,19 @@
                 <div id="img-slide">
                     <div class="album">
                         <div class="images">
-                            <div class="image"><img src="https://cdn.pixabay.com/photo/2017/05/25/15/08/jogging-2343558_1280.jpg" alt="">
+                            <div class="image"><img
+                                    src="https://cdn.pixabay.com/photo/2017/05/25/15/08/jogging-2343558_1280.jpg"
+                                    alt="">
                             </div>
-                            <div class="image"><img src="https://cdn.pixabay.com/photo/2018/02/06/14/07/ease-3134828_640.jpg" alt=""></div>
-                            <div class="image"><img src="https://cdn.pixabay.com/photo/2018/01/01/01/56/yoga-3053487_640.jpg" alt=""></div>
-                            <div class="image"><img src="https://cdn.pixabay.com/photo/2016/11/18/14/15/woman-1834827_640.jpg" alt=""></div>
+                            <div class="image"><img
+                                    src="https://cdn.pixabay.com/photo/2018/02/06/14/07/ease-3134828_640.jpg" alt="">
+                            </div>
+                            <div class="image"><img
+                                    src="https://cdn.pixabay.com/photo/2018/01/01/01/56/yoga-3053487_640.jpg" alt="">
+                            </div>
+                            <div class="image"><img
+                                    src="https://cdn.pixabay.com/photo/2016/11/18/14/15/woman-1834827_640.jpg" alt="">
+                            </div>
                         </div>
                         <button class="prev">◀</button>
                         <button class="next">▶</button>
@@ -80,29 +89,23 @@
             </div>
 
             <div class="reservation">
-                <div class="calender">
+                <form th:action="@{/reserve}" method="post">
+                    <label for="datePicker">날짜</label>
                     <input type="text" id="datePicker" name="datePicker">
-                </div>
 
+                <label for="childSelectBox">시간</label>
                 <select id="childSelectBox" name="childSelectBox">
                     <option value="">== 시간 선택 ==</option>
                 </select>
 
-
-                <select class="s-ticket">
-                    <option value="">수강권선택</option>
-                    <option value="프리미엄">프리미엄</option>
-                    <option value="고급">고급</option>
-                    <option value="일반">일반</option>
-                </select>
-
-                <button class="btn-r" id="reserveButton">예약하기</button>
+                <button type="submit" class="btn-r" id="reserveButton">예약하기</button>
+                </form>
             </div>
         </div>
 
 
         <!--        강사리스트 구간      -->
-        <div class ="academy-mid-2">
+        <div class="academy-mid-2">
             <div class="teachers">강사리스트</div>
             <div class="teachers">
                 <div id="t-slide">
@@ -110,7 +113,8 @@
                         <div class="t-images">
                             <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
                                 <a onclick="getTeacherId(this)">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg" alt="teacherPic">
+                                    <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg"
+                                         alt="teacherPic">
                                     <div th:text="${teacher.teacherName}"></div>
                                     <input type="hidden" th:value="${teacher.teacherName}" id="teacherName"/>
                                     <input type="hidden" th:value="${teacher.introduction}" id="teacherIntro"/>
@@ -129,7 +133,7 @@
         </div>
 
         <!--        학원 상세정보 구간      -->
-        <div class ="academy-mid-3">
+        <div class="academy-mid-3">
             <div class="detail-btn">
                 <a href="#학원소개">학원소개</a>
                 <a href="#수업정보">수업정보</a>
@@ -158,12 +162,12 @@
                         <ul class="review-items" th:each="review : ${paging}">
                             <li>
                                 <div th:text="${review.userId}"></div>
-                                <div id="starRatingDisplay"><input type="hidden" th:value="${review.star_rating}" id="starRating"/></div>
+                                <div id="starRatingDisplay"><input type="hidden" th:value="${review.star_rating}"
+                                                                   id="starRating"/></div>
                                 <div th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                                 <div th:text="${review.content}"></div>
                             </li>
                         </ul>
-
 
 
                         <form th:action="@{|/review/create/${academy.id}|}" method="post">
@@ -207,13 +211,11 @@
     </div>
 
 
-
     <!--같은 동 다른 학원 목록. 이전 목록으로 가기 등등-->
     <div class="academy-btm">
         <div id="map" style="width:500px;height:300px;"></div>
     </div>
 </div>
-
 
 
 <script th:src="@{/academy.js}"></script>
@@ -241,13 +243,19 @@
     }
 
 }
+
+
+
+
+
+
 </script>
 
 
 <!--ajax 스크립트 추가-->
 <script>
     $(document).ready(function() {
-        $("#datePicker").on("propertychange change keyup paste input", function(){
+        $("#datePicker").bind("propertychange change keyup paste input", function(){
             var thisParam = $(this).val();
             console.log(thisParam);
             $.ajax({
@@ -270,35 +278,15 @@
                 }
             });
         });
-
-        $("#reserveButton").click(function() {
-            var selectedDate = $("#datePicker").val();
-            var selectedTime = $("#childSelectBox").val();
-            console.log("선택한 날짜:", selectedDate);
-            console.log("선택한 시간:", selectedTime);
-
-            // 컨트롤러로 선택한 날짜와 시간 전송
-            $.ajax({
-                url: "/reserve",
-                method: "POST",
-                data : {"date":selectedDate, "time":selectedTime},
-                error: function(xhr, status, error) {
-                    console.log('통신실패!!');
-                    console.log('에러 메시지:', error);
-                },
-                success: function(response) {
-                    console.log("통신성공!!");
-                    console.log('서버 응답:', response);
-                    // 예약 결과 처리 등 추가 작업 수행
-                }
-            });
-        });
     });
+
+
 </script>
 
 </body>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
@@ -338,5 +326,8 @@ geocoder.addressSearch(address, function(result, status) {
         map.setCenter(coords);
     }
 });
+
+
+
 </script>
 </html>

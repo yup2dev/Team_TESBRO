@@ -1,22 +1,21 @@
 package com.team.tesbro.Board;
 
-import com.team.tesbro.DataNotFoundException;
+import com.team.tesbro.User.SiteUser;
+import com.team.tesbro.User.UserService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
     private final BoardService boardService;
     private final BoardRepository boardRepository;
+    UserService userService;
 
     public BoardController(BoardService boardService, BoardRepository boardRepository) {
         this.boardService = boardService;
@@ -47,7 +46,7 @@ public class BoardController {
         return "board_list";
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/event/create")
     public String getCreateEventForm(Model model) {
         model.addAttribute("boardForm", new BoardForm());
@@ -55,15 +54,17 @@ public class BoardController {
         return "board_form";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/qna/create")
-    public String getCreateQnaForm(Model model) {
+    public String getCreateQnaForm(Model model, SiteUser user) {
         model.addAttribute("boardForm", new BoardForm());
         model.addAttribute("boardCategory", "qna");
         return "board_form";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/notice/create")
-    public String getCreateNoticeForm(Model model) {
+    public String getCreateNoticeForm(Model model, SiteUser user) {
         model.addAttribute("boardForm", new BoardForm());
         model.addAttribute("boardCategory", "notice");
         return "board_form";
@@ -71,12 +72,13 @@ public class BoardController {
 
     @PostMapping("/{boardCategory}/create")
     public String createBoard(@PathVariable("boardCategory") String boardCategory,
-                              @ModelAttribute("boardForm") BoardForm boardForm) {
+                              @ModelAttribute("boardForm") BoardForm boardForm, Principal principal) {
         String managerName = boardForm.getManagerName();
         String subject = boardForm.getSubject();
         String content = boardForm.getContent();
+        SiteUser user = this.userService.getUser(principal.getName());
 
-        Board createdBoard = boardService.create(boardCategory, managerName, subject, content);
+        Board createdBoard = boardService.create(boardCategory, managerName, subject, content, user);
 
         return "redirect:/board/" + boardCategory;
     }
@@ -97,6 +99,7 @@ public class BoardController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/{boardCategory}/detail/{id}")
     public String addAnswerToBoard(@PathVariable("boardCategory") String boardCategory, @PathVariable("id") Integer id, @ModelAttribute("answerForm") AnswerForm answerForm) {
         String content = answerForm.getContent();
@@ -110,7 +113,7 @@ public class BoardController {
         model.addAttribute("paging", searchResult);
         return "board_list";
     }
-
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
     public String getModifyForm(@PathVariable("id") Integer id, Model model) {
         Board board = boardService.getBoard(id);
@@ -126,6 +129,7 @@ public class BoardController {
     }
 
     @PostMapping("/modify/{id}")
+    @PreAuthorize("isAuthenticated()")
     public String modifyBoard(@PathVariable("id") Integer id, @ModelAttribute("boardForm") BoardForm boardForm) {
         String managerName = boardForm.getManagerName();
         String subject = boardForm.getSubject();
@@ -136,6 +140,7 @@ public class BoardController {
         return "redirect:/board/detail/" + id;
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/delete/{id}")
     public String deleteBoard(@PathVariable("id") Integer id) {
         boardService.deleteBoard(id);
