@@ -81,14 +81,11 @@
 
             <div class="reservation">
                 <div class="calender">
-                    <p><input type="text" id="datepicker"></p>
+                    <input type="text" id="datePicker" name="datePicker">
                 </div>
 
-                <select class="s-class">
-                    <option value="">수업선택</option>
-                    <option value="강의1">강의1</option>
-                    <option value="강의2">강의2</option>
-                    <option value="강의3">강의3</option>
+                <select id="childSelectBox" name="childSelectBox">
+                    <option value="">== 시간 선택 ==</option>
                 </select>
 
 
@@ -99,7 +96,7 @@
                     <option value="일반">일반</option>
                 </select>
 
-                <button class="btn-r">예약하기</button>
+                <button class="btn-r" id="reserveButton">예약하기</button>
             </div>
         </div>
 
@@ -221,7 +218,7 @@
 
 <script th:src="@{/academy.js}"></script>
 <script>
-    $("#datepicker").datepicker({
+    $("#datePicker").datepicker({
        language: 'ko'
     });
 
@@ -245,6 +242,60 @@
 
 }
 </script>
+
+
+<!--ajax 스크립트 추가-->
+<script>
+    $(document).ready(function() {
+        $("#datePicker").on("propertychange change keyup paste input", function(){
+            var thisParam = $(this).val();
+            console.log(thisParam);
+            $.ajax({
+                url: "/multi_box_ajax",
+                data : { "data" : thisParam },
+                //dataType: "json",
+                error: function(xhr, status, error) {
+                    console.log('통신실패!!');
+                    console.log('에러 메시지:', error);
+                },
+                success: function(response) {
+                    console.log("통신성공!!");
+                    console.log('서버 응답:', response);
+                    // 2차 박스 업데이트
+                    var childSelectBox = $("#childSelectBox");
+                    childSelectBox.empty();
+                    $.each(response, function(index, value) {
+                        childSelectBox.append('<option value="' + value + '">' + value + '</option>');
+                    });
+                }
+            });
+        });
+
+        $("#reserveButton").click(function() {
+            var selectedDate = $("#datePicker").val();
+            var selectedTime = $("#childSelectBox").val();
+            console.log("선택한 날짜:", selectedDate);
+            console.log("선택한 시간:", selectedTime);
+
+            // 컨트롤러로 선택한 날짜와 시간 전송
+            $.ajax({
+                url: "/reserve",
+                method: "POST",
+                data : {"date":selectedDate, "time":selectedTime},
+                error: function(xhr, status, error) {
+                    console.log('통신실패!!');
+                    console.log('에러 메시지:', error);
+                },
+                success: function(response) {
+                    console.log("통신성공!!");
+                    console.log('서버 응답:', response);
+                    // 예약 결과 처리 등 추가 작업 수행
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>

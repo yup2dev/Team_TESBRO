@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface LessonRepository extends JpaRepository<Lesson, Integer> {
     List<Lesson> findByLessonDate(LocalDate lessonDate);
+    List<Lesson> findByAcademyId(Integer id);
 }
 
 
