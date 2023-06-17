@@ -13,10 +13,11 @@
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  margin-top: 100px;
+  margin-top: 10px;
 }
 section.board {
-  padding: 80px 0;
+  padding: 50px 0;
+
 }
 
 .page-title {
@@ -85,7 +86,7 @@ section.board {
    display: flex;
    align-items: center;
    justify-content: center;
-   margin: 20px 0;
+   margin: 10px 0;
    position: relative;
 }
 
@@ -113,6 +114,15 @@ section.board {
   color: #fff;
   border-color: #333;
   background: seagreen;
+}
+
+.pagination .button {
+  background: seagreen;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: white;
+  position: absolute;
+  left: 0;
 }
 
 .pagination .str {
@@ -157,7 +167,7 @@ a {
 .navbar {
   background: white;
   text-align:center;
-  position: absolute;
+  position: relative;
   left: 50%;
   transform: translateX(-50%);
   width:80%
@@ -196,18 +206,15 @@ a {
 
 }
 
-.nav-item > a:hover{
-  display:block;
-  color: rgb(27, 89, 29);
-  transform:scale(1.1);
-  transition:transform 0.5s;
-}
+
 
 .nav-bar:hover .nav-item .sub-bar {
   display:block;
   height:auto;
   margin: 10px;
   color: black;
+  position: relative;
+  z-index: 1;
 }
 
 .sub-bar{
@@ -222,4 +229,24 @@ a {
   color:seagreen;
   transform:scale(1.1);
   transition:transform 0.5s;
+}
+.search-form {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.search-form input[type="text"] {
+  flex: 1;
+  height: 50px;
+}
+
+.search-form button[type="submit"] {
+  background: seagreen;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: white;
+  height: 50px;
+  width: 50px;
 }

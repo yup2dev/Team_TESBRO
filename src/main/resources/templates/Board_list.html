@@ -98,9 +98,15 @@
   <section class="board">
     <div class="page-title">
       <div class="container">
-        <h3>공지사항입니다</h3>
-        </div>
+        <h3>공지사항입니다 </h3>
+        <!-- 검색 -->
+        <form class="search-form" th:action="@{/board/search}" method="get">
+          <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+          <button type="submit">검색</button>
+        </form>
+        <!-- 검색 끝 -->
       </div>
+    </div>
     </div>
     <!-- 게시판 -->
     <div id="board-list">
@@ -153,12 +159,6 @@
             </span>
           <a th:if="${paging.hasNext()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.nextPageable().pageNumber}|}" class="next">&gt;</a>
           <!-- 페이징 끝 -->
-          <!-- 검색 -->
-          <form class="search-form" th:action="@{/board/search}" method="get">
-            <input type="text" name="keyword" placeholder="검색어를 입력하세요">
-            <button type="submit">검색</button>
-          </form>
-          <!-- 검색 끝 -->
         </div>
       </div>
     </div>
