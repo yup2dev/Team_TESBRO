@@ -6,16 +6,17 @@ import com.team.tesbro.Lesson.LessonRepository;
 import com.team.tesbro.User.SiteUser;
 import com.team.tesbro.User.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -54,9 +55,9 @@ public class Lesson_ResService {
 //        return null;
 //    }
 
-    public void reserve(Lesson_ResDto lessonResDto, Principal principal){
-
-        Lesson lesson = lessonRepository.findById(lessonResDto.getLessonId())
+    public void reserve(Lesson_ResDto lessonResDto, Integer lessonId, Integer siteUserId){
+        Optional<Lesson> lesson1 = lessonRepository.findById(lessonId);
+        Lesson lesson = lessonRepository.findById(lesson1.get().getId())
                 .orElseThrow(() -> new DataNotFoundException("존재하지 않는 레슨ID입니다"));
 
         Lesson_Res lessonRes = new Lesson_Res();
@@ -64,19 +65,16 @@ public class Lesson_ResService {
         lessonRes.setBookDate(LocalDateTime.now());
         lessonResRepository.save(lessonRes);
 
-        List<Integer> userList = lessonResDto.getBookedUsersId();
-        List<SiteUser> users = userRepository.findAllById(userList);
+        List<Integer> bookedUsersId = new ArrayList<>();
+        bookedUsersId.add(siteUserId);
+        lessonResDto.setBookedUsersId(bookedUsersId);
 
-        Optional<SiteUser> currentUsername = userRepository.findByusername(principal.getName());
-        Integer currentUserId = currentUsername.get().getId();
-        if (currentUserId != null) {
-            SiteUser currentUser = userRepository.findById(currentUserId).orElse(null);
-            if (currentUser != null) {
-                users.add(currentUser);
-            }
+        for (Integer userId : lessonResDto.getBookedUsersId()) {
+            Optional<SiteUser> userOptional = userRepository.findById(userId);
+            SiteUser user = userOptional.orElseThrow(() -> new DataNotFoundException("존재하지 않는 사용자 ID입니다"));
+            lessonRes.getUsers().add(user);
         }
 
-        lessonRes.getUsers().addAll(users);
         lessonResRepository.save(lessonRes);
     }
 }

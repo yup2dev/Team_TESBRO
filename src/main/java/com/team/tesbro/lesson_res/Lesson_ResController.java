@@ -3,6 +3,7 @@ package com.team.tesbro.lesson_res;
 import com.team.tesbro.Lesson.Lesson;
 import com.team.tesbro.Lesson.LessonRepository;
 import com.team.tesbro.User.SiteUser;
+import com.team.tesbro.User.UserRepository;
 import com.team.tesbro.User.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.Optional;
 
 
@@ -29,12 +31,14 @@ public class Lesson_ResController {
     private final Lesson_ResService lesson_resService;
     private final LessonRepository lessonRepository;
     private final UserService userService;
+    private final UserRepository userRepository;
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/reserve/{id}")
     public String reserveLesson(@RequestParam String datePicker, @RequestParam String childSelectBox,
                                 @PathVariable("id") Integer id, @Valid Lesson_ResDto lessonResDto,
                                 BindingResult bindingResult, Principal principal) {
+
         // 유저 이름 필요
         //string => 날짜 시간 타입으로 변경
         LocalDate date = LocalDate.parse(datePicker, DateTimeFormatter.ISO_DATE);
@@ -43,23 +47,20 @@ public class Lesson_ResController {
         System.out.println(id);
         System.out.println(date);
         System.out.println(time);
-        // 위 데이터로 lessonId 찾기 있다면 예약 인원 수++
-        Optional<Lesson> lesson_id = lesson_resService.findLessonId(date, time, id);
-        System.out.println(lesson_id);
-        Optional<Lesson> lesson = lessonRepository.findById(lesson_id.get().getId());
-        if (lesson == null) {
-            return "없음";
-        } else if (lesson_resService.isLessonFullyBooked(lesson_id.get().getId())) {
-            return "꽉참";
-        } else {
-            Lesson_Res lessonRes = new Lesson_Res();
-            lessonRes.setBookDate(LocalDateTime.now());
 
-            //레슨 테이블에 등록인원 추가 로직
-            lesson_resService.increaseLessonCapacity(lesson_id.get().getId());
-        }
+        String currentUsername = principal.getName();
+        Optional<SiteUser> currentUser = userRepository.findByusername(currentUsername);
 
-        this.lesson_resService.reserve(lessonResDto, principal);
+        Integer currentUserId = currentUser.map(SiteUser::getId).orElse(null);
+        lessonResDto.setBookedUsersId(Collections.singletonList(currentUserId));
+
+        Optional<Lesson> lesson = lesson_resService.findLessonId(date, time, id);
+        Integer lessonId = lesson.get().getId();
+        Lesson_Res lessonRes = new Lesson_Res();
+        lessonRes.setBookDate(LocalDateTime.now());
+        System.out.println(lessonResDto);
+        //레슨 테이블에 등록인원 추가 로직
+        this.lesson_resService.reserve(lessonResDto, lessonId, currentUserId);
         System.out.println("예약됨");
         return "redirect:/reserve";
     }
