@@ -19,7 +19,6 @@ li {
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  border:1px solid black;
   background: transparent;
 }
 
@@ -233,6 +232,7 @@ li {
   position:relative;
 }
 .academy-mid-3 .detail-btn {
+
   display:flex;
   position:sticky;
   top:0;
@@ -240,9 +240,10 @@ li {
   border-top:1px solid lightgray;
   border-bottom:1px solid lightgray;
   text-align:center;
-  background: white;
+
 }
-.academy-mid-3 .detail-btn a {
+.academy-mid-3 .detail-btn > a {
+ background: white;
   font-size:1.4rem;
   width:100%;
   padding:10px;

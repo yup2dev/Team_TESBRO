@@ -162,8 +162,9 @@
                         <ul class="review-items" th:each="review : ${paging}">
                             <li>
                                 <div th:text="${review.userId}"></div>
-                                <div id="starRatingDisplay"><input type="hidden" th:value="${review.star_rating}"
-                                                                   id="starRating"/></div>
+                                <div id="starRatingDisplay">
+                                    <input type="hidden" th:value="${review.star_rating}" id="starRating"/>
+                                </div>
                                 <div th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                                 <div th:text="${review.content}"></div>
                             </li>
@@ -242,6 +243,12 @@
         teacherAwardsDisplay.textContent = teacherAwards;
     }
 
+    document.getElementById('starRatingDisplay').textContent = starRating;
+    var starRatingDisplay = document.getElementById('starRatingDisplay');
+    if (starRatingDisplay) {
+        starRatingDisplay.textContent = starRating;
+        console.log(starRating);
+    }
 }
 
 
