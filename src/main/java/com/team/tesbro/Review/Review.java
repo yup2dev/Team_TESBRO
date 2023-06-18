@@ -1,6 +1,7 @@
 package com.team.tesbro.Review;
 
 import com.team.tesbro.Academy.Academy;
+import com.team.tesbro.User.SiteUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -31,8 +32,8 @@ public class Review {
     @Min(1)
     private int star_rating;
 
-    @Column
-    private String userId;
+    @ManyToOne
+    private SiteUser userId;
 
     @ManyToOne
     private Academy academy;

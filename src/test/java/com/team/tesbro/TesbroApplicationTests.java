@@ -97,7 +97,7 @@ class TesbroApplicationTests {
 			String content = String.format("테스트 리뷰:[%03d]", i);
 			int star_rating = 5;
 
-			this.reviewService.create(a, content, star_rating);
+			this.reviewService.create(a, content, star_rating, null);
 		}
 	}
 }
