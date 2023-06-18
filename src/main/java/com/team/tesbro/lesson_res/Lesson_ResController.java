@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -38,7 +39,6 @@ public class Lesson_ResController {
     public String reserveLesson(@RequestParam String datePicker, @RequestParam String childSelectBox,
                                 @PathVariable("id") Integer id, @Valid Lesson_ResDto lessonResDto,
                                 BindingResult bindingResult, Principal principal) {
-
         // 유저 이름 필요
         //string => 날짜 시간 타입으로 변경
         LocalDate date = LocalDate.parse(datePicker, DateTimeFormatter.ISO_DATE);
@@ -67,7 +67,14 @@ public class Lesson_ResController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/reserve")
-    public String onlesson(Model model) {
+    public String onlesson(Model model, Principal principal) {
+        String currentUsername = principal.getName();
+        Optional<SiteUser> currentUser = userRepository.findByusername(currentUsername);
+
+        Integer currentUserId = currentUser.map(SiteUser::getId).orElse(null);
+        List<Lesson_Res> lessonResList = lesson_resService.findUserRes(currentUserId);
+        model.addAttribute("lessonResList", lessonResList);
+        System.out.println(lessonResList);
         return "reserve";
     }
 }
