@@ -5,11 +5,13 @@ import com.team.tesbro.User.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -64,6 +66,7 @@ public class BoardController {
         model.addAttribute("boardCategory", "notice");
         return "board_form";
     }
+
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/{boardCategory}/create")
     public String createBoard(@PathVariable("boardCategory") String boardCategory,
@@ -109,27 +112,28 @@ public class BoardController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String getModifyForm(@PathVariable("id") Integer id, Model model) {
+    public String getModifyForm(@PathVariable("id") Integer id, Principal principal, BoardForm boardForm) {
         Board board = boardService.getBoard(id);
-        BoardForm boardForm = new BoardForm();
+        if (!board.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다");
+        }
         boardForm.setSubject(board.getSubject());
         boardForm.setContent(board.getContent());
-
-        model.addAttribute("boardForm", boardForm);
-        model.addAttribute("boardId", id);
-
         return "board_form";
     }
-
-    @PostMapping("/modify/{id}")
     @PreAuthorize("isAuthenticated()")
-    public String modifyBoard(@PathVariable("id") Integer id, @ModelAttribute("boardForm") BoardForm boardForm) {
-        String subject = boardForm.getSubject();
-        String content = boardForm.getContent();
-
-        boardService.modifyBoard(id, subject, content);
-
-        return "redirect:/board/detail/" + id;
+    @PostMapping("/modify/{id}")
+    public String modifyBoard(@Valid BoardForm boardForm, BindingResult bindingResult,
+                              Principal principal, @PathVariable("id") Integer id) {
+        if (bindingResult.hasErrors()) {
+            return "board_form";
+        }
+        Board board = this.boardService.getBoard(id);
+        if (!board.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        this.boardService.modifyBoard(board, boardForm.getSubject(), boardForm.getContent());
+        return String.format("redirect:/board/detail/%S", id);
     }
 
     @PreAuthorize("isAuthenticated()")
