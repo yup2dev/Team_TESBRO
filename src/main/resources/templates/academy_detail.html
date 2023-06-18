@@ -89,7 +89,7 @@
             </div>
 
             <div class="reservation">
-                <form th:action="@{/reserve}" method="post">
+                <form th:action="@{|/reserve/${academy.id}|}" method="post">
                     <label for="datePicker">날짜</label>
                     <input type="text" id="datePicker" name="datePicker">
 
