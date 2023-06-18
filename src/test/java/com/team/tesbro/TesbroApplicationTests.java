@@ -3,6 +3,8 @@ package com.team.tesbro;
 import com.team.tesbro.Academy.Academy;
 import com.team.tesbro.Academy.AcademyRepository;
 import com.team.tesbro.Academy.AcademyService;
+import com.team.tesbro.Review.Review;
+import com.team.tesbro.Review.ReviewService;
 import com.team.tesbro.Teacher.Teacher;
 import com.team.tesbro.Teacher.TeacherRepository;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,11 @@ class TesbroApplicationTests {
 	private AcademyRepository academyRepository;
 	@Autowired
 	private TeacherRepository teacherRepository;
+
+	@Autowired
+	private ReviewService reviewService;
+
+
 	@Test
 	void contextLoads() {
 		Optional<Academy> oa = this.academyRepository.findById(1);
@@ -76,5 +83,21 @@ class TesbroApplicationTests {
 		t.setAcademy(a);
 		this.teacherRepository.save(t);
 
+	}
+
+	@Test
+	void contextLoads3() {
+
+
+		for (int i = 1; i <= 20; i++){
+			Optional<Academy> oa = this.academyRepository.findById(1);
+			assertTrue(oa.isPresent());
+			Academy a = oa.get();
+
+			String content = String.format("테스트 리뷰:[%03d]", i+10);
+			int star_rating = 5;
+
+			this.reviewService.create(a, content, star_rating);
+		}
 	}
 }

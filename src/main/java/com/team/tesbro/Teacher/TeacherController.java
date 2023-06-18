@@ -20,5 +20,4 @@ public class TeacherController {
         model.addAttribute("teacher", teacher);
         return "teacher_detail";
     }
-
 }
