@@ -1,18 +1,49 @@
-<div layout:fragment="content" class="container my-3">
-  <form th:action="@{/user/login}" method="post">
-    <div th:if="${param.error}">
-      <div class="alert alert-danger">
-        사용자ID 또는 비밀번호를 확인해 주세요.
+<!--<div layout:fragment="content" class="container my-3">-->
+<!--  <form th:action="@{/user/login}" method="post">-->
+<!--    <div th:if="${param.error}">-->
+<!--      <div class="alert alert-danger">-->
+<!--        사용자ID 또는 비밀번호를 확인해 주세요.-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--      <label for="username" class="form-label">사용자ID</label>-->
+<!--      <input type="text" name="username" id="username" class="form-control">-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--      <label for="password" class="form-label">비밀번호</label>-->
+<!--      <input type="password" name="password" id="password" class="form-control">-->
+<!--    </div>-->
+<!--    <button type="submit" class="btn btn-primary">로그인</button>-->
+<!--  </form>-->
+<!--</div>-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/login.css}">
+</head>
+<body>
+<div class="container">
+  <!--   테스형 로고 -->
+  <div class="logo">
+  </div>
+  <!--  테스형 로고 끝 -->
+  <!--   로그인 입력 시작 -->
+  <div class="login">
+    <form th:action="@{/user/login}" method="post">
+      <div th:if="${param.error}">
+        <label for="username" class="form-label"></label>
+      <input type="text" placeholder="아이디" id="username" name="username">
       </div>
-    </div>
-    <div class="mb-3">
-      <label for="username" class="form-label">사용자ID</label>
-      <input type="text" name="username" id="username" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">비밀번호</label>
-      <input type="password" name="password" id="password" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">로그인</button>
-  </form>
+      <label for="password" class="form-label"></label>
+      <input type="password" placeholder="비밀번호" name="password" id="password">
+      <span class="findID">아이디 찾기 <span>|</span> <span class="findPw">비밀번호 찾기</span></span>
+      <button id="login" type="submit">로그인</button>
+      <button>회원가입</button>
+      <button>소셜로그인</button>
+      <button>메인화면</button>
+    </form>
+  </div>
+  <!--   로그인 입력 끝 -->
 </div>
+</body>
