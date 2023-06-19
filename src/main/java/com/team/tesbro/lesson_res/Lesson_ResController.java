@@ -30,8 +30,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class Lesson_ResController {
     private final Lesson_ResService lesson_resService;
-    private final LessonRepository lessonRepository;
-    private final UserService userService;
     private final UserRepository userRepository;
 
     @PreAuthorize("isAuthenticated()")
@@ -56,8 +54,6 @@ public class Lesson_ResController {
 
         Optional<Lesson> lesson = lesson_resService.findLessonId(date, time, id);
         Integer lessonId = lesson.get().getId();
-        Lesson_Res lessonRes = new Lesson_Res();
-        lessonRes.setBookDate(LocalDateTime.now());
         System.out.println(lessonResDto);
         //레슨 테이블에 등록인원 추가 로직
         this.lesson_resService.reserve(lessonResDto, lessonId, currentUserId);

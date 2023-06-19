@@ -60,7 +60,6 @@ public class Lesson_ResService {
         Lesson_Res lessonRes = new Lesson_Res();
         lessonRes.setLesson(lesson);
         lessonRes.setBookDate(LocalDateTime.now());
-        lessonResRepository.save(lessonRes);
 
         List<Integer> bookedUsersId = new ArrayList<>();
         bookedUsersId.add(siteUserId);
