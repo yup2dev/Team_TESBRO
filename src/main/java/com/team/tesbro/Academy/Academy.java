@@ -2,6 +2,7 @@ package com.team.tesbro.Academy;
 
 import com.team.tesbro.Review.Review;
 import com.team.tesbro.Teacher.Teacher;
+import com.team.tesbro.lesson_res.Lesson_Res;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

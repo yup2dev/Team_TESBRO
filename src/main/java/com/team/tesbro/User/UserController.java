@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class    UserController {
 
     private final UserService userService;
 
@@ -36,21 +36,24 @@ public class UserController {
         }
 
         try {
+            UserRole role = userCreateForm.getUsername().startsWith("admin") ? UserRole.ADMIN : UserRole.USER;
+
             userService.create(userCreateForm.getUsername(),
-                    userCreateForm.getEmail(), userCreateForm.getPassword1());
-        }catch(DataIntegrityViolationException e) {
+                    userCreateForm.getEmail(), userCreateForm.getPassword1(), role);
+        } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
             return "signup_form";
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", e.getMessage());
             return "signup_form";
         }
 
-        return "redirect:/board/notice";
+        return "redirect:/board/event";
         // 메인페이지가 없어서 임시로 notice로 함
     }
+
     @GetMapping("/login")
     public String login() {
         return "login_form";

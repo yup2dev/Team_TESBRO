@@ -1,6 +1,7 @@
 package com.team.tesbro.Review;
 
 import com.team.tesbro.Academy.Academy;
+import com.team.tesbro.User.SiteUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -31,11 +32,11 @@ public class Review {
     @Min(1)
     private int star_rating;
 
-    @Column
-    private String userId;
+    @ManyToOne
+    private SiteUser userId;
 
     @ManyToOne
     private Academy academy;
-}
+}   
 
 // 추천 voter 유저클래스 없어서 킵

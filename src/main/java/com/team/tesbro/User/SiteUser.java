@@ -1,10 +1,6 @@
 package com.team.tesbro.User;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +12,7 @@ public class SiteUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(unique = true)
     private String username;
@@ -25,4 +21,14 @@ public class SiteUser {
 
     @Column(unique = true)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    public boolean isAdmin(){
+        return "admin".equals(username) ||
+                "admin2".equals(username) ||
+                "admin3".equals(username) ||
+                "admin4".equals(username);
+    }
 }

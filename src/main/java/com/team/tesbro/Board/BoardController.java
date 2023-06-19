@@ -1,27 +1,26 @@
 package com.team.tesbro.Board;
 
-import com.team.tesbro.DataNotFoundException;
+import com.team.tesbro.User.SiteUser;
+import com.team.tesbro.User.UserService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/board")
+@RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
-    private final BoardRepository boardRepository;
-
-    public BoardController(BoardService boardService, BoardRepository boardRepository) {
-        this.boardService = boardService;
-        this.boardRepository = boardRepository;
-    }
+    private final UserService userService;
 
     @GetMapping("/event")
     public String getEventList(@RequestParam(defaultValue = "latest") String order,
@@ -47,37 +46,36 @@ public class BoardController {
         return "board_list";
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/event/create")
-    public String getCreateEventForm(Model model) {
-        model.addAttribute("boardForm", new BoardForm());
+    public String getCreateEventForm(Model model, BoardForm boardForm) {
         model.addAttribute("boardCategory", "event");
         return "board_form";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/qna/create")
-    public String getCreateQnaForm(Model model) {
-        model.addAttribute("boardForm", new BoardForm());
+    public String getCreateQnaForm(Model model, BoardForm boardForm) {
         model.addAttribute("boardCategory", "qna");
         return "board_form";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/notice/create")
-    public String getCreateNoticeForm(Model model) {
-        model.addAttribute("boardForm", new BoardForm());
+    public String getCreateNoticeForm(Model model, BoardForm boardForm) {
         model.addAttribute("boardCategory", "notice");
         return "board_form";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/{boardCategory}/create")
     public String createBoard(@PathVariable("boardCategory") String boardCategory,
-                              @ModelAttribute("boardForm") BoardForm boardForm) {
-        String managerName = boardForm.getManagerName();
-        String subject = boardForm.getSubject();
-        String content = boardForm.getContent();
-
-        Board createdBoard = boardService.create(boardCategory, managerName, subject, content);
-
+                              @Valid BoardForm boardForm, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "board_form";
+        }
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        boardService.create(boardForm.getBoardCategory(), boardForm.getSubject(), boardForm.getContent(), siteUser);
         return "redirect:/board/" + boardCategory;
     }
 
@@ -97,6 +95,7 @@ public class BoardController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/{boardCategory}/detail/{id}")
     public String addAnswerToBoard(@PathVariable("boardCategory") String boardCategory, @PathVariable("id") Integer id, @ModelAttribute("answerForm") AnswerForm answerForm) {
         String content = answerForm.getContent();
@@ -111,31 +110,33 @@ public class BoardController {
         return "board_list";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String getModifyForm(@PathVariable("id") Integer id, Model model) {
+    public String getModifyForm(@PathVariable("id") Integer id, Principal principal, BoardForm boardForm) {
         Board board = boardService.getBoard(id);
-        BoardForm boardForm = new BoardForm();
-        boardForm.setManagerName(board.getManagerName());
+        if (!board.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다");
+        }
         boardForm.setSubject(board.getSubject());
         boardForm.setContent(board.getContent());
-
-        model.addAttribute("boardForm", boardForm);
-        model.addAttribute("boardId", id);
-
         return "board_form";
     }
-
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
-    public String modifyBoard(@PathVariable("id") Integer id, @ModelAttribute("boardForm") BoardForm boardForm) {
-        String managerName = boardForm.getManagerName();
-        String subject = boardForm.getSubject();
-        String content = boardForm.getContent();
-
-        boardService.modifyBoard(id, managerName, subject, content);
-
-        return "redirect:/board/detail/" + id;
+    public String modifyBoard(@Valid BoardForm boardForm, BindingResult bindingResult,
+                              Principal principal, @PathVariable("id") Integer id) {
+        if (bindingResult.hasErrors()) {
+            return "board_form";
+        }
+        Board board = this.boardService.getBoard(id);
+        if (!board.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        this.boardService.modifyBoard(board, boardForm.getSubject(), boardForm.getContent());
+        return String.format("redirect:/board/detail/%S", id);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/delete/{id}")
     public String deleteBoard(@PathVariable("id") Integer id) {
         boardService.deleteBoard(id);
