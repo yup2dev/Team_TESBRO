@@ -278,3 +278,12 @@ a {
   border-radius: 5px;
   cursor: pointer;
 }
+.answer {
+  margin-right: 5px;
+  background-color: seagreen;
+  color: white;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 5px;
+}
+

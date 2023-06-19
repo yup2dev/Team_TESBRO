@@ -54,6 +54,10 @@
         <td th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
         <td>
           <a th:href="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:text="${board.subject}"></a>
+          <span class="answer"
+                th:if="${#lists.size(board.answers) > 0}"
+                th:text="${#lists.size(board.answers)}">
+          </span>
         </td>
         <td>
           <span th:if="${board.author != null}" th:text="${board.author.username}"></span>

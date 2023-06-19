@@ -28,10 +28,17 @@
     <a th:if="${board.boardCategory == 'event'}" th:href="@{/board/event}" class="btn btn-primary">돌아가기</a>
     <a th:href="@{/board/modify/{id}(id=${board.id})}" class="btn btn-primary">수정하기</a>
 
-    <form th:action="@{'/board/delete/' + ${board.id}}" method="post" style="display: inline-block;">
+    <form th:action="@{'/board/delete/' + ${board.id}}" method="post" style="display: inline-block;" onsubmit="return confirmDelete();">
         <input type="hidden" name="_method" value="DELETE" />
         <button type="submit" class="btn btn-primary">삭제하기</button>
     </form>
+
+    <script>
+function confirmDelete() {
+    var result = confirm("삭제하시겠습니까?");
+    return result;
+}
+</script>
 </div>
 </body>
 </html>
