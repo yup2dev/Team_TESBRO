@@ -1,12 +1,12 @@
-<div class="navContainer">
-    <div th:fragment="navbarFragment" class="navbar">
+<div th:fragment="navbarFragment" class="navContainer">
+    <div  class="navbar">
         <link rel="stylesheet" type="text/css" th:href="@{/style_navbar.css}">
         <div class="nav-top">
             <div class="brand-logo"><a href="#">TESBRO</a></div>
             <div class="user-btns">
                 <div class="user-btn"><a href="#">기업 등록</a></div>
-                <div class="user-btn"><a href="#">로그인</a></div>
-                <div class="user-btn"><a href="#">회원가입</a></div>
+                <div class="user-btn"><a href="/user/login">로그인</a></div>
+                <div class="user-btn"><a href="/user/signup">회원가입</a></div>
             </div>
         </div>
 

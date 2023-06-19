@@ -41,12 +41,21 @@ public class ReviewService {
         }
     }
 
+
     public Page<Review> getList(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
         return this.reviewRepository.findAll(pageable);
     }
+
+    public void modify(Review review, String content, int star_rating) {
+        review.setContent(content);
+        review.setStar_rating(star_rating);
+        review.setModifyDate(LocalDateTime.now());
+        this.reviewRepository.save(review);
+    }
+
 
     public void delete(Review review) {
         this.reviewRepository.delete(review);
