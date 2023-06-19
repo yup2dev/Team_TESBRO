@@ -1,74 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>TESBRO</title>
 </head>
 <body>
-<div class="login">
-  <div class></div>
-  <a href="/user/signup">회원가입</a>
-  <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
-  <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
-</div>
-<div class="navbar">
-  <!--  내비로고  -->
-  <div class="nav-logo">
-    <a href="#">
-      <img src="https://velog.velcdn.com/images/jsr3643/post/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg" alt="TesbroLogo">
-    </a>
-  </div>
-  <!--  내비로고끝  -->
-  <!--  내비바 메뉴 -->
-  <ul class="nav-bar">
-    <li class="nav-item">
-      <a href="#">예약하기</a>
-      <ul class="sub-bar">
-        <li class="sub-mn">
-          <a href="#">등록하기(기업)</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item">
-      <a href="/academy/list">학원조회</a>
-      <ul class="sub-bar">
-        <li class="sub-mn">
-          <a href="/map">내 주변</a>
-        </li>
-        <li class="sub-mn">
-          <a href="#">수강권 구매</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item">
-      <a href="/board/notice">공지사항</a>
-      <ul class="sub-bar">
-        <li class="sub-mn">
-          <a href="/board/event">이벤트</a>
-        </li>
-        <li class="sub-mn">
-          <a href="/board/qna">Q&A</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item">
-      <a href="#">마이</a>
-      <ul class="sub-bar">
-        <li class="sub-mn">
-          <a href="#">예약확인</a>
-        </li>
-        <li class="sub-mn">
-          <a href="#">내 수강권</a>
-        </li>
-        <li class="sub-mn">
-          <a href="#">마이페이지</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <!--  내비바메뉴 끝  -->
-</div>
-<!-- 내비바 끝 -->
-
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<th:block layout:fragment="content"></th:block>
 </body>
 </html>
