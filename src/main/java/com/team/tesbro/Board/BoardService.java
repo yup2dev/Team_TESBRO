@@ -77,10 +77,7 @@ public class BoardService {
         return boardRepository.findBySubjectContainingIgnoreCase(keyword, pageable);
     }
 
-    public void modifyBoard(Integer id, String subject, String content) {
-        Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Board not found with id: " + id));
-
+    public void modifyBoard(Board board, String subject, String content) {
         board.setSubject(subject);
         board.setContent(content);
         board.setUpdateDate(LocalDateTime.now());

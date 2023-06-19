@@ -10,6 +10,7 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,8 @@ public class Lesson {
     private Integer id;
     @Column
     private Integer peopleCapacity;
+    @Column
+    private Integer currentCapacity;
     @Column(length = 100)
     private String lessonName;
     private LocalDate lessonDate;
@@ -33,4 +36,7 @@ public class Lesson {
 
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.REMOVE)
     private List<Lesson_Res> lesson_resList;
+
 }
+
+
