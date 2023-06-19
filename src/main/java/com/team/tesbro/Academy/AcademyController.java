@@ -28,12 +28,4 @@ public class AcademyController {
         model.addAttribute("keyword", keyword);
         return "list";
     }
-
-    @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
-        Academy academy = this.academyService.getAcademy(id);
-        model.addAttribute("academy", academy);
-
-        return "academy_detail";
-    }
 }

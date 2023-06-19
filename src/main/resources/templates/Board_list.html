@@ -1,166 +1,106 @@
-<link rel="stylesheet" type="text/css" th:href="@{/style1.css}">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" th:href="@{/style1.css}">
+  <title>게시판</title>
+</head>
+<body>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
 
-<section class="board">
-  <!-- 정렬하기 -->
-  <select id="order" onchange="handleOrderChange()">
-    <option value="">정렬하기</option>
-    <option value="outdated">오래된순</option>
-    <option value="views">조회순</option>
-    <option value="recommend">추천순</option>
-    <option value="comments">댓글순</option>
-  </select>
+<div class="notice-section">
+  <div class="container">
+    <div class="notice-header">
+      <h3 class="notice-title">공지사항</h3>
+<!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'notice'}">공지사항</h3>-->
+<!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'qna'}">문의하기</h3>-->
+<!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'event'}">이벤트</h3>-->
 
-  <script>
-  function handleOrderChange() {
-    var selectedOption = document.getElementById("order").value;
-    var currentUrl = window.location.href;
-    var updatedUrl;
-
-    if (currentUrl.includes("?")) {
-      if (currentUrl.includes("order=")) {
-        updatedUrl = currentUrl.replace(/order=[^&]+/, "order=" + selectedOption);
-      } else {
-        updatedUrl = currentUrl + "&order=" + selectedOption;
-      }
-    } else {
-      updatedUrl = currentUrl + "?order=" + selectedOption;
-    }
-
-    window.location.href = updatedUrl;
-  }
-</script>
-  <!-- 정렬하기 끝 -->
-  <div class="login">
-    <div class></div>
-    <a href="/user/signup">회원가입</a>
-    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
-    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
-  </div>
-  <div class="navbar">
-    <!--  내비로고  -->
-    <div class="nav-logo">
-      <a href="#">
-        <img src="https://velog.velcdn.com/images/jsr3643/post/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg" alt="TesbroLogo">
-      </a>
-    </div>
-    <!--  내비로고끝  -->
-    <!--  내비바 메뉴 -->
-    <ul class="nav-bar">
-      <li class="nav-item">
-        <a href="#">예약하기</a>
-        <ul class="sub-bar">
-          <li class="sub-mn">
-            <a href="/academy/create">등록하기(기업)</a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a href="/academy/list">학원조회</a>
-        <ul class="sub-bar">
-          <li class="sub-mn">
-            <a href="/map">내 주변</a>
-          </li>
-          <li class="sub-mn">
-            <a href="#">수강권 구매</a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a href="/board/notice">공지사항</a>
-        <ul class="sub-bar">
-          <li class="sub-mn">
-            <a href="/board/event">이벤트</a>
-          </li>
-          <li class="sub-mn">
-            <a href="/board/qna">Q&A</a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a href="#">마이</a>
-        <ul class="sub-bar">
-          <li class="sub-mn">
-            <a href="#">예약확인</a>
-          </li>
-          <li class="sub-mn">
-            <a href="#">내 수강권</a>
-          </li>
-          <li class="sub-mn">
-            <a href="#">마이페이지</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <!--  내비바메뉴 끝  -->
-  </div>
-  <!-- 내비바 끝 -->
-
-  <section class="board">
-    <div class="page-title">
-      <div class="container">
-        <h3>공지사항입니다 </h3>
-        <!-- 검색 -->
-        <form class="search-form" th:action="@{/board/search}" method="get">
-          <input type="text" name="keyword" placeholder="검색어를 입력하세요">
-          <button type="submit">검색</button>
-        </form>
-        <!-- 검색 끝 -->
+      <!-- 정렬 버튼들 -->
+      <div class="order-buttons">
+        <button class="order-button" onclick="handleOrderChange('outdated')">오래된순</button>
+        <button class="order-button" onclick="handleOrderChange('views')">조회순</button>
+        <button class="order-button" onclick="handleOrderChange('recommend')">추천순</button>
+        <button class="order-button" onclick="handleOrderChange('comments')">댓글순</button>
       </div>
+      <!-- 정렬 버튼들 끝 -->
     </div>
-    </div>
-    <!-- 게시판 -->
-    <div id="board-list">
-      <div class="container">
-        <!-- 게시판 리스트 -->
-        <table class="board-table">
-          <thead>
-          <tr>
-            <th scope="col" class="th-num">번호</th>
-            <th scope="col" class="th-title">제목</th>
-            <th scope="col" class="th-author">작성자</th>
-            <th scope="col" class="th-date">작성일</th>
-            <th scope="col" class="th-hit">조회</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="board, loop : ${paging}">
-            <td th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
-            <td>
-              <a th:href="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:text="${board.subject}"></a>
-            </td>
-            <td>
-              <span th:if="${board.author != null}" th:text="${board.author.username}"></span>
-            </td>
-            <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}">
-            </td>
-            <td th:text="${board.views}"></td>
-          </tr>
-          </tbody>
-        </table>
-        <!-- 게시판 리스트 끝 -->
-        <div class="pagination">
-          <!--  글 쓰기 -->
-          <a th:href="@{|/board/${paging.content[0].boardCategory}/create|}" class="button">글쓰기</a>
-          <!-- 글 쓰기 끝 -->
-          <!-- 페이징 -->
-          <a th:if="${paging.hasPrevious()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.previousPageable().pageNumber}|}" class="prev">&lt;</a>
-          <span th:if="${paging.number >= 2}">
+
+    <!-- 검색 -->
+    <form class="search-form" th:action="@{/board/search}" method="get">
+      <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+      <button type="submit">검색</button>
+    </form>
+    <!-- 검색 끝 -->
+  </div>
+</div>
+
+
+<div id="board-list">
+  <div class="container">
+    <table class="board-table">
+      <thead>
+      <tr>
+        <th scope="col" class="th-num">번호</th>
+        <th scope="col" class="th-title">제목</th>
+        <th scope="col" class="th-author">작성자</th>
+        <th scope="col" class="th-date">작성일</th>
+        <th scope="col" class="th-hit">조회</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="board, loop : ${paging}">
+        <td th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
+        <td>
+          <a th:href="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:text="${board.subject}"></a>
+        </td>
+        <td>
+          <span th:if="${board.author != null}" th:text="${board.author.username}"></span>
+        </td>
+        <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${board.views}"></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <a th:href="@{|/board/${paging.content[0].boardCategory}/create|}" class="button">글쓰기</a>
+      <a th:if="${paging.hasPrevious()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.previousPageable().pageNumber}|}" class="prev">&lt;</a>
+      <span th:if="${paging.number >= 2}">
           <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 2}|}" class="pager" th:text="${paging.number - 1}"></a>
-            </span>
-          <span th:if="${paging.number >= 1}">
+        </span>
+      <span th:if="${paging.number >= 1}">
           <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 1}|}" class="pager" th:text="${paging.number}"></a>
-            </span>
-          <span class="current pager" th:text="${paging.number + 1}"></span>
-          <span th:if="${paging.number + 1 < paging.totalPages}">
+        </span>
+      <span class="current pager" th:text="${paging.number + 1}"></span>
+      <span th:if="${paging.number + 1 < paging.totalPages}">
           <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number + 1}|}" class="pager" th:text="${paging.number + 2}"></a>
-            </span>
-          <span th:if="${paging.number + 2 < paging.totalPages}">
+        </span>
+      <span th:if="${paging.number + 2 < paging.totalPages}">
           <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number + 2}|}" class="pager" th:text="${paging.number + 3}"></a>
-            </span>
-          <a th:if="${paging.hasNext()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.nextPageable().pageNumber}|}" class="next">&gt;</a>
-          <!-- 페이징 끝 -->
-        </div>
-      </div>
+        </span>
+      <a th:if="${paging.hasNext()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.nextPageable().pageNumber}|}" class="next">&gt;</a>
     </div>
-    <!-- 게시판 끝 -->
-  </section>
+  </div>
+</div>
+
+<script>
+    function handleOrderChange(selectedOption) {
+      var currentUrl = window.location.href;
+      var updatedUrl;
+
+      if (currentUrl.includes("?")) {
+        if (currentUrl.includes("order=")) {
+          updatedUrl = currentUrl.replace(/order=[^&]+/, "order=" + selectedOption);
+        } else {
+          updatedUrl = currentUrl + "&order=" + selectedOption;
+        }
+      } else {
+        updatedUrl = currentUrl + "?order=" + selectedOption;
+      }
+
+      window.location.href = updatedUrl;
+    }
+  </script>
+</body>
+</html>

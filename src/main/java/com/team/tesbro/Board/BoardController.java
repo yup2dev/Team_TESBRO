@@ -133,7 +133,7 @@ public class BoardController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         this.boardService.modifyBoard(board, boardForm.getSubject(), boardForm.getContent());
-        return String.format("redirect:/board/detail/%S", id);
+        return String.format("redirect:/board/%s/detail/%d", board.getBoardCategory(), id);
     }
 
     @PreAuthorize("isAuthenticated()")

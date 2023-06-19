@@ -239,7 +239,7 @@ a {
 
 .search-form input[type="text"] {
   flex: 1;
-  height: 50px;
+  height: 30px;
 }
 
 .search-form button[type="submit"] {
@@ -247,6 +247,34 @@ a {
   border: 1px solid #ddd;
   border-radius: 5px;
   color: white;
-  height: 50px;
+  height: 30px;
   width: 50px;
+}
+
+.notice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+}
+
+.notice-title {
+  margin-right: 10px;
+  color:seagreen;
+  font-size: 30px
+}
+
+.order-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.order-button {
+  margin-right: 5px;
+  background-color: seagreen;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
