@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html layout:decorate="~{layout}" lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>academy_detail</title>
@@ -12,7 +12,7 @@
 </head>
 <body>
 <!--        이름이랑 정보 요약&찜/공유      -->
-<div class="content">
+<div layout:fragment="content" class="content">
     <a href="#top">
         <div class="top-btn">▲</div>
     </a>
@@ -226,7 +226,7 @@
     <div class="academy-btm">
         <div id="map" style="width:500px;height:300px;"></div>
     </div>
-</div>
+
 
 
 <script th:src="@{/academy.js}"></script>
@@ -299,12 +299,9 @@
 
 
 </script>
-
-</body>
-
-<script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
-<script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
+    <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -347,4 +344,7 @@ geocoder.addressSearch(address, function(result, status) {
 
 
 </script>
+
+</div>
+</body>
 </html>
