@@ -185,6 +185,13 @@
                                     <span th:if="${review.star_rating == 4}">⭐⭐⭐⭐</span>
                                     <span th:if="${review.star_rating == 5}">⭐⭐⭐⭐⭐</span>
                                 </div>
+<!--                                삭제 -->
+                                <div>
+                                    <a href="javascript:void(0);" th:data-uri="@{|/review/delete/${review.id}|}" sec:authorize="isAuthenticated()"
+                                       th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="삭제"></a>
+                                </div>
+
+
                                 <div th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                                 <div th:text="${review.content}"></div>
                             </li>
@@ -343,6 +350,17 @@ geocoder.addressSearch(address, function(result, status) {
 
 
 
+</script>
+<!--  삭제  -->
+<script type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
 </script>
 
 </div>

@@ -302,6 +302,7 @@ select, textarea {
     border-bottom: 2px solid lightgray;
     width:100%;
     margin-bottom:30px;
+    position:relative;
 }
 
 .d-content .review_box .review-items li div {
@@ -315,7 +316,7 @@ select, textarea {
     border-right:1px solid lightgray;
 }
 
-.d-content .review_box .review-items li div:nth-child(3) {
+.d-content .review_box .review-items li div:nth-child(4) {
     float:right;
     padding-right:10px;
 }
@@ -327,6 +328,17 @@ select, textarea {
     min-height:100px;
     border-top:1px solid lightgray;
 }
+.review_box .review-items li div:nth-child(3) {
+    width:50px;
+    height:20px;
+    padding:5px;
+    margin:0;
+    position:absolute;
+    top:5px;
+    right:170px;
+    text-align:center;
+}
+
 .d-content .review_box .pagination {
     display:flex;
     justify-content:center;

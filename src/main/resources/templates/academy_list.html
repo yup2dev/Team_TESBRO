@@ -17,7 +17,7 @@
     </thead>
     <tbody>
     <tr th:each="academy, index : ${academyList}">
-        <td><a th:href="@{|/academy/detail/${academy.id}|}" 1yName}"></a></td>
+        <td><a th:href="@{|/academy/detail/${academy.id}|}" th:text="Name}"></a></td>
         <td><a th:href="@{|/academy/detail/${academy.id}|}" 112th:text="${academy.ceoName}"></a></td>
         <td><a th:href="@{|/academy/detail/${academy.id}|}" th:text="${academy.academyAddress}"></a></td>
         <td><a th:href="@{|/academy/detail/${academy.id}|}" th:text="${academy.academyNum}"></a></td>

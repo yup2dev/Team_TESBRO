@@ -6,14 +6,13 @@ import com.team.tesbro.User.SiteUser;
 import com.team.tesbro.User.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -36,6 +35,16 @@ public class ReviewController {
             return "academy_detail";
         }
         this.reviewService.create(academy, reviewForm.getContent(), reviewForm.getStar_rating(), siteUser);
+        return String.format("redirect:/academy/detail/%s", id);
+    }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String reviewDelete(Principal principal, @PathVariable("id") Integer id) {
+        Review review = this.reviewService.getReview(id);
+        if (!review.getUserId().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+        this.reviewService.delete(review);
         return String.format("redirect:/academy/detail/%s", id);
     }
 }
