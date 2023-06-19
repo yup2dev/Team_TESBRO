@@ -1,6 +1,7 @@
 package com.team.tesbro.lesson_res;
 
 import com.team.tesbro.Lesson.Lesson;
+import com.team.tesbro.Lesson.LessonRepository;
 import com.team.tesbro.User.SiteUser;
 import com.team.tesbro.User.UserRepository;
 import jakarta.validation.Valid;
@@ -30,6 +31,7 @@ import java.util.Optional;
 public class Lesson_ResController {
     private final Lesson_ResService lesson_resService;
     private final UserRepository userRepository;
+    private final LessonRepository lessonRepository;
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/reserve/{id}")
@@ -56,11 +58,20 @@ public class Lesson_ResController {
         Integer lessonId = lesson.get().getId();
         System.out.println(lessonResDto);
 
-        // 중복 체크
+        // 중복 체크 후 에러시 팝업 띄워주기
         if (lesson_resService.findUsers(lessonId).contains(currentUserId)) {
             System.out.println("유저 중복으로 불가능");
-            redirectAttributes.addFlashAttribute("popupMessage", "불가능한 예약입니다.");
+            redirectAttributes.addFlashAttribute("popupMessage", "이미 예약된 회원입니다");
             return "redirect:/academy/detail/{id}";
+        }
+
+        if (lesson.get().getCurrentCapacity() >= lesson.get().getPeopleCapacity()) {
+            System.out.println("꽉참");
+            redirectAttributes.addFlashAttribute("popupMessage", "수용 인원을 초과했습니다");
+            return "redirect:/academy/detail/{id}";
+        } else {
+            lesson.get().setCurrentCapacity(lesson.get().getCurrentCapacity() + 1);
+            lessonRepository.save(lesson.get());
         }
 
         //레슨 테이블에 등록인원 추가 로직

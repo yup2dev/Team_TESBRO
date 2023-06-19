@@ -13,10 +13,13 @@
 <body>
 <!--        이름이랑 정보 요약&찜/공유      -->
 <div layout:fragment="content" class="content">
-
-    <div id="popupMessage" th:if="${popupMessage}" th:text="${popupMessage}" class="popup-container">
-        <button class="popup-close-button" onclick="closePopup()">X</button>
-        <p class="popup-message">팝업 메시지 내용</p>
+    <!--팝업에러 파트-->
+    <!-- Add this HTML within your page -->
+    <div id="popupModal" class="modal" th:if="${popupMessage}">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p th:text="${popupMessage}"></p>
+        </div>
     </div>
 
 
@@ -100,12 +103,12 @@
                     <label for="datePicker">날짜</label>
                     <input type="text" id="datePicker" name="datePicker">
 
-                <label for="childSelectBox">시간</label>
-                <select id="childSelectBox" name="childSelectBox">
-                    <option value="">== 시간 선택 ==</option>
-                </select>
+                    <label for="childSelectBox">시간</label>
+                    <select id="childSelectBox" name="childSelectBox">
+                        <option value="">== 시간 선택 ==</option>
+                    </select>
 
-                <button type="submit" class="btn-r" id="reserveButton">예약하기</button>
+                    <button type="submit" class="btn-r" id="reserveButton">예약하기</button>
                 </form>
             </div>
         </div>
@@ -160,7 +163,8 @@
                 </div>
                 <div id="후기" class="d-content">
                     <p>후기</p>
-                    <form th:action="@{|/review/create/${academy.id}|}" th:object="${reviewForm}" method="post" class="review-create">
+                    <form th:action="@{|/review/create/${academy.id}|}" th:object="${reviewForm}" method="post"
+                          class="review-create">
 
 
                         <select name="star_rating" id="star_rating">
@@ -175,9 +179,9 @@
 
                     </form>
 
-<!--                    <div class="review-createBtn">-->
-<!--                        <button th:href="@{/review/create}">리뷰 등록하기</button>-->
-<!--                    </div>-->
+                    <!--                    <div class="review-createBtn">-->
+                    <!--                        <button th:href="@{/review/create}">리뷰 등록하기</button>-->
+                    <!--                    </div>-->
                     <div class="review_box">
                         <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 후기가 있습니다.|"></div>
 
@@ -196,8 +200,6 @@
                                 <div th:text="${review.content}"></div>
                             </li>
                         </ul>
-
-
 
 
                         <div th:if="${!paging.isEmpty()}">
@@ -234,10 +236,25 @@
         <div id="map" style="width:500px;height:300px;"></div>
     </div>
 
+    <script>
+    $(document).ready(function() {
+      var popupModal = $("#popupModal");
+      var closeBtn = $(".close");
 
+      if (popupModal.length) {
+        popupModal.show();
+      }
 
-<script th:src="@{/academy.js}"></script>
-<script>
+      if (closeBtn.length) {
+        closeBtn.on("click", function() {
+          popupModal.hide();
+        });
+      }
+    });
+    </script>
+
+    <script th:src="@{/academy.js}"></script>
+    <script>
     $("#datePicker").datepicker({
        language: 'ko'
     });
@@ -273,11 +290,15 @@
 
 
 
-</script>
 
 
-<!--ajax 스크립트 추가-->
-<script>
+
+
+    </script>
+
+
+    <!--ajax 스크립트 추가-->
+    <script>
     $(document).ready(function() {
         $("#datePicker").bind("propertychange change keyup paste input", function(){
             var thisParam = $(this).val();
@@ -305,7 +326,11 @@
     });
 
 
-</script>
+
+
+
+
+    </script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
     <script>
@@ -350,7 +375,11 @@ geocoder.addressSearch(address, function(result, status) {
 
 
 
-</script>
+
+
+
+
+    </script>
 
 </div>
 </body>
