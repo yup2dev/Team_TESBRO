@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>예약확인</title>
-</head>
-<body>
-
-</body>
-</html>
+<table>
+    <thead>
+    <tr>
+        <th>수업 시간</th>
+        <th>수업명</th>
+        <th>예약자</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="lessonRes : ${lessonResList}">
+        <td th:text="${lessonRes.lesson.lessonName}"></td>
+        <td th:text="${lessonRes.bookDate}"></td>
+        <td>
+            <ul>
+                <li th:each="user : ${lessonRes.users}" th:text="${user.username}"></li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>

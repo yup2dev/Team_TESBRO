@@ -1,12 +1,14 @@
 package com.team.tesbro.lesson_res;
 
-import com.team.tesbro.Lesson.Lesson;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
 public class Lesson_ResDto {
-    private Lesson lessonId;
-
+    @NotNull
+    private List<Integer> bookedUsersId;
 }

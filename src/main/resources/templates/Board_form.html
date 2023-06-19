@@ -2,10 +2,6 @@
     <h5 class="my-3 border-bottom pb-2">글쓰기</h5>
     <form th:action="@{/board/{boardCategory}/create(boardCategory=${boardCategory})}" method="post" th:object="${boardForm}">
         <div class="mb-3">
-            <label for="managerName" class="form-label">작성자</label>
-            <input type="text" th:field="*{managerName}" class="form-control">
-        </div>
-        <div class="mb-3">
             <label for="subject" class="form-label">제목</label>
             <input type="text" th:field="*{subject}" class="form-control">
         </div>
