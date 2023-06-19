@@ -1,15 +1,16 @@
-<link rel="stylesheet" type="text/css" th:href="@{/styleY.css}" xmlns="">
-<script type="text/javascript" src="hangjungdong.js"></script>
 <!DOCTYPE html>
-<html lang="en">
+<html layout:decorate="~{layout}" lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
     <script type="application/javascript"
             src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/styleY.css}" xmlns="">
+    <script type="text/javascript" src="hangjungdong.js"></script>
 </head>
 <body>
+<div layout:fragment="content" class="content">
 <div class="searchhide">
 
     <select id="sido">
@@ -115,6 +116,7 @@
     </div>
 </div>
 </body>
+</html>
 <script>
 jQuery(document).ready(function(){
 //sido option 추가
@@ -197,4 +199,3 @@ jQuery.ajax({
 
 
 </script>
-</html>

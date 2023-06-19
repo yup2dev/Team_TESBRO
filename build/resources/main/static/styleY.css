@@ -2,6 +2,12 @@ body{
   padding: 0 100px;
 }
 
+.content{
+  max-width:1400px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
 a{
   text-decoration: none;
   color:black;
@@ -18,6 +24,7 @@ a{
 .container{
   padding-top:3rem;
   padding-bottom:2rem;
+  text-align:center;
 }
 
 form{
@@ -28,6 +35,7 @@ form{
 .searchbox {
   display:flex;
   align-items:center;
+  text-align:center;
   justify-content:center;
   box-sizing:border-box;
   flex-wrap: no-wrap;

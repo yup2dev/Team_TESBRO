@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html layout:decorate="~{layout}" lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>academy_detail</title>
@@ -12,7 +12,7 @@
 </head>
 <body>
 <!--        이름이랑 정보 요약&찜/공유      -->
-<div class="content">
+<div layout:fragment="content" class="content">
     <a href="#top">
         <div class="top-btn">▲</div>
     </a>
@@ -153,34 +153,45 @@
                 </div>
                 <div id="후기" class="d-content">
                     <p>후기</p>
-                    <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 답변이 있습니다.|"></div>
-                    <div class="review-createBtn">
-                        <button th:href="@{/review/create}">리뷰 등록하기</button>
-                    </div>
+                    <form th:action="@{|/review/create/${academy.id}|}" th:object="${reviewForm}" method="post" class="review-create">
+
+
+                        <select name="star_rating" id="star_rating">
+                            <option value="5">⭐⭐⭐⭐⭐</option>
+                            <option value="4">⭐⭐⭐⭐</option>
+                            <option value="3">⭐⭐⭐</option>
+                            <option value="2">⭐⭐</option>
+                            <option value="1">⭐</option>
+                        </select>
+                        <input type="submit" value="리뷰등록">
+                        <textarea name="content" id="content" rows="12"></textarea>
+
+                    </form>
+
+<!--                    <div class="review-createBtn">-->
+<!--                        <button th:href="@{/review/create}">리뷰 등록하기</button>-->
+<!--                    </div>-->
                     <div class="review_box">
+                        <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 후기가 있습니다.|"></div>
+
 
                         <ul class="review-items" th:each="review : ${paging}">
                             <li>
-                                <div th:text="${review.userId}"></div>
-                                <div id="starRatingDisplay"><input type="hidden" th:value="${review.star_rating}"
-                                                                   id="starRating"/></div>
+                                <div th:if="${review.userId != null}" th:text="${review.userId.username}"></div>
+                                <div>
+                                    <span th:if="${review.star_rating == 1}">⭐</span>
+                                    <span th:if="${review.star_rating == 2}">⭐⭐</span>
+                                    <span th:if="${review.star_rating == 3}">⭐⭐⭐</span>
+                                    <span th:if="${review.star_rating == 4}">⭐⭐⭐⭐</span>
+                                    <span th:if="${review.star_rating == 5}">⭐⭐⭐⭐⭐</span>
+                                </div>
                                 <div th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                                 <div th:text="${review.content}"></div>
                             </li>
                         </ul>
 
 
-                        <form th:action="@{|/review/create/${academy.id}|}" method="post">
-                            <select name="star_rating" id="star_rating">
-                                <option value="5">⭐⭐⭐⭐⭐</option>
-                                <option value="4">⭐⭐⭐⭐</option>
-                                <option value="3">⭐⭐⭐</option>
-                                <option value="2">⭐⭐</option>
-                                <option value="1">⭐</option>
-                            </select>
-                            <textarea name="content" id="content" rows="15"></textarea>
-                            <input type="submit" value="답변등록">
-                        </form>
+
 
                         <div th:if="${!paging.isEmpty()}">
                             <ul class="pagination justify-content-center">
@@ -215,7 +226,7 @@
     <div class="academy-btm">
         <div id="map" style="width:500px;height:300px;"></div>
     </div>
-</div>
+
 
 
 <script th:src="@{/academy.js}"></script>
@@ -242,6 +253,12 @@
         teacherAwardsDisplay.textContent = teacherAwards;
     }
 
+    document.getElementById('starRatingDisplay').textContent = starRating;
+    var starRatingDisplay = document.getElementById('starRatingDisplay');
+    if (starRatingDisplay) {
+        starRatingDisplay.textContent = starRating;
+        console.log(starRating);
+    }
 }
 
 
@@ -282,12 +299,9 @@
 
 
 </script>
-
-</body>
-
-<script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
-<script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
+    <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -330,4 +344,7 @@ geocoder.addressSearch(address, function(result, status) {
 
 
 </script>
+
+</div>
+</body>
 </html>
