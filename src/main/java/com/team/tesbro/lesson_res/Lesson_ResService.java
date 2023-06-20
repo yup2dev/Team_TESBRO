@@ -77,4 +77,8 @@ public class Lesson_ResService {
     public List<Lesson_Res> findUserRes(Integer userId){
         return lessonResRepository.findByUsersId(userId);
     }
+
+    public List<Integer> findUsers(Integer lessonId){
+        return lessonResRepository.findUserIdsByLessonId(lessonId);
+    }
 }
