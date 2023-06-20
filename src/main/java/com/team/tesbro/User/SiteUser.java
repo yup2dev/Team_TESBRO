@@ -24,6 +24,7 @@ public class SiteUser {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
+    @ManyToMany(mappedBy = "ticketUsers")
 
     public boolean isAdmin(){
         return "admin".equals(username) ||

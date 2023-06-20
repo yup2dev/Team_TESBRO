@@ -26,6 +26,7 @@ public class Lesson_ResService {
         return lessonRepository.findIdByLessonDateAndLessonTimeAndAcademyId(date, time, id);
     }
 
+    //현재 인원 증가시키는 로직 팝업 띄우는 로직 추가해야함 controller에는 다 구현 되어있음
     public void increaseLessonCapacity(Integer lessonId) {
         Lesson lesson = lessonRepository.findById(lessonId)
                 .orElseThrow(() -> new IllegalArgumentException("레슨 없음 id : " + lessonId));
@@ -37,20 +38,13 @@ public class Lesson_ResService {
             throw new IllegalStateException("예약 꽉참");
         }
     }
+
+    //레슨 인원 포과하는지 보는 함수 근데 팝업으로 수정해서 service로 빼야함 controller에는 다 구현 되어있음
     public boolean isLessonFullyBooked(Integer lessonId) {
         Lesson lesson = lessonRepository.findById(lessonId)
                 .orElseThrow(() -> new IllegalArgumentException("레슨 없음 id : " + lessonId));
         return lesson.getCurrentCapacity() >= lesson.getPeopleCapacity();
     }
-
-//    private Integer getCurrentUserId() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication != null && authentication.getPrincipal() instanceof SiteUser) {
-//            SiteUser user = (SiteUser) authentication.getPrincipal();
-//            return user.getId();
-//        }
-//        return null;
-//    }
 
     public void reserve(Lesson_ResDto lessonResDto, Integer lessonId, Integer siteUserId){
         Optional<Lesson> lesson1 = lessonRepository.findById(lessonId);
