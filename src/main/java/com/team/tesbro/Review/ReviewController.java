@@ -35,7 +35,7 @@ public class ReviewController {
             return "academy_detail";
         }
         this.reviewService.create(academy, reviewForm.getContent(), reviewForm.getStar_rating(), siteUser);
-        return String.format("redirect:/academy/detail/%s", id);
+        return String.format("redirect:/academy/detail/%d", id);
     }
 
 
@@ -47,7 +47,7 @@ public class ReviewController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
         }
         this.reviewService.delete(review);
-        return String.format("redirect:/academy/detail/%s", review.getAcademy().getId());
+        return String.format("redirect:/academy/detail/%d", review.getAcademy().getId());
     }
 
 
@@ -75,6 +75,15 @@ public class ReviewController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         this.reviewService.modify(review, reviewForm.getContent(), reviewForm.getStar_rating());
-        return String.format("redirect:/academy/detail/%s", review.getAcademy().getId());
+        return String.format("redirect:/academy/detail/%d", review.getAcademy().getId());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String reviewVote(Principal principal, @PathVariable("id") Integer id) {
+        Review review = this.reviewService.getReview(id);
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.reviewService.vote(review, siteUser);
+        return String.format("redirect:/academy/detail/%d", review.getAcademy().getId());
     }
 }

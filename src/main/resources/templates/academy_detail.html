@@ -63,7 +63,6 @@
         </div>
         <div class="atop-items">
             <p class="academy_name" th:text="${academy.academyName}"></p>
-            <p class="academyDong" th:text="${academy.academyDong}"></p>
             <a href="#">대표명을 써야하나</a></p>
             <p th:text="${academy.academyTel}"></p>
         </div>
@@ -199,6 +198,15 @@
                                     <span th:if="${review.star_rating == 4}">⭐⭐⭐⭐</span>
                                     <span th:if="${review.star_rating == 5}">⭐⭐⭐⭐⭐</span>
                                 </div>
+
+                                <div>
+                                    <a href="javascript:void(0);" class="recommend"
+                                       th:data-uri="@{|/review/vote/${review.id}|}">
+                                        추천
+                                        <span class="badge" th:text="${#lists.size(review.voter)}"></span>
+                                    </a>
+                                </div>
+
 <!--                                삭제 -->
                                 <div>
                                     <a href="javascript:void(0);" th:data-uri="@{|/review/delete/${review.id}|}" class="delete" sec:authorize="isAuthenticated()"
@@ -395,6 +403,14 @@ geocoder.addressSearch(address, function(result, status) {
     Array.from(delete_elements).forEach(function(element) {
         element.addEventListener('click', function() {
             if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+        const recommend_elements = document.getElementsByClassName("recommend");
+    Array.from(recommend_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 추천하시겠습니까?")) {
                 location.href = this.dataset.uri;
             };
         });

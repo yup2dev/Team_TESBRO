@@ -1,6 +1,7 @@
 package com.team.tesbro.Review;
 
 import com.team.tesbro.Academy.Academy;
+import com.team.tesbro.Academy.AcademyService;
 import com.team.tesbro.DataNotFoundException;
 import com.team.tesbro.User.SiteUser;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.Optional;
 @Service
 public class ReviewService {
     private final ReviewRepository reviewRepository;
+    private AcademyService academyService;
 
     public void create(Academy academy, String content, int star_rating, SiteUser author){
         Review review = new Review();
@@ -59,5 +61,10 @@ public class ReviewService {
 
     public void delete(Review review) {
         this.reviewRepository.delete(review);
+    }
+
+    public void vote(Review review, SiteUser siteUser) {
+        review.getVoter().add(siteUser);
+        this.reviewRepository.save(review);
     }
 }
