@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,22 @@ public class AcademyController {
         model.addAttribute("academyList", academyList);
         model.addAttribute("keyword", keyword);
         return "list";
+    }
+    @GetMapping("/create")
+    public String getCreateAcademyForm(Model model) {
+        model.addAttribute("AcademyForm", new AcademyForm());
+        return "academy_form";
+    }
+
+    @PostMapping("/create")
+    public String AcademyCreate(@ModelAttribute AcademyForm academyForm) {
+        String academyName = academyForm.getAcademyName();
+        String CeoName = academyForm.getCeoName();
+        String AcademyAddress = academyForm.getAcademyAddress();
+        String AcademyTel = academyForm.getAcademyTel();
+        String introduction = academyForm.getIntroduction();
+        String imglogo = academyForm.getImgLogo();
+        this.academyService.create(academyName, CeoName, AcademyAddress, AcademyTel, introduction, imglogo);
+        return "redirect:/academy/list";
     }
 }

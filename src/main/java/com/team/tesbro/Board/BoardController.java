@@ -26,6 +26,7 @@ public class BoardController {
     public String getEventList(@RequestParam(defaultValue = "latest") String order,
                                @RequestParam(defaultValue = "0") int page, Model model) {
         Page<Board> boardPage = boardService.getBoardListByCategory("event", order, page);
+        model.addAttribute("boardcategory", "event");
         model.addAttribute("paging", boardPage);
         return "event_list";
     }
@@ -35,6 +36,7 @@ public class BoardController {
                              @RequestParam(defaultValue = "0") int page, Model model) {
         Page<Board> boardPage = boardService.getBoardListByCategory("qna", order, page);
         model.addAttribute("paging", boardPage);
+        model.addAttribute("boardcategory", "qna");
         return "board_list";
     }
 
@@ -43,6 +45,7 @@ public class BoardController {
                                 @RequestParam(defaultValue = "0") int page, Model model) {
         Page<Board> boardPage = boardService.getBoardListByCategory("notice", order, page);
         model.addAttribute("paging", boardPage);
+        model.addAttribute("boardcategory", "notice");
         return "board_list";
     }
 
@@ -162,4 +165,8 @@ public class BoardController {
         return "jusoPopup";
     }
 
+    @GetMapping("/address3")
+    public String address3(){
+        return "Bnum";
+    }
 }

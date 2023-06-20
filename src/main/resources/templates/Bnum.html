@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<div th:fragment="BnumFragment" class="Bnum">
+<head>
+    <title>사업자 정보 조회</title>
+    <h3>예시 - 5138116574</h3>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>사업자 정보 조회</h1>
+<input type="text" id="bnoInput" placeholder="사업자번호를 입력하세요">
+<button id="searchButton">조회</button>
+
+<div id="resultContainer"></div>
+
+<div id="registerContainer" style="display: none;">
+    <button id="registerButton">회원가입</button>
+    <button id="backButton">돌아가기</button>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#searchButton').click(function() {
+            var bno = $('#bnoInput').val();
+
+            var data = {
+                "b_no": [bno]
+            };
+
+            $.ajax({
+                url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=xVPPH2l2F%2BJ7umaIAnvMBTEOAbnO1ovqOp1D5juzg3itCyPFyFuAbsVCs5CV1PFtb8%2BDI5%2BK89%2BhBdQdhOSKlw%3D%3D",
+                type: "POST",
+                data: JSON.stringify(data),
+                dataType: "JSON",
+                contentType: "application/json",
+                accept: "application/json",
+                success: function(result) {
+                    displayResult(result);
+                },
+                error: function(result) {
+                    console.log(result.responseText);
+                }
+            });
+        });
+
+        $('#registerButton').click(function() {
+            window.location.href = "/user/signup";
+        });
+        $('#backButton').click(function() {
+            window.location.href = "/user/signup";
+        });
+    });
+
+    function displayResult(result) {
+        var container = $('#resultContainer');
+        var registerContainer = $('#registerContainer');
+
+        var html = '<h2>조회 결과</h2>';
+        html += '<p>사업자번호: ' + result.data[0].b_no + '</p>';
+        html += '<p>과세유형: ' + result.data[0].tax_type + '</p>';
+
+        container.html(html);
+
+        if (result.data[0].tax_type.includes("과세자")) {
+            registerContainer.show();
+        } else {
+            registerContainer.hide();
+        }
+    }
+</script>
+</body>
+</div>
+</html>

@@ -14,7 +14,9 @@
 <div class="notice-section">
   <div class="container">
     <div class="notice-header">
-      <h3 class="notice-title">공지사항</h3>
+      <h3 th:if="${boardcategory == 'notice'}">공지사항</h3>
+      <h3 th:if="${boardcategory == 'qna'}">문의하기</h3>
+      <h3 th:if="${boardcategory == 'event'}">이벤트</h3>
       <!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'notice'}">공지사항</h3>-->
       <!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'qna'}">문의하기</h3>-->
       <!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'event'}">이벤트</h3>-->
@@ -65,12 +67,7 @@
         </td>
         <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
         <td th:text="${board.views}"></td>
-        <td th:text="${board.voter}">
-          <span class="voter"
-                th:if="${#lists.size(board.voter) > 0}"
-                th:text="${#lists.size(board.voter)}">
-                    </span>
-        </td>
+        <td th:text="${#lists.size(board.voter)}"></td>
       </tr>
       </tbody>
     </table>
