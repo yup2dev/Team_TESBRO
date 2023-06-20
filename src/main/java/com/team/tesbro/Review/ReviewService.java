@@ -1,6 +1,7 @@
 package com.team.tesbro.Review;
 
 import com.team.tesbro.Academy.Academy;
+import com.team.tesbro.DataNotFoundException;
 import com.team.tesbro.User.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -30,10 +32,32 @@ public class ReviewService {
         this.reviewRepository.save(review);
     }
 
+    public Review getReview(Integer id) {
+        Optional<Review> review = this.reviewRepository.findById(id);
+        if(review.isPresent()) {
+            return review.get();
+        } else {
+            throw new DataNotFoundException("review not found");
+        }
+    }
+
+
     public Page<Review> getList(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
         return this.reviewRepository.findAll(pageable);
+    }
+
+    public void modify(Review review, String content, int star_rating) {
+        review.setContent(content);
+        review.setStar_rating(star_rating);
+        review.setModifyDate(LocalDateTime.now());
+        this.reviewRepository.save(review);
+    }
+
+
+    public void delete(Review review) {
+        this.reviewRepository.delete(review);
     }
 }

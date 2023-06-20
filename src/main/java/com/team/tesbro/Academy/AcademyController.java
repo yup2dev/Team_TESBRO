@@ -36,27 +36,4 @@ public class AcademyController {
         return "list";
     }
 
-//    @GetMapping("/detail/{id}")
-//    public String detail(Model model, @PathVariable("id") Integer id, @RequestParam(value="page", defaultValue="0") int page) {
-//        Academy academy = this.academyService.getAcademy(id);
-//        model.addAttribute("academy", academy);
-//        Page<Review> paging = this.reviewService.getList(page);
-//        model.addAttribute("paging", paging);
-//
-//
-//        List<Lesson> lessonList = lessonService.getAcLesson(id);
-//        List<LocalDate> dateList = new ArrayList<>();
-//        for (Lesson lesson : lessonList) {
-//            LocalDate lessonDate = lesson.getLessonDate();
-//            dateList.add(lessonDate);
-//        }
-//        Set<LocalDate> uniqueDates = new HashSet<>(dateList);
-//        List<LocalDate> uniqueDateList = new ArrayList<>(uniqueDates);
-//        Collections.sort(uniqueDateList);
-//        model.addAttribute("uniqueDateList", uniqueDateList);
-//        //학원의 날짜
-//        //시간만 손보면 끝납니다잉
-//
-//        return "academy_detail";
-//    }
 }

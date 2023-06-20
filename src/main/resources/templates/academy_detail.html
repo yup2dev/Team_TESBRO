@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <title>academy_detail</title>
     <link rel="stylesheet" type="text/css" th:href="@{/style_academy.css}">
+
+</head>
+<body>
+<div layout:fragment="content" class="aContainer">
+<!--        이름이랑 정보 요약&찜/공유      -->
+<div  class="content">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
     <!-- Air datepicker css -->
     <script src="/datepicker.js"></script> <!-- Air datepicker js -->
     <script src="/datepicker.ko.js"></script>
-</head>
-<body>
-<!--        이름이랑 정보 요약&찜/공유      -->
-<div layout:fragment="content" class="content">
+
+
     <!--팝업에러 파트-->
     <!-- Add this HTML within your page -->
     <div id="popupModal" class="modal" th:if="${popupMessage}">
@@ -60,7 +64,7 @@
         <div class="atop-items">
             <p class="academy_name" th:text="${academy.academyName}"></p>
             <p class="academyDong" th:text="${academy.academyDong}"></p>
-            <a href="#">지도보기</a></p>
+            <a href="#">대표명을 써야하나</a></p>
             <p th:text="${academy.academyTel}"></p>
         </div>
         <div class="besides">
@@ -100,13 +104,12 @@
 
             <div class="reservation">
                 <form th:action="@{|/reserve/${academy.id}|}" method="post">
-                    <label for="datePicker">날짜</label>
-                    <input type="text" id="datePicker" name="datePicker">
+                    <input placeholder="날짜를 선택하세요." type="text" id="datePicker" name="datePicker">
 
-                    <label for="childSelectBox">시간</label>
-                    <select id="childSelectBox" name="childSelectBox">
-                        <option value="">== 시간 선택 ==</option>
-                    </select>
+
+                <select id="childSelectBox" name="childSelectBox">
+                    <option value="">수업시간을 선택하세요.</option>
+                </select>
 
                     <button type="submit" class="btn-r" id="reserveButton">예약하기</button>
                 </form>
@@ -175,7 +178,7 @@
                             <option value="1">⭐</option>
                         </select>
                         <input type="submit" value="리뷰등록">
-                        <textarea name="content" id="content" rows="12"></textarea>
+                        <textarea name="content" id="content" rows="10"></textarea>
 
                     </form>
 
@@ -196,6 +199,17 @@
                                     <span th:if="${review.star_rating == 4}">⭐⭐⭐⭐</span>
                                     <span th:if="${review.star_rating == 5}">⭐⭐⭐⭐⭐</span>
                                 </div>
+<!--                                삭제 -->
+                                <div>
+                                    <a href="javascript:void(0);" th:data-uri="@{|/review/delete/${review.id}|}" class="delete" sec:authorize="isAuthenticated()"
+                                       th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="삭제"></a>
+                                </div>
+                                <div>
+                                    <a href="@{|/review/modify/${review.id}|}" sec:authorize="isAuthenticated()"
+                                       th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="수정"></a>
+                                </div>
+
+
                                 <div th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                                 <div th:text="${review.content}"></div>
                             </li>
@@ -373,14 +387,21 @@ geocoder.addressSearch(address, function(result, status) {
     }
 });
 
+</script>
 
+    <!--  삭제  -->
+    <script type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+</script>
 
-
-
-
-
-    </script>
-
+</div>
 </div>
 </body>
 </html>
