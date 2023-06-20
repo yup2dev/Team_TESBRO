@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>TESBRO_MAIN</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="mainContainer">
+    <link rel="stylesheet" type="text/css" th:href="@{/style_main.css}">
+    <div class="promotion">
+        <div class="slider-section">
+            <div class="slide-container">
+                <div class="slide">
+                    <div class="slide_item item1">
+                        <div class="fixed-item">
+                            <div>~ 대충 멋들어지는 <br> &nbsp;&nbsp;&nbsp;선전문구 들어가는 곳 ~</div>
+                            <input type="text" placeholder="필라테스 학원 검색하기">
+                            <button><img src="https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_1280.png" alt=""></button>
+                            <img src="https://cdn.pixabay.com/photo/2023/06/15/04/29/woman-8064380_1280.jpg" alt="1">
+                        </div>
+                    </div>
+
+
+
+                    <div class="slide_item item2">
+                        <div class="fixed-item">
+                            <div>~ 그냥 귀여워서 넣었음 ~</div>
+                            <div>아마도 이벤트</div>
+                            <img src="https://cdn.pixabay.com/photo/2016/08/05/19/29/rock-1573068_1280.jpg" alt="2">
+
+                        </div>
+                    </div>
+
+
+                    <div class="slide_item item3">
+                        <div class="fixed-item">
+                            <div>~ 가만히 있어도</div>
+                            <div>살빠지면 좋겠다 ~</div>
+                            <img src="https://cdn.pixabay.com/photo/2020/11/03/13/04/yoga-5709767_1280.png" alt="3"
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="slide_prev_button slide_button">◀</div>
+                <div class="slide_next_button slide_button">▶</div>
+                <ul class="slide_pagination"></ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+<div class="academy-list"></div>
+
+
+<script>
+    // 슬라이크 전체 크기(width 구하기)
+const slide = document.querySelector(".slide");
+let slideWidth = slide.clientWidth;
+
+// 버튼 엘리먼트 선택하기
+const prevBtn = document.querySelector(".slide_prev_button");
+const nextBtn = document.querySelector(".slide_next_button");
+
+// 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
+let slideItems = document.querySelectorAll(".slide_item");
+// 현재 슬라이드 위치가 슬라이드 개수를 넘기지 않게 하기 위한 변수
+const maxSlide = slideItems.length;
+
+// 버튼 클릭할 때 마다 현재 슬라이드가 어디인지 알려주기 위한 변수
+let currSlide = 1;
+
+// 페이지네이션 생성
+const pagination = document.querySelector(".slide_pagination");
+
+for (let i = 0; i < maxSlide; i++) {
+  if (i === 0) pagination.innerHTML += `<li class="active">•</li>`;
+  else pagination.innerHTML += `<li>•</li>`;
+}
+
+const paginationItems = document.querySelectorAll(".slide_pagination > li");
+
+// 무한 슬라이드를 위해 start, end 슬라이드 복사하기
+const startSlide = slideItems[0];
+const endSlide = slideItems[slideItems.length - 1];
+const startElem = document.createElement("div");
+const endElem = document.createElement("div");
+
+endSlide.classList.forEach((c) => endElem.classList.add(c));
+endElem.innerHTML = endSlide.innerHTML;
+
+startSlide.classList.forEach((c) => startElem.classList.add(c));
+startElem.innerHTML = startSlide.innerHTML;
+
+// 각 복제한 엘리먼트 추가하기
+slideItems[0].before(endElem);
+slideItems[slideItems.length - 1].after(startElem);
+
+// 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
+slideItems = document.querySelectorAll(".slide_item");
+//
+let offset = slideWidth + currSlide;
+slideItems.forEach((i) => {
+  i.setAttribute("style", `left: ${-offset}px`);
+});
+
+function nextMove() {
+  currSlide++;
+  if (currSlide <= maxSlide) {
+    const offset = slideWidth * currSlide;
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `left: ${-offset}px`);
+    });
+    paginationItems.forEach((i) => i.classList.remove("active"));
+    paginationItems[currSlide - 1].classList.add("active");
+  } else {
+    currSlide = 0;
+    let offset = slideWidth * currSlide;
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `left: ${-offset}px; transition: none`);
+    });
+    currSlide++;
+    offset = slideWidth * currSlide;
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `left: ${-offset}px`);
+    });
+    paginationItems.forEach((i) => i.classList.remove("active"));
+    paginationItems[currSlide - 1].classList.add("active");
+  }
+}
+
+function prevMove() {
+  currSlide--;
+  if (currSlide > 0) {
+    const offset = slideWidth * currSlide;
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `left: ${-offset}px`);
+    });
+    paginationItems.forEach((i) => i.classList.remove("active"));
+    paginationItems[currSlide - 1].classList.add("active");
+  } else {
+    currSlide = maxSlide + 1;
+    let offset = slideWidth * currSlide;
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `left: ${-offset}px; transition: none`);
+    });
+    currSlide--;
+    offset = slideWidth * currSlide;
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `left: ${-offset}px`);
+    });
+    paginationItems.forEach((i) => i.classList.remove("active"));
+    paginationItems[currSlide - 1].classList.add("active");
+  }
+}
+
+// 버튼 엘리먼트에 클릭 이벤트 추가하기
+nextBtn.addEventListener("click", () => {
+  // 이후 버튼 누를 경우 현재 슬라이드를 변경
+  nextMove();
+});
+// 버튼 엘리먼트에 클릭 이벤트 추가하기
+prevBtn.addEventListener("click", () => {
+  // 이전 버튼 누를 경우 현재 슬라이드를 변경
+  prevMove();
+});
+
+// 브라우저 화면이 조정될 때 마다 slideWidth를 변경하기 위해
+window.addEventListener("resize", () => {
+  slideWidth = slide.clientWidth;
+  const offset = slideWidth * currSlide;
+  slideItems.forEach((i) => {
+    i.setAttribute("style", `left: ${-offset}px`);
+  });
+});
+
+// 각 페이지네이션 클릭 시 해당 슬라이드로 이동하기
+for (let i = 0; i < maxSlide; i++) {
+  // 각 페이지네이션마다 클릭 이벤트 추가하기
+  paginationItems[i].addEventListener("click", () => {
+    // 클릭한 페이지네이션에 따라 현재 슬라이드 변경해주기(currSlide는 시작 위치가 1이기 때문에 + 1)
+    currSlide = i + 1;
+    // 슬라이드를 이동시키기 위한 offset 계산
+    const offset = slideWidth * currSlide;
+    // 각 슬라이드 아이템의 left에 offset 적용
+    slideItems.forEach((i) => {
+      i.setAttribute("style", `transition: 1s; left: ${-offset}px`);
+    });
+    // 슬라이드 이동 시 현재 활성화된 pagination 변경
+    paginationItems.forEach((i) => i.classList.remove("active"));
+    paginationItems[currSlide - 1].classList.add("active");
+  });
+}
+
+// 드래그(스와이프) 이벤트를 위한 변수 초기화
+let startPoint = 0;
+let endPoint = 0;
+
+// PC 클릭 이벤트 (드래그)
+slide.addEventListener("mousedown", (e) => {
+  startPoint = e.pageX; // 마우스 드래그 시작 위치 저장
+});
+
+slide.addEventListener("mouseup", (e) => {
+  endPoint = e.pageX; // 마우스 드래그 끝 위치 저장
+  if (startPoint < endPoint) {
+    // 마우스가 오른쪽으로 드래그 된 경우
+    prevMove();
+  } else if (startPoint > endPoint) {
+    // 마우스가 왼쪽으로 드래그 된 경우
+    nextMove();
+  }
+});
+
+
+// 기본적으로 슬라이드 루프 시작하기
+let loopInterval = setInterval(() => {
+  nextMove();
+}, 5000);
+
+// 슬라이드에 마우스가 올라간 경우 루프 멈추기
+slide.addEventListener("mouseover", () => {
+  clearInterval(loopInterval);
+});
+
+// 슬라이드에서 마우스가 나온 경우 루프 재시작하기
+slide.addEventListener("mouseout", () => {
+  loopInterval = setInterval(() => {
+    nextMove();
+  }, 5000);
+});
+</script>
+</div>
+
+</body>
+</html>
