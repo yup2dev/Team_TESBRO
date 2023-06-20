@@ -75,6 +75,7 @@ public class ReviewController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         this.reviewService.modify(review, reviewForm.getContent(), reviewForm.getStar_rating());
+        System.out.println(review.getAcademy().getId());
         return String.format("redirect:/academy/detail/%s", review.getAcademy().getId());
     }
 }

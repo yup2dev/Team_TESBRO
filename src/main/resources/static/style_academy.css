@@ -431,6 +431,7 @@ float:right;
 
 .teacher-popup {
   display:none;
+  z-index:999;
 }
 .teacher-popup .p-content {
   border:1px solid black;
@@ -452,7 +453,6 @@ float:right;
   height:350px;
   object-fit:cover;
   position:relative;
-  z-index:1;
   border-radius:20px;
 }
 
@@ -462,7 +462,6 @@ float:right;
   background: linear-gradient(to bottom, transparent, white 40%);
   position:absolute;
   top:200px;
-  z-index:2;
   border-radius:20px;
 }
 
@@ -470,7 +469,6 @@ float:right;
   position:relative;
   top:-150px;
   width:400px;
-  z-index:3;
 }
 .p-content .profile .profile-item:first-child {
   font-size: 2rem;
@@ -498,7 +496,6 @@ float:right;
   flex-wrap:nowrap;
   justify-content:space-around;
   position:relative;
-  z-index:4;
   margin-bottom:30px;
   font-weight:bold;
 }
