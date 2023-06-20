@@ -3,10 +3,9 @@ a{text-decoration:none;color:inherit;}
 
 
 
-.mainContainer {
-}
 .promotion {
   width:100%;
+   min-width:1400px;
   height: 800px;
   position:absolute;
   top:0;
@@ -47,6 +46,7 @@ a{text-decoration:none;color:inherit;}
 
   /* size */
   width: 100%;
+  min-width:1500px;
 
   /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
   user-select: none;
@@ -102,8 +102,7 @@ a{text-decoration:none;color:inherit;}
 }
 .slide_item.item1 .fixed-item{
   position:relative;
-  width: 1200px;
-
+  min-width: 1200px;
 }
 .slide_item.item1 .fixed-item div{
   font-family: 'Humanbumsuk';
@@ -116,26 +115,26 @@ a{text-decoration:none;color:inherit;}
    position:absolute;
   top:400px;
   left:100px;
-  width:400px;
-  font-size:1.5rem;
-  padding:10px 0;
+  width:380px;
+  font-size:1.1rem;
+  padding:5px 0;
   text-align:center;
   border:3px solid rgb(30,90,30);
   border-radius:30px;
 }
 .slide_item.item1 .fixed-item button{
      position:absolute;
-  width:50px;
-  height:50px;
+  width:40px;
+  height:40px;
   top:400px;
-  left:450px;
+  left:440px;
   background: inherit;
   cursor:pointer;
   border:0;
 }
 .slide_item.item1 .fixed-item > button > img{
-  width:40px;
-  height:40px;
+  width:30px;
+  height:30px;
   position:absolute;
   top:-95px;
   left:-550px;
