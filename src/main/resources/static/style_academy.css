@@ -102,7 +102,6 @@ select, textarea {
 
 
 .academy-mid {
-border:2px solid blue;
   display: flex;
   flex-wrap: wrap;
   min-width:1100px;
@@ -153,7 +152,6 @@ border:2px solid blue;
 
 
 .reservation {
-border:1px solid red;
   height:550px;
   width:450px;
   margin-top:30px;
@@ -200,7 +198,6 @@ border:1px solid red;
   padding-left:30px;
 }
 .academy-mid-2 .teachers:last-child {
-    border:1px solid red;
     width:1030px;
     margin-top:30px;
     margin-left:30px;
@@ -303,7 +300,7 @@ margin-bottom:50px;
 }
 
 .academy-mid-3 .detail-contents .d-content .review-size{
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight:bold;
     padding:15px 0;
     margin-bottom: 20px;
@@ -318,13 +315,14 @@ margin-bottom:50px;
 }
 
 .d-content .review_box .review-items li div {
-    font-size:0.8rem;
+    font-size:1rem;
     display:inline-block;
     padding-left:10px;
     margin-top:10px;
 }
 .d-content .review_box .review-items li div:first-child {
     border-right:1px solid lightgray;
+    padding:0 15px ;
 }
 
 .d-content .review_box .review-items li div:nth-child(5) {
@@ -333,7 +331,7 @@ float:right;
 }
 .d-content .review_box .review-items li div:last-child {
     display:block;
-    font-size:0.8rem;
+    font-size:1rem;
     padding-top: 20px;
         padding-bottom:20px;
         min-height:100px;
@@ -347,7 +345,7 @@ float:right;
      top:10px;
     right:150px;
     text-align:center;
-    font-size:0.8rem;
+    font-size:1rem;
 }
 .review_box .review-items li div:nth-child(4) {
     width:50px;
@@ -357,7 +355,7 @@ float:right;
     top:10px;
     right:200px;
     text-align:center;
-    font-size:0.8rem;
+    font-size:1rem;
 
 }
 
@@ -403,7 +401,7 @@ float:right;
 }
 .d-content .review-create input {
     padding:10px 20px;
-    font-size:0.8rem;
+    font-size:1rem;
     float:right;
     border-left:1px solid lightgray;
 }
