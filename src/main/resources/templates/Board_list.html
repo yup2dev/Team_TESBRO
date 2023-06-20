@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" th:href="@{/style1.css}">
   <title>게시판</title>
 </head>
+
 <body>
 <nav th:replace="~{navbar :: navbarFragment}"></nav>
 
@@ -13,16 +15,16 @@
   <div class="container">
     <div class="notice-header">
       <h3 class="notice-title">공지사항</h3>
-<!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'notice'}">공지사항</h3>-->
-<!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'qna'}">문의하기</h3>-->
-<!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'event'}">이벤트</h3>-->
+      <!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'notice'}">공지사항</h3>-->
+      <!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'qna'}">문의하기</h3>-->
+      <!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'event'}">이벤트</h3>-->
 
       <!-- 정렬 버튼들 -->
       <div class="order-buttons">
         <button class="order-button" onclick="handleOrderChange('outdated')">오래된순</button>
         <button class="order-button" onclick="handleOrderChange('views')">조회순</button>
-        <button class="order-button" onclick="handleOrderChange('recommend')">추천순</button>
-        <button class="order-button" onclick="handleOrderChange('comments')">댓글순</button>
+        <button class="order-button" onclick="handleOrderChange('voter')">추천순</button>
+        <button class="order-button" onclick="handleOrderChange('answers')">댓글순</button>
       </div>
       <!-- 정렬 버튼들 끝 -->
     </div>
@@ -36,7 +38,6 @@
   </div>
 </div>
 
-
 <div id="board-list">
   <div class="container">
     <table class="board-table">
@@ -47,6 +48,7 @@
         <th scope="col" class="th-author">작성자</th>
         <th scope="col" class="th-date">작성일</th>
         <th scope="col" class="th-hit">조회</th>
+        <th scope="col" class="th-voter">추천</th>
       </tr>
       </thead>
       <tbody>
@@ -54,8 +56,7 @@
         <td th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
         <td>
           <a th:href="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:text="${board.subject}"></a>
-          <span class="answer"
-                th:if="${#lists.size(board.answers) > 0}"
+          <span class="answer" th:if="${#lists.size(board.answers) > 0}"
                 th:text="${#lists.size(board.answers)}">
           </span>
         </td>
@@ -64,6 +65,12 @@
         </td>
         <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
         <td th:text="${board.views}"></td>
+        <td th:text="${board.voter}">
+          <span class="voter"
+                th:if="${#lists.size(board.voter) > 0}"
+                th:text="${#lists.size(board.voter)}">
+                    </span>
+        </td>
       </tr>
       </tbody>
     </table>

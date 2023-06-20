@@ -7,6 +7,11 @@
 <h1 th:text="${board.subject}">제목</h1>
 <div th:text="${board.managerName}">작성자</div>
 <div class="content2" th:text="${board.content}">내용</div>
+<a href="javascript:void(0);" class="recommend"
+   th:data-uri="@{|/board/vote/${board.id}|}">
+    추천
+    <span class="badge rounded-pill bg-success" th:text="${#lists.size(board.voter)}"></span>
+</a>
 
 <h2>답변</h2>
 <ul>
@@ -38,7 +43,16 @@ function confirmDelete() {
     var result = confirm("삭제하시겠습니까?");
     return result;
 }
+const recommend_elements = document.getElementsByClassName("recommend");
+Array.from(recommend_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("추천하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
 </script>
+
 </div>
 </body>
 </html>

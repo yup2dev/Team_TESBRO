@@ -72,3 +72,19 @@ textarea {
   box-sizing: border-box;
   margin-bottom: 10px;
 }
+
+.recommend {
+  text-decoration: none;
+  margin-right: 5px;
+  background-color: seagreen;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.recommend:hover{
+  color: white;
+  transform: scale(1.1);
+  transition: transform 0.5s;
+}

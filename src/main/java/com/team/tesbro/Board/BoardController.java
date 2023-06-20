@@ -143,6 +143,15 @@ public class BoardController {
         return "redirect:/board/notice";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String boardVote(Principal principal, @PathVariable("id") Integer id) {
+        Board board = this.boardService.getBoard(id);
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.boardService.vote(board, siteUser);
+        return String.format("redirect:/board/%s/detail/%d", board.getBoardCategory(), id);
+    }
+
     @GetMapping("/address")
     public String address(){
         return "address_search";
