@@ -157,6 +157,11 @@ public class BoardController {
 
     @GetMapping("/address")
     public String address(){
-        return "address_search";
+        return "sample2";
+    }
+
+    @GetMapping("/address2")
+    public String address2(){
+        return "jusoPopup2";
     }
 }
