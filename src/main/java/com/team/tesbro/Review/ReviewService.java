@@ -44,11 +44,12 @@ public class ReviewService {
     }
 
 
-    public Page<Review> getList(int page) {
+    public Page<Review> getList(Academy academy, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
+
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
-        return this.reviewRepository.findAll(pageable);
+        return this.reviewRepository.findAllByAcademy(academy, pageable);
     }
 
     public void modify(Review review, String content, int star_rating) {

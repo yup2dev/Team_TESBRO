@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
-    Page<Review> findAll(Pageable pageable);
+    Page<Review> findAllByAcademy(Academy academy, Pageable pageable);
+
 }
