@@ -238,20 +238,17 @@ li {
 }
 .slide_pagination {
 
-  /* layout */
   display: flex;
   gap: 5px;
 
-  /* position */
   position: absolute;
   bottom: 0;
-  /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
   left: 50%;
   transform: translateX(-50%);
 }
 .slide_pagination > li {
   /* 현재 슬라이드가 아닌 것은 투명도 부여 */
-  color: rgb(30,90,30);
+  color: rgba(30,90,30,0.5);
   cursor: pointer;
   font-size: 25px;
 }
@@ -275,21 +272,18 @@ li {
 
 
 
-
-
 /* 공지사항 */
 .notice-box {
   width:100%;
   min-width:1500px;
   height: 100px;
-   border:3px solid blue;
   position:relative;
   display:flex;
   justify-content:center;
   align-items:center;
 }
 .notice-box .notice-items {
-  width:1100px;
+  width:1200px;
   border:1px solid lightgray;
   border-radius:10px;
   display:flex;
@@ -297,9 +291,9 @@ li {
 
 }
 .notice-box .notice-items .notice-item {
-  padding:10px 40px;
+  padding:7px 40px;
   display:inline-block;
-  font-size:1.2rem;
+  font-size:1.1rem;
 }
 .notice-box .notice-items .notice-item:nth-child(2) {
   width:700px;
@@ -312,23 +306,23 @@ li {
   font-size:1.2rem;
   color:gray;
   cursor:pointer;
+  margin-right:10px;
 }
 /* 공지끝 */
 
 
 
 
-
-/* 학원 리스트 */
+/* 학원 */
+/* 이용자수 */
 .academy-list {
   width:100%;
   min-width:1500px;
-  height: 500px;
+  height: 1500px;
   position:relative;
-  border:3px solid red;
 }
 .academy-list .total-size {
-  width:1100px;
+  width:1200px;
   height:300px;
   border:1px solid lightgray;
   border-radius:10px;
@@ -347,27 +341,143 @@ li {
 }
 .academy-list .total-size .size-item div {
   font-size:1rem;
-  margin:10px 0;
+  margin:1px 0;
 }
 .academy-list .total-size .size-item div:last-child{
   font-size:1.6rem;
   font-weight:bold;
   color:rgb(30,90,30);
+  margin-top:10px;
 }
 
-/* 학원 리스트끝*/
+/* 이용자수 리스트끝*/
+
+/* 학원리스트 */
+.academy-list .academy-box {
+  width:1200px;
+  height:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  margin-top: 30px;
+}
+.academy-list .academy-box .academy-btn {
+  position:absolute;
+  width:200px;
+  height:50px;
+  font-size:1.1rem;
+  bottom:0px;
+  left:50%;
+  transform:translatex(-50%);
+  cursor:pointer;
+  border:1px solid lightgray;
+  background: transparent;
+}
+.academy-list .academy-box .academy-items .academy-item{
+  width:580px;
+  font-size:1.7rem;
+  padding:30px 0;
+  border-bottom:1px solid lightgray;
+}
+.academy-list .academy-box .academy-items .academy-card {
+  border:1px solid lightgray;
+  border-radius:5px;
+  width:100%;
+  height:160px;
+  margin:30px 0;
+  display:flex;
+  align-items:center;
+
+}
+.academy-box .academy-items .academy-card img {
+  width:130px;
+  height:130px;
+  margin:0 30px;
+}
+.academy-items .academy-card li {
+  font-size:1.1rem;
+  padding:5px 0;
+}
+.academy-items .academy-card li:first-child {
+  font-weight:bold;
+  font-size:1.3rem;
+}
+.academy-items .academy-card button {
+  margin-left:200px;
+  padding:5px 0;
+  border:0;
+  background: transparent;
+  font-size: 0.9rem;
+  cursor:pointer;
+}
+/* 학원리스트 끝*/
 
 
 
 
-
+/* 리뷰시작 */
 .latest-review {
   width:100%;
   min-width:1500px;
-  height: 500px;
   position:relative;
-  border:3px solid green;
+  /*border:3px solid green;*/
 }
+.latest-review .review-box {
+  /*border:2px solid orange;*/
+  width:1200px;
+  height:500px;
+  margin:0 auto;
+}
+.review-box .review-item {
+  font-size:1.6rem;
+  font-weight:bold;
+  padding-top:30px;
+}
+.review-box .review-items .review-cards {
+  /*border:2px solid purple;*/
+  height:250px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  position:relative;
+}
+.review-items .review-cards .review-card {
+  border:1px solid lightgray;
+  border-radius:5px;
+  width:280px;
+  height:200px;
+  display:flex;
+  flex-direction:column;
+}
+.review-cards .review-card img {
+  width:50px;
+  height:50px;
+  background: white;
+  border:1px solid lightgray;
+  border-radius:5px;
+  object-fit:contain;
+  position:relative;
+  left:25px;
+  top:-25px;
+}
+.review-cards .review-card div {
+  margin-left:20px;
+}
+.review-cards .review-card div:last-child {
+  margin-right:15px;
+  height:90px;
+  overflow:hidden;
+}
+.review-cards .review-card div:last-child p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 표시할 줄 수 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 리뷰끝 */
+
 
 
 
