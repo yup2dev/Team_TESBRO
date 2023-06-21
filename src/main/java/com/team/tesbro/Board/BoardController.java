@@ -157,11 +157,23 @@ public class BoardController {
 
     @GetMapping("/address")
     public String address(){
-        return "sample2";
+        return "juso";
     }
 
     @GetMapping("/address2")
     public String address2(){
-        return "jusoPopup2";
+        return "jusoPopup";
     }
+
+    @PostMapping("/address")
+    public String addressPost(){
+        // POST 요청 처리 로직 작성
+        return "juso";
+    }
+
+    @PostMapping("/address2")
+    public String address2Post(){
+        return "jusoPopup";
+    }
+
 }

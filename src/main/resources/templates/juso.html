@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<div th:fragment="jusoFragment" class="juso">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>주소 입력 샘플</title>
@@ -35,6 +36,7 @@
 </form>
 </body>
 <script>
+document.domain = "board/address";
 function goPopup(){
     var pop = window.open("/board/address2","pop","width=570,height=420, scrollbars=yes, resizable=yes");
 }
@@ -46,4 +48,5 @@ function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, en
     document.form.zipNo.value = zipNo;
 }
 </script>
+</div>
 </html>
