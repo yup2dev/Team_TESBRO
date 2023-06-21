@@ -23,6 +23,10 @@ public class    UserController {
     public String signup(UserCreateForm userCreateForm, Model model) {
         return "signup_form";
     }
+    @GetMapping("/sign")
+    public String sing(){
+        return "Bnum";
+    }
 
     @PostMapping("/signup")
     public String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
