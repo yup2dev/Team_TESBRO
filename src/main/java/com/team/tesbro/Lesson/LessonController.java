@@ -3,6 +3,7 @@ package com.team.tesbro.Lesson;
 import com.team.tesbro.Academy.Academy;
 import com.team.tesbro.Academy.AcademyService;
 import com.team.tesbro.Review.Review;
+import com.team.tesbro.Review.ReviewForm;
 import com.team.tesbro.Review.ReviewService;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
@@ -26,15 +27,15 @@ public class LessonController {
     private final AcademyService academyService;
     @GetMapping("/academy/lesson")
     public String handleSelectedData(Model model) {
-    lessonList = lessonService.getList();
-    List<LocalDate> dateList = new ArrayList<>();
+        lessonList = lessonService.getList();
+        List<LocalDate> dateList = new ArrayList<>();
 
         for (Lesson lesson : lessonList) {
-        LocalDate lessonDate = lesson.getLessonDate();
-        dateList.add(lessonDate);
-    }
-    Set<LocalDate> uniqueDates = new HashSet<>(dateList);
-    List<LocalDate> uniqueDateList = new ArrayList<>(uniqueDates);
+            LocalDate lessonDate = lesson.getLessonDate();
+            dateList.add(lessonDate);
+        }
+        Set<LocalDate> uniqueDates = new HashSet<>(dateList);
+        List<LocalDate> uniqueDateList = new ArrayList<>(uniqueDates);
         Collections.sort(uniqueDateList);
         model.addAttribute("uniqueDateList", uniqueDateList);
         return "lesson";
@@ -42,10 +43,10 @@ public class LessonController {
 
 
     @GetMapping("/academy/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id, @RequestParam(value="page", defaultValue="0") int page) {
+    public String detail(Model model, @PathVariable("id") Integer id, ReviewForm reviewForm,@RequestParam(value="page", defaultValue="0") int page) {
         Academy academy = this.academyService.getAcademy(id);
         model.addAttribute("academy", academy);
-        Page<Review> paging = this.reviewService.getList(page);
+        Page<Review> paging = this.reviewService.getList(academy,page);
         model.addAttribute("paging", paging);
 
 
