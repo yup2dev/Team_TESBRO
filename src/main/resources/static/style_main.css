@@ -1,11 +1,14 @@
 body {margin:0; padding:0}
 a{text-decoration:none;color:inherit;}
+button{border:0;background:inherit;}
+
+
 
 
 
 .promotion {
   width:100%;
-   min-width:1400px;
+   min-width:1500px;
   height: 800px;
   position:absolute;
   top:0;
@@ -238,17 +241,20 @@ li {
 }
 .slide_pagination {
 
+  /* layout */
   display: flex;
   gap: 5px;
 
+  /* position */
   position: absolute;
   bottom: 0;
+  /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
   left: 50%;
   transform: translateX(-50%);
 }
 .slide_pagination > li {
   /* 현재 슬라이드가 아닌 것은 투명도 부여 */
-  color: rgba(30,90,30,0.5);
+  color: rgb(30,90,30);
   cursor: pointer;
   font-size: 25px;
 }
@@ -281,6 +287,7 @@ li {
   display:flex;
   justify-content:center;
   align-items:center;
+  margin-top:700px;
 }
 .notice-box .notice-items {
   width:1200px;
@@ -318,7 +325,7 @@ li {
 .academy-list {
   width:100%;
   min-width:1500px;
-  height: 1500px;
+  height: 100px;
   position:relative;
 }
 .academy-list .total-size {
@@ -360,6 +367,7 @@ li {
   display:flex;
   justify-content:space-between;
   margin-top: 30px;
+  position:relative;
 }
 .academy-list .academy-box .academy-btn {
   position:absolute;
@@ -375,7 +383,8 @@ li {
 }
 .academy-list .academy-box .academy-items .academy-item{
   width:580px;
-  font-size:1.7rem;
+  font-size:1.6rem;
+  font-weight:bold;
   padding:30px 0;
   border-bottom:1px solid lightgray;
 }
@@ -414,18 +423,17 @@ li {
 
 
 
-
 /* 리뷰시작 */
 .latest-review {
   width:100%;
   min-width:1500px;
   position:relative;
-  /*border:3px solid green;*/
+/*   border:3px solid green; */
 }
 .latest-review .review-box {
-  /*border:2px solid orange;*/
+/*   border:2px solid orange; */
   width:1200px;
-  height:500px;
+  height:300px;
   margin:0 auto;
 }
 .review-box .review-item {
@@ -434,7 +442,7 @@ li {
   padding-top:30px;
 }
 .review-box .review-items .review-cards {
-  /*border:2px solid purple;*/
+/*   border:2px solid purple; */
   height:250px;
   display:flex;
   align-items:flex-end;
@@ -448,6 +456,8 @@ li {
   height:200px;
   display:flex;
   flex-direction:column;
+
+
 }
 .review-cards .review-card img {
   width:50px;
@@ -470,7 +480,7 @@ li {
 }
 .review-cards .review-card div:last-child p {
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* 표시할 줄 수 */
+  -webkit-line-clamp: 4; /* 표시할 줄 수 */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -478,6 +488,125 @@ li {
 
 /* 리뷰끝 */
 
+
+
+/* 버튼들 */
+.link-buttons {
+  width:100%;
+  min-width:1500px;
+  height: 730px;
+  position:relative;
+  margin-top:30px;
+/*   border:3px solid purple; */
+}
+.link-buttons .lbtn-ment {
+  width:1200px;
+  margin:0 auto;
+  font-size:1.6rem;
+  font-weight:bold;
+  padding-top:30px;
+}
+.link-buttons .lbtn-area {
+  width:1200px;
+  height:600px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:30px;
+  position:relative;
+}
+.link-buttons .lbtn-area > button {
+  width:600px;
+  height:600px;
+  background: #feebdc;
+  cursor:pointer;
+}
+.link-buttons .lbtn-area .lbtn-area2 {
+  width:600px;
+  height:600px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  margin-left:20px;
+}
+.link-buttons .lbtn-area .lbtn-area2 button {
+  height:290px;
+  cursor:pointer;
+  background: #a5cdcd;
+}
+.link-buttons .lbtn-area .lbtn-area2 button:last-child {
+  background: #fffbe2;
+  overflow:hidden;
+}
+
+
+
+/* 버튼 안에 문구 설정 */
+.link-buttons .lbtn-area > button div:nth-child(2) {
+  position:absolute;
+  font-size:2.5rem;
+  font-weight:bold;
+  font-family: 'Humanbumsuk';
+  bottom:120px;
+  left:70px;
+}
+
+.link-buttons .lbtn-area > button div:last-child {
+  position:absolute;
+  font-size:1.5rem;
+  font-family: 'Humanbumsuk';
+  bottom:80px;
+  left:70px;
+}
+
+.link-buttons .lbtn-area2 > button:first-child .inbtn-ment:nth-child(2){
+  position:absolute;
+  font-size:2.5rem;
+  font-weight:bold;
+  font-family: 'Humanbumsuk';
+  top:110px;
+  left:650px;
+}
+.link-buttons .lbtn-area2 > button:first-child .inbtn-ment:last-child {
+  position:absolute;
+  font-size:1.5rem;
+  font-family: 'Humanbumsuk';
+  top:160px;
+  left:650px;
+}
+.link-buttons .lbtn-area2 > button:last-child .inbtn-ment:nth-child(2){
+  position:absolute;
+  font-size:2.5rem;
+  font-weight:bold;
+  font-family: 'Humanbumsuk';
+  top:420px;
+  left:650px;
+}
+.link-buttons .lbtn-area2 > button:last-child .inbtn-ment:last-child {
+  position:absolute;
+  font-size:1.5rem;
+  font-family: 'Humanbumsuk';
+  top:470px;
+  left:650px;
+}
+
+
+
+/* 버튼 안에 이미지 설정 */
+.link-buttons .lbtn-area > button div:first-child img{
+  width:500px;
+  margin-top:-80px;
+}
+.link-buttons .lbtn-area2 button:first-child div:first-child img {
+  width:250px;
+  margin-left:280px;
+
+}
+.lbtn-area .lbtn-area2 button:last-child div:first-child img {
+  width:350px;
+  margin-right:-200px;
+}
 
 
 
@@ -500,3 +629,5 @@ li {
     font-weight: normal;
     font-style: normal;
 }
+
+
