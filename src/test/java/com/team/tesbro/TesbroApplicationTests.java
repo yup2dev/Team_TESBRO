@@ -71,12 +71,12 @@ class TesbroApplicationTests {
 
 	@Test
 	void contextLoads2() {
-		Optional<Academy> oa = this.academyRepository.findById(2);
+		Optional<Academy> oa = this.academyRepository.findById(1);
 		assertTrue(oa.isPresent());
 		Academy a = oa.get();
 
 		Teacher t = new Teacher();
-		t.setTeacherName("테스트");
+		t.setTeacherName("테스트2");
 		t.setQualifications("테스트 경력");
 		t.setAwards("테스트 수상내역");
 		t.setIntroduction("테스트 자기소개 으아아아아아악");
