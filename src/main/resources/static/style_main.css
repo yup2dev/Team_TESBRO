@@ -6,6 +6,7 @@ button{border:0;background:inherit;}
 
 
 
+
 .promotion {
   width:100%;
    min-width:1500px;
@@ -141,7 +142,6 @@ button{border:0;background:inherit;}
   position:absolute;
   top:-94px;
   left:-548px;
-  -webkit-user-drag: none;
 }
 
 .slide_item.item1 .fixed-item img{
@@ -150,7 +150,6 @@ button{border:0;background:inherit;}
   object-fit:contain;
   margin-left: 550px;
   margin-top:100px;
-  -webkit-user-drag: none;
 }
 
 
@@ -173,7 +172,7 @@ button{border:0;background:inherit;}
   width:1200px;
   height:500px;
   object-fit:cover;
-  -webkit-user-drag: none;
+
 }
 .slide_item.item2 .fixed-item div:first-child{
   font-family: 'Humanbumsuk';
@@ -210,7 +209,6 @@ button{border:0;background:inherit;}
   height:500px;
   object-fit:contain;
   margin-left:400px;
-  -webkit-user-drag: none;
 }
 .slide_item.item3 .fixed-item div:first-child{
   font-family: 'Humanbumsuk';
@@ -290,7 +288,7 @@ li {
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-top:700px;
+  margin-top:650px;
 }
 .notice-box .notice-items {
   width:1200px;
@@ -328,7 +326,6 @@ li {
 .academy-list {
   width:100%;
   min-width:1500px;
-  height: 100px;
   position:relative;
 }
 .academy-list .total-size {
@@ -363,6 +360,11 @@ li {
 /* 이용자수 리스트끝*/
 
 /* 학원리스트 */
+.academy-list {
+   width:100%;
+  min-width:1500px;
+  position:relative;
+}
 .academy-list .academy-box {
   width:1200px;
   height:1200px;
@@ -377,7 +379,7 @@ li {
   width:200px;
   height:50px;
   font-size:1.1rem;
-  bottom:30px;
+  bottom:45px;
   left:50%;
   transform:translatex(-50%);
   cursor:pointer;
@@ -431,12 +433,11 @@ li {
   width:100%;
   min-width:1500px;
   position:relative;
-/*   border:3px solid green; */
 }
 .latest-review .review-box {
 /*   border:2px solid orange; */
   width:1200px;
-  height:320px;
+  height:300px;
   margin:0 auto;
 }
 .review-box .review-item {
@@ -483,7 +484,7 @@ li {
 }
 .review-cards .review-card div:last-child p {
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* 표시할 줄 수 */
+  -webkit-line-clamp: 4; /* 표시할 줄 수 */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -500,7 +501,7 @@ li {
   height: 730px;
   position:relative;
   margin-top:30px;
-/*   border:3px solid purple; */
+
 }
 .link-buttons .lbtn-ment {
   width:1200px;
@@ -632,5 +633,7 @@ li {
     font-weight: normal;
     font-style: normal;
 }
+
+
 
 
