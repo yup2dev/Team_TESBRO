@@ -11,4 +11,7 @@ public class ResultData<T> {
     String resultCode;
     String msg;
     T body;
+
+    public ResultData(String resultCode, String msg) {
+    }
 }

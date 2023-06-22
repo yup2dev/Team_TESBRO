@@ -3,16 +3,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.team.tesbro.Academy.Academy;
 import com.team.tesbro.Board.Board;
 import com.team.tesbro.User.SiteUser;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -45,8 +44,6 @@ public class GenFile {
     private LocalDateTime modifyDate;
     @ManyToMany
     Set<Board> boards;
-    @ManyToMany
-    Set<Academy> academies;
     @JsonIgnore
     public String getFilePath() {
         return GenFileService.GEN_FILE_DIR_PATH + getBaseFileUri();

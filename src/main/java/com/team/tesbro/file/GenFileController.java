@@ -1,6 +1,7 @@
 package com.team.tesbro.file;
 
 import com.team.tesbro.Academy.Academy;
+import com.team.tesbro.Academy.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,12 +17,20 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class GenFileController {
     private final GenFileService genFileService;
+    private final AcademyRepository academyRepository;
+
     @RequestMapping("/{id}")
     @ResponseBody
     public ResultData upload(@RequestParam Map<String, Object> param,
                              MultipartRequest multipartRequest,
-                             Academy academy,
                              @PathVariable("id") Integer id) {
+        int afileId;
+        // Academy 객체를 id로 조회
+        Academy academy = academyRepository.findById(id).orElse(null);
+        if (academy == null) {
+            return new ResultData("F-1", "존재하지 않는 Academy ID입니다.");
+        }
+
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 
         List<Long> fileIds = new ArrayList<>();
@@ -68,6 +77,13 @@ public class GenFileController {
                             fileNo, originFileName, fileExtTypeCode, fileExtType2Code, fileExt, fileSize);
 
                     fileIds.add(fileId);
+                    GenFile genFile = genFileService.getGenFileById(fileId); // 수정된 부분
+                    academy.getGenFiles().add(genFile);
+                }
+
+                // academies에 id 추가
+                if (relTypeCode.equals("academy")) {
+
                 }
             }
         }
@@ -91,9 +107,16 @@ public class GenFileController {
                 if (needToDelete) {
                     genFileService.deleteFile(oldFileId);
                     deleteCount++;
+
+                    // academies에서 삭제
+                    if (relTypeCode.equals("academy")) {
+                        academy.getGenFiles().remove(genFileService.getGenFileById(relId));
+                    }
                 }
             }
         }
+        // Academy 엔티티 업데이트
+        academyRepository.save(academy);
 
         Map<String, Object> rsDataBody = new HashMap<>();
 
