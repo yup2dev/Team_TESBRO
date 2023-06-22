@@ -36,4 +36,9 @@ public class AcademyController {
         return "list";
     }
 
+    @GetMapping("detail/create/{id}")
+    public String detailCre(@PathVariable("id") Integer id){
+    return "academy_detail_form";
+    }
+
 }

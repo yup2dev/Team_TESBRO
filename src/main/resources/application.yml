@@ -1,0 +1,28 @@
+spring:
+  h2:
+    console:
+      enabled: 'true'
+      path: /h2-console
+  datasource:
+    username: sa
+    url: jdbc:h2:~/local
+    driverClassName: org.h2.Driver
+    password: ''
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: 'true'
+        show_sql: 'true'
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    org:
+      springframework:
+        core:
+          LocalVariableTableParameterNameDiscoverer: error
+server:
+  port: '9000'
+custom:
+  genFileDirPath: C:\Users\onetw\Desktop\tesbro clone\serin\src\main\resources\static\img

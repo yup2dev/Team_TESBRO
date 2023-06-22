@@ -73,7 +73,6 @@ public class Lesson_ResController {
             lesson.get().setCurrentCapacity(lesson.get().getCurrentCapacity() + 1);
             lessonRepository.save(lesson.get());
         }
-
         //레슨 테이블에 등록인원 추가 로직
         this.lesson_resService.reserve(lessonResDto, lessonId, currentUserId);
         System.out.println("예약됨");
