@@ -1,7 +1,13 @@
 package com.team.tesbro.Academy;
 
+import com.team.tesbro.Board.Board;
 import com.team.tesbro.DataNotFoundException;
+import com.team.tesbro.User.SiteUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -41,4 +47,23 @@ public class AcademyService {
             throw new DataNotFoundException("academy not found");
         }
     }
+
+    public void vote(Academy academy, SiteUser siteUser) {
+        academy.getVoter().add(siteUser);
+        this.academyRepository.save(academy);
+    }
+
+    public Page<Academy> getAcademyList(String academyName, String order, int page) {
+        Sort sort;
+        if (order.equals("voter")) {
+            sort = Sort.by(Sort.Direction.DESC, "voter");
+        } else if (order.equals("outdated")) {
+            sort = Sort.by(Sort.Direction.ASC, "id");
+        } else {
+            sort = Sort.by(Sort.Direction.DESC, "id");
+        }
+        Pageable pageable = PageRequest.of(page, 5, sort);
+        return academyRepository.findByAcademyName(academyName, pageable);
+    }
+
 }

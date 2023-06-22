@@ -1,7 +1,5 @@
-<html layout:decorate="~{layout}">
-<link rel="stylesheet" type="text/css" th:href="@{/style_academy.css}">
 <div layout:fragment="content" class="container">
-  <h5>답변 수정</h5>
+  <h5>리뷰 수정</h5>
 <div th:fragment="reviewFragment" class="review">
   <form th:object="${review}" method="post">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -18,4 +16,3 @@
 
   </form>
 </div>
-</html>

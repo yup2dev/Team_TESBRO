@@ -62,13 +62,21 @@
                      alt="academy-logo">
             </div>
             <div class="atop-items">
-                <p class="academy_name" th:text="${academy.academyName}"></p>
+                <p class="academyName" th:text="${academy.academyName}"></p>
+                <p class="academyAddress" th:text="${academy.academyAddress}"></p>
                 <a href="#">대표명을 써야하나</a></p>
                 <p th:text="${academy.academyTel}"></p>
             </div>
             <div class="besides">
                 <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1358/1358023.png" alt="share-icon"></a>
-                <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon"></a>
+                <a href="javascript:void(0);" class="like"
+                   th:data-uri="@{|/academy/vote/${academy.id}|}">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon">
+                    <span class="badge rounded-pill bg-success" th:text="${#lists.size(academy.voter)}"></span>
+                </a>
+
+
+
             </div>
         </div>
 
@@ -165,7 +173,19 @@
                     </div>
                     <div id="후기" class="d-content">
                         <p>후기</p>
-                        <div th:replace="review :: reviewFragment"></div>
+                        <form th:action="@{|/review/create/${academy.id}|}" th:object="${reviewForm}" method="post"
+                              class="review-create">
+                            <select name="star_rating" id="star_rating">
+                                <option value="5">⭐⭐⭐⭐⭐</option>
+                                <option value="4">⭐⭐⭐⭐</option>
+                                <option value="3">⭐⭐⭐</option>
+                                <option value="2">⭐⭐</option>
+                                <option value="1">⭐</option>
+                            </select>
+                            <input type="submit" value="리뷰등록">
+                            <textarea name="content" id="content" rows="10"></textarea>
+
+                        </form>
                         <div class="review_box">
                             <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 후기가 있습니다.|"></div>
 
@@ -351,7 +371,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-var address = document.querySelector('.academyDong').innerText;
+var address = document.querySelector('.academyAddress').innerText;
 geocoder.addressSearch(address, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면
@@ -368,7 +388,7 @@ geocoder.addressSearch(address, function(result, status) {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + document.querySelector('.academy_name').innerText + '</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + document.querySelector('.academyName').innerText + '</div>'
         });
         infowindow.open(map, marker);
 
@@ -405,6 +425,17 @@ geocoder.addressSearch(address, function(result, status) {
             };
         });
     });
+            const like_elements = document.getElementsByClassName("like");
+    Array.from(like_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 찜 하시겠습니까?")) {
+                const imageElement = this.querySelector('img');
+                imageElement.src = "https://cdn-icons-png.flaticon.com/128/138/138533.png";
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+
 </script>
 
     </div>
