@@ -292,11 +292,12 @@ select, textarea {
 
 
 
-
 .academy-mid-3 .detail-contents .d-content .review_box {
     width:90%;
-    margin:0 auto;
-margin-bottom:50px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:100px;
+
 }
 
 .academy-mid-3 .detail-contents .d-content .review-size{
@@ -326,43 +327,21 @@ margin-bottom:50px;
 }
 
 .d-content .review_box .review-items li div:nth-child(6) {
-float:right;
- padding-right:10px;
+    float:right;
+    padding-right:10px;
+}
+.d-content .review_box .review-items li div:nth-child(3) span{
+    padding-left:5px;
+    color:rgb(30,90,30);
 }
 .d-content .review_box .review-items li div:last-child {
     display:block;
     font-size:1rem;
     padding-top: 20px;
-        padding-bottom:20px;
-        min-height:100px;
-        border-top:1px solid lightgray;
-        border:2px solid red;
+    padding-bottom:20px;
+    min-height:100px;
+    border-top:1px solid lightgray;
 }
-.review_box .review-items li div:nth-child(4) {
-    width:50px;
-    height:20px;
-    margin:0;
-    position:absolute;
-     top:10px;
-    right:150px;
-    text-align:center;
-    font-size:1rem;
-}
-.review_box .review-items li div:nth-child(5) {
-    width:50px;
-    height:20px;
-    margin:0;
-    position:absolute;
-    top:10px;
-    right:200px;
-    text-align:center;
-    font-size:1rem;
-
-}
-
-
-
-
 .d-content .review_box .pagination {
     display:flex;
     justify-content:center;
@@ -384,7 +363,9 @@ float:right;
   color:white;
 }
 
-
+disabled {
+  display:none;
+}
 
 
 
@@ -399,6 +380,7 @@ float:right;
     background:transparent;
     border-top:1px solid lightgray;
     border-radius:0 0 10px 10px;
+    font-size: 1rem;
 }
 .d-content .review-create input {
     padding:10px 20px;
@@ -407,10 +389,11 @@ float:right;
     border-left:1px solid lightgray;
 }
 .d-content .review-create select {
-    padding:10px;
+    padding:12px;
     border-right:1px solid lightgray;
     margin-left:5px;
 }
+
 
 
 

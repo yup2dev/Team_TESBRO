@@ -90,10 +90,8 @@
 
             <div class="reservation">
                 <form th:action="@{|/reserve/${academy.id}|}" method="post">
-                    <label for="datePicker">날짜</label>
                     <input type="text" id="datePicker" name="datePicker">
 
-                <label for="childSelectBox">시간</label>
                 <select id="childSelectBox" name="childSelectBox">
                     <option value="">== 시간 선택 ==</option>
                 </select>
@@ -185,6 +183,33 @@
                                     <span th:if="${review.star_rating == 4}">⭐⭐⭐⭐</span>
                                     <span th:if="${review.star_rating == 5}">⭐⭐⭐⭐⭐</span>
                                 </div>
+
+                                <div>
+                                    <a href="javascript:void(0);" class="recommend"
+                                       th:data-uri="@{|/review/vote/${review.id}|}">
+                                        추천
+                                        <span class="badge" th:text="${#lists.size(review.voter)}"></span>
+                                    </a>
+                                </div>
+
+
+
+                                <!--        수정 -->
+                                <div>
+                                    <a href="@{|/review/modify/${review.id}|}" sec:authorize="isAuthenticated()"
+                                       th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="수정"></a>
+                                </div>
+
+
+
+                                <!--        삭제 -->
+                                <div>
+                                    <a href="javascript:void(0);" th:data-uri="@{|/review/delete/${review.id}|}" class="delete" sec:authorize="isAuthenticated()"
+                                       th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="삭제"></a>
+                                </div>
+
+
+
                                 <div th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                                 <div th:text="${review.content}"></div>
                             </li>
