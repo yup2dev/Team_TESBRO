@@ -24,7 +24,7 @@ public class    UserController {
         return "signup_form";
     }
     @GetMapping("/sign")
-    public String sing(){
+    public String sign(){
         return "Bnum";
     }
 

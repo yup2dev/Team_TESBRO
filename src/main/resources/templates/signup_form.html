@@ -1,31 +1,52 @@
-<div layout:fragment="content" class="container my-3">
-  <div class="my-3 border-bottom">
-    <div>
-      <h4>회원가입</h4>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/signup.css}">
+</head>
+<body>
+<div class="signup">
+  <div class="signup-box">
+    <div class="bg-left">
+      <img src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=16387492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b" alt="login-bg">
     </div>
+    <div class="bg-right"></div>
   </div>
-  <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
-    <div th:replace="~{form_errors :: formErrorsFragment}"></div>
-    <div class="mb-3">
-      <label for="username" class="form-label">사용자ID</label>
-      <input type="text" th:field="*{username}" class="form-control">
+
+
+  <div class="container">
+    <div class="form-top">환영합니다. <br> 어쩌구 저쩌구 TESBRO 입니다.</div>
+    <div class="form-left">
+      <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div class="input-item">
+          <label for="username" class="form-label">사용자ID</label>
+          <input type="text" th:field="*{username}" class="form-control">
+        </div>
+        <div class="input-item">
+          <label for="password1" class="form-label">비밀번호</label>
+          <input type="password" th:field="*{password1}" class="form-control">
+        </div>
+        <div class="input-item">
+          <label for="password2" class="form-label">비밀번호 확인</label>
+          <input type="password" th:field="*{password2}" class="form-control">
+        </div>
+        <div class="input-item">
+          <label for="email" class="form-label">이메일</label>
+          <input type="email" th:field="*{email}" class="form-control">
+        </div>
+        <button type="submit">일반 회원가입</button>
+      </form>
     </div>
-    <div class="mb-3">
-      <label for="password1" class="form-label">비밀번호</label>
-      <input type="password" th:field="*{password1}" class="form-control">
+
+
+
+
+    <div class="form-right">
+      <div class="other-btn"><button><img src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=16387492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b" alt=""><div>카카오톡 로그인</div></div>
+      <div class="other-btn"><button><img src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=16387492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b" alt="" ><div>학원계정 회원가입</div></button></div>
     </div>
-    <div class="mb-3">
-      <label for="password2" class="form-label">비밀번호 확인</label>
-      <input type="password" th:field="*{password2}" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">이메일</label>
-      <input type="email" th:field="*{email}" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">일반 회원가입</button>
-  </form>
-  <form th:action="@{/user/sign}" th:object="${userCreateForm}" method="get">
-    <button type="submit" class="btn btn-primary">기업 회원가입</button>
-  </form>
+
+  </div>
 </div>
-</html>
+</body>

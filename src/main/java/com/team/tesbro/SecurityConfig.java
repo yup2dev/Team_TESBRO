@@ -25,19 +25,19 @@ public class SecurityConfig {
         http.authorizeHttpRequests().requestMatchers(
                         new AntPathRequestMatcher("/**")).permitAll()
                 .and()
-                .csrf(csrf -> csrf.ignoringRequestMatchers(
-                        new AntPathRequestMatcher("/h2-console/**")))
-                .headers(headers -> headers
-                        .addHeaderWriter(new XFrameOptionsHeaderWriter(
-                                XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-                .formLogin(login -> login
+                .csrf().ignoringRequestMatchers(
+                        new AntPathRequestMatcher("/h2-console/**"))
+                .and()
+                .headers()
+                .addHeaderWriter(new XFrameOptionsHeaderWriter(
+                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+
+                .and()
+                        .formLogin()
                         .loginPage("/user/login")
-                        .defaultSuccessUrl("/board/event"))
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                        .logoutSuccessUrl("/board/event")
-                        .invalidateHttpSession(true))
-        ;
+                        .defaultSuccessUrl("/")
+
+                ;
         return http.build();
     }
 
