@@ -34,8 +34,8 @@ public class ReviewController {
             model.addAttribute("academy", academy);
             return "academy_detail";
         }
-        this.reviewService.create(academy, reviewForm.getContent(), reviewForm.getStar_rating(), siteUser);
-        return String.format("redirect:/academy/detail/%d", id);
+        Review review = this.reviewService.create(academy, reviewForm.getContent(), reviewForm.getStar_rating(), siteUser);
+        return String.format("redirect:/academy/detail/%d#review_%d", review.getAcademy().getId(), review.getId());
     }
 
 
@@ -75,7 +75,7 @@ public class ReviewController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         this.reviewService.modify(review, reviewForm.getContent(), reviewForm.getStar_rating());
-        return String.format("redirect:/academy/detail/%d", review.getAcademy().getId());
+        return String.format("redirect:/academy/detail/%d#review_%d", review.getAcademy().getId(), review.getId());
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -84,6 +84,6 @@ public class ReviewController {
         Review review = this.reviewService.getReview(id);
         SiteUser siteUser = this.userService.getUser(principal.getName());
         this.reviewService.vote(review, siteUser);
-        return String.format("redirect:/academy/detail/%d", review.getAcademy().getId());
+        return String.format("redirect:/academy/detail/%d#review_%d", review.getAcademy().getId(), review.getId());
     }
 }

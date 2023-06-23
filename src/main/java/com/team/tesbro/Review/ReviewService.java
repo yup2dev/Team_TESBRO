@@ -23,7 +23,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private AcademyService academyService;
 
-    public void create(Academy academy, String content, int star_rating, SiteUser author){
+    public Review create(Academy academy, String content, int star_rating, SiteUser author){
         Review review = new Review();
         review.setContent(content);
         review.setCreateDate(LocalDateTime.now());
@@ -32,6 +32,8 @@ public class ReviewService {
         review.setUserId(author);
         review.setAcademy(academy);
         this.reviewRepository.save(review);
+
+        return review;
     }
 
     public Review getReview(Integer id) {

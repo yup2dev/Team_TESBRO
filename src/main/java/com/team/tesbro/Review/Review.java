@@ -42,5 +42,3 @@ public class Review {
     @ManyToMany
     Set<SiteUser> voter;
 }
-
-// 추천 voter 유저클래스 없어서 킵
