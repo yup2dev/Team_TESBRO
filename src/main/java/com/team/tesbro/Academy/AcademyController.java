@@ -31,7 +31,6 @@ public class AcademyController {
         model.addAttribute("keyword", keyword);
         return "list";
     }
-
     @GetMapping("/create")
     public String getCreateAcademyForm(Model model) {
         model.addAttribute("AcademyForm", new AcademyForm());
@@ -49,6 +48,7 @@ public class AcademyController {
         this.academyService.create(academyName, CeoName, AcademyAddress, AcademyTel, introduction, imglogo);
         return "redirect:/academy/list";
     }
+
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/vote/{id}")

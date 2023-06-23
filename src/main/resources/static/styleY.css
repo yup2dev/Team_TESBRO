@@ -214,7 +214,7 @@ form{
 .card_frame{
   border: 1px solid #e7eaf3;
   transition: 0.3s;
-  argin-bottom: 1rem;
+  margin-bottom: 1rem;
   flex-direction: column;
   word-wrap: break-word;
   background-color: #fff;
@@ -276,4 +276,8 @@ form{
 
 .jjim{
   margin-right:15%;
+}
+
+.test {
+color:red;
 }

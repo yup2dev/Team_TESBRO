@@ -53,7 +53,7 @@ public class AcademyService {
         this.academyRepository.save(academy);
     }
 
-    public Page<Academy> getAcademyList(String academyName, String order, int page) {
+    public Page<Academy> getAcademyList(String order, int page) {
         Sort sort;
         if (order.equals("voter")) {
             sort = Sort.by(Sort.Direction.DESC, "voter");
@@ -63,7 +63,6 @@ public class AcademyService {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
         Pageable pageable = PageRequest.of(page, 5, sort);
-        return academyRepository.findByAcademyName(academyName, pageable);
+        return this.academyRepository.findAll(pageable);
     }
-
 }
