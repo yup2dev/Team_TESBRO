@@ -25,8 +25,8 @@ align-items:center;
 -webkit-justify-content:center;
 -ms-flex-pack:center;
 justify-content:center;
-min-height:50px;
-max-height:50px;
+min-height:55px;
+max-height:55px;
 z-index:1
 }
 .datepicker--cell.-focus-{
@@ -112,7 +112,7 @@ width:14.28571%
 .datepickers-container{position:absolute;left:0;top:0}
 @media print{.datepickers-container{display:none}}
 .datepicker{
-width:500px;
+width:450px;
 background:#fff;
 border:1px solid #dbdbdb;
 box-shadow:0 4px 12px rgba(0,0,0,.15);
@@ -160,7 +160,7 @@ opacity:1;
 transform:none
 }
 .datepicker--content{box-sizing:content-box;padding:4px;
-    width: 500px;
+    width: 450px;
 }
 
 .datepicker--pointer{
@@ -204,7 +204,7 @@ top:calc(50% - 10px / 2)}
 .datepicker--body.active{display:block}
 
 .datepicker--nav{
-width:500px;
+width:450px;
 display:-webkit-flex;
 display:-ms-flexbox;
 display:flex;

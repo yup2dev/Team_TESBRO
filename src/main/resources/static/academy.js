@@ -2,7 +2,7 @@
 
 let curPos= 0;
 let position = 0;
-const IMAGE_WIDTH = 600;
+const IMAGE_WIDTH = 550;
 
 const prevBtn = document.querySelector(".prev")
 const nextBtn = document.querySelector(".next")
@@ -43,50 +43,56 @@ function init(){
 
 init();
 
+
+
 // 강사 리스트 슬라이드
+let slideItems = document.querySelectorAll(".t-image");
+const maxSlide = slideItems.length-1;
 
-let TcurPos= 0;
+let TcurPos = 0;
 let Tposition = 0;
-const TIMAGE_WIDTH = 500;
+const TIMAGE_WIDTH = slideItems[0].offsetWidth + 15;
+const TIMAGE_COUNT = slideItems.length;
 
-const TprevBtn = document.querySelector(".t-prev")
-const TnextBtn = document.querySelector(".t-next")
-const Timages = document.querySelector(".t-images")
+const TprevBtn = document.querySelector(".t-prev");
+const TnextBtn = document.querySelector(".t-next");
+const Timages = document.querySelector(".t-images");
 
-
-function Tprev(){
-    if(TcurPos > 0){
-    TnextBtn.removeAttribute("disabled")
-    Tposition += TIMAGE_WIDTH
-
-    Timages.style.transform = `translateX(${Tposition}px)`
+function Tprev() {
+  if (TcurPos > 0) {
+    TnextBtn.removeAttribute("disabled");
+    Tposition += TIMAGE_WIDTH;
+    Timages.style.transform = `translateX(${Tposition}px)`;
     TcurPos -= 1;
-    }
-    if(TcurPos == 0){
-        TprevBtn.setAttribute("disabled", 'true')
-    }
- }
-function Tnext(){
-    if(TcurPos < 2){
-        TprevBtn.removeAttribute("disabled")
-        Tposition -= TIMAGE_WIDTH
-
-        Timages.style.transform = `translateX(${Tposition}px)`
-        TcurPos += 1;
-    }
-    if(TcurPos == 2){
-        TnextBtn.setAttribute("disabled", 'true')
-    }
+  }
+  if (TcurPos === 0) {
+    TprevBtn.setAttribute("disabled", "true");
+  }
 }
 
-function Tinit(){
+function Tnext() {
+  if (TcurPos < TIMAGE_COUNT - Math.ceil(Timages.offsetWidth / TIMAGE_WIDTH)) {
+    TprevBtn.removeAttribute("disabled");
+    Tposition -= TIMAGE_WIDTH;
+    Timages.style.transform = `translateX(${Tposition}px)`;
+    TcurPos += 1;
+  }
+  if (TcurPos === TIMAGE_COUNT - Math.ceil(Timages.offsetWidth / TIMAGE_WIDTH)) {
+    TnextBtn.setAttribute("disabled", "true");
+  }
+}
 
-    TprevBtn.setAttribute("disabled", 'true')
-    TprevBtn.addEventListener("click", Tprev)
-    TnextBtn.addEventListener("click", Tnext)
+function Tinit() {
+  TcurPos = 0;
+  Tposition = 0;
+  TprevBtn.setAttribute("disabled", "true");
+  TprevBtn.addEventListener("click", Tprev);
+  TnextBtn.addEventListener("click", Tnext);
 }
 
 Tinit();
+
+
 
 // 팝업 여닫기
 function Popup1__show() {

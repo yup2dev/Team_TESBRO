@@ -54,21 +54,21 @@ public class ReviewController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String reviewModify(ReviewForm reviewForm, @PathVariable("id") Integer id, Principal principal) {
+    public String answerModify(ReviewForm reviewForm, @PathVariable("id") Integer id, Principal principal) {
         Review review = this.reviewService.getReview(id);
         if (!review.getUserId().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         reviewForm.setContent(review.getContent());
         reviewForm.setStar_rating(review.getStar_rating());
-        return "review";
+        return "review_form";
     }
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
     public String reviewModify(@Valid ReviewForm reviewForm, BindingResult bindingResult,
                                @PathVariable("id") Integer id, Principal principal) {
         if (bindingResult.hasErrors()) {
-            return "review";
+            return "review_form";
         }
         Review review = this.reviewService.getReview(id);
         if (!review.getUserId().getUsername().equals(principal.getName())) {

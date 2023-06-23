@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  display:grid;
+  place-items:center;
+  height:100vh;
+}
+
+span {
+  font-size: 14px;
+  color: #a9a9a9;
+}
+
+form {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+
+input {
+  background-color: #ecececdd;
+  border: none;
+  font-size: 14px;
+  padding: 10px 12px;
+  margin: 8px 0;
+  width: 80%;
+  color: #333;
+  outline: none;
+  border-radius: 5px;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 2em;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  position: relative;
+  overflow: hidden;
+  width: 850px;
+  max-width: 100%;
+  min-height: 550px;
+}
+
+.login form{
+  position: absolute;
+  top: 50%;
+  height: 0;
+  transition: all ease-in-out 0.6s;
+}
+
+.logo{
+left:0;
+width:50%;
+height:80%;
+margin-top:6%;
+background: url(https://i.ibb.co/mc8X7Fd/Kakao-Talk-20230522-164812484.jpg) no-repeat;
+background-size:contain;
+position:absolute;
+z-index:1;
+}
+
+.login form{
+  right: 0;
+  width: 50%;
+  z-index: 2;
+  opacity: 1;
+}
+
+button {
+  text-decoration: none;
+  position: relative;
+  font-size: 14px;
+  font-weight: 700;
+  color: black;
+  outline-color:rgb(27,28,29);
+  width: 80%;
+  height: 3em;
+  line-height: 2em;
+  text-align: center;
+  background: white;
+  background-size: 300%;
+  border-radius: 5px;
+  z-index: 2;
+  margin-top: 13px;
+  cursor: pointer;
+}
+
+#login {
+  background-color: rgb(27,89,29);
+  color:white;
+}

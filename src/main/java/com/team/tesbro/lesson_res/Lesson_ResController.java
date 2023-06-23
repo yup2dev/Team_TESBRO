@@ -4,7 +4,6 @@ import com.team.tesbro.Lesson.Lesson;
 import com.team.tesbro.Lesson.LessonRepository;
 import com.team.tesbro.User.SiteUser;
 import com.team.tesbro.User.UserRepository;
-import com.team.tesbro.User.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -30,15 +30,16 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class Lesson_ResController {
     private final Lesson_ResService lesson_resService;
-    private final LessonRepository lessonRepository;
-    private final UserService userService;
     private final UserRepository userRepository;
+    private final LessonRepository lessonRepository;
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/reserve/{id}")
     public String reserveLesson(@RequestParam String datePicker, @RequestParam String childSelectBox,
                                 @PathVariable("id") Integer id, @Valid Lesson_ResDto lessonResDto,
-                                BindingResult bindingResult, Principal principal) {
+                                BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                Principal principal) {
+
         // 유저 이름 필요
         //string => 날짜 시간 타입으로 변경
         LocalDate date = LocalDate.parse(datePicker, DateTimeFormatter.ISO_DATE);
@@ -50,20 +51,35 @@ public class Lesson_ResController {
 
         String currentUsername = principal.getName();
         Optional<SiteUser> currentUser = userRepository.findByusername(currentUsername);
-
         Integer currentUserId = currentUser.map(SiteUser::getId).orElse(null);
         lessonResDto.setBookedUsersId(Collections.singletonList(currentUserId));
 
         Optional<Lesson> lesson = lesson_resService.findLessonId(date, time, id);
         Integer lessonId = lesson.get().getId();
-        Lesson_Res lessonRes = new Lesson_Res();
-        lessonRes.setBookDate(LocalDateTime.now());
         System.out.println(lessonResDto);
+
+        // 중복 체크 후 에러시 팝업 띄워주기
+        if (lesson_resService.findUsers(lessonId).contains(currentUserId)) {
+            System.out.println("유저 중복으로 불가능");
+            redirectAttributes.addFlashAttribute("popupMessage", "이미 예약된 회원입니다");
+            return "redirect:/academy/detail/{id}";
+        }
+
+        if (lesson.get().getCurrentCapacity() >= lesson.get().getPeopleCapacity()) {
+            System.out.println("꽉참");
+            redirectAttributes.addFlashAttribute("popupMessage", "수용 인원을 초과했습니다");
+            return "redirect:/academy/detail/{id}";
+        } else {
+            lesson.get().setCurrentCapacity(lesson.get().getCurrentCapacity() + 1);
+            lessonRepository.save(lesson.get());
+        }
+
         //레슨 테이블에 등록인원 추가 로직
         this.lesson_resService.reserve(lessonResDto, lessonId, currentUserId);
         System.out.println("예약됨");
         return "redirect:/reserve";
     }
+
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/reserve")
