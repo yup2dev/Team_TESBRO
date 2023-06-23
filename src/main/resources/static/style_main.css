@@ -1,11 +1,15 @@
 body {margin:0; padding:0}
 a{text-decoration:none;color:inherit;}
+button{border:0;background:inherit;}
+
+
+
 
 
 
 .promotion {
   width:100%;
-   min-width:1400px;
+   min-width:1500px;
   height: 800px;
   position:absolute;
   top:0;
@@ -66,7 +70,12 @@ a{text-decoration:none;color:inherit;}
   height: 800px;
   /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
   flex-shrink: 0;
-}
+  opacity: 1;
+    transition: opacity 1s ease;
+  }
+  .slide_item.active {
+    opacity: 1;
+  }
 .slide_button {
   /* layout */
   display: flex;
@@ -146,6 +155,7 @@ a{text-decoration:none;color:inherit;}
   object-fit:contain;
   margin-left: 550px;
   margin-top:100px;
+  -webkit-user-drag: none;
 }
 
 
@@ -168,7 +178,7 @@ a{text-decoration:none;color:inherit;}
   width:1200px;
   height:500px;
   object-fit:cover;
-
+-webkit-user-drag: none;
 }
 .slide_item.item2 .fixed-item div:first-child{
   font-family: 'Humanbumsuk';
@@ -205,6 +215,7 @@ a{text-decoration:none;color:inherit;}
   height:500px;
   object-fit:contain;
   margin-left:400px;
+  -webkit-user-drag: none;
 }
 .slide_item.item3 .fixed-item div:first-child{
   font-family: 'Humanbumsuk';
@@ -275,21 +286,19 @@ li {
 
 
 
-
-
 /* 공지사항 */
 .notice-box {
   width:100%;
   min-width:1500px;
   height: 100px;
-   border:3px solid blue;
   position:relative;
   display:flex;
   justify-content:center;
   align-items:center;
+  margin-top:650px;
 }
 .notice-box .notice-items {
-  width:1100px;
+  width:1200px;
   border:1px solid lightgray;
   border-radius:10px;
   display:flex;
@@ -297,9 +306,9 @@ li {
 
 }
 .notice-box .notice-items .notice-item {
-  padding:10px 40px;
+  padding:7px 40px;
   display:inline-block;
-  font-size:1.2rem;
+  font-size:1.1rem;
 }
 .notice-box .notice-items .notice-item:nth-child(2) {
   width:700px;
@@ -312,23 +321,22 @@ li {
   font-size:1.2rem;
   color:gray;
   cursor:pointer;
+  margin-right:10px;
 }
 /* 공지끝 */
 
 
 
 
-
-/* 학원 리스트 */
+/* 학원 */
+/* 이용자수 */
 .academy-list {
   width:100%;
   min-width:1500px;
-  height: 500px;
   position:relative;
-  border:3px solid red;
 }
 .academy-list .total-size {
-  width:1100px;
+  width:1200px;
   height:300px;
   border:1px solid lightgray;
   border-radius:10px;
@@ -347,26 +355,268 @@ li {
 }
 .academy-list .total-size .size-item div {
   font-size:1rem;
-  margin:10px 0;
+  margin:1px 0;
 }
 .academy-list .total-size .size-item div:last-child{
   font-size:1.6rem;
   font-weight:bold;
   color:rgb(30,90,30);
+  margin-top:10px;
 }
 
-/* 학원 리스트끝*/
+/* 이용자수 리스트끝*/
+
+/* 학원리스트 */
+.academy-list {
+   width:100%;
+  min-width:1500px;
+  position:relative;
+}
+.academy-list .academy-box {
+  width:1200px;
+  height:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  margin-top: 30px;
+  position:relative;
+}
+.academy-list .academy-box .academy-btn {
+  position:absolute;
+  width:200px;
+  height:50px;
+  font-size:1.1rem;
+  bottom:45px;
+  left:50%;
+  transform:translatex(-50%);
+  cursor:pointer;
+  border:1px solid lightgray;
+  background: transparent;
+}
+.academy-list .academy-box .academy-items .academy-item{
+  width:580px;
+  font-size:1.6rem;
+  font-weight:bold;
+  padding:30px 0;
+  border-bottom:1px solid lightgray;
+}
+.academy-list .academy-box .academy-items .academy-card {
+  border:1px solid lightgray;
+  border-radius:5px;
+  width:100%;
+  height:160px;
+  margin:30px 0;
+  display:flex;
+  align-items:center;
+
+}
+.academy-box .academy-items .academy-card img {
+  width:130px;
+  height:130px;
+  margin:0 30px;
+}
+.academy-items .academy-card li {
+  font-size:1.1rem;
+  padding:5px 0;
+}
+.academy-items .academy-card li:first-child {
+  font-weight:bold;
+  font-size:1.3rem;
+}
+.academy-items .academy-card button {
+  margin-left:200px;
+  padding:5px 0;
+  border:0;
+  background: transparent;
+  font-size: 0.9rem;
+  cursor:pointer;
+}
+/* 학원리스트 끝*/
 
 
 
-
-
+/* 리뷰시작 */
 .latest-review {
   width:100%;
   min-width:1500px;
-  height: 500px;
   position:relative;
-  border:3px solid green;
+}
+.latest-review .review-box {
+/*   border:2px solid orange; */
+  width:1200px;
+  height:300px;
+  margin:0 auto;
+}
+.review-box .review-item {
+  font-size:1.6rem;
+  font-weight:bold;
+  padding-top:30px;
+}
+.review-box .review-items .review-cards {
+/*   border:2px solid purple; */
+  height:250px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  position:relative;
+}
+.review-items .review-cards .review-card {
+  border:1px solid lightgray;
+  border-radius:5px;
+  width:280px;
+  height:200px;
+  display:flex;
+  flex-direction:column;
+
+
+}
+.review-cards .review-card img {
+  width:50px;
+  height:50px;
+  background: white;
+  border:1px solid lightgray;
+  border-radius:5px;
+  object-fit:contain;
+  position:relative;
+  left:25px;
+  top:-25px;
+}
+.review-cards .review-card div {
+  margin-left:20px;
+}
+.review-cards .review-card div:last-child {
+  margin-right:15px;
+  height:90px;
+  overflow:hidden;
+}
+.review-cards .review-card div:last-child p {
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* 표시할 줄 수 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 리뷰끝 */
+
+
+
+/* 버튼들 */
+.link-buttons {
+  width:100%;
+  min-width:1500px;
+  height: 730px;
+  position:relative;
+  margin-top:30px;
+
+}
+.link-buttons .lbtn-ment {
+  width:1200px;
+  margin:0 auto;
+  font-size:1.6rem;
+  font-weight:bold;
+  padding-top:30px;
+}
+.link-buttons .lbtn-area {
+  width:1200px;
+  height:600px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:30px;
+  position:relative;
+}
+.link-buttons .lbtn-area > button {
+  width:600px;
+  height:600px;
+  background: #feebdc;
+  cursor:pointer;
+}
+.link-buttons .lbtn-area .lbtn-area2 {
+  width:600px;
+  height:600px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  margin-left:20px;
+}
+.link-buttons .lbtn-area .lbtn-area2 button {
+  height:290px;
+  cursor:pointer;
+  background: #a5cdcd;
+}
+.link-buttons .lbtn-area .lbtn-area2 button:last-child {
+  background: #fffbe2;
+  overflow:hidden;
+}
+
+
+
+/* 버튼 안에 문구 설정 */
+.link-buttons .lbtn-area > button div:nth-child(2) {
+  position:absolute;
+  font-size:2.5rem;
+  font-weight:bold;
+  font-family: 'Humanbumsuk';
+  bottom:120px;
+  left:70px;
+}
+
+.link-buttons .lbtn-area > button div:last-child {
+  position:absolute;
+  font-size:1.5rem;
+  font-family: 'Humanbumsuk';
+  bottom:80px;
+  left:70px;
+}
+
+.link-buttons .lbtn-area2 > button:first-child .inbtn-ment:nth-child(2){
+  position:absolute;
+  font-size:2.5rem;
+  font-weight:bold;
+  font-family: 'Humanbumsuk';
+  top:110px;
+  left:650px;
+}
+.link-buttons .lbtn-area2 > button:first-child .inbtn-ment:last-child {
+  position:absolute;
+  font-size:1.5rem;
+  font-family: 'Humanbumsuk';
+  top:160px;
+  left:650px;
+}
+.link-buttons .lbtn-area2 > button:last-child .inbtn-ment:nth-child(2){
+  position:absolute;
+  font-size:2.5rem;
+  font-weight:bold;
+  font-family: 'Humanbumsuk';
+  top:420px;
+  left:650px;
+}
+.link-buttons .lbtn-area2 > button:last-child .inbtn-ment:last-child {
+  position:absolute;
+  font-size:1.5rem;
+  font-family: 'Humanbumsuk';
+  top:470px;
+  left:650px;
+}
+
+
+
+/* 버튼 안에 이미지 설정 */
+.link-buttons .lbtn-area > button div:first-child img{
+  width:500px;
+  margin-top:-80px;
+}
+.link-buttons .lbtn-area2 button:first-child div:first-child img {
+  width:250px;
+  margin-left:280px;
+
+}
+.lbtn-area .lbtn-area2 button:last-child div:first-child img {
+  width:350px;
+  margin-right:-200px;
 }
 
 
@@ -390,3 +640,7 @@ li {
     font-weight: normal;
     font-style: normal;
 }
+
+
+
+

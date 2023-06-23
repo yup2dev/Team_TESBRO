@@ -202,7 +202,7 @@ select, textarea {
     margin-top:30px;
     margin-left:30px;
 }
-#t-slide{ width: 100%; margin: 0 auto;}
+#t-slide{ width: 1030px; margin: 0 auto;}
 .t-album{
   overflow: hidden;
   position:relative;
@@ -213,14 +213,15 @@ select, textarea {
     transition-duration: 1s;
 }
 .t-album .t-images .t-image {
-  margin-right:30px;
+  padding: 0 20px;
   text-align:center;
-  font-size:1.rem;
+  font-size:1rem;
   margin-bottom:10px;
   cursor:pointer;
+  margin-bottom:10px;
 }
 .t-album .t-images .t-image img {
-  width: 150px; height: 200px;
+  width: 170px; height: 200px;
   object-fit:cover;
 }
 

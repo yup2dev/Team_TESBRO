@@ -1,0 +1,51 @@
+
+
+.footer {
+  position:relative;
+  width:100%;
+  min-width:1500px;
+  height:200px;
+  border-top:1px solid lightgray;
+}
+.footer-box {
+/*   border:2px solid blue; */
+  width:1200px;
+  height:300px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  flex-wrap:nowrap;
+}
+.footer-box .team-intro img {
+  width:200px;
+  height:200px;
+}
+.footer-box .team-intro {
+  display:flex;
+  align-items:center;
+}
+.footer-box .team-intro > ul {
+  display:inline-block;
+}
+.footer-box .team-intro > ul li {
+  font-size:0.9rem;
+  color:gray;
+  padding:5px 0;
+}
+
+.footer-box .total-menu {
+/*   border:1px solid black; */
+  display:flex;
+  align-items:flex-start;
+  width:600px;
+  justify-content:space-around;
+}
+.footer-box .total-menu > ul li {
+  font-size:0.9rem;
+  color:gray;
+  padding:5px 0;
+}
+.footer-box ul li:first-child {
+  font-weight:bold;
+}
