@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.team.tesbro.User.SiteUser;
+import com.team.tesbro.file.GenFile;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -47,6 +48,12 @@ public class Board {
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Answer> answers;
+
+    @ManyToMany
+    @JoinTable(name = "GEN_FILE_BOARDS",
+            joinColumns = @JoinColumn(name = "board_id"),
+            inverseJoinColumns = @JoinColumn(name = "gen_file_id"))
+    private List<GenFile> genFiles;
 
     public void addAnswer(Answer answer) {
         if (answers == null) {

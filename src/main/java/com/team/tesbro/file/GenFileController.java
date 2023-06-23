@@ -2,6 +2,8 @@ package com.team.tesbro.file;
 
 import com.team.tesbro.Academy.Academy;
 import com.team.tesbro.Academy.AcademyRepository;
+import com.team.tesbro.Board.Board;
+import com.team.tesbro.Board.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +20,7 @@ import java.util.Map;
 public class GenFileController {
     private final GenFileService genFileService;
     private final AcademyRepository academyRepository;
+    private final BoardRepository boardRepository;
 
     @RequestMapping("/{id}")
     @ResponseBody
@@ -27,8 +30,11 @@ public class GenFileController {
         int afileId;
         // Academy 객체를 id로 조회
         Academy academy = academyRepository.findById(id).orElse(null);
+        Board board = boardRepository.findById(id).orElse(null);
         if (academy == null) {
             return new ResultData("F-1", "존재하지 않는 Academy ID입니다.");
+        } else if (board == null) {
+            return new ResultData("F-1", "존재하지 않는 Board ID입니다.");
         }
 
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
@@ -73,17 +79,26 @@ public class GenFileController {
                 }
 
                 if (fileUpdated == false) {
+
+                }
+
+                // academies에 id 추가
+                if (relTypeCode.equals("academy")) {
                     long fileId = genFileService.saveFileOnDisk(multipartFile, relTypeCode, relId, typeCode, type2Code,
                             fileNo, originFileName, fileExtTypeCode, fileExtType2Code, fileExt, fileSize);
 
                     fileIds.add(fileId);
                     GenFile genFile = genFileService.getGenFileById(fileId); // 수정된 부분
                     academy.getGenFiles().add(genFile);
-                }
+                    academyRepository.save(academy);
+                } else if (relTypeCode.equals("board")) {
+                    long fileId = genFileService.saveFileOnDisk(multipartFile, relTypeCode, relId, typeCode, type2Code,
+                            fileNo, originFileName, fileExtTypeCode, fileExtType2Code, fileExt, fileSize);
 
-                // academies에 id 추가
-                if (relTypeCode.equals("academy")) {
-
+                    fileIds.add(fileId);
+                    GenFile genFile = genFileService.getGenFileById(fileId);
+                    board.getGenFiles().add(genFile);
+                    boardRepository.save(board);
                 }
             }
         }
@@ -115,8 +130,6 @@ public class GenFileController {
                 }
             }
         }
-        // Academy 엔티티 업데이트
-        academyRepository.save(academy);
 
         Map<String, Object> rsDataBody = new HashMap<>();
 

@@ -21,10 +21,9 @@ public class TestController {
     }
     @RequestMapping("/upload/show")
     public String showfile(Model model){
-        GenFile afile = genFileService.getGenFileById(6L);
+        GenFile afile = genFileService.getGenFileById(1L);
         String file = afile.getBaseFileUri();
         model.addAttribute("file", file);
-
         return "uploadShow";
     }
 }

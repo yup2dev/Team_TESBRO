@@ -42,8 +42,6 @@ public class GenFile {
     private LocalDateTime createDate;
     @LastModifiedDate
     private LocalDateTime modifyDate;
-    @ManyToMany
-    Set<Board> boards;
     @JsonIgnore
     public String getFilePath() {
         return GenFileService.GEN_FILE_DIR_PATH + getBaseFileUri();
