@@ -491,7 +491,7 @@ li {
 }
 .review-cards .review-card div:last-child p {
   display: -webkit-box;
-  -webkit-line-clamp: 4; /* 표시할 줄 수 */
+  -webkit-line-clamp: 3; /* 표시할 줄 수 */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
