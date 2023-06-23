@@ -1,78 +1,78 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html layout:decorate="~{layout}" lang="ko">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" th:href="@{/style1.css}">
   <title>게시판</title>
 </head>
 
 <body>
-<nav th:replace="~{navbar :: navbarFragment}"></nav>
-
-<div class="notice-section">
+<div layout:fragment="content" class="notice-section">
+  <link rel="stylesheet" type="text/css" th:href="@{/style1.css}">
   <div class="container">
     <div class="notice-header">
-      <h3 th:if="${boardcategory == 'notice'}">공지사항</h3>
-      <h3 th:if="${boardcategory == 'qna'}">문의하기</h3>
-      <h3 th:if="${boardcategory == 'event'}">이벤트</h3>
-      <!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'notice'}">공지사항</h3>-->
-      <!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'qna'}">문의하기</h3>-->
-      <!--      <h3 class="notice-title" th:if="${board.BoardCategory == 'event'}">이벤트</h3>-->
+      <div class="notice-sub">공지사항</div>
+      <!-- 검색 -->
+      <div class="search-box">
+        <form class="search-form" th:action="@{/board/search}" method="get">
+          <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+          <button type="submit"><img src="https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_1280.png" alt="searchIcon"></button>
+        </form>
+      </div>
+      <!-- 검색 끝 -->
 
       <!-- 정렬 버튼들 -->
       <div class="order-buttons">
-        <button class="order-button" onclick="handleOrderChange('outdated')">오래된순</button>
-        <button class="order-button" onclick="handleOrderChange('views')">조회순</button>
-        <button class="order-button" onclick="handleOrderChange('voter')">추천순</button>
-        <button class="order-button" onclick="handleOrderChange('answers')">댓글순</button>
+        <button class="order-button" onclick="handleOrderChange('outdated')">▼</button>
+        <button class="order-button" onclick="handleOrderChange('views')">▼</button>
+        <button class="order-button" onclick="handleOrderChange('voter')">▼</button>
       </div>
       <!-- 정렬 버튼들 끝 -->
     </div>
 
-    <!-- 검색 -->
-    <form class="search-form" th:action="@{/board/search}" method="get">
-      <input type="text" name="keyword" placeholder="검색어를 입력하세요">
-      <button type="submit">검색</button>
-    </form>
-    <!-- 검색 끝 -->
+
+
+
   </div>
-</div>
+
 
 <div id="board-list">
   <div class="container">
     <table class="board-table">
       <thead>
-      <tr>
-        <th scope="col" class="th-num">번호</th>
-        <th scope="col" class="th-title">제목</th>
-        <th scope="col" class="th-author">작성자</th>
-        <th scope="col" class="th-date">작성일</th>
-        <th scope="col" class="th-hit">조회</th>
-        <th scope="col" class="th-voter">추천</th>
-      </tr>
+        <tr>
+          <th scope="col" class="th-item">번호</th>
+          <th scope="col" class="th-item">제목</th>
+          <th scope="col" class="th-item">작성자</th>
+          <th scope="col" class="th-item">작성일</th>
+          <th scope="col" class="th-item">조회</th>
+          <th scope="col" class="th-item">추천</th>
+        </tr>
       </thead>
       <tbody>
       <tr th:each="board, loop : ${paging}">
-        <td th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
-        <td>
+        <td class="td-item" th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
+        <td class="td-item" >
           <a th:href="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:text="${board.subject}"></a>
           <span class="answer" th:if="${#lists.size(board.answers) > 0}"
                 th:text="${#lists.size(board.answers)}">
           </span>
         </td>
-        <td>
+        <td class="td-item" >
           <span th:if="${board.author != null}" th:text="${board.author.username}"></span>
         </td>
-        <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
-        <td th:text="${board.views}"></td>
-        <td th:text="${#lists.size(board.voter)}"></td>
+        <td class="td-item" th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        <td class="td-item" th:text="${board.views}"></td>
+        <td class="td-item" th:text="${#lists.size(board.voter)}"></td>
       </tr>
       </tbody>
     </table>
+
+
+
+
     <div class="pagination">
-      <a th:href="@{|/board/${paging.content[0].boardCategory}/create|}" class="button">글쓰기</a>
+
       <a th:if="${paging.hasPrevious()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.previousPageable().pageNumber}|}" class="prev">&lt;</a>
       <span th:if="${paging.number >= 2}">
           <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 2}|}" class="pager" th:text="${paging.number - 1}"></a>
@@ -89,8 +89,14 @@
         </span>
       <a th:if="${paging.hasNext()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.nextPageable().pageNumber}|}" class="next">&gt;</a>
     </div>
+
+
   </div>
 </div>
+
+
+
+
 
 <script>
     function handleOrderChange(selectedOption) {
@@ -110,5 +116,6 @@
       window.location.href = updatedUrl;
     }
   </script>
+</div>
 </body>
 </html>

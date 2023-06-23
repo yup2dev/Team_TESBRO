@@ -1,143 +1,164 @@
-* {
-  list-style: none;
+body {
+
   text-decoration: none;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+button {
+    border:0;
+    background:inherit;
+}
+li {list-style: none;}
+
+.notice-section {
+    position:relative;
+    width:100%;
+    min-width:1500px;
+    margin:0 auto;
+}
 .container {
   width: 1100px;
   margin: 0 auto;
+
 }
 
-table {
+.container .notice-header {
+    position:relative;
+    height:200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.container .notice-header .notice-sub{
+    font-size: 1.5rem;
+    font-weight:bold;
+    margin-top:-120px;
+}
+.container .notice-header .search-box {
+    border-top:5px double lightgray;
+    border-bottom:5px double lightgray;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    padding:40px 0;
+}
+.notice-header .search-box > form {
+    width:60%;
+    margin:0 auto;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.notice-header .search-box > form input {
+    padding:10px;
+    border:1px solid lightgray;
+    border-radius:10px;
+    width:100%;
+}
+.notice-header .search-box > form button {
+    position:absolute;
+    right:225px;
+    cursor:pointer;
+
+}
+.notice-header .search-box > form button img {
+    width:30px;
+}
+
+
+
+
+
+
+/* 테이블*/
+.board-table {
   border-collapse: collapse;
   border-spacing: 0;
-  margin-top: 10px;
-}
-section.board {
-  padding: 5px 0;
-
-}
-
-.page-title {
-  margin-bottom: 15px;
-}
-.page-title h3 {
-  font-size: 30px;
-  color: #333333;
-  font-weight: bold;
-  text-align: left;
-}
-
-
-.board-table {
-  font-size: 15px;
   width: 100%;
-  border-top: 2px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid lightgray;
+}
+.board-table .th-item{
+    font-size:0.8rem;
+    height:20px;
+    text-align: center;
+    padding: 10px 0;
+}
+.board-table .th-item:first-child {
+    width:60px;
+}
+.board-table .th-item:nth-child(3), .th-item:nth-child(4) {
+    width:170px;
+}
+.board-table .th-item:nth-child(5), .th-item:nth-child(6) {
+    width:60px;
 }
 
-.board-table a {
-  color: #333;
-  display: inline-block;
-  line-height: 1.4;
-  word-break: break-all;
-  vertical-align: middle;
+.board-table .td-item {
+    text-align: center;
+    font-size:1rem;
+    height:40px;
+    padding: 10px 0;
 }
+
+
+
+
+
+
+
 .board-table a:hover {
   text-decoration: underline;
 }
-.board-table th {
-  text-align: center;
-}
 
-.board-table .th-num {
-  width: 100px;
-  text-align: center;
-}
-
-.board-table .th-date {
-  width: 200px;
-}
-
-.board-table th,
-.board-table td {
-  padding: 10px 0;
-}
 
 .board-table tbody td {
   border-top: 1px solid #e7e7e7;
-  text-align: center;
 }
 
-.board-table tbody th {
-  padding-left: 28px;
-  padding-right: 14px;
-  border-top: 1px solid #e7e7e7;
-  text-align: left;
-}
 
-.board-table tbody th p {
-  display: none;
-}
+
 
 .pagination {
    display: flex;
    align-items: center;
    justify-content: center;
-   margin: 10px 0;
+   margin: 40px 0;
    position: relative;
 }
 
-.pagination span,
 .pagination a {
   display: block;
-  width: auto;
-  padding: 8px;
-  background-color: #fff;
+  width: 20px;
   text-decoration: none;
   text-align: center;
-  line-height: 20px;
+  padding:10px;
+  margin: 10px;
 }
 
 .pagination .pager {
   color: black;
-  width: 30px;
-  border: 1px solid #ddd;
+  width: 20px;
+  border: 1px solid lightgray;
+  text-align: center;
   border-radius: 5px;
+  padding:10px;
 }
 
 .pagination a:hover,
 .pagination .current {
-  color: #fff;
-  border-color: #333;
-  background: seagreen;
-}
-
-.pagination .button {
-  background: seagreen;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  color: white;
-  position: absolute;
-  left: 0;
-}
-
-.pagination .str {
-  font-weight: bold;
+  color: rgb(30,90,30);
+  border-color: rgb(30,90,30);
 }
 
 .pagination a.prev {
-  margin-right: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid lightgray;
   border-radius: 5px;
   color: black;
 }
 
 .pagination a.next {
-  margin-left: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid lightgray;
   border-radius: 5px;
   color: black;
 }
@@ -146,143 +167,37 @@ section.board {
   display: none;
 }
 
-* {
-  margin: 0; padding: 0; box-sizing: border-box;
-
-}
-ul, li { list-style: none }
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-
-.login {
-  text-align : right;
-  font-size:14px;
-}
-
-
-.navbar {
-  background: white;
-  text-align:center;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width:80%
-}
-.nav-logo > a > img {
-  width : 150px;
-  height : 150px;
-}
-.nav-logo {
-  display:inline-block;
-}
-
-.nav-bar {
-  display:inline-block;
-  border : 2px solid rgb(27, 89, 29);
-  border-radius : 10px 10px;
-  width: 100%;
-  vertical-align: 63px;
-}
-.nav-bar::after{
-  content: '';
-  display: table;
-  clear: both;
-}
-.nav-logo, .nav-bar{
-  float:center;
-}
-
-.nav-bar > .nav-item {
-  display:inherit;
-  font-weight : bold;
-  width : calc(100% / 5);
-  padding-top: 20px;
-  padding-bottom: 20px;
-  vertical-align:top;
-
-}
 
 
 
-.nav-bar:hover .nav-item .sub-bar {
-  display:block;
-  height:auto;
-  margin: 10px;
-  color: black;
-  position: relative;
-  z-index: 1;
-}
 
-.sub-bar{
-  height:0;
-  overflow:hidden;
-}
-.sub-bar .sub-mn {
-  padding-top:10px;
-  display:block;
-}
-.sub-bar .sub-mn:hover {
-  color:seagreen;
-  transform:scale(1.1);
-  transition:transform 0.5s;
-}
-.search-form {
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-}
 
-.search-form input[type="text"] {
-  flex: 1;
-  height: 30px;
-}
 
-.search-form button[type="submit"] {
-  background: seagreen;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  color: white;
-  height: 30px;
-  width: 50px;
-}
 
-.notice-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100px;
-}
-
-.notice-title {
-  margin-right: 10px;
-  color:seagreen;
-  font-size: 30px
-}
 
 .order-buttons {
-  display: flex;
-  align-items: center;
+    position:relative;
+    top:120px;
+    right:0;
+    width:300px;
+    display: flex;
+    justify-content:right;
+
 }
 
 .order-button {
-  margin-right: 5px;
-  background-color: seagreen;
-  color: white;
-  border: none;
-  padding: 5px 10px;
+ font-size:1rem;
+ text-align:right;
+  width:50px;
+  color: black;
+  padding: 10px 0;
   border-radius: 5px;
   cursor: pointer;
 }
-.answer {
-  margin-right: 5px;
-  background-color: seagreen;
-  color: white;
-  border: none;
-  padding: 5px 5px;
-  border-radius: 5px;
+.order-button:nth-child(2) {
+    margin-right:10px;
 }
-
+.order-button:first-child {
+    margin-right:60px;
+    width:60px;
+}
