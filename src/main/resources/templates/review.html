@@ -1,0 +1,18 @@
+<div layout:fragment="content" class="container">
+  <h5>리뷰 수정</h5>
+<div th:fragment="reviewFragment" class="review">
+  <form th:object="${review}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+    <select name="star_rating" id="star_rating">
+      <option value="5">⭐⭐⭐⭐⭐</option>
+      <option value="4">⭐⭐⭐⭐</option>
+      <option value="3">⭐⭐⭐</option>
+      <option value="2">⭐⭐</option>
+      <option value="1">⭐</option>
+    </select>
+    <input type="submit" value="리뷰등록">
+    <textarea name="content" id="content" rows="10"></textarea>
+
+  </form>
+</div>

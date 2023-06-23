@@ -4,29 +4,15 @@
     <meta charset="UTF-8">
     <title>academy_detail</title>
     <link rel="stylesheet" type="text/css" th:href="@{/style_academy.css}">
-
-</head>
-<body>
-<div layout:fragment="content" class="aContainer">
-<!--        이름이랑 정보 요약&찜/공유      -->
-<div  class="content">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
     <!-- Air datepicker css -->
     <script src="/datepicker.js"></script> <!-- Air datepicker js -->
     <script src="/datepicker.ko.js"></script>
-
-
-    <!--팝업에러 파트-->
-    <!-- Add this HTML within your page -->
-    <div id="popupModal" class="modal" th:if="${popupMessage}">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p th:text="${popupMessage}"></p>
-        </div>
-    </div>
-
-
+</head>
+<body>
+<!--        이름이랑 정보 요약&찜/공유      -->
+<div layout:fragment="content" class="content">
     <a href="#top">
         <div class="top-btn">▲</div>
     </a>
@@ -63,7 +49,8 @@
         </div>
         <div class="atop-items">
             <p class="academy_name" th:text="${academy.academyName}"></p>
-            <a href="#">대표명을 써야하나</a></p>
+            <p class="academyDong" th:text="${academy.academyDong}"></p>
+            <a href="#">지도보기</a></p>
             <p th:text="${academy.academyTel}"></p>
         </div>
         <div class="besides">
@@ -103,14 +90,15 @@
 
             <div class="reservation">
                 <form th:action="@{|/reserve/${academy.id}|}" method="post">
-                    <input placeholder="날짜를 선택하세요." type="text" id="datePicker" name="datePicker">
+                    <label for="datePicker">날짜</label>
+                    <input type="text" id="datePicker" name="datePicker">
 
-
+                <label for="childSelectBox">시간</label>
                 <select id="childSelectBox" name="childSelectBox">
-                    <option value="">수업시간을 선택하세요.</option>
+                    <option value="">== 시간 선택 ==</option>
                 </select>
 
-                    <button type="submit" class="btn-r" id="reserveButton">예약하기</button>
+                <button type="submit" class="btn-r" id="reserveButton">예약하기</button>
                 </form>
             </div>
         </div>
@@ -165,8 +153,7 @@
                 </div>
                 <div id="후기" class="d-content">
                     <p>후기</p>
-                    <form th:action="@{|/review/create/${academy.id}|}" th:object="${reviewForm}" method="post"
-                          class="review-create">
+                    <form th:action="@{|/review/create/${academy.id}|}" th:object="${reviewForm}" method="post" class="review-create">
 
 
                         <select name="star_rating" id="star_rating">
@@ -177,13 +164,13 @@
                             <option value="1">⭐</option>
                         </select>
                         <input type="submit" value="리뷰등록">
-                        <textarea name="content" id="content" rows="10"></textarea>
+                        <textarea name="content" id="content" rows="12"></textarea>
 
                     </form>
 
-                    <!--                    <div class="review-createBtn">-->
-                    <!--                        <button th:href="@{/review/create}">리뷰 등록하기</button>-->
-                    <!--                    </div>-->
+<!--                    <div class="review-createBtn">-->
+<!--                        <button th:href="@{/review/create}">리뷰 등록하기</button>-->
+<!--                    </div>-->
                     <div class="review_box">
                         <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 후기가 있습니다.|"></div>
 
@@ -198,30 +185,12 @@
                                     <span th:if="${review.star_rating == 4}">⭐⭐⭐⭐</span>
                                     <span th:if="${review.star_rating == 5}">⭐⭐⭐⭐⭐</span>
                                 </div>
-
-                                <div>
-                                    <a href="javascript:void(0);" class="recommend"
-                                       th:data-uri="@{|/review/vote/${review.id}|}">
-                                        추천
-                                        <span class="badge" th:text="${#lists.size(review.voter)}"></span>
-                                    </a>
-                                </div>
-
-<!--                                삭제 -->
-                                <div>
-                                    <a href="javascript:void(0);" th:data-uri="@{|/review/delete/${review.id}|}" class="delete" sec:authorize="isAuthenticated()"
-                                       th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="삭제"></a>
-                                </div>
-                                <div>
-                                    <a href="@{|/review/modify/${review.id}|}" sec:authorize="isAuthenticated()"
-                                       th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="수정"></a>
-                                </div>
-
-
                                 <div th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                                 <div th:text="${review.content}"></div>
                             </li>
                         </ul>
+
+
 
 
                         <div th:if="${!paging.isEmpty()}">
@@ -258,25 +227,10 @@
         <div id="map" style="width:500px;height:300px;"></div>
     </div>
 
-    <script>
-    $(document).ready(function() {
-      var popupModal = $("#popupModal");
-      var closeBtn = $(".close");
 
-      if (popupModal.length) {
-        popupModal.show();
-      }
 
-      if (closeBtn.length) {
-        closeBtn.on("click", function() {
-          popupModal.hide();
-        });
-      }
-    });
-    </script>
-
-    <script th:src="@{/academy.js}"></script>
-    <script>
+<script th:src="@{/academy.js}"></script>
+<script>
     $("#datePicker").datepicker({
        language: 'ko'
     });
@@ -312,15 +266,11 @@
 
 
 
+</script>
 
 
-
-
-    </script>
-
-
-    <!--ajax 스크립트 추가-->
-    <script>
+<!--ajax 스크립트 추가-->
+<script>
     $(document).ready(function() {
         $("#datePicker").bind("propertychange change keyup paste input", function(){
             var thisParam = $(this).val();
@@ -348,11 +298,7 @@
     });
 
 
-
-
-
-
-    </script>
+</script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
     <script>
@@ -395,29 +341,10 @@ geocoder.addressSearch(address, function(result, status) {
     }
 });
 
+
+
 </script>
 
-    <!--  삭제  -->
-    <script type='text/javascript'>
-    const delete_elements = document.getElementsByClassName("delete");
-    Array.from(delete_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 삭제하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
-        });
-    });
-        const recommend_elements = document.getElementsByClassName("recommend");
-    Array.from(recommend_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 추천하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
-        });
-    });
-</script>
-
-</div>
 </div>
 </body>
 </html>

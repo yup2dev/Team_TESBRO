@@ -10,7 +10,6 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -41,6 +40,6 @@ public class Review {
 
     @ManyToMany
     Set<SiteUser> voter;
-}   
+}
 
 // 추천 voter 유저클래스 없어서 킵

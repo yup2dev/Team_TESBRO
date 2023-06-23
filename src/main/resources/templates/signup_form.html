@@ -22,7 +22,10 @@
       <label for="email" class="form-label">이메일</label>
       <input type="email" th:field="*{email}" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary">회원가입</button>
+    <button type="submit" class="btn btn-primary">일반 회원가입</button>
+  </form>
+  <form th:action="@{/user/sign}" th:object="${userCreateForm}" method="get">
+    <button type="submit" class="btn btn-primary">기업 회원가입</button>
   </form>
 </div>
 </html>

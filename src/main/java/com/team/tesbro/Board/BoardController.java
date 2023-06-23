@@ -26,6 +26,7 @@ public class BoardController {
     public String getEventList(@RequestParam(defaultValue = "latest") String order,
                                @RequestParam(defaultValue = "0") int page, Model model) {
         Page<Board> boardPage = boardService.getBoardListByCategory("event", order, page);
+        model.addAttribute("boardcategory", "event");
         model.addAttribute("paging", boardPage);
         return "event_list";
     }
@@ -35,6 +36,7 @@ public class BoardController {
                              @RequestParam(defaultValue = "0") int page, Model model) {
         Page<Board> boardPage = boardService.getBoardListByCategory("qna", order, page);
         model.addAttribute("paging", boardPage);
+        model.addAttribute("boardcategory", "qna");
         return "board_list";
     }
 
@@ -43,6 +45,7 @@ public class BoardController {
                                 @RequestParam(defaultValue = "0") int page, Model model) {
         Page<Board> boardPage = boardService.getBoardListByCategory("notice", order, page);
         model.addAttribute("paging", boardPage);
+        model.addAttribute("boardcategory", "notice");
         return "board_list";
     }
 
@@ -133,7 +136,7 @@ public class BoardController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
         this.boardService.modifyBoard(board, boardForm.getSubject(), boardForm.getContent());
-        return String.format("redirect:/board/detail/%S", id);
+        return String.format("redirect:/board/%s/detail/%d", board.getBoardCategory(), id);
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -142,4 +145,35 @@ public class BoardController {
         boardService.deleteBoard(id);
         return "redirect:/board/notice";
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String boardVote(Principal principal, @PathVariable("id") Integer id) {
+        Board board = this.boardService.getBoard(id);
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.boardService.vote(board, siteUser);
+        return String.format("redirect:/board/%s/detail/%d", board.getBoardCategory(), id);
+    }
+
+    @GetMapping("/address")
+    public String address(){
+        return "juso";
+    }
+
+    @GetMapping("/address2")
+    public String address2(){
+        return "jusoPopup";
+    }
+
+    @PostMapping("/address")
+    public String addressPost(){
+        // POST 요청 처리 로직 작성
+        return "juso";
+    }
+
+    @PostMapping("/address2")
+    public String address2Post(){
+        return "jusoPopup";
+    }
+
 }

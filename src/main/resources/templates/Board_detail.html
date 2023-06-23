@@ -1,31 +1,58 @@
+<link rel="stylesheet" type="text/css" th:href="@{/boardDetail.css}">
+<!DOCTYPE html>
+<html lang="ko">
+</head>
+<body>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
 <h1 th:text="${board.subject}">제목</h1>
 <div th:text="${board.managerName}">작성자</div>
-<div th:text="${board.content}">내용</div>
+<div class="content2" th:text="${board.content}">내용</div>
+<a href="javascript:void(0);" class="recommend"
+   th:data-uri="@{|/board/vote/${board.id}|}">
+    추천
+    <span class="badge rounded-pill bg-success" th:text="${#lists.size(board.voter)}"></span>
+</a>
 
 <h2>답변</h2>
 <ul>
-    <li th:each="answer : ${board.answers}" th:text="${answer.content}"></li>
+    <li class="answer2" th:each="answer : ${board.answers}" th:text="${answer.content}"></li>
 </ul>
 
 <form th:action="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:object="${answerForm}" method="post">
     <input type="hidden" th:field="*{boardId}" th:value="${board.id}" />
     <div>
-        <label for="content">답변 작성:</label>
+        <label for="content"></label>
         <textarea id="content" name="content" rows="4" cols="50" th:field="*{content}"></textarea>
     </div>
-    <button type="submit">답변 등록</button>
+    <button type="submit" class="btn btn-primary">답변 등록</button>
 </form>
 
-<a th:if="${board.boardCategory == 'notice'}" th:href="@{/board/notice}">돌아가기</a>
-<a th:if="${board.boardCategory == 'qna'}" th:href="@{/board/qna}">돌아가기</a>
-<a th:if="${board.boardCategory == 'event'}" th:href="@{/board/event}">돌아가기</a>
+<div style="text-align: center; margin-top: 20px;">
+    <a th:if="${board.boardCategory == 'notice'}" th:href="@{/board/notice}" class="btn btn-primary">돌아가기</a>
+    <a th:if="${board.boardCategory == 'qna'}" th:href="@{/board/qna}" class="btn btn-primary">돌아가기</a>
+    <a th:if="${board.boardCategory == 'event'}" th:href="@{/board/event}" class="btn btn-primary">돌아가기</a>
+    <a th:href="@{/board/modify/{id}(id=${board.id})}" class="btn btn-primary">수정하기</a>
 
+    <form th:action="@{'/board/delete/' + ${board.id}}" method="post" style="display: inline-block;" onsubmit="return confirmDelete();">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit" class="btn btn-primary">삭제하기</button>
+    </form>
 
-<a th:href="@{/board/modify/{id}(id=${board.id})}" class="btn btn-primary">수정하기</a>
+    <script>
+function confirmDelete() {
+    var result = confirm("삭제하시겠습니까?");
+    return result;
+}
+const recommend_elements = document.getElementsByClassName("recommend");
+Array.from(recommend_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("추천하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+</script>
 
-
-<form th:action="@{'/board/delete/' + ${board.id}}" method="post">
-    <input type="hidden" name="_method" value="DELETE" />
-    <button type="submit">삭제</button>
-
-</form>
+</div>
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.team.tesbro.Academy;
 
 import com.team.tesbro.Review.Review;
 import com.team.tesbro.Teacher.Teacher;
+import com.team.tesbro.User.SiteUser;
 import com.team.tesbro.lesson_res.Lesson_Res;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -36,6 +38,9 @@ public class Academy {
     private LocalDateTime createDate;
 
     @Column
+    private String academyAddress;
+
+    @Column
     private String academySi;
 
     @Column
@@ -44,8 +49,8 @@ public class Academy {
     @Column
     private String academyDong;
 
-    @Column
-    private Integer jjim;
+    @ManyToMany
+    Set<SiteUser> voter;
 
     @OneToMany(mappedBy = "academy", cascade = CascadeType.REMOVE)
     private List<Teacher> teacherList;

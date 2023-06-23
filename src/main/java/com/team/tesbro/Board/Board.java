@@ -3,6 +3,7 @@ package com.team.tesbro.Board;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.team.tesbro.User.SiteUser;
 import jakarta.persistence.*;
@@ -59,6 +60,9 @@ public class Board {
     public Integer getViews() {
         return views != null ? views : 0;
     }
+
+    @ManyToMany
+    Set<SiteUser> voter;
 }
 
 

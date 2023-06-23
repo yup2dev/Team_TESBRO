@@ -35,7 +35,11 @@ dependencies {
 	implementation 'org.commonmark:commonmark:0.21.0'
 	runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation 'javax.servlet:jstl'
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform()

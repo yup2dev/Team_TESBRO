@@ -50,6 +50,10 @@ public class BoardService {
             sort = Sort.by(Sort.Direction.DESC, "views");
         } else if (order.equals("outdated")) {
             sort = Sort.by(Sort.Direction.ASC, "id");
+        } else if (order.equals("voter")) {
+            sort = Sort.by(Sort.Direction.DESC, "voter");
+        } else if (order.equals("answers")) {
+            sort = Sort.by(Sort.Direction.DESC, "answers");
         } else {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
@@ -98,5 +102,9 @@ public class BoardService {
 
         board.setViews(board.getViews() + 1);
         boardRepository.save(board);
+    }
+    public void vote(Board board, SiteUser siteUser) {
+        board.getVoter().add(siteUser);
+        this.boardRepository.save(board);
     }
 }

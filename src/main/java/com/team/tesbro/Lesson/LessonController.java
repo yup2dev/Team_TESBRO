@@ -27,15 +27,15 @@ public class LessonController {
     private final AcademyService academyService;
     @GetMapping("/academy/lesson")
     public String handleSelectedData(Model model) {
-    lessonList = lessonService.getList();
-    List<LocalDate> dateList = new ArrayList<>();
+        lessonList = lessonService.getList();
+        List<LocalDate> dateList = new ArrayList<>();
 
         for (Lesson lesson : lessonList) {
-        LocalDate lessonDate = lesson.getLessonDate();
-        dateList.add(lessonDate);
-    }
-    Set<LocalDate> uniqueDates = new HashSet<>(dateList);
-    List<LocalDate> uniqueDateList = new ArrayList<>(uniqueDates);
+            LocalDate lessonDate = lesson.getLessonDate();
+            dateList.add(lessonDate);
+        }
+        Set<LocalDate> uniqueDates = new HashSet<>(dateList);
+        List<LocalDate> uniqueDateList = new ArrayList<>(uniqueDates);
         Collections.sort(uniqueDateList);
         model.addAttribute("uniqueDateList", uniqueDateList);
         return "lesson";
