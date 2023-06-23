@@ -297,7 +297,6 @@
 <!--    리뷰끝-->
 
     <script>
-        // 슬라이드 전체 크기(width 구하기)
     const slide = document.querySelector(".slide");
     let slideWidth = slide.clientWidth;
 
@@ -355,9 +354,9 @@
           i.setAttribute("style", `left: ${-offset}px`);
         });
           slideItems.forEach((item) => item.style.opacity = 0);
-          slideItems[currSlide].style.opacity = 1;
-          paginationItems.forEach((i) => i.classList.remove("active"));
-          paginationItems[currSlide - 1].classList.add("active");
+  slideItems[currSlide].style.opacity = 1;
+        paginationItems.forEach((i) => i.classList.remove("active"));
+  paginationItems[currSlide - 1].classList.add("active");
       } else {
         currSlide = 0;
         let offset = slideWidth * currSlide;
@@ -371,8 +370,8 @@
         });
           slideItems.forEach((item) => item.style.opacity = 0);
           slideItems[currSlide].style.opacity = 1;
-          paginationItems.forEach((i) => i.classList.remove("active"));
-          paginationItems[currSlide - 1].classList.add("active");
+        paginationItems.forEach((i) => i.classList.remove("active"));
+  paginationItems[currSlide - 1].classList.add("active");
       }
     }
 
@@ -386,7 +385,7 @@
         slideItems.forEach((item) => item.style.opacity = 0);
         slideItems[currSlide].style.opacity = 1;
         paginationItems.forEach((i) => i.classList.remove("active"));
-        paginationItems[currSlide - 1].classList.add("active");
+  paginationItems[currSlide - 1].classList.add("active");
       } else {
         currSlide = maxSlide + 1;
         let offset = slideWidth * currSlide;
@@ -401,7 +400,7 @@
         slideItems.forEach((item) => item.style.opacity = 0);
         slideItems[currSlide].style.opacity = 1;
         paginationItems.forEach((i) => i.classList.remove("active"));
-        paginationItems[currSlide - 1].classList.add("active");
+  paginationItems[currSlide - 1].classList.add("active");
       }
     }
 
