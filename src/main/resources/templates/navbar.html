@@ -1,25 +1,26 @@
-<div class="navContainer">
-<div th:fragment="navbarFragment" class="navbar">
-    <link rel="stylesheet" type="text/css" th:href="@{/style_navbar.css}">
-    <div class="nav-top">
-        <div class="brand-logo"><a href="#">TESBRO</a></div>
-        <div class="user-btns">
-            <div class="user-btn"><a href="#">기업 등록</a></div>
-            <div class="user-btn"><a href="#">로그인</a></div>
-            <div class="user-btn"><a href="#">회원가입</a></div>
+<div th:fragment="navbarFragment" class="navContainer">
+    <div  class="navbar">
+        <link rel="stylesheet" type="text/css" th:href="@{/style_navbar.css}">
+        <div class="nav-top">
+            <div class="brand-logo"><a href="/tesbro">TESBRO</a></div>
+            <div class="user-btns">
+                <div class="user-btn"><a href="#">기업 등록</a></div>
+                <div class="user-btn"><a href="/user/login">로그인</a></div>
+                <div class="user-btn"><a href="/user/signup">회원가입</a></div>
+            </div>
+        </div>
+
+
+
+
+        <div class="nav-btm">
+            <div class="nav-btn"><a href="/board/notice"><span>공지사항</span></a></div>
+            <div class="nav-btn"><a href="/academy/list"><span>학원 찾기</span></a></div>
+            <div class="nav-btn"><a href="#"><span>예약하기</span></a></div>
+            <div class="nav-btn"><a href="#"><span>수강권 구매</span></a></div>
+            <div class="nav-btn"><a href="/board/event"><span>이벤트</span></a></div>
+            <div class="nav-btn"><a href="/board/qna"><span>문의하기</span></a></div>
+            <div class="nav-btn"><a href="#"><span>마이페이지</span></a></div>
         </div>
     </div>
-
-
-
-    <div class="nav-btm">
-        <div class="nav-btn"><a href="/board/notice"><span>공지사항</span></a></div>
-        <div class="nav-btn"><a href="#"><span>학원 찾기</span></a></div>
-        <div class="nav-btn"><a href="#"><span>예약하기</span></a></div>
-        <div class="nav-btn"><a href="#"><span>수강권 구매</span></a></div>
-        <div class="nav-btn"><a href="/board/event"><span>이벤트</span></a></div>
-        <div class="nav-btn"><a href="/board/qna"><span>문의하기</span></a></div>
-        <div class="nav-btn"><a href="#"><span>마이페이지</span></a></div>
-    </div>
-</div>
 </div>
