@@ -53,16 +53,17 @@ public class AcademyService {
         this.academyRepository.save(academy);
     }
 
-    public Page<Academy> getAcademyList(String order, int page) {
+    public Page<Academy> getAcademyList(String academyName, String order, int page) {
         Sort sort;
         if (order.equals("voter")) {
             sort = Sort.by(Sort.Direction.DESC, "voter");
         } else if (order.equals("outdated")) {
             sort = Sort.by(Sort.Direction.ASC, "id");
-        } else {
+        }    else {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
         Pageable pageable = PageRequest.of(page, 5, sort);
-        return this.academyRepository.findAll(pageable);
+        return academyRepository.findByAcademyName(academyName, pageable);
     }
+
 }

@@ -49,7 +49,6 @@ public class AcademyController {
         return "redirect:/academy/list";
     }
 
-
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/vote/{id}")
     public String AcademyVote(Principal principal, @PathVariable("id") Integer id) {
