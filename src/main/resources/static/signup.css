@@ -85,7 +85,7 @@ button{border:0;background: inherit; padding:0;}
 .form-left .input-item {
 /*   border:1px solid orange; */
   height:30px;
-  margin-bottom:40px;
+  margin-bottom:25px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -98,16 +98,19 @@ button{border:0;background: inherit; padding:0;}
   width: 220px;
   border-radius:10px;
 }
-.form-left form button {
+.form-left > form > button {
   cursor:pointer;
   border:1px solid rgb(30,90,30);
   font-size:1.2rem;
   font-weight:bold;
-  padding:10px 0;
+  padding:8px 0;
   border-radius:10px;
   width:100%;
+  margin-bottom: 20px;
 }
-
+.form-left > form > button:last-child {
+    border:1px solid lightgray;
+}
 
 
 
