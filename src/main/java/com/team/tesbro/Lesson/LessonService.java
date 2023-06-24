@@ -1,6 +1,8 @@
 package com.team.tesbro.Lesson;
 
+import com.team.tesbro.Academy.Academy;
 import com.team.tesbro.DataNotFoundException;
+import com.team.tesbro.Teacher.Teacher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +51,16 @@ public class LessonService {
             }
         }
         return timeList;
+    }
+
+    public void createLesson(LessonForm lessonForm, Teacher teacher, Academy academy){
+        Lesson lesson = new Lesson();
+        lesson.setLessonName(lessonForm.getLessonName());
+        lesson.setPeopleCapacity(lessonForm.getPeopleCapacity());
+        lesson.setLessonDate(lessonForm.getLessonDate());
+        lesson.setLessonTime(lessonForm.getLessonTime());
+        lesson.setAcademy(academy);
+        lesson.setTeacher(teacher);
+        lessonRepository.save(lesson);
     }
 }

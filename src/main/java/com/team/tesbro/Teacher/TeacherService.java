@@ -5,7 +5,7 @@ import com.team.tesbro.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -30,5 +30,8 @@ public class TeacherService {
         } else {
             throw new DataNotFoundException("teacher not found");
         }
+    }
+    public List<Teacher> getTeachersByAcademyId(Integer academyId) {
+        return teacherRepository.findByAcademyId(academyId);
     }
 }
