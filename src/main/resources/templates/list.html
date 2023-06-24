@@ -3,139 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+</head>
+<body>
+<div layout:fragment="content" class="content">
     <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
     <script type="application/javascript"
             src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/styleY.css}" xmlns="">
     <script type="text/javascript" src="hangjungdong.js"></script>
-</head>
-<body>
-<div layout:fragment="content" class="content">
 
-<div class="container border-bottom">
-    <form th:action="@{/academy/list}">
-        <div class="searchbox">
-            <div class="box1">
-                <input type="text" class="box1_input" name="keyword" th:value="${keyword}" value
-                       placeholder="우리 동네 학원을 찾아보세요">
-            </div>
-            <div class="box2">
-                <div class="box2_sel">
-                    <span>지역 선택</span>
+
+    <div class="list-header">
+        <div class="list-sub">학원 찾기</div>
+    </div>
+
+
+    <div class="container">
+        <form th:action="@{/academy/list}">
+            <div class="searchbox">
+                <div class="box1">
+                    <input type="text" class="box1_input" name="keyword" th:value="${keyword}" value
+                           placeholder="우리 동네 학원을 찾아보세요">
+                </div>
+                <div class="box2">
+                    <div class="box2_sel">
+                        지역 선택
+                    </div>
+                </div>
+                <div class="box3">
+                    <button class="searchbtn" type="submit">
+                        검색하기
+                    </button>
                 </div>
             </div>
-            <div class="box3">
-                <button class="searchbtn" type="submit">
-                    <span>검색하기</span>
+        </form>
+    </div>
+
+    <!-- 검색 박스 끝 -->
+
+    <div class="main_container">
+        <div class="leftbox">
+            <div class="filter_detail">
+                <h5>상세 검색</h5>
+                <button class="reset_btn">
+                    필터 초기화
                 </button>
             </div>
-        </div>
-    </form>
-</div>
-
-<div class="searchloc">
-    <form th:action="@{/academy/list}">
-    </form>
-</div>
-
-<!-- 검색 박스 끝 -->
-
-<div class="main_container">
-    <div class="leftbox">
-        <div class="filter_detail">
-            <h5>상세 검색</h5>
-            <button class="reset_btn">
-                필터 초기화
-            </button>
-        </div>
-        <div class="personnel mb-3">
-            <h4>수강 인원</h4>
-            <ul class="person">
-                <li>asdasd</li>
-            </ul>
-        </div>
-        <div class="ticket mb-3">
-            <h4>수강권</h4>
-            <ul class="person">
-                <li>asdasd</li>
-            </ul>
-        </div>
-    </div>
-    <!--  오른쪽박스 시작-->
-    <div class="rightbox">
-        <!--    검색된 학원수랑 정렬버튼 시작-->
-        <div class="search_title">
-            <h5>검색된 학원 수</h5>
-
-            <!-- 페이징 처리 시작 -->
-<!--            <div class="pagination"></div>-->
-<!--            <a th:if="${paging.hasPrevious()}"-->
-<!--               th:href="@{|/academy/list?page=${paging.previousPageable().pageNumber}&keyword=${keyword}|}"-->
-<!--               class="prev">&lt;</a>-->
-<!--            <span th:if="${paging.number >= 2}">-->
-<!--            <a th:href="@{|/academy/list?page=${paging.number - 2}&keyword=${keyword}|}" class="pager"-->
-<!--               th:text="${paging.number - 1}"></a>-->
-<!--        </span>-->
-<!--            <span th:if="${paging.number >= 1}">-->
-<!--            <a th:href="@{|/academy/list?page=${paging.number - 1}&keyword=${keyword}|}" class="pager"-->
-<!--               th:text="${paging.number}"></a>-->
-<!--        </span>-->
-<!--            <span class="current pager" th:text="${paging.number + 1}"></span>-->
-<!--            <span th:if="${paging.number + 1 < paging.totalPages}">-->
-<!--            <a th:href="@{|/academy/list?page=${paging.number + 1}&keyword=${keyword}|}" class="pager"-->
-<!--               th:text="${paging.number + 2}"></a>-->
-<!--        </span>-->
-<!--            <span th:if="${paging.number + 2 < paging.totalPages}">-->
-<!--            <a th:href="@{|/academy/list?page=${paging.number + 2}&keyword=${keyword}|}" class="pager"-->
-<!--               th:text="${paging.number + 3}"></a>-->
-<!--        </span>-->
-<!--            <a th:if="${paging.hasNext()}"-->
-<!--               th:href="@{|/academy/list?page=${paging.nextPageable().pageNumber}&keyword=${keyword}|}" class="next">&gt;</a>-->
-<!--        </div>-->
-        <!-- 페이징 처리 끝 -->
-
-            <div class="order-buttons">
-                <button class="order-button" onclick="handleOrderChange('outdated')">오래된순</button>
-                <button class="order-button" onclick="handleOrderChange('voter')">추천순</button>
+            <div class="personnel mb-3">
+                <h4>수강 인원</h4>
+                <ul class="person">
+                    <li>asdasd</li>
+                </ul>
+            </div>
+            <div class="ticket mb-3">
+                <h4>수강권</h4>
+                <ul class="person">
+                    <li>asdasd</li>
+                </ul>
             </div>
         </div>
+        <!--  오른쪽박스 시작-->
+        <div class="rightbox">
+            <!--    검색된 학원수랑 정렬버튼 시작-->
+            <div class="search_title">
+                <h5>검색된 학원 수</h5>
 
-        <!--    검색된 학원수랑 정렬버튼 끝-->
-        <div class="academy_list" th:each="academy : ${academyList}">
-            <a th:href="@{|/academy/detail/${academy.id}|}">
-                <li class="card_frame">
-                    <div class="academy_box">
-                        <div class="img_box">
-                            <img th:src="${academy.imgLogo}" alt="">
-                        </div>
-                        <!--img_box 종료 -->
-                        <!--아카데미 안에 들어갈 글씨랑 찜까지 시작-->
-                        <div class="academy_box_text">
-                            <div class="cardbody">
-                                <div class="info">
-                                    <h3 th:text="${academy.academyName}"></h3>
-                                    <span class="map" th:text="${academy.academySi}"></span> <span class="map"
-                                                                                                   th:text="${academy.academyGu}"></span>
-                                    <span class="map" th:text="${academy.academyDong}"></span>
-                                </div>
-                                <div class="voter">
-                                    <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" style="width:20px; vertical-align:middle" alt="like-icon">
-                                    <td th:text="${#lists.size(academy.voter)}"></td>
+                <!-- 페이징 처리 시작 -->
+    <!--            <div class="pagination"></div>-->
+    <!--            <a th:if="${paging.hasPrevious()}"-->
+    <!--               th:href="@{|/academy/list?page=${paging.previousPageable().pageNumber}&keyword=${keyword}|}"-->
+    <!--               class="prev">&lt;</a>-->
+    <!--            <span th:if="${paging.number >= 2}">-->
+    <!--            <a th:href="@{|/academy/list?page=${paging.number - 2}&keyword=${keyword}|}" class="pager"-->
+    <!--               th:text="${paging.number - 1}"></a>-->
+    <!--        </span>-->
+    <!--            <span th:if="${paging.number >= 1}">-->
+    <!--            <a th:href="@{|/academy/list?page=${paging.number - 1}&keyword=${keyword}|}" class="pager"-->
+    <!--               th:text="${paging.number}"></a>-->
+    <!--        </span>-->
+    <!--            <span class="current pager" th:text="${paging.number + 1}"></span>-->
+    <!--            <span th:if="${paging.number + 1 < paging.totalPages}">-->
+    <!--            <a th:href="@{|/academy/list?page=${paging.number + 1}&keyword=${keyword}|}" class="pager"-->
+    <!--               th:text="${paging.number + 2}"></a>-->
+    <!--        </span>-->
+    <!--            <span th:if="${paging.number + 2 < paging.totalPages}">-->
+    <!--            <a th:href="@{|/academy/list?page=${paging.number + 2}&keyword=${keyword}|}" class="pager"-->
+    <!--               th:text="${paging.number + 3}"></a>-->
+    <!--        </span>-->
+    <!--            <a th:if="${paging.hasNext()}"-->
+    <!--               th:href="@{|/academy/list?page=${paging.nextPageable().pageNumber}&keyword=${keyword}|}" class="next">&gt;</a>-->
+    <!--        </div>-->
+            <!-- 페이징 처리 끝 -->
+
+                <div class="order-buttons">
+                    <button class="order-button" onclick="handleOrderChange('outdated')">오래된순</button>
+                    <button class="order-button" onclick="handleOrderChange('voter')">추천순</button>
+                </div>
+            </div>
+
+            <!--    검색된 학원수랑 정렬버튼 끝-->
+            <div class="academy_list" th:each="academy : ${academyList}">
+                <a th:href="@{|/academy/detail/${academy.id}|}">
+                    <li class="card_frame">
+                        <div class="academy_box">
+                            <div class="img_box">
+                                <img th:src="${academy.imgLogo}" alt="">
+                            </div>
+                            <!--img_box 종료 -->
+                            <!--아카데미 안에 들어갈 글씨랑 찜까지 시작-->
+                            <div class="academy_box_text">
+                                <div class="cardbody">
+                                    <div class="info">
+                                        <h3 th:text="${academy.academyName}"></h3>
+                                        <span class="map" th:text="${academy.academySi}"></span> <span class="map"
+                                                                                                       th:text="${academy.academyGu}"></span>
+                                        <span class="map" th:text="${academy.academyDong}"></span>
+                                    </div>
+                                    <div class="voter">
+                                        <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" style="width:20px; vertical-align:middle" alt="like-icon">
+                                        <td th:text="${#lists.size(academy.voter)}"></td>
+                                    </div>
                                 </div>
                             </div>
+                            <!--아카데미 안에 들어갈 글씨랑 찜까지 끝-->
                         </div>
-                        <!--아카데미 안에 들어갈 글씨랑 찜까지 끝-->
-                    </div>
-                    <!--오른쪽박스 끝-->
-                </li>
-            </a>
+                        <!--오른쪽박스 끝-->
+                    </li>
+                </a>
+            </div>
+            <!--    아카데미 리스트 끝-->
         </div>
-        <!--    아카데미 리스트 끝-->
     </div>
-</div>
-</body>
-</html>
-<script>
+    <script>
 jQuery(document).ready(function(){
 //sido option 추가
 jQuery.each(hangjungdong.sido, function(idx, code){
@@ -218,7 +218,7 @@ jQuery.ajax({
 
 </script>
 
-<script>
+    <script>
     function handleOrderChange(selectedOption) {
       var currentUrl = window.location.href;
       var updatedUrl;
@@ -236,3 +236,6 @@ jQuery.ajax({
       window.location.href = updatedUrl;
     }
   </script>
+</div>
+</body>
+</html>
