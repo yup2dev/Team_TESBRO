@@ -1,18 +1,35 @@
-<html layout:decorate="~{layout}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+
+<script>
+    async function UploadForm__submit(form) {
+        const formData = new FormData(form);
+
+        const response = await axios.post(form.action, formData, {
+            headers: {
+                "Content-Type" : "multipart/form-data"
+            }
+        });
+
+        console.log(response);
+    }
+</script>
+
 <div layout:fragment="content" class="container">
-    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
-    <form th:object="${questionForm}" method="post">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
-        <div class="mb-3">
-            <label for="subject" class="form-label">제목</label>
-            <input type="text" th:field="*{subject}" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">내용</label>
-            <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
-        </div>
-        <input type="submit" value="저장하기" class="btn btn-primary my-2">
+
+
+    <form onsubmit="UploadForm__submit(this); return false;" th:action="@{/api/upload/{id}(id=${id})}" method="POST"
+          enctype="multipart/form-data">
+        <input type="file" name="file___academy__0__common__profileImg__1__owner__1">
+        <input type="submit" value="업로드">
+    </form>
+    <form onsubmit="UploadForm__submit(this); return false;" th:action="@{/api/upload/{id}(id=${id})}" method="POST"
+          enctype="multipart/form-data">
+        <input type="file" name="file___academy__0__common__profileImg__1__owner__1">
+        <input type="submit" value="업로드">
+    </form>
+    <form onsubmit="UploadForm__submit(this); return false;" th:action="@{/api/upload/{id}(id=${id})}" method="POST"
+          enctype="multipart/form-data">
+        <input type="file" name="file___academy__0__common__profileImg__1__owner__1">
+        <input type="submit" value="업로드">
     </form>
 </div>
-</html>

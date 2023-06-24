@@ -26,6 +26,7 @@ public class LessonController {
     private final AcademyService academyService;
     @GetMapping("/academy/lesson")
     public String handleSelectedData(Model model) {
+        //test용
     lessonList = lessonService.getList();
     List<LocalDate> dateList = new ArrayList<>();
 
@@ -59,8 +60,6 @@ public class LessonController {
         List<LocalDate> uniqueDateList = new ArrayList<>(uniqueDates);
         Collections.sort(uniqueDateList);
         model.addAttribute("uniqueDateList", uniqueDateList);
-        //학원의 날짜
-        //시간만 손보면 끝납니다잉
 
         return "academy_detail";
     }

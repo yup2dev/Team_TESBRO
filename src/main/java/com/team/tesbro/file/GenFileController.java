@@ -31,10 +31,8 @@ public class GenFileController {
         // Academy 객체를 id로 조회
         Academy academy = academyRepository.findById(id).orElse(null);
         Board board = boardRepository.findById(id).orElse(null);
-        if (academy == null) {
+        if (academy == null && board == null) {
             return new ResultData("F-1", "존재하지 않는 Academy ID입니다.");
-        } else if (board == null) {
-            return new ResultData("F-1", "존재하지 않는 Board ID입니다.");
         }
 
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();

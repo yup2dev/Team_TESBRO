@@ -6,12 +6,15 @@ import com.team.tesbro.Review.Review;
 import com.team.tesbro.Review.ReviewService;
 import com.team.tesbro.Teacher.Teacher;
 import com.team.tesbro.Teacher.TeacherService;
+import com.team.tesbro.User.SiteUser;
+import com.team.tesbro.User.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -25,6 +28,7 @@ public class AcademyController {
     private final AcademyService academyService;
     private final ReviewService reviewService;
     private final LessonService lessonService;
+    private final UserService userService;
 
 
     @RequestMapping("/list")
@@ -32,13 +36,26 @@ public class AcademyController {
         List<Academy> academyList = this.academyService.getList(keyword);
         model.addAttribute("academyList", academyList);
         model.addAttribute("keyword", keyword);
-
         return "list";
     }
 
-    @GetMapping("detail/create/{id}")
-    public String detailCre(@PathVariable("id") Integer id){
-    return "academy_detail_form";
+    @GetMapping("detail/create/search")
+    public String detailSearch(Model model, @Param("keyword") String keyword){
+        List<Academy> academyList = this.academyService.getList(keyword);
+            model.addAttribute(academyList);
+        return "academy_create_list";
     }
 
+    @GetMapping("detail/create/{id}")
+    public String detailCre(@PathVariable("id") Integer id, Model model){
+        model.addAttribute("id", id);
+        return "academy_detail_form";
+    }
+
+    @PostMapping("detail/create/{id}")
+    public String detailCreP(@PathVariable("id") Integer id, Principal principal){
+        Academy academy = academyService.getAcademy(id);
+        SiteUser siteUser = userService.getUser(principal.getName());
+        return String.format("redirect:academy/detail/%s", id);
+    }
 }
