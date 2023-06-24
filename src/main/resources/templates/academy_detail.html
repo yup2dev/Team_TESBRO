@@ -168,9 +168,7 @@
 
                     </form>
 
-<!--                    <div class="review-createBtn">-->
-<!--                        <button th:href="@{/review/create}">리뷰 등록하기</button>-->
-<!--                    </div>-->
+
                     <div class="review_box">
                         <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 후기가 있습니다.|"></div>
 
@@ -224,7 +222,7 @@
                         <div th:if="${!paging.isEmpty()}">
                             <ul class="pagination justify-content-center">
                                 <li class="page-item">
-                                    <a class="page-link"
+                                    <a class="page-link" th:if="${paging.hasPrevious()}"
                                        th:href="@{|?page=${paging.number-1}|}">
                                         <span>이전</span>
                                     </a>
@@ -235,7 +233,7 @@
                                     <a th:text="${page}+1" class="page-link" th:href="@{|?page=${page}|}"></a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                                    <a class="page-link" th:if="${paging.hasNext()}" th:href="@{|?page=${paging.number+1}|}">
                                         <span>다음</span>
                                     </a>
                                 </li>
