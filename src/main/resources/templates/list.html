@@ -42,68 +42,54 @@
 
     <!-- 검색 박스 끝 -->
 
+
+
     <div class="main_container">
         <div class="leftbox">
             <div class="filter_detail">
-                <h5>상세 검색</h5>
+                <div>상세 검색</div>
                 <button class="reset_btn">
-                    필터 초기화
+                    초기화
                 </button>
             </div>
-            <div class="personnel mb-3">
-                <h4>수강 인원</h4>
-                <ul class="person">
-                    <li>asdasd</li>
+            <div class="filter-box">
+                <div>수강 인원</div>
+                <ul class="filter-item">
+                    <li><input type="checkbox" value="1인">1인</li>
+                    <li><input type="checkbox" value="2~4인">2~4인</li>
+                    <li><input type="checkbox" value="5~10인">5~10인</li>
+                    <li><input type="checkbox" value="10인 이상">10인 이상</li>
                 </ul>
             </div>
-            <div class="ticket mb-3">
-                <h4>수강권</h4>
-                <ul class="person">
-                    <li>asdasd</li>
+            <div class="filter-box">
+                <div>수강권</div>
+                <ul class="filter-item">
+                    <li><input type="checkbox" value="STANDARD">STANDARD</li>
+                    <li><input type="checkbox" value="PREMIUM">PREMIUM</li>
+                    <li><input type="checkbox" value="what">등급을어캐나누지</li>
                 </ul>
             </div>
         </div>
+
+
+
+
         <!--  오른쪽박스 시작-->
         <div class="rightbox">
             <!--    검색된 학원수랑 정렬버튼 시작-->
             <div class="search_title">
-                <h5>검색된 학원 수</h5>
+                <div>검색된 학원 수 :</div>
+                <div  th:text="${academyCount}"></div>
 
-                <!-- 페이징 처리 시작 -->
-    <!--            <div class="pagination"></div>-->
-    <!--            <a th:if="${paging.hasPrevious()}"-->
-    <!--               th:href="@{|/academy/list?page=${paging.previousPageable().pageNumber}&keyword=${keyword}|}"-->
-    <!--               class="prev">&lt;</a>-->
-    <!--            <span th:if="${paging.number >= 2}">-->
-    <!--            <a th:href="@{|/academy/list?page=${paging.number - 2}&keyword=${keyword}|}" class="pager"-->
-    <!--               th:text="${paging.number - 1}"></a>-->
-    <!--        </span>-->
-    <!--            <span th:if="${paging.number >= 1}">-->
-    <!--            <a th:href="@{|/academy/list?page=${paging.number - 1}&keyword=${keyword}|}" class="pager"-->
-    <!--               th:text="${paging.number}"></a>-->
-    <!--        </span>-->
-    <!--            <span class="current pager" th:text="${paging.number + 1}"></span>-->
-    <!--            <span th:if="${paging.number + 1 < paging.totalPages}">-->
-    <!--            <a th:href="@{|/academy/list?page=${paging.number + 1}&keyword=${keyword}|}" class="pager"-->
-    <!--               th:text="${paging.number + 2}"></a>-->
-    <!--        </span>-->
-    <!--            <span th:if="${paging.number + 2 < paging.totalPages}">-->
-    <!--            <a th:href="@{|/academy/list?page=${paging.number + 2}&keyword=${keyword}|}" class="pager"-->
-    <!--               th:text="${paging.number + 3}"></a>-->
-    <!--        </span>-->
-    <!--            <a th:if="${paging.hasNext()}"-->
-    <!--               th:href="@{|/academy/list?page=${paging.nextPageable().pageNumber}&keyword=${keyword}|}" class="next">&gt;</a>-->
-    <!--        </div>-->
-            <!-- 페이징 처리 끝 -->
 
                 <div class="order-buttons">
-                    <button class="order-button" onclick="handleOrderChange('outdated')">오래된순</button>
+                    <button class="order-button" onclick="handleOrderChange('reviewList')">리뷰순</button>
                     <button class="order-button" onclick="handleOrderChange('voter')">추천순</button>
                 </div>
             </div>
 
             <!--    검색된 학원수랑 정렬버튼 끝-->
-            <div class="academy_list" th:each="academy : ${academyList}">
+            <div class="academy_list" th:each="academy : ${paging}">
                 <a th:href="@{|/academy/detail/${academy.id}|}">
                     <li class="card_frame">
                         <div class="academy_box">
@@ -131,8 +117,32 @@
                         <!--오른쪽박스 끝-->
                     </li>
                 </a>
+
             </div>
             <!--    아카데미 리스트 끝-->
+            <!-- 페이징처리 시작 -->
+            <div th:if="${!paging.isEmpty()}">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" th:if="${paging.hasPrevious()}"
+                           th:href="@{|?page=${paging.number-1}|}">
+                            <span><</span>
+                        </a>
+                    </li>
+                    <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                        th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                        th:classappend="${page == paging.number} ? 'active'"
+                        class="page-item">
+                        <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:if="${paging.hasNext()}"  th:href="@{|?page=${paging.number+1}|}">
+                            <span>></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 페이징처리 끝 -->
         </div>
     </div>
     <script>
@@ -218,24 +228,6 @@ jQuery.ajax({
 
 </script>
 
-    <script>
-    function handleOrderChange(selectedOption) {
-      var currentUrl = window.location.href;
-      var updatedUrl;
-
-      if (currentUrl.includes("?")) {
-        if (currentUrl.includes("order=")) {
-          updatedUrl = currentUrl.replace(/order=[^&]+/, "order=" + selectedOption);
-        } else {
-          updatedUrl = currentUrl + "&order=" + selectedOption;
-        }
-      } else {
-        updatedUrl = currentUrl + "?order=" + selectedOption;
-      }
-
-      window.location.href = updatedUrl;
-    }
-  </script>
 </div>
 </body>
 </html>

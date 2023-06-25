@@ -7,13 +7,13 @@ a{
   color:black;
 }
 button{border:0;background:inherit;}
+li {list-style:none;}
 
 
 
 
 
 .content{
-border:1px solid red;
 width:100%;
   min-width:1500px;
   margin-left:auto;
@@ -21,7 +21,6 @@ width:100%;
 }
 
 .content .list-header {
-    border:1px solid red;
     position:relative;
     width:1100px;
     height:80px;
@@ -38,17 +37,18 @@ width:100%;
 
 
 .content .container{
-   border:1px solid blue;
    width:1100px;
    height:200px;
    margin:0 auto;
    display:flex;
    justify-content:space-around;
    align-items:center;
+   border-top:1px solid gray;
+    border-bottom:1px solid gray;
 }
 
 .container .searchbox {
-  border:1px solid green;
+
   width:1100px;
   display:flex;
   justify-content:space-between;
@@ -85,88 +85,80 @@ width:100%;
 
 
 .main_container{
-    border:1px solid blue;
+
     width: 1100px;
     margin:0 auto;
     display:flex;
     position:relative;
 }
 
+.main_container .leftbox{
 
-
-
-.leftbox{
-  position: relative;
-  align-items:center;
-  padding-right: 20px;
-  padding-left: 20px;
-  max-width: 25%;
-  width: 100%;
+  width: 30%;
+  margin-top:30px;
+  padding-right:20px;
 }
+.main_container .leftbox .filter_detail{
 
-.leftbox > .filter_detail{
   width:100%;
   display:flex;
-  justify-content: space-between;
-  align-items:center;
-  box-sizing: border-box;
+  justify-content:space-between;
+  align-items:flex-end;
 }
-
-.filter_detail > h5{
-  font-size: 1.25rem;
-  font-weight: 500;
-  font-weight: bold;
-  margin-left: 10px;
+.main_container .leftbox .filter_detail > div {
+    font-size:1.2rem;
+    padding:10px;
 }
-
-.reset_btn{
-  color: #77838f;
-  height:2rem;
-  align-items:center;
-  background-color: #fff;
-  border:none;
+.main_container .leftbox .filter_detail > .reset_btn{
+  color: gray;
+  height:30px;
   font-size: 0.8rem;
-  font-weight: 900;
-  line-height: 1.5;
+  cursor:pointer;
+    margin-right:10px;
+    margin-bottom:5px;
+}
+.leftbox .filter-box {
+    border:1px solid lightgray;
+    border-radius:10px;
+    margin-bottom:20px;
+    padding:10px;
+}
+.leftbox .filter-box li {
+    padding:5px 0;
 }
 
-.personnel{
-  border: 1px solid #d5dae2;
-  background-color: #fff;
-  border-radius: 0.3125rem;
-  padding-left:20px;
-}
 
-.ticket{
-  border: 1px solid #d5dae2;
-  background-color: #fff;
-  border-radius: 0.3125rem;
-  padding-left:20px;
-}
+
+
+
+
 
 .rightbox{
-  position: relative;
-  padding-right: 15px;
-  padding-left: 15px;
-  max-width: 75%;
-  width: 100%;
-}
 
+    margin-top:30px;
+  width: 75%;
+}
 .rightbox > .search_title{
-  display: flex;
-  align-items:center;
-  width:100%;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
 
-.search_title > h5{
-  font-size: 1.25rem;
-  color: #77838f;
-  font-weight: 500;
-  font-weight: bold;
-  margin-left: 10px;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
 }
+.rightbox > .search_title > div {
+    font-size:1.2rem;
+        padding:10px;
+}
+.rightbox > .search_title > div:nth-child(2){
+    position: absolute;
+    left:470px;
+    color:rgb(30,90,30);
+}
+.order-button {
+cursor:pointer;}
+
+
+
 
 .academy_list{
   box-sizing: border-box;
@@ -174,7 +166,7 @@ width:100%;
 }
 
 .card_frame{
-  border: 1px solid #e7eaf3;
+  border: 1px solid lightgray;
   transition: 0.3s;
   margin-bottom: 1rem;
   flex-direction: column;
@@ -242,4 +234,33 @@ width:100%;
 
 .test {
 color:red;
+}
+
+
+.pagination {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin: 40px 0;
+   position: relative;
+}
+
+.pagination a {
+  border:1px solid lightgray;
+  border-radius:5px;
+  display: block;
+  width: 30px;
+  height:30px;
+  text-decoration: none;
+  text-align: center;
+  padding:5px;
+  margin: 5px;
+}
+.pagination a:hover {
+  color: rgb(30,90,30);
+  border-color: rgb(30,90,30);
+}
+.pagination a.active {
+color: rgb(30, 90, 30);
+border-color: rgb(30, 90, 30);
 }

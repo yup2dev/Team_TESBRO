@@ -71,6 +71,7 @@ select, textarea {
   width:130px;
   height:130px;
   object-fit:cover;
+  margin-left:50px;
 }
 .academy-top .atop-items {
   display:inline-block;
@@ -91,7 +92,7 @@ select, textarea {
 .besides {
   display:inline-block;
   position:absolute;
-  right:30px;
+  right:90px;
   bottom:20px;
 }
 .besides a {

@@ -58,6 +58,4 @@ public class Academy {
     @OneToMany(mappedBy = "academy", cascade = CascadeType.REMOVE)
     private List<Review> reviewList;
 
-    //업체아이디, 수업리스트 <클래스가 없음
-    // 찜하기 .. 후기? 사진 < 방법 모름
 }
