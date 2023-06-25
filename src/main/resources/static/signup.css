@@ -86,7 +86,7 @@ border:0;background: inherit; padding:0;
 
 }
 
-.form-left #send_btn{
+.form-left #email-btn{
 border: 1px solid black;
 border-radius:10px;
 background:inherit;
@@ -112,7 +112,7 @@ margin-left:5px;
   border-radius:10px;
 }
 
-.form-left #send_box{
+.form-left #email{
 width:180px;
 }
 
