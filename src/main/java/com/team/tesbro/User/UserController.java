@@ -63,4 +63,9 @@ public class    UserController {
     public String login() {
         return "login_form";
     }
+
+    @GetMapping("/signup/mail")
+    public String mail() {
+        return "mail";
+    }
 }

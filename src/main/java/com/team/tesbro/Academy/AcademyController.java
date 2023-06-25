@@ -41,6 +41,12 @@ public class AcademyController {
         return "list";
     }
 
+    @GetMapping("/create")
+    public String getCreateAcademyForm(Model model) {
+        model.addAttribute("AcademyForm", new AcademyForm());
+        return "academy_form";
+    }
+
 
     @PostMapping("/create")
     public String AcademyCreate(@ModelAttribute AcademyForm academyForm) {

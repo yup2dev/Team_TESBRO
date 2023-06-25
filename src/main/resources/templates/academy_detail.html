@@ -49,7 +49,7 @@
         </div>
         <div class="atop-items">
             <p class="academy_name" th:text="${academy.academyName}"></p>
-            <p class="academyDong" th:text="${academy.academyDong}"></p>
+            <p class="academy_Address" th:text="${academy.academyAddress}"></p>
             <a href="#">지도보기</a></p>
             <p th:text="${academy.academyTel}"></p>
         </div>
@@ -107,29 +107,31 @@
         <!--        강사리스트 구간      -->
         <div class="academy-mid-2">
             <div class="teachers">강사리스트</div>
-            <div class="teachers">
-                <div id="t-slide">
-                    <div class="t-album">
-                        <div class="t-images">
-                            <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
-                                <a onclick="getTeacherId(this)">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg"
-                                         alt="teacherPic">
-                                    <div th:text="${teacher.teacherName}"></div>
-                                    <input type="hidden" th:value="${teacher.teacherName}" id="teacherName"/>
-                                    <input type="hidden" th:value="${teacher.introduction}" id="teacherIntro"/>
-                                    <input type="hidden" th:value="${teacher.qualifications}" id="teacherQualify"/>
-                                    <input type="hidden" th:value="${teacher.awards}" id="teacherAwards"/>
-                                </a>
+
+            <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get" class="teacher-create">
+                <div class="teachers">
+                    <div id="t-slide">
+                        <div class="t-album">
+                            <div class="t-images">
+                                <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
+                                    <a onclick="getTeacherId(this)">
+                                        <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg"
+                                             alt="teacherPic">
+                                        <div th:text="${teacher.teacherName}"></div>
+                                        <input type="hidden" th:value="${teacher.teacherName}" name="teacherName" id="teacherName"/>
+                                        <input type="hidden" th:value="${teacher.introduction}" name="introduction" id="introduction"/>
+                                        <input type="hidden" th:value="${teacher.qualifications}" name="qualifications" id="qualifications"/>
+                                        <input type="hidden" th:value="${teacher.awards}" name="awards" id="awards"/>
+                                    </a>
+                                </div>
                             </div>
+                            <button class="t-prev">◀</button>
+                            <button class="t-next">▶</button>
                         </div>
-                        <button class="t-prev">◀</button>
-                        <button class="t-next">▶</button>
                     </div>
                 </div>
-
-
-            </div>
+                <input type="submit" value="강사등록">
+            </form>
         </div>
 
         <!--        학원 상세정보 구간      -->
@@ -315,7 +317,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-var address = document.querySelector('.academyDong').innerText;
+var address = document.querySelector('.academy_Address').innerText;
 geocoder.addressSearch(address, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면
@@ -345,6 +347,31 @@ geocoder.addressSearch(address, function(result, status) {
 
 </script>
 
+    <script>
+var teacherNameInput = document.getElementById('teacherName');
+var teacherNameValue = teacherNameInput.value;
+
+var teacherIntroInput = document.getElementById('introduction');
+var teacherIntroValue = teacherIntroInput.value;
+
+var qualificationsInput = document.getElementById('qualifications');
+var qualificationsValue = qualificationsInput.value;
+
+var awardsInput = document.getElementById('awards');
+var awardsValue = awardsInput.value;
+
+var teacherNameDisplay = document.getElementById('teacherNameDisplay');
+teacherNameDisplay.textContent = teacherNameValue;
+
+var teacherIntroDisplay = document.getElementById('teacherIntroDisplay');
+teacherIntroDisplay.textContent = teacherIntroValue;
+
+var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
+teacherQualifyDisplay.textContent = qualificationsValue;
+
+var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
+teacherAwardsDisplay.textContent = awardsValue;
+    </script>
 </div>
 </body>
 </html>

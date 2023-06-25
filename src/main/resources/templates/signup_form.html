@@ -18,6 +18,7 @@
       <label for="password2" class="form-label">비밀번호 확인</label>
       <input type="password" th:field="*{password2}" class="form-control">
     </div>
+    <nav th:replace="~{juso :: jusoFragment}"></nav>
     <div class="mb-3">
       <label for="email" class="form-label">이메일</label>
       <input type="email" th:field="*{email}" class="form-control">
