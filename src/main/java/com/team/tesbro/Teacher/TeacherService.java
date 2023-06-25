@@ -31,4 +31,8 @@ public class TeacherService {
             throw new DataNotFoundException("teacher not found");
         }
     }
+
+    public long countTeacherIds(){
+        return teacherRepository.count();
+    }
 }
