@@ -39,7 +39,7 @@
                         <div class="preview"></div>
                     </form>
                 </div>
-                <button onclick="uploadAllForms()">한 번에 업로드</button>
+                <button onclick="confirmUpload()">한 번에 업로드</button>
             </div>
         </div>
     </div>
@@ -90,11 +90,21 @@
         console.log(response);
     }
 
-    function uploadAllForms() {
+    function confirmUpload() {
         const forms = document.querySelectorAll('form[id^="uploadForm"]');
-        forms.forEach((form) => {
-            UploadForm__submit(form);
-        });
+        if (forms.length === 0) {
+            alert('업로드할 파일이 없습니다.');
+            return;
+        }
+
+        const confirmMessage = '선택한 파일을 업로드하시겠습니까?';
+        if (window.confirm(confirmMessage)) {
+            forms.forEach((form) => {
+                UploadForm__submit(form);
+            });
+        } else {
+            alert('업로드가 취소되었습니다.');
+        }
     }
 </script>
 </body>
