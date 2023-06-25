@@ -74,30 +74,59 @@
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-$(document).ready(function() {
-  $("#email-btn").click(function() {
-    $.ajax({
-      url: "/mailConfirm",
-      type: "POST",
-      data: { email: $("#email").val() },
-      beforeSend: function (xhr) {
-        var token = $("meta[name='_csrf']").attr("content");
-        var header = $("meta[name='_csrf_header']").attr("content");
-        xhr.setRequestHeader(header, token);
-      },
+        $(document).ready(function() {
+          $("#email-btn").click(function() {
+            $.ajax({
+              url: "/mailConfirm",
+              type: "POST",
+              data: { email: $("#email").val() },
+              beforeSend: function (xhr) {
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+                xhr.setRequestHeader(header, token);
+              },
 
-      success: function(response) {
-        console.log("Email was sent successfully");
-        console.log("Authorization code: " + response);
-      },
-      error: function(xhr, status, error) {
-        console.log("Failed to send email");
-        console.log("Error: " + error);
-      }
-    });
+              success: function(response) {
+                console.log("Email was sent successfully");
+                console.log("Authorization code: " + response);
+              },
+              error: function(xhr, status, error) {
+                console.log("Failed to send email");
+                console.log("Error: " + error);
+              }
+            });
+          });
+        });
+  $("#check_btn").click(function() {
+        var verificationCode = $("#confirmN").val();
+        $.ajax({
+            url: "/mailConfirm/check",
+            type: "POST",
+            data: { verificationCode: verificationCode },
+                          beforeSend: function (xhr) {
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+                xhr.setRequestHeader(header, token);
+              },
+            success: function(response) {
+                 if (response === true) {
+                    // Action when verification code is valid
+                    console.log("Verification code is valid");
+                    // Open a pop-up or show a message indicating that the verification code matches
+                    alert("성공입니다이!");
+                } else {
+                    // Action when verification code is invalid
+                    console.log("Verification code is invalid");
+                     alert("실패입니다이 다시 하세요이");
+                }
+            },
+            error: function(xhr, status, error) {
+                // Action when verification code check fails
+                console.log("Verification code is invalid");
+                // Perform any desired action, such as showing an error message or clearing the input field
+            }
+        });
   });
-});
-
 window.onload = function(){
     document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
         //카카오 지도 발생

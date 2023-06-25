@@ -11,12 +11,22 @@ import java.io.UnsupportedEncodingException;
 public class EmailController {
 
     private final EmailService emailService;
+    private String authCode;
 
     @PostMapping("/mailConfirm")
     @ResponseBody
     public String mailConfirm(@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException {
         System.out.println(email);
-        String authCode = emailService.sendEmail(email);
+        authCode = emailService.sendEmail(email);
+        System.out.println(authCode);
         return authCode;
+    }
+
+    @PostMapping("/mailConfirm/check")
+    @ResponseBody
+    public boolean checkVerificationCode(@RequestParam("verificationCode") String verificationCode) {
+        // Perform the logic to check the verification code
+        boolean isValid = verificationCode.equals(authCode);
+        return isValid;
     }
 }
