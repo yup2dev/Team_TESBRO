@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>0625</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style_academy.css}">
+</head>
+<body>
+<div layout:fragment="content" class="aContainer">
+    <div class="content">
+        <div class="academy-mid-3">
+            <div class="detail-contents">
+                <div id="학원소개" class="d-content">
+                    <p>학원소개</p>
+                    <form id="uploadForm1" onsubmit="UploadForm__submit(this); return false;" th:action="@{/api/upload/{id}(id=${id})}"
+                          method="POST"
+                          enctype="multipart/form-data">
+                        <input type="file" name="file___academy__0__common__profileImg__1__owner__1"
+                               onchange="handleFileInputChange(this);">
+                        <div class="preview"></div>
+                    </form>
+                </div>
+                <div id="수업정보" class="d-content">
+                    <p>수업정보</p>
+                    <form id="uploadForm2" onsubmit="UploadForm__submit(this); return false;" th:action="@{/api/upload/{id}(id=${id})}"
+                          method="POST"
+                          enctype="multipart/form-data">
+                        <input type="file" name="file___academy__0__common__profileImg__2__owner__1"
+                               onchange="handleFileInputChange(this);">
+                        <div class="preview"></div>
+                    </form>
+                </div>
+                <div id="취소환불" class="d-content">
+                    <p>취소/환불 규정</p>
+                    <form id="uploadForm3" onsubmit="UploadForm__submit(this); return false;" th:action="@{/api/upload/{id}(id=${id})}"
+                          method="POST"
+                          enctype="multipart/form-data">
+                        <input type="file" name="file___academy__0__common__profileImg__3__owner__1"
+                               onchange="handleFileInputChange(this);">
+                        <div class="preview"></div>
+                    </form>
+                </div>
+                <button onclick="uploadAllForms()">한 번에 업로드</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+<style>
+    .preview {
+        width: 600px;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<script>
+    function handleFileInputChange(input) {
+        const file = input.files[0];
+        const preview = input.parentNode.querySelector('.preview');
+
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                preview.innerHTML = '';
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.innerHTML = '';
+        }
+    }
+
+    async function UploadForm__submit(form) {
+        const formData = new FormData(form);
+
+        const response = await axios.post(form.action, formData, {
+            headers: {
+                "Content-Type" : "multipart/form-data"
+            }
+        });
+
+        console.log(response);
+    }
+
+    function uploadAllForms() {
+        const forms = document.querySelectorAll('form[id^="uploadForm"]');
+        forms.forEach((form) => {
+            UploadForm__submit(form);
+        });
+    }
+</script>
+</body>
+</html>

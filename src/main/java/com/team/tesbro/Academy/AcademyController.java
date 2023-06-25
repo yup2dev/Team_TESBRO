@@ -58,4 +58,9 @@ public class AcademyController {
         SiteUser siteUser = userService.getUser(principal.getName());
         return String.format("redirect:academy/detail/%s", id);
     }
+
+    @GetMapping("/test/{id}")
+    public String ttt(@PathVariable("id") Integer id){
+        return "detail_form_practice";
+    }
 }

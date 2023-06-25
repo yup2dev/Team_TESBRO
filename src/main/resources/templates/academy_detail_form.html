@@ -1,6 +1,37 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+<style>
+    .preview {
+        width: 600px;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
 
 <script>
+    function handleFileInputChange(input) {
+        const file = input.files[0];
+        const preview = input.parentNode.querySelector('.preview');
+
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                preview.innerHTML = '';
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.innerHTML = '';
+        }
+    }
+
     async function UploadForm__submit(form) {
         const formData = new FormData(form);
 
@@ -15,21 +46,11 @@
 </script>
 
 <div layout:fragment="content" class="container">
-
-
     <form onsubmit="UploadForm__submit(this); return false;" th:action="@{/api/upload/{id}(id=${id})}" method="POST"
           enctype="multipart/form-data">
-        <input type="file" name="file___academy__0__common__profileImg__1__owner__1">
+        <input type="file" name="file___academy__0__common__profileImg__1__owner__1" onchange="handleFileInputChange(this);">
         <input type="submit" value="업로드">
+        <div class="preview"></div>
     </form>
-    <form onsubmit="UploadForm__submit(this); return false;" th:action="@{/api/upload/{id}(id=${id})}" method="POST"
-          enctype="multipart/form-data">
-        <input type="file" name="file___academy__0__common__profileImg__1__owner__1">
-        <input type="submit" value="업로드">
-    </form>
-    <form onsubmit="UploadForm__submit(this); return false;" th:action="@{/api/upload/{id}(id=${id})}" method="POST"
-          enctype="multipart/form-data">
-        <input type="file" name="file___academy__0__common__profileImg__1__owner__1">
-        <input type="submit" value="업로드">
-    </form>
+    <!-- 나머지 form들도 동일한 방식으로 처리 -->
 </div>
