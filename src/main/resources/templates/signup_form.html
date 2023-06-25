@@ -1,28 +1,114 @@
-<div layout:fragment="content" class="container my-3">
-  <div class="my-3 border-bottom">
-    <div>
-      <h4>회원가입</h4>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/signup.css}">
+</head>
+<body>
+<div class="signup">
+    <div class="signup-box">
+        <div class="bg-left">
+            <img src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=16387492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b"
+                 alt="login-bg">
+        </div>
+        <div class="bg-right"></div>
     </div>
-  </div>
-  <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
-    <div th:replace="~{form_errors :: formErrorsFragment}"></div>
-    <div class="mb-3">
-      <label for="username" class="form-label">사용자ID</label>
-      <input type="text" th:field="*{username}" class="form-control">
+
+    <div class="container">
+        <!--        <div class="form-top">환영합니다. <br> 어쩌구 저쩌구 TESBRO 입니다.</div>-->
+        <div class="form-left">
+            <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+                <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+                <div class="input-item">
+                    <label for="username" class="form-label">사용자ID</label>
+                    <input type="text" th:field="*{username}" class="form-control">
+                </div>
+                <div class="input-item">
+                    <label for="password1" class="form-label">비밀번호</label>
+                    <input type="password" th:field="*{password1}" class="form-control">
+                </div>
+                <div class="input-item">
+                    <label for="password2" class="form-label">비밀번호 확인</label>
+                    <input type="password" th:field="*{password2}" class="form-control" name="password2">
+                </div>
+                <div class="input-item">
+                    <label for="email" class="form-label">이메일</label>
+                    <input type="email" th:field="*{email}" class="form-control">
+                </div>
+                <div class="input-item">
+                    <label for="confirmN" class="form-label">이메일 인증번호</label>
+                    <input type="text" th:field="*{confirmN}" class="form-control" id="send_box">
+                    <button type="button" id="send_btn">발송</button>
+                </div>
+                <div class="input-item">
+                    <label for="address" class="form-label">주소</label>
+                    <input type="text" id="address_kakao" name="address" readonly/>
+                </div>
+                <button type="submit">일반 회원가입</button>
+                <button>메인화면</button>
+            </form>
+        </div>
+
+        <div class="form-right">
+            <div class="other-btn">
+                <button><img
+                        src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=16387492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b"
+                        alt="">
+                    <div>카카오톡 로그인</div>
+            </div>
+            <div class="other-btn">
+                <button><img
+                        src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=16387492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b"
+                        alt="">
+                    <div>학원계정 회원가입</div>
+                </button>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-      <label for="password1" class="form-label">비밀번호</label>
-      <input type="password" th:field="*{password1}" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="password2" class="form-label">비밀번호 확인</label>
-      <input type="password" th:field="*{password2}" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">이메일</label>
-      <input type="email" th:field="*{email}" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">회원가입</button>
-  </form>
 </div>
+</body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
+$(document).ready(function() {
+  $("#send_btn").click(function() {
+    var email = $("#send_box").val(); // 이메일 입력값 가져오기
+
+    // 이메일 데이터 생성
+    var emailData = {
+      email: email
+    };
+
+    // 서버로 이메일 전송 요청
+    $.ajax({
+      url: "/login/mailConfirm",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(emailData),
+      success: function(response) {
+        // 성공적으로 이메일이 전송되었을 때의 동작
+        console.log("이메일이 성공적으로 전송되었습니다.");
+        console.log("인증 코드: " + response);
+      },
+      error: function(xhr, status, error) {
+        // 이메일 전송에 실패했을 때의 동작
+        console.log("이메일 전송 실패");
+        console.log("에러: " + error);
+      }
+    });
+  });
+});
+
+</script>
 </html>

@@ -33,4 +33,14 @@ public class UserService {
             throw new DataNotFoundException("siteuser not found");
         }
     }
+
+    // 학원 관리자 업데이트
+    private void updateAcademyUserRole(String username) {
+        Optional<SiteUser> siteUserOpt = userRepository.findByusername(username);
+        if (siteUserOpt.isPresent()) {
+            SiteUser siteUser = siteUserOpt.get();
+            siteUser.setRole(UserRole.ACADEMY);
+            userRepository.save(siteUser);
+        }
+    }
 }

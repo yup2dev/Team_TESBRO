@@ -1,79 +1,84 @@
-* {
-  box-sizing: border-box;
+html {
+  height:100%;
+}
+body {
   margin: 0;
   padding: 0;
+  height:100%;
+  font-family: 'NanumSquareNeo-Variable';
 }
 
-body{
-  display:grid;
-  place-items:center;
-  height:100vh;
+.login {
+  width:100%;
+  height:100%;
+  position:relative;
+}
+.login-box {
+  width:100%;
+  display:flex;
+  flex-wrap:nowrap;
+  height:100%;
+}
+.login-box .bg-left {
+/*   border:2px solid blue; */
+  width:calc(100%/2);
+  overflow:hidden;
+}
+.login-box .bg-left img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.login-box .bg-right {
+/*   border:2px solid blue; */
+  width:calc(100%/2);
 }
 
-span {
-  font-size: 14px;
-  color: #a9a9a9;
-}
-
-form {
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 50px;
-  height: 100%;
-  text-align: center;
-}
-
-input {
-  background-color: #ecececdd;
-  border: none;
-  font-size: 14px;
-  padding: 10px 12px;
-  margin: 8px 0;
-  width: 80%;
-  color: #333;
-  outline: none;
-  border-radius: 5px;
-}
 
 .container {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
   background-color: #ffffff;
-  border-radius: 2em;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  position: relative;
+  border-radius: 30px;
+  box-shadow: rgba(99, 99, 99, 0.4) 0px 20px 80px 0px;
   overflow: hidden;
   width: 850px;
-  max-width: 100%;
-  min-height: 550px;
+  height: 550px;
+  display:flex;
+  align-items:center;
+}
+.container .logo, .login-form {
+  width:calc(100%/2);
+  height:100%;
+  display:flex;
+  justify-content:center;
+  overflow:hidden;
+}
+.container .logo > img {
+  width:400px;
+  height:400px;
+  margin:auto 0;
+}
+.container .login-form > form{
+  position:absolute;
+  z-index:99;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top: 95px;
+}
+.container .login-form img{
+  transform:rotate(180deg);
+  opacity:0.5;
+  width:500px;
+  height:800px;
 }
 
-.login form{
-  position: absolute;
-  top: 50%;
-  height: 0;
-  transition: all ease-in-out 0.6s;
-}
 
-.logo{
-left:0;
-width:50%;
-height:80%;
-margin-top:6%;
-background: url(https://i.ibb.co/mc8X7Fd/Kakao-Talk-20230522-164812484.jpg) no-repeat;
-background-size:contain;
-position:absolute;
-z-index:1;
-}
 
-.login form{
-  right: 0;
-  width: 50%;
-  z-index: 2;
-  opacity: 1;
-}
-
+/* 로그인 폼 안에 요소 설정 */
 button {
   text-decoration: none;
   position: relative;
@@ -81,7 +86,7 @@ button {
   font-weight: 700;
   color: black;
   outline-color:rgb(27,28,29);
-  width: 80%;
+  width: 250px;
   height: 3em;
   line-height: 2em;
   text-align: center;
@@ -92,8 +97,49 @@ button {
   margin-top: 13px;
   cursor: pointer;
 }
-
 #login {
   background-color: rgb(27,89,29);
   color:white;
+}
+
+input {
+  background-color: white;
+  border: none;
+  font-size: 14px;
+  width: 250px;
+  height: 3em;
+  margin:10px 0;
+  color: #333;
+  outline: none;
+  border-radius: 5px;
+}
+span {
+  font-size: 14px;
+  color: #a9a9a9;
+}
+.container .login-form > button {
+  position:absolute;
+  width:250px;
+}
+.container .login-form > .btn-1 {
+  top:290px;
+}
+.container .login-form > .btn-2 {
+  top:340px;
+}
+.container .login-form > .btn-3 {
+  top:390px;
+}
+.container .login-form div:first-child {
+  position:absolute;
+  z-index:99;
+  top:75px;
+  color:red;
+}
+
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }

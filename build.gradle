@@ -44,10 +44,11 @@ dependencies {
 	implementation 'org.commonmark:commonmark:0.21.0'
 	runtimeOnly 'org.postgresql:postgresql'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-
 	//querydsl 추가
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
 }
 

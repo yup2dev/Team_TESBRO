@@ -39,6 +39,7 @@ public class AcademyController {
         return "list";
     }
 
+    // 디테일에 추가 할 학원계정 전용 검색기
     @GetMapping("detail/create/search")
     public String detailSearch(Model model, @Param("keyword") String keyword){
         List<Academy> academyList = this.academyService.getList(keyword);
@@ -46,19 +47,20 @@ public class AcademyController {
         return "academy_create_list";
     }
 
+    // 학원계정 전용 파일 추가 매핑
     @GetMapping("detail/create/{id}")
     public String detailCre(@PathVariable("id") Integer id, Model model){
         model.addAttribute("id", id);
         return "academy_detail_form";
     }
-
+    // 지금은 쓸데없음
     @PostMapping("detail/create/{id}")
     public String detailCreP(@PathVariable("id") Integer id, Principal principal){
         Academy academy = academyService.getAcademy(id);
         SiteUser siteUser = userService.getUser(principal.getName());
         return String.format("redirect:academy/detail/%s", id);
     }
-
+    //테스트용 파일 등록 매핑
     @GetMapping("/test/{id}")
     public String ttt(@PathVariable("id") Integer id){
         return "detail_form_practice";

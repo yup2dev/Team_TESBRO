@@ -80,6 +80,7 @@ public class Lesson_ResController {
     }
 
 
+    // 예약 확인 하는 부분
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/reserve")
     public String onlesson(Model model, Principal principal) {
