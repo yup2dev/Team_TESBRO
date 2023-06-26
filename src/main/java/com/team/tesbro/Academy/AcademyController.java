@@ -29,7 +29,7 @@ public class AcademyController {
     private final AcademyService academyService;
     private final ReviewService reviewService;
     private final LessonService lessonService;
-    private UserService userService;
+    private final UserService userService;
 
 
     @RequestMapping("/list")

@@ -20,7 +20,7 @@ import java.util.Optional;
 public class TeacherService {
     private final TeacherRepository teacherRepository;
 
-    public void create(String teacherName, String qualifications, String awards, String introduction, Academy academy) {
+    public void create(String teacherName, String introduction, String qualifications, String awards, Academy academy) {
         Teacher teacher = new Teacher();
         teacher.setTeacherName(teacherName);
         teacher.setQualifications(qualifications);

@@ -55,7 +55,11 @@
         </div>
         <div class="besides">
             <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1358/1358023.png" alt="share-icon"></a>
-            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon"></a>
+            <a href="javascript:void(0);" class="like"
+               th:data-uri="@{|/academy/vote/${academy.id}|}">
+                <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon">
+                <span class="badge rounded-pill bg-success" th:text="${#lists.size(academy.voter)}"></span>
+            </a>
         </div>
     </div>
 
@@ -343,6 +347,46 @@ geocoder.addressSearch(address, function(result, status) {
     }
 });
 
+</script>
+
+    <!--  삭제  -->
+    <script type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+        const modify_elements = document.getElementsByClassName("modify");
+    Array.from(modify_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 수정하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+        const recommend_elements = document.getElementsByClassName("recommend");
+    Array.from(recommend_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 추천하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+            const like_elements = document.getElementsByClassName("like");
+    Array.from(like_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 찜 하시겠습니까?")) {
+                const imageElement = this.querySelector('img');
+                imageElement.src = "https://cdn-icons-png.flaticon.com/128/138/138533.png";
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+
+</script>
 
 
 </script>
