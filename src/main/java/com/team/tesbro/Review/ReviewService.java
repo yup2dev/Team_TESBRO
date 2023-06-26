@@ -41,6 +41,7 @@ public class ReviewService {
         } else {
             throw new DataNotFoundException("review not found");
         }
+
     }
 
 
@@ -51,6 +52,7 @@ public class ReviewService {
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
         return this.reviewRepository.findAllByAcademy(academy, pageable);
     }
+
 
     public void modify(Review review, String content, int star_rating) {
         review.setContent(content);

@@ -179,8 +179,6 @@
 <!--                    </div>-->
                     <div class="review_box">
                         <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 후기가 있습니다.|"></div>
-
-
                         <ul class="review-items" th:each="review : ${paging}">
                             <li>
                                 <div th:if="${review.userId != null}" th:text="${review.userId.username}"></div>
@@ -230,7 +228,7 @@
 
     <!--같은 동 다른 학원 목록. 이전 목록으로 가기 등등-->
     <div class="academy-btm">
-        <div id="map" style="width:500px;height:300px;"></div>
+        <div id="map" style="width:1100px;height:500px;"></div>
     </div>
 
 
