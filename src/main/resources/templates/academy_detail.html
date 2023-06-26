@@ -275,74 +275,79 @@
 
 
 
-<script th:src="@{/academy.js}"></script>
-<script>
-
-
-    function getTeacherId(element) {
-    var teacherName = element.querySelector('#teacherName').value;
-    var teacherIntro = element.querySelector('#teacherIntro').value;
-    var teacherQualify = element.querySelector('#teacherQualify').value;
-    var teacherAwards = element.querySelector('#teacherAwards').value;
-
-
-    document.getElementById('teacherNameDisplay').textContent = teacherName;
-    document.getElementById('teacherIntroDisplay').textContent = teacherIntro;
-    var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
-    if (teacherQualifyDisplay) {
-        teacherQualifyDisplay.textContent = teacherQualify;
-    }
-    var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
-    if (teacherAwardsDisplay) {
-        teacherAwardsDisplay.textContent = teacherAwards;
-    }
-
-    document.getElementById('starRatingDisplay').textContent = starRating;
-    var starRatingDisplay = document.getElementById('starRatingDisplay');
-    if (starRatingDisplay) {
-        starRatingDisplay.textContent = starRating;
-        console.log(starRating);
-    }
-}
-</script>
-
     <script>
-    $("#datePicker").datepicker({
-       language: 'ko'
-    });
+    $(document).ready(function() {
+      var popupModal = $("#popupModal");
+      var closeBtn = $(".close");
 
+      if (popupModal.length) {
+        popupModal.show();
+      }
+
+      if (closeBtn.length) {
+        closeBtn.on("click", function() {
+          popupModal.hide();
+        });
+      }
+    });
     </script>
 
-<!--ajax 스크립트 추가-->
-<script>
-    $(document).ready(function() {
-        $("#datePicker").bind("propertychange change keyup paste input", function(){
-            var thisParam = $(this).val();
-            console.log(thisParam);
-            $.ajax({
-                url: "/multi_box_ajax",
-                data : { "data" : thisParam },
-                //dataType: "json",
-                error: function(xhr, status, error) {
-                    console.log('통신실패!!');
-                    console.log('에러 메시지:', error);
-                },
-                success: function(response) {
-                    console.log("통신성공!!");
-                    console.log('서버 응답:', response);
-                    // 2차 박스 업데이트
-                    var childSelectBox = $("#childSelectBox");
-                    childSelectBox.empty();
-                    $.each(response, function(index, value) {
-                        childSelectBox.append('<option value="' + value + '">' + value + '</option>');
-                    });
-                }
-            });
-        });
-    });
+    <script th:src="@{/academy.js}"></script>
+    <script>
+    $("#datePicker").datepicker({
+       language: 'ko',
+       onSelect: function(dateString) {
+                var thisParam = dateString;
+                $.ajax({
+                    url: "/multi_box_ajax",
+                    data : { "data" : thisParam },
+                    //dataType: "json",
+                    error: function(xhr, status, error) {
+                        console.log('통신실패!!');
+                        console.log('에러 메시지:', error);
+                    },
+                    success: function(response) {
+                        console.log("통신성공!!");
+                        console.log('서버 응답:', response);
+                        // 2차 박스 업데이트
+                        var childSelectBox = $("#childSelectBox");
+                        childSelectBox.empty();
+                        $.each(response, function(index, value) {
+                            childSelectBox.append('<option value="' + value + '">' + value + '</option>');
+                        });
+                    }
+                });
+
+         }
+    })
+
+    function getTeacherId(element) {
+        var teacherName = element.querySelector('#teacherName').value;
+        var teacherIntro = element.querySelector('#teacherIntro').value;
+        var teacherQualify = element.querySelector('#teacherQualify').value;
+        var teacherAwards = element.querySelector('#teacherAwards').value;
 
 
-</script>
+        document.getElementById('teacherNameDisplay').textContent = teacherName;
+        document.getElementById('teacherIntroDisplay').textContent = teacherIntro;
+        var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
+        if (teacherQualifyDisplay) {
+            teacherQualifyDisplay.textContent = teacherQualify;
+        }
+        var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
+        if (teacherAwardsDisplay) {
+            teacherAwardsDisplay.textContent = teacherAwards;
+        }
+
+        document.getElementById('starRatingDisplay').textContent = starRating;
+        var starRatingDisplay = document.getElementById('starRatingDisplay');
+        if (starRatingDisplay) {
+            starRatingDisplay.textContent = starRating;
+            console.log(starRating);
+        }
+    }
+    </script>
+
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
     <script>
@@ -397,62 +402,9 @@ geocoder.addressSearch(address, function(result, status) {
             };
         });
     });
-        const modify_elements = document.getElementsByClassName("modify");
-    Array.from(modify_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 수정하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
-        });
-    });
-        const recommend_elements = document.getElementsByClassName("recommend");
-    Array.from(recommend_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 추천하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
-        });
-    });
-            const like_elements = document.getElementsByClassName("like");
-    Array.from(like_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 찜 하시겠습니까?")) {
-                const imageElement = this.querySelector('img');
-                imageElement.src = "https://cdn-icons-png.flaticon.com/128/138/138533.png";
-                location.href = this.dataset.uri;
-            };
-        });
-    });
-
 </script>
 
-
-
-    <script>
-var teacherNameInput = document.getElementById('teacherName');
-var teacherNameValue = teacherNameInput.value;
-
-var teacherIntroInput = document.getElementById('introduction');
-var teacherIntroValue = teacherIntroInput.value;
-
-var qualificationsInput = document.getElementById('qualifications');
-var qualificationsValue = qualificationsInput.value;
-
-var awardsInput = document.getElementById('awards');
-var awardsValue = awardsInput.value;
-
-var teacherNameDisplay = document.getElementById('teacherNameDisplay');
-teacherNameDisplay.textContent = teacherNameValue;
-
-var teacherIntroDisplay = document.getElementById('teacherIntroDisplay');
-teacherIntroDisplay.textContent = teacherIntroValue;
-
-var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
-teacherQualifyDisplay.textContent = qualificationsValue;
-
-var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
-teacherAwardsDisplay.textContent = awardsValue;
-    </script>
+</div>
 </div>
 </body>
 </html>
