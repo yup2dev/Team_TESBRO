@@ -52,4 +52,7 @@ public class TeacherService {
         return this.teacherRepository.findAllByAcademy(academy, pageable);
 
     }
+    public List<Teacher> getTeachersByAcademyId(Integer academyId) {
+        return teacherRepository.findByAcademyId(academyId);
+    }
 }

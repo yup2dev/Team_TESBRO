@@ -1,4 +1,5 @@
-* {
+.aContainer {
+  font-family: 'S-CoreDream-3Light';
   padding:0;
   margin:0;
 }
@@ -38,8 +39,8 @@ select, textarea {
   display:flex;
   justify-content:center;
   padding-top:10px;
-  width:70px;
-  height:40px;
+  width:50px;
+  height:30px;
   background: white;
   border:1px solid seagreen;
   opacity:0.7;
@@ -47,20 +48,20 @@ select, textarea {
 
 .academy-top {
   display: flex;
+  align-items:center;
   flex-wrap: wrap;
   position:relative;
-  min-width:1200px;
-  max-width:1200px;
+  min-width:1100px;
+  max-width:1100px;
   height:200px;
 }
 .academy-top .academy-logo{
   display:inline-block;
-  margin-top:20px;
   margin-left:30px;
 }
 .academy-top .academy-logo img{
-  width:150px;
-  height:150px;
+  width:130px;
+  height:130px;
   object-fit:cover;
 }
 .academy-top .atop-items {
@@ -68,15 +69,15 @@ select, textarea {
   height:150px;
   vertical-align:top;
   margin:20px;
+  margin-left:40px;
 }
 .academy-top .atop-items p:first-child {
-  font-size:36px;
+  font-size:1.8rem;
   font-weight:bold;
-  margin-top:15px;
-  margin-bottom:20px;
+  margin-top:20px;
 }
 .academy-top .atop-items p:last-child {
-  margin-top:10px;
+  margin-top:-15px;
 }
 
 .besides {
@@ -103,8 +104,8 @@ select, textarea {
 .academy-mid {
   display: flex;
   flex-wrap: wrap;
-  min-width:1200px;
-  max-width:1200px;
+  min-width:1100px;
+  max-width:1100px;
   border-top:1px solid lightgray;
   position:relative;
   z-index:0;
@@ -112,65 +113,73 @@ select, textarea {
 .academy-mid-1 {
   display:flex;
   width:100%;
-  height:670px;
+  height:610px;
 }
 .academy-mid-1 .mid1-photo {
-  min-width:600px;
-  height:600px;
+  min-width:550px;
+  height:550px;
   margin:30px;
 }
-#img-slide{ width: 600px; margin: 0 auto;}
+#img-slide{ width: 550px; margin: 0 auto;}
 .album{
-  height: 600px;
+  height: 550px;
   width: 100%;
   overflow: hidden;
   position:relative;
 }
 .album .images{
-    display: flex; height: 600px; width: 2560px;
+    display: flex; height: 550px; width: 2560px;
     transition-property: transform;
     transition-duration: 1s;
 }
 .album .images .image img {
-  width: 600px; height: 600px;
+  width: 550px; height: 550px;
   object-fit:cover;
 }
 
 .album button{
     width: 50px; height: 50px; border:none;
     color: white; background-color: gray;
-  opacity:0.3;
+  opacity:0.2;
   position:relative;
   cursor:pointer;
 }
 .album button:disabled{
     background-color: gray;
 }
-.album .prev{ position:absolute; top:300px;}
-.album .next{ position:absolute; top:300px; right:0;}
+.album .prev{ position:absolute; top:250px;}
+.album .next{ position:absolute; top:250px; right:0;}
 
 
 .reservation {
-  height:600px;
-  min-width:500px;
+  height:550px;
+  width:450px;
   margin-top:30px;
 }
-.reservation .calender {
-  height:400px;
+.reservation input {
+    width:100%;
+    padding:10px 0;
+    margin-bottom:20px;
+    text-align:center;
+    border: 1px solid lightgray;
+    font-size:1rem;
+    color:black;
 }
 .reservation select{
-  font-size:14px;
-  display:flex;
-  margin: 20px auto;
-  padding:10px;
+  border:1px solid lightgray;
+  padding:10px 0;
   width:100%;
+  text-align:center;
+   font-size:1rem;
+  margin:20px 0;
+
 }
 .reservation .btn-r {
-  font-size:1.5rem;
+  font-size:1.2rem;
   font-weight:bold;
   width:100%;
-  background: seagreen;
-  color:white;
+  border:2px solid rgb(30, 90, 30);
+  border-radius:5px;
   padding:10px;
   margin-top:6px;
 }
@@ -181,18 +190,17 @@ select, textarea {
 
 .academy-mid-2 {
   width:100%;
-  height: 400px;
+  height: 330px;
 }
 .academy-mid-2 .teachers:first-child {
-  font-size:1.5rem;
+  font-size:1.3rem;
   font-weight:bold;
   padding-left:30px;
-
 }
 .academy-mid-2 .teachers:last-child {
-  position:absolute;
-  width:1130px;
-  margin:30px;
+    width:1030px;
+    margin-top:30px;
+    margin-left:30px;
 }
 #t-slide{ width: 100%; margin: 0 auto;}
 .t-album{
@@ -207,17 +215,17 @@ select, textarea {
 .t-album .t-images .t-image {
   margin-right:30px;
   text-align:center;
-  font-size:1.2rem;
+  font-size:1.rem;
   margin-bottom:10px;
   cursor:pointer;
 }
 .t-album .t-images .t-image img {
-  width: 200px; height: 250px;
+  width: 150px; height: 200px;
   object-fit:cover;
 }
 
 .t-album button{
-    width: 50px; height: 50px; border:none;
+    width: 30px; height: 50px; border:none;
     color: white; background-color: gray;
     opacity:0.3;
     position:relative;
@@ -226,8 +234,8 @@ select, textarea {
 .t-album button:disabled{
     background-color: transparent;
 }
-.t-album .t-prev{ position:absolute; top:125px;}
-.t-album .t-next{ position:absolute; top:125px; right:0;}
+.t-album .t-prev{ position:absolute; top:100px;}
+.t-album .t-next{ position:absolute; top:100px; right:0;}
 
 
 
@@ -253,9 +261,10 @@ select, textarea {
 }
 .academy-mid-3 .detail-btn > a {
   background: white;
-  font-size:1.2rem;
+  font-size:1.1rem;
+  font-weight:bold;
   width:100%;
-  padding:10px;
+  padding:7px;
 
 }
 .academy-mid-3 .detail-contents {
@@ -265,68 +274,94 @@ select, textarea {
 }
 
 .academy-mid-3 .detail-contents .d-content {
-  margin:30px;
   min-height:200px;
   border:1px dotted orange;
   position:relative;
+  margin:0 30px;
 }
 .academy-mid-3 .detail-contents .d-content p{
   display:flex;
   justify-content:center;
 }
 .academy-mid-3 .detail-contents .d-content p:first-child {
-  font-size: 20px;
+  font-size: 1.1rem;
   justify-content:flex-start;
-  font-weight:bold;
   padding-bottom:5px;
   border-bottom:1px solid lightgray;
-  margin-bottom:30px;
 }
+
+
+
+
 .academy-mid-3 .detail-contents .d-content .review_box {
     width:90%;
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:100px;
-
+    margin:0 auto;
+margin-bottom:50px;
 }
 
 .academy-mid-3 .detail-contents .d-content .review-size{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight:bold;
-    padding:10px;
-    margin-bottom: 30px;
+    padding:15px 0;
+    margin-bottom: 20px;
 }
 
 .academy-mid-3 .detail-contents .d-content .review_box .review-items {
     border-top: 2px solid lightgray;
     border-bottom: 2px solid lightgray;
-    width:100%;
     margin-bottom:30px;
+    position:relative;
+    padding:0;
 }
 
 .d-content .review_box .review-items li div {
-    font-size:1.1rem;
+    font-size:1rem;
     display:inline-block;
     padding-left:10px;
-    padding-right: 50px;
     margin-top:10px;
 }
 .d-content .review_box .review-items li div:first-child {
     border-right:1px solid lightgray;
+    padding:0 15px ;
 }
 
-.d-content .review_box .review-items li div:nth-child(3) {
-    float:right;
-    padding-right:10px;
+.d-content .review_box .review-items li div:nth-child(5) {
+float:right;
+ padding-right:10px;
 }
 .d-content .review_box .review-items li div:last-child {
     display:block;
     font-size:1rem;
     padding-top: 20px;
-    padding-bottom:20px;
-    min-height:100px;
-    border-top:1px solid lightgray;
+        padding-bottom:20px;
+        min-height:100px;
+        border-top:1px solid lightgray;
 }
+.review_box .review-items li div:nth-child(3) {
+    width:50px;
+    height:20px;
+    margin:0;
+    position:absolute;
+     top:10px;
+    right:150px;
+    text-align:center;
+    font-size:1rem;
+}
+.review_box .review-items li div:nth-child(4) {
+    width:50px;
+    height:20px;
+    margin:0;
+    position:absolute;
+    top:10px;
+    right:200px;
+    text-align:center;
+    font-size:1rem;
+
+}
+
+
+
+
 .d-content .review_box .pagination {
     display:flex;
     justify-content:center;
@@ -335,11 +370,10 @@ select, textarea {
   border:1px solid gray;
   display:inline-block;
   cursor:pointer;
-  padding:7px;
-  padding-left : 12px;
-  padding-right: 12px;
   border-radius:10px;
   margin-left:10px;
+  padding: 7px 12px;
+  font-size:0.8rem;
 }
 .d-content .review_box .pagination .page-item:last-child{
     margin-right:10px;
@@ -349,48 +383,30 @@ select, textarea {
   color:white;
 }
 
-disabled {
-  display:none;
-}
 
-.d-content .review-createBtn {
-    position:absolute;
-    top:65px;
-    right:7px;
-}
-.d-content .review-createBtn button {
-    font-size: 20px;
-    margin-right: 50px;
-    border:1px solid lightgray;
-    padding:10px;
-    border-radius:5px;
-    background:rgb(27, 89, 29);
-    color:white;
-}
+
+
 
 .d-content .review-create {
     width:90%;
     border:1px solid lightgray;
     border-radius:10px;
-    margin-bottom:20px;
-    margin-right:auto;
-    margin-left:auto;
+    margin:20px auto;
 }
 .d-content .review-create textarea {
     width:100%;
+    background:transparent;
     border-top:1px solid lightgray;
     border-radius:0 0 10px 10px;
 }
 .d-content .review-create input {
-    padding:10px;
-    padding-left:20px;
-    padding-right:20px;
+    padding:10px 20px;
     font-size:1rem;
     float:right;
     border-left:1px solid lightgray;
 }
 .d-content .review-create select {
-    padding:12px;
+    padding:10px;
     border-right:1px solid lightgray;
     margin-left:5px;
 }
@@ -405,7 +421,7 @@ disabled {
   display: flex;
   flex-wrap: nowrap;
   border:2px solid green;
-  min-width:1200px;
+  min-width:1100px;
   height:500px;
 }
 
@@ -415,6 +431,7 @@ disabled {
 
 .teacher-popup {
   display:none;
+  z-index:999;
 }
 .teacher-popup .p-content {
   border:1px solid black;
@@ -436,7 +453,6 @@ disabled {
   height:350px;
   object-fit:cover;
   position:relative;
-  z-index:1;
   border-radius:20px;
 }
 
@@ -446,7 +462,6 @@ disabled {
   background: linear-gradient(to bottom, transparent, white 40%);
   position:absolute;
   top:200px;
-  z-index:2;
   border-radius:20px;
 }
 
@@ -454,7 +469,6 @@ disabled {
   position:relative;
   top:-150px;
   width:400px;
-  z-index:3;
 }
 .p-content .profile .profile-item:first-child {
   font-size: 2rem;
@@ -482,7 +496,6 @@ disabled {
   flex-wrap:nowrap;
   justify-content:space-around;
   position:relative;
-  z-index:4;
   margin-bottom:30px;
   font-weight:bold;
 }
@@ -530,3 +543,26 @@ disabled {
   text-decoration: none;
   cursor: pointer;
 }
+
+
+
+
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+     font-family: 'S-CoreDream-3Light';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+     font-weight: 300;
+     font-style: normal;
+}
+

@@ -4,15 +4,28 @@
     <meta charset="UTF-8">
     <title>academy_detail</title>
     <link rel="stylesheet" type="text/css" th:href="@{/style_academy.css}">
-    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div layout:fragment="content" class="aContainer">
+<!--        이름이랑 정보 요약&찜/공유      -->
+<div  class="content">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
     <!-- Air datepicker css -->
     <script src="/datepicker.js"></script> <!-- Air datepicker js -->
     <script src="/datepicker.ko.js"></script>
-</head>
-<body>
-<!--        이름이랑 정보 요약&찜/공유      -->
-<div layout:fragment="content" class="content">
+
+
+    <!--팝업에러 파트-->
+    <!-- Add this HTML within your page -->
+    <div id="popupModal" class="modal" th:if="${popupMessage}">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p th:text="${popupMessage}"></p>
+        </div>
+    </div>
+
+
     <a href="#top">
         <div class="top-btn">▲</div>
     </a>
@@ -346,7 +359,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-var address = document.querySelector('.academy_Address').innerText;
+var address = document.querySelector('.academyDong').innerText;
 geocoder.addressSearch(address, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면

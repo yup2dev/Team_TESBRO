@@ -6,16 +6,12 @@ import com.team.tesbro.Review.Review;
 import com.team.tesbro.Review.ReviewService;
 import com.team.tesbro.Teacher.Teacher;
 import com.team.tesbro.Teacher.TeacherService;
-import com.team.tesbro.User.SiteUser;
-import com.team.tesbro.User.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -72,5 +68,31 @@ public class AcademyController {
         SiteUser siteUser = this.userService.getUser(principal.getName());
         this.academyService.vote(academy, siteUser);
         return String.format("redirect:/academy/detail/%d", id);
+    }
+    // 디테일에 추가 할 학원계정 전용 검색기
+    @GetMapping("detail/create/search")
+    public String detailSearch(Model model, @Param("keyword") String keyword){
+        List<Academy> academyList = this.academyService.getList(keyword);
+            model.addAttribute(academyList);
+        return "academy_create_list";
+    }
+
+    // 학원계정 전용 파일 추가 매핑
+    @GetMapping("detail/create/{id}")
+    public String detailCre(@PathVariable("id") Integer id, Model model){
+        model.addAttribute("id", id);
+        return "academy_detail_form";
+    }
+    // 지금은 쓸데없음
+    @PostMapping("detail/create/{id}")
+    public String detailCreP(@PathVariable("id") Integer id, Principal principal){
+        Academy academy = academyService.getAcademy(id);
+        SiteUser siteUser = userService.getUser(principal.getName());
+        return String.format("redirect:academy/detail/%s", id);
+    }
+    //테스트용 파일 등록 매핑
+    @GetMapping("/test/{id}")
+    public String ttt(@PathVariable("id") Integer id){
+        return "detail_form_practice";
     }
 }

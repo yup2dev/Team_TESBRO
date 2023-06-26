@@ -78,18 +78,28 @@ button{border:0;background: inherit; padding:0;}
 
 /* left */
 .form-left form{
-  margin-top:160px;
+  margin-top:80px;
   margin-left:30px;
 
 }
+
+.form-left #email-btn{
+border: 1px solid black;
+border-radius:10px;
+background:inherit;
+height:30px;
+width:35px;
+margin-left:5px;
+}
+
 .form-left .input-item {
 /*   border:1px solid orange; */
   height:30px;
-  margin-bottom:25px;
+  margin-bottom:20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-size:1.2rem;
+  font-size:0.9rem;
 }
 .form-left .input-item input {
   height:30px;
@@ -98,6 +108,11 @@ button{border:0;background: inherit; padding:0;}
   width: 220px;
   border-radius:10px;
 }
+
+.form-left #email{
+width:180px;
+}
+
 .form-left > form > button {
   cursor:pointer;
   border:1px solid rgb(30,90,30);
@@ -119,19 +134,20 @@ button{border:0;background: inherit; padding:0;}
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  text-align:center;
 }
 .form-right .other-btn {
   width: 80%;
-  height:140px;
-  margin-top:50px;
+  height:50px;
   overflow:hidden;
   border-radius:10px;
   cursor:pointer;
   position:relative;
   margin-right:30px;
+  margin-bottom:30px;
 }
 .form-right .other-btn:last-child {
-  margin-bottom:-50px;
+  margin-bottom:50px;
 }
 .form-right .other-btn img {
   width:100%;
@@ -145,10 +161,10 @@ button{border:0;background: inherit; padding:0;}
 }
 .form-right .other-btn button > div{
   position:absolute;
-  font-size:1.6rem;
+  font-size:1.2rem;
   font-weight:bold;
   z-index:999;
-  top:55px;
+  top:20px;
   left:30px;
 }
 
