@@ -4,15 +4,28 @@
     <meta charset="UTF-8">
     <title>academy_detail</title>
     <link rel="stylesheet" type="text/css" th:href="@{/style_academy.css}">
+</head>
+<body>
+<div layout:fragment="content" class="aContainer">
+<!--        이름이랑 정보 요약&찜/공유      -->
+<div  class="content">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link href="/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
     <!-- Air datepicker css -->
     <script src="/datepicker.js"></script> <!-- Air datepicker js -->
     <script src="/datepicker.ko.js"></script>
-</head>
-<body>
-<!--        이름이랑 정보 요약&찜/공유      -->
-<div layout:fragment="content" class="content">
+
+
+    <!--팝업에러 파트-->
+    <!-- Add this HTML within your page -->
+    <div id="popupModal" class="modal" th:if="${popupMessage}">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p th:text="${popupMessage}"></p>
+        </div>
+    </div>
+
+
     <a href="#top">
         <div class="top-btn">▲</div>
     </a>
@@ -43,23 +56,26 @@
         </div>
     </div>
     <div class="academy-top">
-        <div class="academy-logo">
-            <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg"
-                 alt="academy-logo">
-        </div>
-        <div class="atop-items">
-            <p class="academy_name" th:text="${academy.academyName}"></p>
-            <p class="academy_Address" th:text="${academy.academyAddress}"></p>
-            <a href="#">지도보기</a></p>
-            <p th:text="${academy.academyTel}"></p>
-        </div>
-        <div class="besides">
-            <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1358/1358023.png" alt="share-icon"></a>
-            <a href="javascript:void(0);" class="like"
-               th:data-uri="@{|/academy/vote/${academy.id}|}">
-                <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon">
-                <span class="badge rounded-pill bg-success" th:text="${#lists.size(academy.voter)}"></span>
-            </a>
+
+        <div class="top-box">
+            <div class="academy-logo">
+                <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg"
+                     alt="academy-logo">
+            </div>
+            <div class="atop-items">
+                <p class="academy_name" th:text="${academy.academyName}"></p>
+                <p class="academy_address" th:text="${academy.academyAddress}"></p>
+                <a href="#">지도보기</a></p>
+                <p th:text="${academy.academyTel}"></p>
+            </div>
+            <div class="besides">
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1358/1358023.png" alt="share-icon"></a>
+                <a href="javascript:void(0);" class="like"
+                   th:data-uri="@{|/academy/vote/${academy.id}|}">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon">
+                    <span class="badge" th:text="${#lists.size(academy.voter)}"></span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -94,10 +110,8 @@
 
             <div class="reservation">
                 <form th:action="@{|/reserve/${academy.id}|}" method="post">
-                    <label for="datePicker">날짜</label>
                     <input type="text" id="datePicker" name="datePicker">
 
-                <label for="childSelectBox">시간</label>
                 <select id="childSelectBox" name="childSelectBox">
                     <option value="">== 시간 선택 ==</option>
                 </select>
@@ -111,32 +125,32 @@
         <!--        강사리스트 구간      -->
         <div class="academy-mid-2">
             <div class="teachers">강사리스트</div>
-
-            <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get" class="teacher-create">
-                <div class="teachers">
-                    <div id="t-slide">
-                        <div class="t-album">
-                            <div class="t-images">
-                                <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
-                                    <a onclick="getTeacherId(this)">
-                                        <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg"
-                                             alt="teacherPic">
-                                        <div th:text="${teacher.teacherName}"></div>
-                                        <input type="hidden" th:value="${teacher.teacherName}" name="teacherName" id="teacherName"/>
-                                        <input type="hidden" th:value="${teacher.introduction}" name="introduction" id="introduction"/>
-                                        <input type="hidden" th:value="${teacher.qualifications}" name="qualifications" id="qualifications"/>
-                                        <input type="hidden" th:value="${teacher.awards}" name="awards" id="awards"/>
-                                    </a>
-                                </div>
+            <div class="teachers">
+                <div id="t-slide">
+                    <div class="t-album">
+                        <div class="t-images">
+                            <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
+                                <a onclick="getTeacherId(this)">
+                                    <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg"
+                                         alt="teacherPic">
+                                    <div th:text="${teacher.teacherName}"></div>
+                                    <input type="hidden" th:value="${teacher.teacherName}" id="teacherName"/>
+                                    <input type="hidden" th:value="${teacher.introduction}" id="teacherIntro"/>
+                                    <input type="hidden" th:value="${teacher.qualifications}" id="teacherQualify"/>
+                                    <input type="hidden" th:value="${teacher.awards}" id="teacherAwards"/>
+                                </a>
                             </div>
-                            <button class="t-prev">◀</button>
-                            <button class="t-next">▶</button>
                         </div>
+                        <button class="t-prev">◀</button>
+                        <button class="t-next">▶</button>
                     </div>
                 </div>
-                <input type="submit" value="강사등록">
-            </form>
+                <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get" class="teacher-create">
+                    <input type="submit" value="강사등록">
+                </form>
+            </div>
         </div>
+
 
         <!--        학원 상세정보 구간      -->
         <div class="academy-mid-3">
@@ -174,12 +188,11 @@
 
                     </form>
 
-<!--                    <div class="review-createBtn">-->
-<!--                        <button th:href="@{/review/create}">리뷰 등록하기</button>-->
-<!--                    </div>-->
+
                     <div class="review_box">
                         <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 후기가 있습니다.|"></div>
                         <ul class="review-items" th:each="review : ${paging}">
+                            <a th:id="|review_${review.id}|"></a>
                             <li>
                                 <div th:if="${review.userId != null}" th:text="${review.userId.username}"></div>
                                 <div>
@@ -189,6 +202,33 @@
                                     <span th:if="${review.star_rating == 4}">⭐⭐⭐⭐</span>
                                     <span th:if="${review.star_rating == 5}">⭐⭐⭐⭐⭐</span>
                                 </div>
+
+                                <div>
+                                    <a href="javascript:void(0);" class="recommend"
+                                       th:data-uri="@{|/review/vote/${review.id}|}">
+                                        추천
+                                        <span class="badge" th:text="${#lists.size(review.voter)}"></span>
+                                    </a>
+                                </div>
+
+
+
+                                <!--        수정 -->
+                                <div>
+                                    <a href="@{|/review/modify/${review.id}|}" sec:authorize="isAuthenticated()"
+                                       th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="수정"></a>
+                                </div>
+
+
+
+                                <!--        삭제 -->
+                                <div>
+                                    <a href="javascript:void(0);" th:data-uri="@{|/review/delete/${review.id}|}" class="delete" sec:authorize="isAuthenticated()"
+                                       th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="삭제"></a>
+                                </div>
+
+
+
                                 <div th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                                 <div th:text="${review.content}"></div>
                             </li>
@@ -200,7 +240,7 @@
                         <div th:if="${!paging.isEmpty()}">
                             <ul class="pagination justify-content-center">
                                 <li class="page-item">
-                                    <a class="page-link"
+                                    <a class="page-link" th:if="${paging.hasPrevious()}"
                                        th:href="@{|?page=${paging.number-1}|}">
                                         <span>이전</span>
                                     </a>
@@ -211,7 +251,7 @@
                                     <a th:text="${page}+1" class="page-link" th:href="@{|?page=${page}|}"></a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                                    <a class="page-link" th:if="${paging.hasNext()}" th:href="@{|?page=${paging.number+1}|}">
                                         <span>다음</span>
                                     </a>
                                 </li>
@@ -228,81 +268,84 @@
 
     <!--같은 동 다른 학원 목록. 이전 목록으로 가기 등등-->
     <div class="academy-btm">
-        <div id="map" style="width:1100px;height:500px;"></div>
+        <div id="map" style="width:100%; height:500px;"></div>
     </div>
 
 
 
-<script th:src="@{/academy.js}"></script>
-<script>
-    $("#datePicker").datepicker({
-       language: 'ko'
+    <script>
+    $(document).ready(function() {
+      var popupModal = $("#popupModal");
+      var closeBtn = $(".close");
+
+      if (popupModal.length) {
+        popupModal.show();
+      }
+
+      if (closeBtn.length) {
+        closeBtn.on("click", function() {
+          popupModal.hide();
+        });
+      }
     });
+    </script>
+
+    <script th:src="@{/academy.js}"></script>
+    <script>
+    $("#datePicker").datepicker({
+       language: 'ko',
+       onSelect: function(dateString) {
+                var thisParam = dateString;
+                $.ajax({
+                    url: "/multi_box_ajax",
+                    data : { "data" : thisParam },
+                    //dataType: "json",
+                    error: function(xhr, status, error) {
+                        console.log('통신실패!!');
+                        console.log('에러 메시지:', error);
+                    },
+                    success: function(response) {
+                        console.log("통신성공!!");
+                        console.log('서버 응답:', response);
+                        // 2차 박스 업데이트
+                        var childSelectBox = $("#childSelectBox");
+                        childSelectBox.empty();
+                        $.each(response, function(index, value) {
+                            childSelectBox.append('<option value="' + value + '">' + value + '</option>');
+                        });
+                    }
+                });
+
+         }
+    })
 
     function getTeacherId(element) {
-    var teacherName = element.querySelector('#teacherName').value;
-    var teacherIntro = element.querySelector('#teacherIntro').value;
-    var teacherQualify = element.querySelector('#teacherQualify').value;
-    var teacherAwards = element.querySelector('#teacherAwards').value;
+        var teacherName = element.querySelector('#teacherName').value;
+        var teacherIntro = element.querySelector('#teacherIntro').value;
+        var teacherQualify = element.querySelector('#teacherQualify').value;
+        var teacherAwards = element.querySelector('#teacherAwards').value;
 
 
-    document.getElementById('teacherNameDisplay').textContent = teacherName;
-    document.getElementById('teacherIntroDisplay').textContent = teacherIntro;
-    var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
-    if (teacherQualifyDisplay) {
-        teacherQualifyDisplay.textContent = teacherQualify;
+        document.getElementById('teacherNameDisplay').textContent = teacherName;
+        document.getElementById('teacherIntroDisplay').textContent = teacherIntro;
+        var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
+        if (teacherQualifyDisplay) {
+            teacherQualifyDisplay.textContent = teacherQualify;
+        }
+        var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
+        if (teacherAwardsDisplay) {
+            teacherAwardsDisplay.textContent = teacherAwards;
+        }
+
+        document.getElementById('starRatingDisplay').textContent = starRating;
+        var starRatingDisplay = document.getElementById('starRatingDisplay');
+        if (starRatingDisplay) {
+            starRatingDisplay.textContent = starRating;
+            console.log(starRating);
+        }
     }
-    var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
-    if (teacherAwardsDisplay) {
-        teacherAwardsDisplay.textContent = teacherAwards;
-    }
+    </script>
 
-    document.getElementById('starRatingDisplay').textContent = starRating;
-    var starRatingDisplay = document.getElementById('starRatingDisplay');
-    if (starRatingDisplay) {
-        starRatingDisplay.textContent = starRating;
-        console.log(starRating);
-    }
-}
-
-
-
-
-
-
-</script>
-
-
-<!--ajax 스크립트 추가-->
-<script>
-    $(document).ready(function() {
-        $("#datePicker").bind("propertychange change keyup paste input", function(){
-            var thisParam = $(this).val();
-            console.log(thisParam);
-            $.ajax({
-                url: "/multi_box_ajax",
-                data : { "data" : thisParam },
-                //dataType: "json",
-                error: function(xhr, status, error) {
-                    console.log('통신실패!!');
-                    console.log('에러 메시지:', error);
-                },
-                success: function(response) {
-                    console.log("통신성공!!");
-                    console.log('서버 응답:', response);
-                    // 2차 박스 업데이트
-                    var childSelectBox = $("#childSelectBox");
-                    childSelectBox.empty();
-                    $.each(response, function(index, value) {
-                        childSelectBox.append('<option value="' + value + '">' + value + '</option>');
-                    });
-                }
-            });
-        });
-    });
-
-
-</script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
     <script>
@@ -319,7 +362,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-var address = document.querySelector('.academy_Address').innerText;
+var address = document.querySelector('.academy_address').innerText;
 geocoder.addressSearch(address, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면
@@ -347,6 +390,7 @@ geocoder.addressSearch(address, function(result, status) {
 
 </script>
 
+    <!--  삭제  -->
     <!--  삭제  -->
     <script type='text/javascript'>
     const delete_elements = document.getElementsByClassName("delete");
@@ -383,37 +427,9 @@ geocoder.addressSearch(address, function(result, status) {
             };
         });
     });
-
 </script>
 
-
-</script>
-
-    <script>
-var teacherNameInput = document.getElementById('teacherName');
-var teacherNameValue = teacherNameInput.value;
-
-var teacherIntroInput = document.getElementById('introduction');
-var teacherIntroValue = teacherIntroInput.value;
-
-var qualificationsInput = document.getElementById('qualifications');
-var qualificationsValue = qualificationsInput.value;
-
-var awardsInput = document.getElementById('awards');
-var awardsValue = awardsInput.value;
-
-var teacherNameDisplay = document.getElementById('teacherNameDisplay');
-teacherNameDisplay.textContent = teacherNameValue;
-
-var teacherIntroDisplay = document.getElementById('teacherIntroDisplay');
-teacherIntroDisplay.textContent = teacherIntroValue;
-
-var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
-teacherQualifyDisplay.textContent = qualificationsValue;
-
-var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
-teacherAwardsDisplay.textContent = awardsValue;
-    </script>
+</div>
 </div>
 </body>
 </html>

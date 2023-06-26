@@ -58,7 +58,7 @@ public class BoardService {
             sort = Sort.by(Sort.Direction.DESC, "id");
         }
 
-        Pageable pageable = PageRequest.of(page, 10, sort);
+        Pageable pageable = PageRequest.of(page, 15, sort);
         return boardRepository.findByBoardCategory(boardCategory, pageable);
     }
 
@@ -77,7 +77,7 @@ public class BoardService {
 
     public Page<Board> searchByKeyword(String keyword) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        Pageable pageable = PageRequest.of(0, 10, sort);
+        Pageable pageable = PageRequest.of(0, 15, sort);
         return boardRepository.findBySubjectContainingIgnoreCase(keyword, pageable);
     }
 
@@ -106,5 +106,9 @@ public class BoardService {
     public void vote(Board board, SiteUser siteUser) {
         board.getVoter().add(siteUser);
         this.boardRepository.save(board);
+    }
+
+    public Board getLastestNotice() {
+        return boardRepository.findLatestNotice();
     }
 }

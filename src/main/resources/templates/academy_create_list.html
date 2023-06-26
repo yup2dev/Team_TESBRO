@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="application/javascript"></script>
+    <script type="application/javascript"
+            src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/styleY.css}" xmlns="">
+    <script type="text/javascript" src="hangjungdong.js"></script>
+</head>
+<body>
+<div layout:fragment="content" class="content">
+    <button id="searchButton" type="button">검색하기</button>
+    <div class="container border-bottom">
+        <form th:action="@{/academy/detail/create/search}">
+            <div class="searchbox">
+                <div class="box1">
+                    <input type="text" class="box1_input" name="keyword" th:value="${keyword}" value
+                           placeholder="우리 동네 학원을 찾아보세요">
+                </div>
+                <div class="box3">
+                    <button class="searchbtn" type="submit">
+                        <span>검색하기</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="searchloc">
+        <form th:action="@{/academy/list}">
+        </form>
+    </div>
+
+    <!-- 검색 박스 끝 -->
+
+    <div class="main_container">
+            <!--    검색된 학원수랑 정렬버튼 끝-->
+            <div class="academy_list" th:each="academy : ${academyList}">
+                <a th:href="@{|/academy/detail/create/${academy.id}|}">
+                    <li class="card_frame">
+                        <div class="academy_box">
+                            <div class="img_box">
+                                <img th:src="${academy.imgLogo}" alt="">
+                            </div>
+                            <!--img_box 종료 -->
+                            <!--아카데미 안에 들어갈 글씨랑 찜까지 시작-->
+                            <div class="academy_box_text">
+                                <div class="cardbody">
+                                    <div class="info">
+                                        <h3 th:text="${academy.academyName}"></h3>
+                                        <span class="map" th:text="${academy.academySi}"></span> <span class="map"
+                                                                                                       th:text="${academy.academyGu}"></span>
+                                        <span class="map" th:text="${academy.academyDong}"></span>
+                                    </div>
+                                    <div class="jjim">
+                                        <input type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--아카데미 안에 들어갈 글씨랑 찜까지 끝-->
+                        </div>
+                        <!--오른쪽박스 끝-->
+                    </li>
+                </a>
+            </div>
+            <!--    아카데미 리스트 끝-->
+        </div>
+    </div>
+</body>
+</html>

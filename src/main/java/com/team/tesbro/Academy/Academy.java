@@ -2,6 +2,7 @@ package com.team.tesbro.Academy;
 
 import com.team.tesbro.Review.Review;
 import com.team.tesbro.Teacher.Teacher;
+import com.team.tesbro.file.GenFile;
 import com.team.tesbro.User.SiteUser;
 import com.team.tesbro.lesson_res.Lesson_Res;
 import jakarta.persistence.*;
@@ -49,8 +50,8 @@ public class Academy {
     @Column
     private String academyDong;
 
-    @ManyToMany
-    Set<SiteUser> voter;
+    @Column
+    private Integer jjim;
 
     @OneToMany(mappedBy = "academy", cascade = CascadeType.REMOVE)
     private List<Teacher> teacherList;
@@ -58,6 +59,14 @@ public class Academy {
     @OneToMany(mappedBy = "academy", cascade = CascadeType.REMOVE)
     private List<Review> reviewList;
 
+    @ManyToMany
+    @JoinTable(name = "GEN_FILE_ACADEMIES",
+            joinColumns = @JoinColumn(name = "academy_id"),
+            inverseJoinColumns = @JoinColumn(name = "gen_file_id"))
+    private List<GenFile> genFiles;
+
+    @ManyToMany
+    Set<SiteUser> voter;
     //업체아이디, 수업리스트 <클래스가 없음
     // 찜하기 .. 후기? 사진 < 방법 모름
 }

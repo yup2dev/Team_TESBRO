@@ -73,7 +73,6 @@ public class Lesson_ResController {
             lesson.get().setCurrentCapacity(lesson.get().getCurrentCapacity() + 1);
             lessonRepository.save(lesson.get());
         }
-
         //레슨 테이블에 등록인원 추가 로직
         this.lesson_resService.reserve(lessonResDto, lessonId, currentUserId);
         System.out.println("예약됨");
@@ -81,6 +80,7 @@ public class Lesson_ResController {
     }
 
 
+    // 예약 확인 하는 부분
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/reserve")
     public String onlesson(Model model, Principal principal) {

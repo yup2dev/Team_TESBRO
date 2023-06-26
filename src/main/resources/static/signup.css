@@ -1,0 +1,187 @@
+html {
+  height:100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height:100%;
+  font-family: 'NanumSquareNeo-Variable';
+}
+button{border:0;background: inherit; padding:0;}
+
+.signup {
+  width:100%;
+  height:100%;
+  position:relative;
+}
+.signup-box {
+  width:100%;
+  display:flex;
+  flex-wrap:nowrap;
+  height:100%;
+}
+.signup-box .bg-left {
+/*   border:2px solid blue; */
+  width:calc(100%/2);
+  overflow:hidden;
+}
+.signup-box .bg-left img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.signup-box .bg-right {
+/*   border:2px solid blue; */
+  width:calc(100%/2);
+}
+
+
+
+.container {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow: rgba(99, 99, 99, 0.4) 0px 20px 80px 0px;
+  overflow: hidden;
+  width: 850px;
+  height: 550px;
+  display:flex;
+  align-items:center;
+}
+
+.container .form-top {
+  font-family: 'Humanbumsuk';
+  font-size:2rem;
+  font-weight:bold;
+/*   border:1px solid red; */
+  position:absolute;
+  text-align:center;
+  top:50px;
+  left:50%;
+  transform:translatex(-50%);
+}
+
+
+
+
+.container .form-left, .form-right {
+/*   border:2px solid blue; */
+  width:calc(100%/2);
+  height:100%;
+  display:flex;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* left */
+.form-left form{
+  margin-top:80px;
+  margin-left:30px;
+
+}
+
+.form-left #email-btn{
+border: 1px solid black;
+border-radius:10px;
+background:inherit;
+height:30px;
+width:35px;
+margin-left:5px;
+}
+
+.form-left .input-item {
+/*   border:1px solid orange; */
+  height:30px;
+  margin-bottom:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:0.9rem;
+}
+.form-left .input-item input {
+  height:30px;
+  border:1px solid lightgray;
+  margin-left:10px;
+  width: 220px;
+  border-radius:10px;
+}
+
+.form-left #email{
+width:180px;
+}
+
+.form-left > form > button {
+  cursor:pointer;
+  border:1px solid rgb(30,90,30);
+  font-size:1.2rem;
+  font-weight:bold;
+  padding:8px 0;
+  border-radius:10px;
+  width:100%;
+  margin-bottom: 20px;
+}
+.form-left > form > button:last-child {
+    border:1px solid lightgray;
+}
+
+
+
+/* right */
+.form-right {
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+.form-right .other-btn {
+  width: 80%;
+  height:50px;
+  overflow:hidden;
+  border-radius:10px;
+  cursor:pointer;
+  position:relative;
+  margin-right:30px;
+  margin-bottom:30px;
+}
+.form-right .other-btn:last-child {
+  margin-bottom:50px;
+}
+.form-right .other-btn img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  cursor:pointer;
+}
+.form-right .other-btn:last-child img{
+  transform:rotate(180deg);
+  object-fit:fill;
+}
+.form-right .other-btn button > div{
+  position:absolute;
+  font-size:1.2rem;
+  font-weight:bold;
+  z-index:999;
+  top:20px;
+  left:30px;
+}
+
+
+
+
+
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Humanbumsuk';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}

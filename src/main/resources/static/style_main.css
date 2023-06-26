@@ -43,9 +43,6 @@ button{border:0;background:inherit;}
   flex-wrap: nowrap;
   /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
   overflow: hidden;
-
-  /* position */
-  /* slide_button의 position absolute가 컨테이너 안쪽에서 top, left, right offset이 적용될 수 있도록 relative를 준다. (기본값이 static인데, static인 경우 그 상위 컨테이너로 나가면서 현재 코드에선 html을 기준으로 offset을 적용시키기 때문) */
   position: relative;
 
   /* size */
@@ -491,7 +488,7 @@ li {
 }
 .review-cards .review-card div:last-child p {
   display: -webkit-box;
-  -webkit-line-clamp: 4; /* 표시할 줄 수 */
+  -webkit-line-clamp: 3; /* 표시할 줄 수 */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
