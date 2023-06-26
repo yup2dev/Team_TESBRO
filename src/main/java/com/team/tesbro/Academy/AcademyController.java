@@ -46,9 +46,6 @@ public class AcademyController {
         return "list";
     }
 
-<<<<<<< HEAD
-
-=======
     @GetMapping("/create")
     public String getCreateAcademyForm(Model model) {
         model.addAttribute("AcademyForm", new AcademyForm());
@@ -76,5 +73,4 @@ public class AcademyController {
         this.academyService.vote(academy, siteUser);
         return String.format("redirect:/academy/detail/%d", id);
     }
->>>>>>> origin/lee2
 }

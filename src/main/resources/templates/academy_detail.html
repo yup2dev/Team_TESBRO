@@ -57,7 +57,11 @@
             </div>
             <div class="besides">
                 <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1358/1358023.png" alt="share-icon"></a>
-                <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon"></a>
+                <a href="javascript:void(0);" class="like"
+                   th:data-uri="@{|/academy/vote/${academy.id}|}">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon">
+                    <span class="badge" th:text="${#lists.size(academy.voter)}"></span>
+                </a>
             </div>
         </div>
     </div>
@@ -108,32 +112,32 @@
         <!--        강사리스트 구간      -->
         <div class="academy-mid-2">
             <div class="teachers">강사리스트</div>
-
-            <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get" class="teacher-create">
-                <div class="teachers">
-                    <div id="t-slide">
-                        <div class="t-album">
-                            <div class="t-images">
-                                <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
-                                    <a onclick="getTeacherId(this)">
-                                        <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg"
-                                             alt="teacherPic">
-                                        <div th:text="${teacher.teacherName}"></div>
-                                        <input type="hidden" th:value="${teacher.teacherName}" name="teacherName" id="teacherName"/>
-                                        <input type="hidden" th:value="${teacher.introduction}" name="introduction" id="introduction"/>
-                                        <input type="hidden" th:value="${teacher.qualifications}" name="qualifications" id="qualifications"/>
-                                        <input type="hidden" th:value="${teacher.awards}" name="awards" id="awards"/>
-                                    </a>
-                                </div>
+            <div class="teachers">
+                <div id="t-slide">
+                    <div class="t-album">
+                        <div class="t-images">
+                            <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
+                                <a onclick="getTeacherId(this)">
+                                    <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg"
+                                         alt="teacherPic">
+                                    <div th:text="${teacher.teacherName}"></div>
+                                    <input type="hidden" th:value="${teacher.teacherName}" id="teacherName"/>
+                                    <input type="hidden" th:value="${teacher.introduction}" id="teacherIntro"/>
+                                    <input type="hidden" th:value="${teacher.qualifications}" id="teacherQualify"/>
+                                    <input type="hidden" th:value="${teacher.awards}" id="teacherAwards"/>
+                                </a>
                             </div>
-                            <button class="t-prev">◀</button>
-                            <button class="t-next">▶</button>
                         </div>
+                        <button class="t-prev">◀</button>
+                        <button class="t-next">▶</button>
                     </div>
                 </div>
-                <input type="submit" value="강사등록">
-            </form>
+                <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get" class="teacher-create">
+                    <input type="submit" value="강사등록">
+                </form>
+            </div>
         </div>
+
 
         <!--        학원 상세정보 구간      -->
         <div class="academy-mid-3">
