@@ -43,6 +43,7 @@
         </div>
     </div>
     <div class="academy-top">
+
         <div class="top-box">
             <div class="academy-logo">
                 <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg"
@@ -56,7 +57,11 @@
             </div>
             <div class="besides">
                 <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1358/1358023.png" alt="share-icon"></a>
-                <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon"></a>
+                <a href="javascript:void(0);" class="like"
+                   th:data-uri="@{|/academy/vote/${academy.id}|}">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon">
+                    <span class="badge" th:text="${#lists.size(academy.voter)}"></span>
+                </a>
             </div>
         </div>
     </div>
@@ -127,10 +132,12 @@
                         <button class="t-next">▶</button>
                     </div>
                 </div>
-
-
+                <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get" class="teacher-create">
+                    <input type="submit" value="강사등록">
+                </form>
             </div>
         </div>
+
 
         <!--        학원 상세정보 구간      -->
         <div class="academy-mid-3">
@@ -339,7 +346,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-var address = document.querySelector('.academyDong').innerText;
+var address = document.querySelector('.academy_Address').innerText;
 geocoder.addressSearch(address, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면
@@ -365,26 +372,74 @@ geocoder.addressSearch(address, function(result, status) {
     }
 });
 
-const recommend_elements = document.getElementsByClassName("recommend");
-Array.from(recommend_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        if(confirm("정말로 추천하시겠습니까?")) {
-            location.href = this.dataset.uri;
-        };
-    });
-});
+</script>
 
-const delete_elements = document.getElementsByClassName("delete");
-Array.from(delete_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        if(confirm("정말로 삭제하시겠습니까?")) {
-            location.href = this.dataset.uri;
-        };
+    <!--  삭제  -->
+    <script type='text/javascript'>
+    const delete_elements = document.getElementsByClassName("delete");
+    Array.from(delete_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 삭제하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
     });
-});
+        const modify_elements = document.getElementsByClassName("modify");
+    Array.from(modify_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 수정하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+        const recommend_elements = document.getElementsByClassName("recommend");
+    Array.from(recommend_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 추천하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+            const like_elements = document.getElementsByClassName("like");
+    Array.from(like_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("정말로 찜 하시겠습니까?")) {
+                const imageElement = this.querySelector('img');
+                imageElement.src = "https://cdn-icons-png.flaticon.com/128/138/138533.png";
+                location.href = this.dataset.uri;
+            };
+        });
+    });
 
 </script>
 
+
+
+    <script>
+var teacherNameInput = document.getElementById('teacherName');
+var teacherNameValue = teacherNameInput.value;
+
+var teacherIntroInput = document.getElementById('introduction');
+var teacherIntroValue = teacherIntroInput.value;
+
+var qualificationsInput = document.getElementById('qualifications');
+var qualificationsValue = qualificationsInput.value;
+
+var awardsInput = document.getElementById('awards');
+var awardsValue = awardsInput.value;
+
+var teacherNameDisplay = document.getElementById('teacherNameDisplay');
+teacherNameDisplay.textContent = teacherNameValue;
+
+var teacherIntroDisplay = document.getElementById('teacherIntroDisplay');
+teacherIntroDisplay.textContent = teacherIntroValue;
+
+var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
+teacherQualifyDisplay.textContent = qualificationsValue;
+
+var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
+teacherAwardsDisplay.textContent = awardsValue;
+    </script>
 </div>
 </body>
 </html>
