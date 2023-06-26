@@ -15,12 +15,14 @@ public interface AcademyRepository extends JpaRepository<Academy, Integer> {
 
     @Query("SELECT DISTINCT a FROM Academy a " +
             "LEFT JOIN a.lessonList l " +
-            "WHERE (:keyword IS NULL OR a.academyName LIKE %:keyword% OR a.academyAddress LIKE %:keyword%) " +
-            "AND (:localKey IS NULL OR a.academyName LIKE %:localKey% OR a.academyAddress LIKE %:localKey%) " +
-            "AND ((:capacityType IS NULL OR :capacityType = 1 AND (l IS NULL OR l.peopleCapacity = 1)) " +
+            "WHERE ((:keyword IS NULL OR a.academyName LIKE %:keyword% OR a.academyAddress LIKE %:keyword%) " +
+            "OR (:localKey IS NULL OR a.academyName LIKE %:localKey% OR a.academyAddress LIKE %:localKey%)) " +
+            "AND ((:capacityType IS NULL AND l IS NULL) " +
+            "OR (:capacityType = 1 AND (l IS NULL OR l.peopleCapacity = 1)) " +
             "OR (:capacityType = 2 AND (l IS NULL OR (l.peopleCapacity >= 2 AND l.peopleCapacity <= 4))) " +
             "OR (:capacityType = 3 AND (l IS NULL OR (l.peopleCapacity >= 5 AND l.peopleCapacity <= 10))) " +
-            "OR (:capacityType = 4 AND (l IS NULL OR l.peopleCapacity >= 10)))")
+            "OR (:capacityType = 4 AND (l IS NULL OR l.peopleCapacity >= 10))) " +
+            "AND (:capacityType IS NULL OR l IS NOT NULL)")
     Page<Academy> searchByParam(
             @Param("keyword") String keyword,
             @Param("localKey") String localKey,
