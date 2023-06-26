@@ -9,7 +9,10 @@ import com.team.tesbro.Teacher.TeacherService;
 import com.team.tesbro.User.SiteUser;
 import com.team.tesbro.User.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +36,7 @@ public class AcademyController {
 
     @RequestMapping("/list")
     public String academy(Model model, @RequestParam(value="page", defaultValue="0") int page, @Param("keyword") String keyword) {
-        Page<Academy> paging = this.academyService.getAcademyList(page);
+        Page<Academy> paging = this.academyService.getAcademyList(keyword, page);
         model.addAttribute("paging", paging);
 
         List<Academy> academyList = this.academyService.getList(keyword);

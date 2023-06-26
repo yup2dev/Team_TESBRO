@@ -1,6 +1,5 @@
 package com.team.tesbro.Academy;
 
-import com.team.tesbro.Board.Board;
 import com.team.tesbro.DataNotFoundException;
 import com.team.tesbro.User.SiteUser;
 import lombok.RequiredArgsConstructor;
@@ -54,19 +53,15 @@ public class AcademyService {
         this.academyRepository.save(academy);
     }
 
-    public Page<Academy> getAcademyList(int page) {
+    public Page<Academy> getAcademyList(String keyword, int page) {
         Sort sort;
-//        if (order.equals("voter")) {
-//            sort = Sort.by(Sort.Direction.DESC, "voter");
-//        } else if (order.equals("reviewCount")) {
-//            sort = Sort.by(Sort.Direction.DESC, "reviewCount");
-//        } else {
-//            sort = Sort.by(Sort.Direction.DESC, "id");
-//        }
+        if(keyword!=null){
+            Pageable pageable = PageRequest.of(page, 10);
+            return this.academyRepository.searchByAcademyNameOrAddress(keyword, pageable);
+        }
         Pageable pageable = PageRequest.of(page, 10);
         return this.academyRepository.findAll(pageable);
     }
-
 
     public long countAcademyIds() {
         return academyRepository.count();

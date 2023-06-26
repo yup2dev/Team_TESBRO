@@ -56,6 +56,7 @@ public class LessonService {
     public void createLesson(LessonForm lessonForm, Teacher teacher, Academy academy){
         Lesson lesson = new Lesson();
         lesson.setLessonName(lessonForm.getLessonName());
+        lesson.setCurrentCapacity(0);
         lesson.setPeopleCapacity(lessonForm.getPeopleCapacity());
         lesson.setLessonDate(lessonForm.getLessonDate());
         lesson.setLessonTime(lessonForm.getLessonTime());

@@ -42,15 +42,6 @@ public class Academy {
     private String academyAddress;
 
     @Column
-    private String academySi;
-
-    @Column
-    private String academyGu;
-
-    @Column
-    private String academyDong;
-
-    @Column
     private Integer jjim;
 
     @OneToMany(mappedBy = "academy", cascade = CascadeType.REMOVE)

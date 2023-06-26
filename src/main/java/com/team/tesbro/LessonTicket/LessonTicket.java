@@ -21,11 +21,6 @@ public class LessonTicket {
     @Column
     private Integer ticketPrice;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_lesson_ticket",
-            joinColumns = @JoinColumn(name = "lesson_ticket_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<SiteUser> ticketUsers = new ArrayList<>();
+    @OneToMany
+    private List<SiteUser> ticketUsers;
 }

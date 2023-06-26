@@ -3,6 +3,7 @@
     <div>
         <label for="teacher">강사:</label>
         <select id="teacher" name="teacherId" onchange="updateTid(this)">
+            <option value="">==강사를 선택하세요==</option>
             <option th:each="teacher : ${academy.teacherList}" th:if="${teacher != null}" th:value="${teacher?.id}"
                     th:text="${teacher?.teacherName}"></option>
         </select>
