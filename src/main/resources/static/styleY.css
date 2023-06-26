@@ -4,7 +4,7 @@ body{
 }
 a{
   text-decoration: none;
-  color:black;
+  color:inherit;
 }
 button{border:0;background:inherit;}
 li {list-style:none;}
