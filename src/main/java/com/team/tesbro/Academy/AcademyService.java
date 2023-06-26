@@ -50,6 +50,7 @@ public class AcademyService {
 
     public void vote(Academy academy, SiteUser siteUser) {
         academy.getVoter().add(siteUser);
+        academy.updateJjim();
         this.academyRepository.save(academy);
     }
 
@@ -69,5 +70,9 @@ public class AcademyService {
 
     public long countAcademyIds() {
         return academyRepository.count();
+    }
+
+    public List<Academy> getAcademyByVoter() {
+        return academyRepository.findMostjjimAcademy();
     }
 }

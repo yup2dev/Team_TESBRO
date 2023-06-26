@@ -45,7 +45,6 @@ public class ReviewService {
         }
     }
 
-
     public Page<Review> getList(Academy academy, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
@@ -73,5 +72,9 @@ public class ReviewService {
 
     public long countReviewIds() {
         return reviewRepository.count();
+    }
+
+    public List<Review> get4RecentReviews() {
+        return reviewRepository.find4RecentReviews();
     }
 }

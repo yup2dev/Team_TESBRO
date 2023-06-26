@@ -126,31 +126,18 @@
         <div class="review-items">
             <div class="review-item">새로 등록된 리뷰</div>
             <div class="review-cards">
-                <div class="review-card">
+                <div th:each="review : ${recentReviews}" class="review-card">
                     <img src="https://cdn.pixabay.com/photo/2020/08/05/13/27/eco-5465459_640.png" alt="review-photo">
-                    <div>학원이름</div>
-                    <div>⭐⭐⭐⭐⭐</div>
-                    <div><p>기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기</p></div>
+                    <div th:text="${review.academy.academyName}"></div>
+                    <div>
+                        <span th:if="${review.star_rating == 1}">⭐</span>
+                        <span th:if="${review.star_rating == 2}">⭐⭐</span>
+                        <span th:if="${review.star_rating == 3}">⭐⭐⭐</span>
+                        <span th:if="${review.star_rating == 4}">⭐⭐⭐⭐</span>
+                        <span th:if="${review.star_rating == 5}">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <div th:text="${review.content}"></div>
                 </div>
-                <div class="review-card">
-                    <img src="https://cdn.pixabay.com/photo/2020/08/05/13/27/eco-5465459_640.png" alt="review-photo">
-                    <div>학원이름</div>
-                    <div>⭐⭐⭐⭐⭐</div>
-                    <div><p>기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기</p></div>
-                </div>
-                <div class="review-card">
-                    <img src="https://cdn.pixabay.com/photo/2020/08/05/13/27/eco-5465459_640.png" alt="review-photo">
-                    <div>학원이름</div>
-                    <div>⭐⭐⭐⭐⭐</div>
-                    <div><p>기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기</p></div>
-                </div>
-                <div class="review-card">
-                    <img src="https://cdn.pixabay.com/photo/2020/08/05/13/27/eco-5465459_640.png" alt="review-photo">
-                    <div>학원이름</div>
-                    <div>⭐⭐⭐⭐⭐</div>
-                    <div><p>기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기기이이인후기</p></div>
-                </div>
-
             </div>
 
         </div>
@@ -230,64 +217,21 @@
             <div class="academy-item">인기 학원</div>
             <ul>
                 <li>
-                    <div class="academy-card">
+                    <div th:each="academy : ${mostjjimAcademy}" class="academy-card">
                         <img src="https://cdn.pixabay.com/photo/2017/07/10/19/42/logo-2491236_640.png" alt="academyLogo">
                         <ul>
-                            <li>학원이름</li>
-                            <li>학원주소</li>
-                            <li>찜</li>
+                            <li th:text="${academy.academyName}"></li>
+                            <li th:text="${academy.academyAddress}"></li>
+                            <li>찜한 횟수 : <span th:text="${academy.jjim}"></span></li>
                         </ul>
-                        <button>자세히보기 ></button>
+                        <button th:attr="onclick=|location.href='/academy/detail/'+${academy.id}|">자세히보기 ></button>
                     </div>
                 </li>
-                <li>
-                    <div class="academy-card">
-                        <img src="https://cdn.pixabay.com/photo/2017/07/10/19/42/logo-2491236_640.png" alt="academyLogo">
-                        <ul>
-                            <li>학원이름</li>
-                            <li>학원주소</li>
-                            <li>찜</li>
-                        </ul>
-                        <button>자세히보기 ></button>
-                    </div>
-                </li>
-                <li>
-                    <div class="academy-card">
-                        <img src="https://cdn.pixabay.com/photo/2017/07/10/19/42/logo-2491236_640.png" alt="academyLogo">
-                        <ul>
-                            <li>학원이름</li>
-                            <li>학원주소</li>
-                            <li>찜</li>
-                        </ul>
-                        <button>자세히보기 ></button>
-                    </div>
-                </li>
-                <li>
-                    <div class="academy-card">
-                        <img src="https://cdn.pixabay.com/photo/2017/07/10/19/42/logo-2491236_640.png" alt="academyLogo">
-                        <ul>
-                            <li>학원이름</li>
-                            <li>학원주소</li>
-                            <li>찜</li>
-                        </ul>
-                        <button>자세히보기 ></button>
-                    </div>
-                </li>
-                <li>
-                    <div class="academy-card">
-                        <img src="https://cdn.pixabay.com/photo/2017/07/10/19/42/logo-2491236_640.png" alt="academyLogo">
-                        <ul>
-                            <li>학원이름</li>
-                            <li>학원주소</li>
-                            <li>찜</li>
-                        </ul>
-                        <button>자세히보기 ></button>
-                    </div>
-                </li>
+
             </ul>
         </div>
 
-        <button class="academy-btn">더보기&nbsp;&nbsp;></button>
+        <button onclick="location.href='/academy/list';" class="academy-btn">더보기&nbsp;&nbsp;></button>
     </div>
 </div>
 
