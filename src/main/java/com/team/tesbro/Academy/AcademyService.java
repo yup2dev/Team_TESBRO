@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +20,7 @@ public class AcademyService {
     private final AcademyRepository academyRepository;
 
     public List<Academy> getList(String keyword) {
-        if(keyword != null){
+        if (keyword != null) {
             return academyRepository.findByAcademyNameContaining(keyword);
         }
         return this.academyRepository.findAll();
@@ -53,15 +54,18 @@ public class AcademyService {
         this.academyRepository.save(academy);
     }
 
-    public Page<Academy> getAcademyList(String keyword, int page) {
-        Sort sort;
-        if(keyword!=null){
-            Pageable pageable = PageRequest.of(page, 10);
-            return this.academyRepository.searchByAcademyNameOrAddress(keyword, pageable);
-        }
+    public Page<Academy> getAcademyList(String keyword, String localKey, int page) {
         Pageable pageable = PageRequest.of(page, 10);
-        return this.academyRepository.findAll(pageable);
+        if (StringUtils.hasText(keyword) && StringUtils.hasText(localKey)) {
+            return academyRepository.searchByAcademyNameOrAddress(keyword, localKey, pageable);
+        } else if (StringUtils.hasText(keyword)) {
+            return academyRepository.searchByAcademyNameOrAddress(keyword, null, pageable);
+        } else if (StringUtils.hasText(localKey)) {
+            return academyRepository.searchByAcademyNameOrAddress(null, localKey, pageable);
+        }
+        return academyRepository.findAll(pageable);
     }
+
 
     public long countAcademyIds() {
         return academyRepository.count();

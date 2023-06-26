@@ -12,8 +12,14 @@ import java.util.List;
 @Repository
 public interface AcademyRepository extends JpaRepository<Academy, Integer> {
     List<Academy> findByAcademyNameContaining(String keyword);
-    @Query("SELECT a FROM Academy a WHERE a.academyName LIKE %:keyword% OR a.academyAddress LIKE %:keyword%")
-    Page<Academy> searchByAcademyNameOrAddress(@Param("keyword") String keyword, @Param("page")Pageable pageable);
+
+    @Query("SELECT a FROM Academy a WHERE (:keyword IS NULL OR a.academyName LIKE %:keyword% OR a.academyAddress LIKE %:keyword%)" +
+            " AND (:localKey IS NULL OR a.academyName LIKE %:localKey% OR a.academyAddress LIKE %:localKey%)")
+    Page<Academy> searchByAcademyNameOrAddress(@Param("keyword") String keyword,
+                                               @Param("localKey") String localKey,
+                                               Pageable pageable);
+
+
     @Query(value = "SELECT * FROM ACADEMY ORDER BY JJIM DESC LIMIT 5", nativeQuery = true)
     List<Academy> findMostjjimAcademy();
 }

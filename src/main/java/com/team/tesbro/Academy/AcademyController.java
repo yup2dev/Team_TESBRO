@@ -35,8 +35,11 @@ public class AcademyController {
     private final UserService userService;
 
     @RequestMapping("/list")
-    public String academy(Model model, @RequestParam(value="page", defaultValue="0") int page, @Param("keyword") String keyword) {
-        Page<Academy> paging = this.academyService.getAcademyList(keyword, page);
+    public String academy(Model model,
+                          @RequestParam(value="page", defaultValue="0") int page,
+                          @RequestParam(value = "keyword", required = false) String keyword,
+                          @RequestParam(value = "localKey", required = false) String localKey) {
+        Page<Academy> paging = this.academyService.getAcademyList(keyword, localKey, page);
         model.addAttribute("paging", paging);
 
         List<Academy> academyList = this.academyService.getList(keyword);
