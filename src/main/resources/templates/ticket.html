@@ -10,11 +10,6 @@
 <div id="agreement"></div>
 <!-- 결제하기 버튼 -->
 <button id="payment-button">결제하기</button>
-<script th:inline="javascript">
-    const orderId = /*[[ ${ticket.id} ]]*/ null;
-    const orderId = /*[[ ${ticket.ticketName} ]]*/ null;
-    const value = /*[[ ${ticket.ticketPrice} ]]*/ null;
-</script>
 <script>
     const clientKey = "test_ck_aBX7zk2yd8yx0ZExRpErx9POLqKQ"
     const customerKey = "XyiqyZtDihwFT4HIIPaDS" // 내 상점의 고객을 식별하는 고유한 키

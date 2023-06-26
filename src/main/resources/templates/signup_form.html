@@ -109,6 +109,7 @@
                 xhr.setRequestHeader(header, token);
               },
             success: function(response) {
+            alert("메일이 발송되었습니다");
                  if (response === true) {
                     // Action when verification code is valid
                     console.log("Verification code is valid");
