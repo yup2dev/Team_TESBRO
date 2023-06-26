@@ -54,17 +54,28 @@ public class AcademyService {
         this.academyRepository.save(academy);
     }
 
-    public Page<Academy> getAcademyList(String keyword, String localKey, int page) {
+    public Page<Academy> getAcademyList(String keyword, String localKey, Integer peopleCapacity, int page) {
         Pageable pageable = PageRequest.of(page, 10);
-        if (StringUtils.hasText(keyword) && StringUtils.hasText(localKey)) {
-            return academyRepository.searchByAcademyNameOrAddress(keyword, localKey, pageable);
+
+        if (StringUtils.hasText(keyword) && StringUtils.hasText(localKey) && peopleCapacity != null) {
+            return academyRepository.searchByParam(keyword, localKey, peopleCapacity, pageable);
+        } else if (StringUtils.hasText(keyword) && StringUtils.hasText(localKey)) {
+            return academyRepository.searchByParam(keyword, localKey, null, pageable);
+        } else if (StringUtils.hasText(keyword) && peopleCapacity != null) {
+            return academyRepository.searchByParam(keyword, null, peopleCapacity, pageable);
+        } else if (StringUtils.hasText(localKey) && peopleCapacity != null) {
+            return academyRepository.searchByParam(null, localKey, peopleCapacity, pageable);
         } else if (StringUtils.hasText(keyword)) {
-            return academyRepository.searchByAcademyNameOrAddress(keyword, null, pageable);
+            return academyRepository.searchByParam(keyword, null, null, pageable);
         } else if (StringUtils.hasText(localKey)) {
-            return academyRepository.searchByAcademyNameOrAddress(null, localKey, pageable);
+            return academyRepository.searchByParam(null, localKey, null, pageable);
+        } else if (peopleCapacity != null) {
+            return academyRepository.searchByParam(null, null, peopleCapacity, pageable);
         }
         return academyRepository.findAll(pageable);
     }
+
+
 
 
     public long countAcademyIds() {
