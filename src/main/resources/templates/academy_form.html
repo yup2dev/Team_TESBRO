@@ -1,5 +1,6 @@
+<link rel="stylesheet" type="text/css" th:href="@{/academyForm.css}">
 <div layout:fragment="content" class="container">
-    <h5 class="my-3 border-bottom pb-2">등록하기</h5>
+    <div class="title">학원 등록하기</div>
     <form th:action="@{/academy/create}" method="post" th:object="${AcademyForm}">
         <div class="mb-3">
             <label for="academyName" class="form-label">학원이름</label>
@@ -14,22 +15,22 @@
 
 
 
-<!--        <div>-->
-<!--            <form name="address_search" action="/static/jusoPopup.jsp" method="get">-->
-<!--                <textarea th:field="*{academyAddress}" class="form-control" rows="10"></textarea>-->
-<!--                <button type="button" onclick="openAddressPopup()">주소검색</button>-->
-<!--            </form>-->
-<!--        </div>-->
+        <!--        <div>-->
+        <!--            <form name="address_search" action="/static/jusoPopup.jsp" method="get">-->
+        <!--                <textarea th:field="*{academyAddress}" class="form-control" rows="10"></textarea>-->
+        <!--                <button type="button" onclick="openAddressPopup()">주소검색</button>-->
+        <!--            </form>-->
+        <!--        </div>-->
 
-<!--        <script>-->
-<!--  function openAddressPopup() {-->
-<!--    var popupUrl = "/static/jusoPopup.jsp";-->
-<!--    var popupWindow = window.open(popupUrl, "주소검색", "width=500, height=500");-->
-<!--    popupWindow.onload = function() {-->
-<!--      popupWindow.document.forms["address_search"].submit();-->
-<!--    };-->
-<!--  }-->
-<!--</script>-->
+        <!--        <script>-->
+        <!--  function openAddressPopup() {-->
+        <!--    var popupUrl = "/static/jusoPopup.jsp";-->
+        <!--    var popupWindow = window.open(popupUrl, "주소검색", "width=500, height=500");-->
+        <!--    popupWindow.onload = function() {-->
+        <!--      popupWindow.document.forms["address_search"].submit();-->
+        <!--    };-->
+        <!--  }-->
+        <!--</script>-->
 
 
 
@@ -50,7 +51,7 @@
             <textarea th:field="*{imgLogo}" class="form-control" rows="10"></textarea>
         </div>
         <div>
-            <input type="submit" value="저장하기" class="btn btn-primary my-2">
+            <input type="submit" value="저장하기" class="save">
         </div>
     </form>
 </div>

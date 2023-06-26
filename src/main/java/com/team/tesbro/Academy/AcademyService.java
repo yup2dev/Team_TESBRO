@@ -66,6 +66,7 @@ public class AcademyService {
         return this.academyRepository.findAll(pageable);
     }
 
+
     public long countAcademyIds() {
         return academyRepository.count();
     }

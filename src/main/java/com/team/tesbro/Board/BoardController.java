@@ -22,14 +22,6 @@ public class BoardController {
     private final BoardService boardService;
     private final UserService userService;
 
-    @GetMapping("/event")
-    public String getEventList(@RequestParam(defaultValue = "latest") String order,
-                               @RequestParam(defaultValue = "0") int page, Model model) {
-        Page<Board> boardPage = boardService.getBoardListByCategory("event", order, page);
-        model.addAttribute("boardcategory", "event");
-        model.addAttribute("paging", boardPage);
-        return "event_list";
-    }
 
     @GetMapping("/qna")
     public String getQnaList(@RequestParam(defaultValue = "latest") String order,
@@ -37,7 +29,7 @@ public class BoardController {
         Page<Board> boardPage = boardService.getBoardListByCategory("qna", order, page);
         model.addAttribute("paging", boardPage);
         model.addAttribute("boardcategory", "qna");
-        return "board_list";
+        return "qna_list";
     }
 
     @GetMapping("/notice")
@@ -49,12 +41,6 @@ public class BoardController {
         return "board_list";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/event/create")
-    public String getCreateEventForm(Model model, BoardForm boardForm) {
-        model.addAttribute("boardCategory", "event");
-        return "board_form";
-    }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/qna/create")

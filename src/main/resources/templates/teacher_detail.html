@@ -1,0 +1,26 @@
+
+<link rel="stylesheet" type="text/css" th:href="@{/academyForm.css}">
+<div layout:fragment="content" class="container">
+  <div class="title">강사 등록하기</div>
+  <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="post">
+    <div class="mb-3">
+      <label for="teacherName" class="form-label">강사 이름</label>
+      <input type="text" th:field="*{teacherName}" name="teacherName" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="introduction" class="form-label">강사 소개</label>
+      <textarea th:field="*{introduction}" name="introduction"  class="form-control" rows="10"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="qualifications" class="form-label">경력 사항</label>
+      <textarea th:field="*{qualifications}"  name="qualifications" class="form-control" rows="20"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="awards" class="form-label">수상 경력</label>
+      <input type="text" th:field="*{awards}" name="awards" class="form-control">
+    </div>
+    <div>
+      <input type="submit" value="저장하기" class="save">
+    </div>
+  </form>
+</div>

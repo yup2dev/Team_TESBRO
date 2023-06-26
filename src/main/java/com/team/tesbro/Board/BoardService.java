@@ -107,4 +107,8 @@ public class BoardService {
         board.getVoter().add(siteUser);
         this.boardRepository.save(board);
     }
+
+    public Board getLastestNotice() {
+        return boardRepository.findLatestNotice();
+    }
 }
