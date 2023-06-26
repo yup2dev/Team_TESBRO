@@ -14,5 +14,6 @@ public interface AcademyRepository extends JpaRepository<Academy, Integer> {
 
     List<Academy> findByAcademyNameContaining(String keyword);
 
-    Page<Academy> findAll(Pageable pageable);
+    Page<Academy> findByAcademyName(String academyName, Pageable pageable);
 }
+
