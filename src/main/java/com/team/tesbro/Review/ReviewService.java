@@ -70,4 +70,8 @@ public class ReviewService {
         review.getVoter().add(siteUser);
         this.reviewRepository.save(review);
     }
+
+    public long countReviewIds() {
+        return reviewRepository.count();
+    }
 }

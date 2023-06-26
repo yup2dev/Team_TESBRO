@@ -26,16 +26,6 @@ public class AcademyController {
     private final ReviewService reviewService;
     private final LessonService lessonService;
 
-
-//    @RequestMapping("/list")
-//    public String academy(Model model, @Param("keyword") String keyword) {
-//        List<Academy> academyList = this.academyService.getList(keyword);
-//        model.addAttribute("academyList", academyList);
-//        model.addAttribute("keyword", keyword);
-//
-//        return "list";
-//    }
-//
     @RequestMapping("/list")
     public String academy(Model model, @RequestParam(value="page", defaultValue="0") int page, @Param("keyword") String keyword) {
         Page<Academy> paging = this.academyService.getAcademyList(page);
