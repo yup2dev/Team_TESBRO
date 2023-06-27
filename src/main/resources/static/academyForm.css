@@ -1,48 +1,63 @@
-.title {
-  font-size: 30px;
-  height: 100px;
-  font-weight: bold;
-  text-align: center;
-}
-.form-label {
-  font-weight: bold;
-}
+body {
 
-.form-control {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-}
-
-.save {
-  display: inline-block;
-  padding: 8px 12px;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
   text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  overflow: visible;
-  background-color: seagreen;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
+button {
+    border:0;
+    background:inherit;
+}
+li {list-style: none;}
 
-.save:hover {
-  color: white;
-  transform: scale(1.1);
-  transition: transform 0.5s;
-}
 
-.mb-3 {
-  margin-bottom: 16px;
+
+.content {
+border:1px solid red;
+    position:relative;
+    width:100%;
+    min-width:1500px;
+    margin:0 auto;
 }
-textarea {
-  resize: none;
+.container {
+  width: 1100px;
+  margin: 0 auto;
+    border:1px solid blue;
+}
+.container .top-box {
+    width:100%;
+        height:80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.5rem;
+        font-weight:bold;
+        border-bottom:5px double lightgray;
+}
+.middle-box {
+    display:flex;
+    margin-bottom:40px;
+    width:100%;
+    padding:30px 0;
+    border:1px solid green;
+}
+.middle-box .form-label {
+    width:200px;
+    font-size:1.5rem;
+    padding:5px 0;
+    border:1px solid red;
+}
+.middle-box form div textarea, form div input {
+    width:40%;
+    margin:20px 0;
+    min-height:30px;
+    border:1px solid lightgray;
+}
+.middle-box form div:nth-child(6) button {
+    cursor:pointer;
+
+}
+.middle-box form div:nth-child(8) textarea {
+    width:1100px;
 }

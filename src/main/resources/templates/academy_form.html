@@ -1,36 +1,54 @@
-<link rel="stylesheet" type="text/css" th:href="@{/academyForm.css}">
-<div layout:fragment="content" class="container">
-    <div class="title">학원 등록하기</div>
-    <form th:action="@{/academy/create}" method="post" th:object="${AcademyForm}">
-        <div class="mb-3">
-            <label for="academyName" class="form-label">학원이름</label>
-            <input type="text" th:field="*{academyName}" class="form-control">
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>학원등록</title>
+
+
+
+</head>
+<body>
+<div layout:fragment="content" class="content">
+    <link rel="stylesheet" type="text/css" th:href="@{/academyForm.css}">
+    <div class="container">
+        <div class="top-box">학원 등록하기</div>
+
+        <div class="middle-box">
+            <form th:action="@{/academy/create}" method="post" th:object="${AcademyForm}">
+                <div class="mb-3">
+                    <label for="imgLogo"><div class="form-label">학원로고</div></label>
+                    <textarea th:field="*{imgLogo}" class="form-control" placeholder="url 첨부"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="address"><div class="form-label">주소</div></label>
+                    <input type="text" id="address_kakao" name="address" readonly placeholder="주소 검색"/>
+                </div>
+                <div class="mb-3">
+                    <label for="academyName"><div class="form-label">학원이름</div></label>
+                    <input type="text" th:field="*{academyName}" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="ceoName"><div class="form-label">대표</div></label>
+                    <input type="text" th:field="*{ceoName}" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="ceoName"><div class="form-label">사업자등록번호</div></label>
+                    <input type="text" th:field="*{ceoName}" class="form-control">
+                    <button type="button" onclick="openPopup();">조회</button>
+                </div>
+                <div class="mb-3">
+                    <label for="academyTel"><div class="form-label">전화번호</div></label>
+                    <textarea th:field="*{academyTel}" class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="introduction"><div class="form-label">학원소개</div></label>
+                    <textarea th:field="*{introduction}" class="form-control" rows="20"></textarea>
+                </div>
+                <div>
+                    <input type="submit" value="저장하기" class="save">
+                </div>
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="ceoName" class="form-label">대표</label>
-            <input type="text" th:field="*{ceoName}" class="form-control">
-        </div>
-
-
-
-
-
-        <!--        <div>-->
-        <!--            <form name="address_search" action="/static/jusoPopup.jsp" method="get">-->
-        <!--                <textarea th:field="*{academyAddress}" class="form-control" rows="10"></textarea>-->
-        <!--                <button type="button" onclick="openAddressPopup()">주소검색</button>-->
-        <!--            </form>-->
-        <!--        </div>-->
-
-        <!--        <script>-->
-        <!--  function openAddressPopup() {-->
-        <!--    var popupUrl = "/static/jusoPopup.jsp";-->
-        <!--    var popupWindow = window.open(popupUrl, "주소검색", "width=500, height=500");-->
-        <!--    popupWindow.onload = function() {-->
-        <!--      popupWindow.document.forms["address_search"].submit();-->
-        <!--    };-->
-        <!--  }-->
-        <!--</script>-->
 
 
 
@@ -38,20 +56,38 @@
 
 
 
-        <div class="mb-3">
-            <label for="academyTel" class="form-label">전화번호</label>
-            <textarea th:field="*{academyTel}" class="form-control" rows="10"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="introduction" class="form-label">학원소개</label>
-            <textarea th:field="*{introduction}" class="form-control" rows="20"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="imgLogo" class="form-label">학원로고</label>
-            <textarea th:field="*{imgLogo}" class="form-control" rows="10"></textarea>
-        </div>
-        <div>
-            <input type="submit" value="저장하기" class="save">
-        </div>
-    </form>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+//카카오 지도 발생
+new daum.Postcode({
+oncomplete: function(data) { //선택시 입력값 세팅
+document.getElementById("address_kakao").value = data.address; // 주소 넣기
+document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+}
+}).open();
+});
+}
+</script>
+    <script>
+function openPopup() {
+    window.open('/user/sign', '사업자등록번호 조회', 'width=430, height=500, location=no, status=yes, scrollbars=yes');
+}
+</script>
 </div>
+</body>
+</html>

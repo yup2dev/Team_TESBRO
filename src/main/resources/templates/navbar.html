@@ -5,7 +5,7 @@
         <div class="nav-top">
             <div class="brand-logo"><a href="/tesbro">TESBRO</a></div>
             <div class="user-btns">
-                <div class="user-btn"><a th:href="@{/academy/create}">기업 등록</a></div>
+                <div class="user-btn"><a th:href="@{/academy/create}">학원 등록</a></div>
                 <div class="user-btn">
                     <a sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
                     <a sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
