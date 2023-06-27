@@ -1,9 +1,14 @@
 package com.team.tesbro.User;
 
+import com.team.tesbro.LessonTicket.LessonTicket;
+import com.team.tesbro.UserLessonTicket.UserLessonTicket;
 import jakarta.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,7 +29,13 @@ public class SiteUser {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
     @ManyToMany(mappedBy = "ticketUsers")
+    private List<LessonTicket> lessonTickets = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserLessonTicket> userLessonTickets = new ArrayList<>();
+
 
     public boolean isAdmin(){
         return "admin".equals(username) ||
