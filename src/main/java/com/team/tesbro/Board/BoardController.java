@@ -49,7 +49,7 @@ public class BoardController {
         return "board_form";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("principal.username.matches('^admin.*$')")
     @GetMapping("/notice/create")
     public String getCreateNoticeForm(Model model, BoardForm boardForm) {
         model.addAttribute("boardCategory", "notice");
@@ -79,12 +79,14 @@ public class BoardController {
 
         if (boardCategory.equals("event")) {
             return "event_detail";
+        } else if (boardCategory.equals("qna")){
+            return "qna_detail";
         } else {
-            return "board_detail";
+            return  "board_detail";
         }
     }
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("principal.username.matches('^admin.*$')")
     @PostMapping("/{boardCategory}/detail/{id}")
     public String addAnswerToBoard(@PathVariable("boardCategory") String boardCategory, @PathVariable("id") Integer id, @ModelAttribute("answerForm") AnswerForm answerForm) {
         String content = answerForm.getContent();

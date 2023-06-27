@@ -53,16 +53,16 @@ public class AcademyService {
         this.academyRepository.save(academy);
     }
 
-    public Page<Academy> getAcademyList(int page) {
+    public Page<Academy> getAcademyList(String order,int page) {
         Sort sort;
-//        if (order.equals("voter")) {
-//            sort = Sort.by(Sort.Direction.DESC, "voter");
-//        } else if (order.equals("reviewCount")) {
-//            sort = Sort.by(Sort.Direction.DESC, "reviewCount");
-//        } else {
-//            sort = Sort.by(Sort.Direction.DESC, "id");
-//        }
-        Pageable pageable = PageRequest.of(page, 10);
+        if (order.equals("voter")) {
+            sort = Sort.by(Sort.Direction.DESC, "voter");
+        } else if (order.equals("review")) {
+            sort = Sort.by(Sort.Direction.DESC, "review");
+        } else {
+            sort = Sort.by(Sort.Direction.DESC, "id");
+        }
+        Pageable pageable = PageRequest.of(page, 5);
         return this.academyRepository.findAll(pageable);
     }
 
