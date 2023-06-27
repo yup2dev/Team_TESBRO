@@ -77,8 +77,8 @@ public class BoardController {
         model.addAttribute("board", board);
         model.addAttribute("answerForm", new AnswerForm());
 
-        if (boardCategory.equals("event")) {
-            return "event_detail";
+        if (boardCategory.equals("qna")) {
+            return "qna_detail";
         } else {
             return "board_detail";
         }

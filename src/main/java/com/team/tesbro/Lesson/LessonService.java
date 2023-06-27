@@ -61,6 +61,7 @@ public class LessonService {
         lesson.setLessonTime(lessonForm.getLessonTime());
         lesson.setAcademy(academy);
         lesson.setTeacher(teacher);
+        lesson.setCurrentCapacity(0);
         lessonRepository.save(lesson);
     }
 }

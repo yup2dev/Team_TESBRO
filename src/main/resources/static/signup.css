@@ -52,19 +52,6 @@ button{border:0;background: inherit; padding:0;}
   align-items:center;
 }
 
-.container .form-top {
-  font-family: 'Humanbumsuk';
-  font-size:2rem;
-  font-weight:bold;
-/*   border:1px solid red; */
-  position:absolute;
-  text-align:center;
-  top:50px;
-  left:50%;
-  transform:translatex(-50%);
-}
-
-
 
 
 .container .form-left, .form-right {
@@ -83,13 +70,15 @@ button{border:0;background: inherit; padding:0;}
 
 }
 
-.form-left #email-btn{
-border: 1px solid black;
+.form-left #email-btn, #check_btn{
+position:absolute;
+right:54%;
 border-radius:10px;
 background:inherit;
 height:30px;
 width:35px;
 margin-left:5px;
+cursor:pointer;
 }
 
 .form-left .input-item {
@@ -109,9 +98,6 @@ margin-left:5px;
   border-radius:10px;
 }
 
-.form-left #email{
-width:180px;
-}
 
 .form-left > form > button {
   cursor:pointer;
@@ -136,15 +122,31 @@ width:180px;
   align-items:center;
   text-align:center;
 }
+.form-right .welcome-ment {
+    font-size: 2rem;
+    font-family: 'Humanbumsuk';
+}
+.form-right .welcome-ment:first-child {
+  margin-top:78px;
+}
+.form-right .welcome-img {
+    width:50%;
+}
+.form-right .welcome-img > img {
+    width:100%;
+}
+
+
+
 .form-right .other-btn {
   width: 80%;
-  height:50px;
+  height:45px;
   overflow:hidden;
   border-radius:10px;
   cursor:pointer;
   position:relative;
   margin-right:30px;
-  margin-bottom:30px;
+  margin-bottom:20px;
 }
 .form-right .other-btn:last-child {
   margin-bottom:50px;
@@ -164,7 +166,7 @@ width:180px;
   font-size:1.2rem;
   font-weight:bold;
   z-index:999;
-  top:20px;
+  top:10px;
   left:30px;
 }
 

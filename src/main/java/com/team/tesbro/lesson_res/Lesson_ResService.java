@@ -6,6 +6,7 @@ import com.team.tesbro.Lesson.LessonRepository;
 import com.team.tesbro.User.SiteUser;
 import com.team.tesbro.User.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -69,7 +70,7 @@ public class Lesson_ResService {
     }
 
     public List<Lesson_Res> findUserRes(Integer userId){
-        return lessonResRepository.findByUsersId(userId);
+        return lessonResRepository.findByUsersId(userId, Sort.by(Sort.Direction.DESC, "lesson.lessonDate"));
     }
 
     public List<Integer> findUsers(Integer lessonId){

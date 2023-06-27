@@ -67,6 +67,9 @@ public class Academy {
 
     @ManyToMany
     Set<SiteUser> voter;
-    //업체아이디, 수업리스트 <클래스가 없음
-    // 찜하기 .. 후기? 사진 < 방법 모름
+
+
+    public void updateJjim() {
+        this.jjim = this.voter.size();
+    }
 }

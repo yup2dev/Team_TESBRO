@@ -82,7 +82,7 @@ public class LessonController {
     }
 
     // 레슨 생성 매핑 null값 불가능 처리 필요(아마 자바스크립트로)
-    @GetMapping("lesson/create/{id}")
+    @GetMapping("/lesson/create/{id}")
     public String lessonCre(@PathVariable("id") Integer id, LessonForm lessonForm, Model model){
 // 굳이        List<Teacher> LT = teacherService.getTeachersByAcademyId(id);
         Academy academy = academyService.getAcademy(id);
