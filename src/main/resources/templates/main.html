@@ -57,7 +57,12 @@
 <div class="notice-box">
     <div class="notice-items">
         <div class="notice-item">공지사항</div>
-        <div class="notice-item"><a th:href="@{|/board/notice/detail/${latestNotice.id}|}" th:text="${latestNotice.subject}"></a></div>
+        <div th:if="${latestNotice == null}">
+            <p>등록된 공지사항이 없습니다.</p>
+        </div>
+        <div th:if="${latestNotice}" class="notice-item">
+            <a th:href="@{|/board/notice/detail/${latestNotice.id}|}" th:text="${latestNotice.subject}"></a>
+        </div>
         <button onclick="location.href='/board/notice';">></button>
     </div>
 </div>
@@ -126,6 +131,9 @@
         <div class="review-items">
             <div class="review-item">새로 등록된 리뷰</div>
             <div class="review-cards">
+                <div th:if="${recentReviews.isEmpty()}" class="review-card">
+                    <div>등록된 리뷰가 없습니다.</div>
+                </div>
                 <div th:each="review : ${recentReviews}" class="review-card">
                     <img src="https://cdn.pixabay.com/photo/2020/08/05/13/27/eco-5465459_640.png" alt="review-photo">
                     <div th:text="${review.academy.academyName}"></div>

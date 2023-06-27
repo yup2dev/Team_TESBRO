@@ -14,7 +14,6 @@ li {list-style: none;}
 
 
 .content {
-border:1px solid red;
     position:relative;
     width:100%;
     min-width:1500px;
@@ -23,7 +22,6 @@ border:1px solid red;
 .container {
   width: 1100px;
   margin: 0 auto;
-    border:1px solid blue;
 }
 .container .top-box {
     width:100%;
@@ -40,24 +38,38 @@ border:1px solid red;
     margin-bottom:40px;
     width:100%;
     padding:30px 0;
-    border:1px solid green;
 }
 .middle-box .form-label {
     width:200px;
     font-size:1.5rem;
     padding:5px 0;
-    border:1px solid red;
+}
+.middle-box form {
+    width:100%;
 }
 .middle-box form div textarea, form div input {
     width:40%;
-    margin:20px 0;
+    margin-top:10px;
+    margin-bottom:20px;
     min-height:30px;
     border:1px solid lightgray;
 }
 .middle-box form div:nth-child(6) button {
     cursor:pointer;
+    margin-left:-50px;
 
 }
-.middle-box form div:nth-child(8) textarea {
-    width:1100px;
+.middle-box form .save {
+    width:20%;
+    margin-left:50%;
+    transform:translatex(-50%);
+    padding:10px 0;
+    cursor:pointer;
+    border:1px solid lightgray;
+    border-radius:10px;
+    background:inherit;
+    font-size:1.2rem;
+}
+.middle-box form .save:hover {
+    border:1px solid rgb(30,90,30);
 }

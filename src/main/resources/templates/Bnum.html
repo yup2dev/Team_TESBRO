@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
-<div th:fragment="BnumFragment" class="Bnum">
 <head>
     <title>사업자 정보 조회</title>
     <h3>예시 - 5138116574</h3>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<h1>사업자 정보 조회</h1>
-<input type="text" id="bnoInput" placeholder="사업자번호를 입력하세요">
-<button id="searchButton">조회</button>
 
-<div id="resultContainer"></div>
+<div class="content">
+    <h1>사업자 정보 조회</h1>
+    <input type="text" id="bnoInput" placeholder="사업자번호를 입력하세요">
+    <button id="searchButton">조회</button>
 
-<div id="registerContainer" style="display: none;">
-    <button id="registerButton">회원가입</button>
-</div>
-    <button id="backButton">돌아가기</button>
+    <div id="resultContainer"></div>
+
+    <div id="registerContainer" style="display: none;">
+        <button id="registerButton">확인</button>
+    </div>
+        <button id="backButton">취소</button>
 
 
 <script>
@@ -48,7 +49,7 @@
             window.location.href = "/user/signup";
         });
         $('#backButton').click(function() {
-            window.location.href = "/user/signup";
+            window.close();
         });
     });
 
@@ -69,6 +70,9 @@
         }
     }
 </script>
+</div>
+
+
 </body>
 </div>
 </html>
