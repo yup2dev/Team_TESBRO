@@ -83,7 +83,7 @@
 
 
                 <div class="order-buttons">
-                    <button class="order-button" onclick="handleOrderChange('reviewList')">리뷰순</button>
+                    <button class="order-button" onclick="handleOrderChange('review')">리뷰순</button>
                     <button class="order-button" onclick="handleOrderChange('voter')">추천순</button>
                 </div>
             </div>
@@ -102,13 +102,14 @@
                                 <div class="cardbody">
                                     <div class="info">
                                         <h3 th:text="${academy.academyName}"></h3>
-                                        <span class="map" th:text="${academy.academySi}"></span> <span class="map"
-                                                                                                       th:text="${academy.academyGu}"></span>
-                                        <span class="map" th:text="${academy.academyDong}"></span>
                                     </div>
                                     <div class="voter">
                                         <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" style="width:20px; vertical-align:middle" alt="like-icon">
                                         <td th:text="${#lists.size(academy.voter)}"></td>
+                                        <div class="review">
+                                            <img src="https://cdn.icon-icons.com/icons2/2066/PNG/512/comments_icon_125320.png" style="width:20px; vertical-align:middle" alt="review-icon">
+                                            <td th:text="${#lists.size(academy.reviewList)}"></td>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -227,6 +228,25 @@ jQuery.ajax({
 
 
 </script>
+
+    <script>
+    function handleOrderChange(selectedOption) {
+      var currentUrl = window.location.href;
+      var updatedUrl;
+
+      if (currentUrl.includes("?")) {
+        if (currentUrl.includes("order=")) {
+          updatedUrl = currentUrl.replace(/order=[^&]+/, "order=" + selectedOption);
+        } else {
+          updatedUrl = currentUrl + "&order=" + selectedOption;
+        }
+      } else {
+        updatedUrl = currentUrl + "?order=" + selectedOption;
+      }
+
+      window.location.href = updatedUrl;
+    }
+  </script>
 
 </div>
 </body>

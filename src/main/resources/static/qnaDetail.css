@@ -1,0 +1,128 @@
+body {
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+button {
+  border: 0;
+  background: inherit;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+li {
+  list-style: none;
+}
+
+.qnaContainer {
+  width: 100%;
+  min-width: 1500px;
+  position: relative;
+}
+.container {
+  width: 1100px;
+  margin: 0 auto;
+}
+.container .qna-header {
+  position: relative;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.container .qna-header .qna-sub {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: -120px;
+}
+.qnaContainer .qna-box {
+  border-top: 5px double lightgray;
+  border-bottom: 1px solid lightgray;
+  width: 1100px;
+  margin: 0 auto;
+  margin-top: -130px;
+  position: relative;
+}
+.qna-box div:first-child {
+  border-bottom: 5px double lightgray;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 20px 10px;
+}
+.qna-box .content2 {
+  min-height: 300px;
+  font-size: 1rem;
+  padding: 50px 10px;
+  margin-bottom: 50px;
+}
+.qna-box .recommend {
+  border: 1px solid rgb(30, 90, 30);
+  border-radius: 10px;
+  padding: 10px;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translatex(-50%);
+  width: 70px;
+  text-align: center;
+}
+.qna-box .recommend:hover {
+  background: rgb(30, 90, 30);
+  color: white;
+}
+
+.container .g-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.container .g-btn a {
+  background: gray;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+.answer-header .answer-sub {
+  border-top: 5px double lightgray;
+  border-bottom: 5px double lightgray;
+  width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  font-size: 1.2rem;
+  font-weight: bold;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+
+}
+
+.btn {
+  background: gray;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1rem;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}

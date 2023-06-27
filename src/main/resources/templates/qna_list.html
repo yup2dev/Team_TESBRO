@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>공지사항</title>
+    <title>문의하기</title>
 </head>
 
 <body>
@@ -55,7 +55,7 @@
                     <td class="td-item" >
                         <a th:href="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:text="${board.subject}"></a>
                         <span class="answer" th:if="${#lists.size(board.answers) > 0}"
-                              th:text="${#lists.size(board.answers)}">
+                              th:text="&#91;답변완료&#93;">
           </span>
                     </td>
                     <td class="td-item" >
@@ -72,7 +72,7 @@
 
 
             <div class="pagination">
-
+                <a th:href="@{|/board/${paging.content[0].boardCategory}/create|}" class="button">글쓰기</a>
                 <a th:if="${paging.hasPrevious()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.previousPageable().pageNumber}|}" class="prev">&lt;</a>
                 <span th:if="${paging.number >= 2}">
           <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 2}|}" class="pager" th:text="${paging.number - 1}"></a>

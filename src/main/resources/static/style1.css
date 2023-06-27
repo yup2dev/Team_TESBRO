@@ -126,6 +126,13 @@ li {list-style: none;}
    margin: 40px 0;
    position: relative;
 }
+.pagination .button {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  position: absolute;
+  left: 0;
+  width: 50px;
+}
 
 .pagination a {
   display: block;
@@ -166,7 +173,9 @@ li {list-style: none;}
 .pagination span.page_num {
   display: none;
 }
-
+.answer {
+color: red;
+}
 
 
 

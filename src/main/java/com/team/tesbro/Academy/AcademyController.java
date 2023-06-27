@@ -32,8 +32,8 @@ public class AcademyController {
     private final UserService userService;
 
     @RequestMapping("/list")
-    public String academy(Model model, @RequestParam(value="page", defaultValue="0") int page, @Param("keyword") String keyword) {
-        Page<Academy> paging = this.academyService.getAcademyList(page);
+    public String academy(Model model, @RequestParam(value="page", defaultValue="0") int page, @Param("keyword") String keyword, @RequestParam(defaultValue = "latest") String order) {
+        Page<Academy> paging = this.academyService.getAcademyList(order, page);
         model.addAttribute("paging", paging);
 
         List<Academy> academyList = this.academyService.getList(keyword);
@@ -77,7 +77,7 @@ public class AcademyController {
     @GetMapping("detail/create/search")
     public String detailSearch(Model model, @Param("keyword") String keyword){
         List<Academy> academyList = this.academyService.getList(keyword);
-            model.addAttribute(academyList);
+        model.addAttribute(academyList);
         return "academy_create_list";
     }
 

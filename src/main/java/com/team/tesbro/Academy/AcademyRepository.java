@@ -12,6 +12,8 @@ import java.util.List;
 @Repository
 public interface AcademyRepository extends JpaRepository<Academy, Integer> {
 
+
+//    Page<Academy> findByOrder(String order, Pageable pageable);
     List<Academy> findByAcademyNameContaining(String keyword);
 
     Page<Academy> findByAcademyName(String academyName, Pageable pageable);

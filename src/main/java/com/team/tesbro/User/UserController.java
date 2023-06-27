@@ -67,4 +67,8 @@ public class    UserController {
     public String mail() {
         return "mail";
     }
+    @GetMapping("/my")
+    public String my() {
+        return "my";
+    }
 }
