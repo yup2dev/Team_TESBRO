@@ -48,16 +48,17 @@
         <div class="bottom-box">
             <div class="recentAca-ment">다시 예약하기</div>
             <div class="recentAca-box">
-                <div  th:each="lessonRes, iStat : ${lessonResList}" th:remove="${iStat.index > 3} ? all : none" class="recentAca-card">
+                <div th:each="lessonRes, iStat : ${lessonResList}" th:remove="${iStat.index > 3} ? all : none" class="recentAca-card">
                     <img src="https://cdn.pixabay.com/photo/2020/08/05/13/27/eco-5465459_640.png" alt="">
-                    <div th:text="${lessonRes.lesson.academy.academyName}" class="recentAca-item"></div>
+                    <div class="recentAca-item"><a th:href="@{|/academy/detail/${lessonRes.lesson.academy.Id}|}" th:text="${lessonRes.lesson.academy.academyName}"></a></div>
                     <div th:text="${lessonRes.lesson.academy.academyAddress}" class="recentAca-item"></div>
                     <div th:text="${lessonRes.lesson.academy.academyTel}" class="recentAca-item"></div>
                 </div>
             </div>
-
         </div>
     </div>
+
+
 
 </div>
 </body>
