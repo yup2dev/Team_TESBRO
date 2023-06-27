@@ -18,6 +18,7 @@ public class AcademyForm {
     private String introduction;
     private String imgLogo;
     private String academyAddress;
+    private long corNum;
 }
 
 

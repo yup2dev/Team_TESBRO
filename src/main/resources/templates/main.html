@@ -15,8 +15,8 @@
                     <div class="slide_item item1">
                         <div class="fixed-item">
                             <div>~ 대충 멋들어지는 <br> &nbsp;&nbsp;&nbsp;선전문구 들어가는 곳 ~</div>
-                            <input type="text" placeholder="필라테스 학원 검색하기">
-                            <button><img src="https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_1280.png" alt=""></button>
+                            <input type="text" placeholder="필라테스 학원 검색하기" name="keyword" th:value="${keyword}" value>
+                            <button class="searchbtn" type="submit"><img src="https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_1280.png" alt=""></button>
                             <img src="https://cdn.pixabay.com/photo/2023/06/15/04/29/woman-8064380_1280.jpg" alt="1">
                         </div>
                     </div>
@@ -115,8 +115,8 @@
             </button>
             <button>
                 <div><img src="https://img.freepik.com/free-vector/flat-design-beautiful-spring-flower-set_23-2148822393.jpg?w=1380&t=st=1687408447~exp=1687409047~hmac=a40404997b0a99fc20515e4f372972bc1cf61b4b9d441df0c2cc4edaa57638f7" alt="btn-img3"></div>
-                <div class="inbtn-ment">여기는 뭐 넣지</div>
-                <div class="inbtn-ment">대충 집가고 싶다는 말</div>
+                <div class="inbtn-ment">수강권 구매</div>
+                <div class="inbtn-ment">돈 내놔</div>
             </button>
         </div>
     </div>
@@ -136,7 +136,7 @@
                 </div>
                 <div th:each="review : ${recentReviews}" class="review-card">
                     <img src="https://cdn.pixabay.com/photo/2020/08/05/13/27/eco-5465459_640.png" alt="review-photo">
-                    <div th:text="${review.academy.academyName}"></div>
+                    <div><a th:href="@{|/academy/detail/${review.academy.Id}|}" th:text="${review.academy.academyName}"></a></div>
                     <div>
                         <span th:if="${review.star_rating == 1}">⭐</span>
                         <span th:if="${review.star_rating == 2}">⭐⭐</span>
@@ -223,6 +223,9 @@
         </div>
         <div class="academy-items">
             <div class="academy-item">인기 학원</div>
+            <div th:if="${mostjjimAcademy.isEmpty()}">
+                <p>등록된 아카데미가 없습니다.</p>
+            </div>
             <ul>
                 <li>
                     <div th:each="academy : ${mostjjimAcademy}" class="academy-card">
@@ -237,6 +240,7 @@
                 </li>
 
             </ul>
+
         </div>
 
         <button onclick="location.href='/academy/list';" class="academy-btn">더보기&nbsp;&nbsp;></button>

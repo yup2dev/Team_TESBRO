@@ -48,31 +48,16 @@
                     <input type="text" id="address_kakao" name="address" readonly placeholder="주소 검색"/>
                 </div>
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                <button type="submit">일반 회원가입</button>
-                <button>메인화면</button>
+                <button type="submit"> 회원가입</button>
+
             </form>
+                <button onclick="location.href='/tesbro';" class="main-btn">메인화면</button>
         </div>
 
         <div class="form-right">
             <div class="welcome-ment">환영합니다</div>
             <div class="welcome-ment">TESBRO 입니다</div>
             <div class="welcome-img"><img src="https://velog.velcdn.com/images/jsr3643/post/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg" alt="logo"></div>
-            <div class="other-btn">
-                <button>
-                    <img
-                        src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=16387492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b"
-                        alt="">
-                    <div>카카오톡 로그인</div>
-                </button>
-            </div>
-            <div class="other-btn">
-                <button>
-                    <img
-                        src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=16387492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b"
-                        alt="">
-                    <div>학원계정 회원가입</div>
-                </button>
-            </div>
         </div>
     </div>
 </div>
@@ -145,6 +130,24 @@ window.onload = function(){
     });
 }
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    var signupForm = document.querySelector('form');
+
+    signupForm.addEventListener('submit', function(e) {
+        var username = document.querySelector('[name="username"]').value.trim();
+        var password1 = document.querySelector('[name="password1"]').value.trim();
+        var password2 = document.querySelector('[name="password2"]').value.trim();
+        var email = document.querySelector('[name="email"]').value.trim();
+        var confirmN = document.querySelector('[name="confirmN"]').value.trim();
+        var address = document.querySelector('[name="address"]').value.trim();
+
+        if (!username || !password1 || !password2 || !email || !confirmN || !address) {
+            e.preventDefault();
+            alert("모든 입력란을 채워주시기 바랍니다.");
+        }
+    });
+});
 
 </script>
 </html>

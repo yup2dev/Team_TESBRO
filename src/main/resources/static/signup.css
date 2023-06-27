@@ -109,8 +109,17 @@ cursor:pointer;
   width:100%;
   margin-bottom: 20px;
 }
-.form-left > form > button:last-child {
+.form-left .main-btn {
     border:1px solid lightgray;
+    position:absolute;
+      font-size:1.2rem;
+      font-weight:bold;
+      padding:8px 0;
+      border-radius:10px;
+      width:40%;
+      bottom:60px;
+      left:56px;
+      cursor:pointer;
 }
 
 
@@ -123,52 +132,19 @@ cursor:pointer;
   text-align:center;
 }
 .form-right .welcome-ment {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-family: 'Humanbumsuk';
 }
 .form-right .welcome-ment:first-child {
-  margin-top:78px;
 }
 .form-right .welcome-img {
-    width:50%;
+    width:70%;
 }
 .form-right .welcome-img > img {
     width:100%;
 }
 
 
-
-.form-right .other-btn {
-  width: 80%;
-  height:45px;
-  overflow:hidden;
-  border-radius:10px;
-  cursor:pointer;
-  position:relative;
-  margin-right:30px;
-  margin-bottom:20px;
-}
-.form-right .other-btn:last-child {
-  margin-bottom:50px;
-}
-.form-right .other-btn img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  cursor:pointer;
-}
-.form-right .other-btn:last-child img{
-  transform:rotate(180deg);
-  object-fit:fill;
-}
-.form-right .other-btn button > div{
-  position:absolute;
-  font-size:1.2rem;
-  font-weight:bold;
-  z-index:999;
-  top:10px;
-  left:30px;
-}
 
 
 

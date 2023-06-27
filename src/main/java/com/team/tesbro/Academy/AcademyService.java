@@ -26,7 +26,7 @@ public class AcademyService {
         return this.academyRepository.findAll();
     }
 
-    public void create(String academyName, String ceoName, String academyAddress, String academyTel, String introduction, String imgLogo) {
+    public void create(String academyName, String ceoName, String academyAddress, String academyTel, String introduction, String imgLogo, Long corNum) {
         Academy academy = new Academy();
         academy.setAcademyName(academyName);
         academy.setCeoName(ceoName);
@@ -34,6 +34,7 @@ public class AcademyService {
         academy.setAcademyTel(academyTel);
         academy.setIntroduction(introduction);
         academy.setImgLogo(imgLogo);
+        academy.setCorNum(corNum);
 
         academy.setCreateDate(LocalDateTime.now());
         this.academyRepository.save(academy);

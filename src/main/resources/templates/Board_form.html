@@ -1,27 +1,43 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html layout:decorate="~{layout}" lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/boardForm.css}">
     <title>작성하기</title>
 </head>
+
+
 <body>
-<nav th:replace="~{navbar :: navbarFragment}"></nav>
-<div layout:fragment="content" class="container">
-    <form th:object="${boardForm}" method="post">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <div class="mb-3">
-            <label for="subject" class="form-label">제목</label>
-            <input type="text" th:field="*{subject}" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">내용</label>
-            <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
-        </div>
-        <div>
-            <input type="submit" value="저장하기" class="btn btn-primary my-2">
-            <a th:href="@{/board/{boardCategory}(boardCategory=${boardCategory})}" class="btn btn-primary my-2">돌아가기</a>
-        </div>
-    </form>
+<div layout:fragment="content" class="content">
+    <link rel="stylesheet" type="text/css" th:href="@{/boardForm.css}">
+    <div class="container">
+        <form th:object="${boardForm}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <div class="mb-3">
+                <label for="subject" class="form-label">제목</label>
+                <input type="text" th:field="*{subject}" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">내용</label>
+                <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
+            </div>
+            <div>
+                <button type="submit" class="btn">저장하기</button>
+                <button type="button" class="btn" id="back-button">돌아가기</button>
+            </div>
+        </form>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var backButton = document.querySelector('#back-button');
+
+    backButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        var url = '/board/qna';
+        location.href = url;
+    });
+});
+    </script>
 </div>
+</body>
+</html>

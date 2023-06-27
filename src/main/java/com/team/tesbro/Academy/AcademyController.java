@@ -61,7 +61,8 @@ public class AcademyController {
         String AcademyTel = academyForm.getAcademyTel();
         String introduction = academyForm.getIntroduction();
         String imglogo = academyForm.getImgLogo();
-        this.academyService.create(academyName, CeoName, AcademyAddress, AcademyTel, introduction, imglogo);
+        Long corNum = academyForm.getCorNum();
+        this.academyService.create(academyName, CeoName, AcademyAddress, AcademyTel, introduction, imglogo, corNum);
         return "redirect:/academy/list";
     }
 

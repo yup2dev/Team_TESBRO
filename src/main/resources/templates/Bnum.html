@@ -14,7 +14,7 @@
 
     <div id="resultContainer"></div>
 
-    <div id="registerContainer" style="display: none;">
+    <div id="registerContainer" style="display: none; margin:10px 0;">
         <button id="registerButton">확인</button>
     </div>
         <button id="backButton">취소</button>
@@ -45,9 +45,14 @@
             });
         });
 
+
         $('#registerButton').click(function() {
-            window.location.href = "/user/signup";
+            var bno = $('#bnoInput').val();
+            window.opener.getUserData(bno);
+            window.close();
         });
+
+
         $('#backButton').click(function() {
             window.close();
         });
