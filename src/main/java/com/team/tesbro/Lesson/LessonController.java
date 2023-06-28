@@ -10,6 +10,7 @@ import com.team.tesbro.Teacher.TeacherService;
 import com.team.tesbro.User.SiteUser;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -67,8 +68,7 @@ public class LessonController {
         List<LocalDate> uniqueDateList = new ArrayList<>(uniqueDates);
         Collections.sort(uniqueDateList);
         model.addAttribute("uniqueDateList", uniqueDateList);
-        //학원의 날짜
-        //시간만 손보면 끝납니다잉
+
 
         return "academy_detail";
     }

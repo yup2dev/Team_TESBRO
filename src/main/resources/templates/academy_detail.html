@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}" lang="ko">
+<html layout:decorate="~{layout}" lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>academy_detail</title>
@@ -9,7 +9,7 @@
 <div layout:fragment="content" class="aContainer">
     <!--        이름이랑 정보 요약&찜/공유      -->
     <div  class="content">
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link href="/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
         <!-- Air datepicker css -->
         <script src="/datepicker.js"></script> <!-- Air datepicker js -->
@@ -68,10 +68,14 @@
                     <p th:text="${academy.academyTel}"></p>
                 </div>
                 <div class="besides">
-                    <a href="#"><img src="https://cdn-icons-png.flaticon.com/128/1358/1358023.png" alt="share-icon"></a>
+                    <a href="javascript:void(0);" id="share-link">
+                        <img src="https://cdn-icons-png.flaticon.com/128/1358/1358023.png" alt="share-icon">
+                    </a>
+                    <div id="copy-message">URL이 복사되었습니다.</div>
                     <a href="javascript:void(0);" class="like"
                        th:data-uri="@{|/academy/vote/${academy.id}|}">
-                        <img src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="like-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/128/4485/4485449.png" alt="like-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/128/3670/3670159.png" alt="like-icon" style="display:none;">
                         <span class="badge" th:text="${#lists.size(academy.voter)}"></span>
                     </a>
                 </div>
@@ -88,17 +92,17 @@
                         <div class="album">
                             <div class="images">
                                 <div class="image"><img
-                                        src="https://cdn.pixabay.com/photo/2017/05/25/15/08/jogging-2343558_1280.jpg"
+                                        src="https://modo-phinf.pstatic.net/20220525_83/16534690458594sW2G_JPEG/mosapKNRYq.jpeg?type=w720"
                                         alt="">
                                 </div>
                                 <div class="image"><img
-                                        src="https://cdn.pixabay.com/photo/2018/02/06/14/07/ease-3134828_640.jpg" alt="">
+                                        src="https://modo-phinf.pstatic.net/20220525_50/1653469046450KABSh_JPEG/mosa7CbDRb.jpeg?type=w720" alt="">
                                 </div>
                                 <div class="image"><img
-                                        src="https://cdn.pixabay.com/photo/2018/01/01/01/56/yoga-3053487_640.jpg" alt="">
+                                        src="https://modo-phinf.pstatic.net/20220525_204/1653469045466p8VWE_JPEG/mosaqccN0t.jpeg?type=w720" alt="">
                                 </div>
                                 <div class="image"><img
-                                        src="https://cdn.pixabay.com/photo/2016/11/18/14/15/woman-1834827_640.jpg" alt="">
+                                        src="https://modo-phinf.pstatic.net/20220525_263/16534690449627vkst_JPEG/mosaannwSa.jpeg?type=w720" alt="">
                                 </div>
                             </div>
                             <button class="prev">◀</button>
@@ -130,7 +134,7 @@
                             <div class="t-images">
                                 <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
                                     <a onclick="getTeacherId(this)">
-                                        <img src="https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_640.jpg"
+                                        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MDZfMjc0%2FMDAxNjQ5MjQ3NzcyMzg4.O8z95BIjH9nFWCm0TYmFvGUJ8W0siFerxWEIDbDgFkkg.NRSXfzJWp_wlztY6ZkRvBekCurQtFS8rxfJfLEVLVQ0g.JPEG.healthboy_cityhall%2FKakaoTalk_20220406_202535829.jpg&type=a340"
                                              alt="teacherPic">
                                         <div th:text="${teacher.teacherName}"></div>
                                         <input type="hidden" th:value="${teacher.teacherName}" id="teacherName"/>
@@ -144,9 +148,9 @@
                             <button class="t-next">▶</button>
                         </div>
                     </div>
-                    <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get" class="teacher-create">
-                        <input type="submit" value="강사등록">
-                    </form>
+<!--                    <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get" class="teacher-create">-->
+<!--                        <input type="submit" value="강사등록">-->
+<!--                    </form>-->
                 </div>
             </div>
 
@@ -156,17 +160,20 @@
                 <div class="detail-btn">
                     <a href="#학원소개">학원소개</a>
                     <a href="#수업정보">수업정보</a>
-                    <a href="#취소환불">취소/환불 규정(?)</a>
+                    <a href="#취소환불">취소/환불 규정</a>
                     <a href="#후기">후기</a>
                 </div>
                 <div class="detail-contents">
                     <div id="학원소개" class="d-content">
                         <p>학원소개</p>
                         <p th:text="${academy.introduction}"></p>
-                        <img src="https://img.freepik.com/premium-photo/blue-sky-white-clouds-vertical-background_483040-152.jpg?size=626&ext=jpg&uid=R45835435&ga=GA1.2.1963562373.1686817582" alt="" width="1000px" height="600px" >
+                        <img src="https://static.wixstatic.com/media/1830b0_8875795da2c34a48aab3e3a632a84587~mv2.jpg/v1/crop/x_0,y_0,w_1366,h_7532/fill/w_979,h_5398,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/about-us-%EC%9B%90%EC%9E%A5%EC%86%8C%EA%B0%9C.jpg" alt="" width="900px"  >
+
                     </div>
                     <div id="수업정보" class="d-content">
                         <p>수업정보</p>
+                        <img src="https://static.wixstatic.com/media/1830b0_d82b8ddae8544b6c80c614035e31bbba~mv2.png/v1/fill/w_897,h_676,al_c,q_90,enc_auto/%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%841.png" alt="" width="900px"  >
+
                     </div>
                     <div id="취소환불" class="d-content">
                         <p>취소/환불 규정</p>
@@ -282,6 +289,30 @@
 
 
         <script>
+
+
+
+        $(document).ready(function() {
+  $("#share-link").click(function() {
+    var dummy = document.createElement('input');
+    var text = window.location.href;
+
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
+
+    $("#copy-message").show().delay(2000).fadeOut(1000);
+  });
+});
+
+
+
+
+
+
+
   document.querySelectorAll('.modify-link').forEach(link => {
   link.addEventListener('click', function(event) {
     event.preventDefault(); // 페이지 리로드 방지
@@ -455,8 +486,6 @@ geocoder.addressSearch(address, function(result, status) {
     Array.from(like_elements).forEach(function(element) {
         element.addEventListener('click', function() {
             if(confirm("정말로 찜 하시겠습니까?")) {
-                const imageElement = this.querySelector('img');
-                imageElement.src = "https://cdn-icons-png.flaticon.com/128/138/138533.png";
                 location.href = this.dataset.uri;
             };
         });

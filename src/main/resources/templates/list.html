@@ -18,11 +18,11 @@
         <form id="searchForm" th:action="@{/academy/list}" method="get" onsubmit="storeInputValues()">
             <div class="searchbox">
                 <div class="box1">
-                    <input type="text" class="box1_input" id="box1_input" name="keyword" th:value="${keyword}" value
+                    <input type="text" class="box1_input" id="box1_input" name="keyword" th:value="${keyword}" value=""
                            placeholder="우리 동네 학원을 찾아보세요">
                 </div>
                 <div class="box2">
-                    <input type="text" class="box2_sel" id="box2_sel" name="localKey" th:value="${localKey}" value
+                    <input type="text" class="box2_sel" id="box2_sel" name="localKey" th:value="${localKey}" value=""
                            placeholder="지역 검색">
                 </div>
                 <input type="hidden" id="peopleCapacity" name="peopleCapacity" th:value="${peopleCapacity}">
@@ -157,6 +157,14 @@
             restoreInputValues();
         }
 
+
+
+
+
+
+
+
+
     function handleOrderChange(selectedOption) {
       var currentUrl = window.location.href;
       var updatedUrl;
@@ -185,6 +193,7 @@
         }
         document.getElementById("searchForm").submit();
     }
+
 
 
   </script>

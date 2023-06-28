@@ -286,10 +286,15 @@ select, textarea {
   min-height:200px;
   position:relative;
   margin:0 30px;
+
 }
 .academy-mid-3 .detail-contents .d-content p{
-  display:flex;
+display:flex;
   justify-content:center;
+}
+.academy-mid-3 .detail-contents .d-content img{
+    margin-left:50%;
+    transform:translatex(-50%);
 }
 .academy-mid-3 .detail-contents .d-content p:first-child {
   font-size: 1.1rem;
@@ -297,7 +302,17 @@ select, textarea {
   padding-bottom:5px;
   border-bottom:1px solid lightgray;
 }
-
+#copy-message {
+ position:absolute;
+ width: 200px;
+ top:-35px;
+ right:-35px;
+ background:lightgray;
+ border-radius:5px;
+ text-align:center;
+ padding:5px 0;
+ display:none;
+}
 
 
 .academy-mid-3 .detail-contents .d-content .review_box {

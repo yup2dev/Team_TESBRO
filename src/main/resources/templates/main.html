@@ -13,12 +13,12 @@
             <div class="slide-container">
                 <div class="slide">
                     <div class="slide_item item1">
-                        <div class="fixed-item">
-                            <div>~ 대충 멋들어지는 <br> &nbsp;&nbsp;&nbsp;선전문구 들어가는 곳 ~</div>
-                            <input type="text" placeholder="필라테스 학원 검색하기" name="keyword" th:value="${keyword}" value>
-                            <button class="searchbtn" type="submit"><img src="https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_1280.png" alt=""></button>
-                            <img src="https://cdn.pixabay.com/photo/2023/06/15/04/29/woman-8064380_1280.jpg" alt="1">
-                        </div>
+                            <div class="fixed-item">
+                                <div>~ 대충 멋들어지는 <br> &nbsp;&nbsp;&nbsp;선전문구 들어가는 곳 ~</div>
+                                <input type="text" placeholder="필라테스 학원 검색하기" name="keyword" id="keyword" value="">
+                                <button class="searchbtn" type="submit" id="searchBtn"><img src="https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_1280.png" alt=""></button>
+                                <img src="https://cdn.pixabay.com/photo/2023/06/15/04/29/woman-8064380_1280.jpg" alt="1">
+                            </div>
                     </div>
 
 
@@ -253,6 +253,19 @@
 <!--    리뷰끝-->
 
     <script>
+
+    //슬라이드 검색창
+    document.getElementById('searchBtn').addEventListener('click', function() {
+        var keyword = document.getElementById('keyword').value;
+        localStorage.setItem('keyword', keyword);
+        window.location.href = '/academy/list';
+    });
+
+
+
+
+
+    // 이미지슬라이드
     const slide = document.querySelector(".slide");
     let slideWidth = slide.clientWidth;
 
