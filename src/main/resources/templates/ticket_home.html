@@ -7,11 +7,23 @@
 </head>
 <body>
 <div layout:fragment="content" class="content">
-    <link rel="stylesheet" type="text/css" th:href="@{/style_reserve.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style_ticket_home.css}">
     <div class="container">
         <div class="top-box">수강권</div>
-        <h2>수강권구매</h2>
-        <h2>보유한 수강권</h2>
+        <div class="middle-box">
+            <div class="left-box">
+                <h3>수강권구매</h3>
+                <div class="ticket-box">
+                    <div class="select-ticket"></div>
+                    <button>구매하기</button>
+                </div>
+            </div>
+            <div class="right-box">
+                <h3>보유한 수강권</h3>
+                <div class="myticket-box"></div>
+            </div>
+        </div>
+
 
     </div>
 </div>

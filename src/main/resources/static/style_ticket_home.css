@@ -25,3 +25,40 @@ li {list-style:none; color:inherit;}
     font-weight:bold;
     border-bottom:5px double lightgray;
 }
+.container .middle-box {
+    display:flex;
+    margin-bottom:50px;
+}
+.container .left-box, .right-box {
+    border:1px solid red;
+    width:50%;
+}
+.container .left-box .ticket-box {
+    border:1px solid orange;
+    height:500px;
+}
+.left-box .ticket-box .select-ticket {
+    border:1px solid purple;
+    height:400px;
+}
+.left-box .ticket-box button {
+    border:1px solid rgb(30,90,30);
+    border-radius:5px;
+    width:100%;
+    font-size:1.2rem;
+    padding:10px 0;
+}
+
+
+
+.middle-box .right-box h3 {
+    margin-left:30px;
+}
+.middle-box .right-box .myticket-box {
+    border:1px solid green;
+    border:1px solid lightgray;
+    border-radius:10px;
+    width:90%;
+    height:500px;
+    margin:0 auto;
+}
