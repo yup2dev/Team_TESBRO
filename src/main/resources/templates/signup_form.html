@@ -45,7 +45,7 @@
                 </div>
                 <div class="input-item">
                     <label for="address" class="form-label">주소</label>
-                    <input type="text" id="address_kakao" name="address" readonly placeholder="주소 검색"/>
+                    <input type="text" th:field="*{address}" id="address_kakao" name="address" readonly placeholder="주소 검색"/>
                 </div>
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 <button type="submit"> 회원가입</button>

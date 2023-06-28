@@ -7,6 +7,7 @@ import com.team.tesbro.Board.BoardService;
 import com.team.tesbro.Review.Review;
 import com.team.tesbro.Review.ReviewService;
 import com.team.tesbro.Teacher.TeacherService;
+import com.team.tesbro.User.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,16 +25,18 @@ public class TesbroController {
     private final AcademyService academyService;
     private final TeacherService teacherService;
     private final ReviewService reviewService;
+    private final UserService userService;
 
     @GetMapping("/tesbro")
-    public String tesbroMain(Model model, @AuthenticationPrincipal Principal principal) {
+    public String tesbroMain(Model model, Principal principal) {
         Board latestNotice = boardService.getLastestNotice();
+
         model.addAttribute("latestNotice", latestNotice);
 
         long academyCount = academyService.countAcademyIds();
         model.addAttribute("academyCount", academyCount);
         long teacherCount = teacherService.countTeacherIds();
-        model.addAttribute("teacherCount",teacherCount);
+        model.addAttribute("teacherCount", teacherCount);
         long reviewCount = reviewService.countReviewIds();
         model.addAttribute("reviewCount", reviewCount);
 
@@ -43,8 +46,19 @@ public class TesbroController {
         List<Academy> mostjjimAcademy = academyService.getAcademyByVoter();
         model.addAttribute("mostjjimAcademy", mostjjimAcademy);
 
+        if (principal != null) {
+            String userAddress = userService.getUser(principal.getName()).getAddress();
+            List<Academy> closerAcademyList = academyService.getCloserAcademy(userAddress);
+            if(closerAcademyList.size() >= 5){
+                academyService.overAcademies(closerAcademyList); //5개 오버하면 처리해주는거
+            }
 
 
+            model.addAttribute(closerAcademyList); // 이거 부르면 됌 없음 처리나 5개 처리는 아직이긴한데
+            for (Academy academy : closerAcademyList) {
+                System.out.println(academy.getAcademyName());
+            }
+        }
         return "main";
     }
 
