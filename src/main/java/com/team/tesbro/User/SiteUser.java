@@ -30,10 +30,7 @@ public class SiteUser {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @ManyToMany(mappedBy = "ticketUsers")
-    private List<LessonTicket> lessonTickets = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "siteUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserLessonTicket> userLessonTickets = new ArrayList<>();
 
 

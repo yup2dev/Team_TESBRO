@@ -51,13 +51,15 @@
                 <button type="submit"> 회원가입</button>
 
             </form>
-                <button onclick="location.href='/tesbro';" class="main-btn">메인화면</button>
+            <button onclick="location.href='/tesbro';" class="main-btn">메인화면</button>
         </div>
 
         <div class="form-right">
             <div class="welcome-ment">환영합니다</div>
             <div class="welcome-ment">TESBRO 입니다</div>
-            <div class="welcome-img"><img src="https://velog.velcdn.com/images/jsr3643/post/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg" alt="logo"></div>
+            <div class="welcome-img"><img
+                    src="https://velog.velcdn.com/images/jsr3643/post/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg"
+                    alt="logo"></div>
         </div>
     </div>
 </div>
@@ -66,6 +68,7 @@
 <script>
         $(document).ready(function() {
           $("#email-btn").click(function() {
+          alert("메일이 발송되었습니다");
             $.ajax({
               url: "/mailConfirm",
               type: "POST",
@@ -99,7 +102,6 @@
                 xhr.setRequestHeader(header, token);
               },
             success: function(response) {
-            alert("메일이 발송되었습니다");
                  if (response === true) {
                     // Action when verification code is valid
                     console.log("Verification code is valid");
@@ -148,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 
 </script>
 </html>
