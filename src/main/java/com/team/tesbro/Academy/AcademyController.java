@@ -49,6 +49,8 @@ public class AcademyController {
         model.addAttribute("academyList", academyList);
         model.addAttribute("keyword", keyword);
 
+        model.addAttribute("totalCount", paging.getTotalElements());
+
         long count = academyService.countAcademyIds();
         model.addAttribute("academyCount", count);
 
