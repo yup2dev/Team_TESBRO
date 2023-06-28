@@ -2,6 +2,7 @@ package com.team.tesbro.LessonTicket;
 
 
 import com.team.tesbro.User.SiteUser;
+import com.team.tesbro.UserLessonTicket.UserLessonTicket;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,12 +21,9 @@ public class LessonTicket {
     private String ticketName;
     @Column
     private Integer ticketPrice;
+    @Column
+    private Integer lessonTime;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_lesson_ticket",
-            joinColumns = @JoinColumn(name = "lesson_ticket_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<SiteUser> ticketUsers = new ArrayList<>();
+    @OneToMany(mappedBy = "lessonTicket", cascade = CascadeType.REMOVE)
+    private List<UserLessonTicket> userLessonTickets = new ArrayList<>();
 }

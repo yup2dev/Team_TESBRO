@@ -1,5 +1,6 @@
 package com.team.tesbro.Academy;
 
+import com.team.tesbro.Lesson.Lesson;
 import com.team.tesbro.Review.Review;
 import com.team.tesbro.Teacher.Teacher;
 import com.team.tesbro.file.GenFile;
@@ -42,15 +43,6 @@ public class Academy {
     private String academyAddress;
 
     @Column
-    private String academySi;
-
-    @Column
-    private String academyGu;
-
-    @Column
-    private String academyDong;
-
-    @Column
     private Integer jjim;
 
     @Column
@@ -61,6 +53,9 @@ public class Academy {
 
     @OneToMany(mappedBy = "academy", cascade = CascadeType.REMOVE)
     private List<Review> reviewList;
+
+    @OneToMany(mappedBy = "academy", cascade = CascadeType.REMOVE)
+    private List<Lesson> lessonList;
 
     @ManyToMany
     @JoinTable(name = "GEN_FILE_ACADEMIES",

@@ -37,4 +37,3 @@ public class Lesson {
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.REMOVE)
     private List<Lesson_Res> lesson_resList;
 }
-
