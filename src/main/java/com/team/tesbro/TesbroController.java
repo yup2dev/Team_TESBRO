@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -49,15 +50,19 @@ public class TesbroController {
         if (principal != null) {
             String userAddress = userService.getUser(principal.getName()).getAddress();
             List<Academy> closerAcademyList = academyService.getCloserAcademy(userAddress);
-            if(closerAcademyList.size() >= 5){
-                academyService.overAcademies(closerAcademyList); //5개 오버하면 처리해주는거
+            List<Academy> cAcademyList = new ArrayList<>();
+            if (closerAcademyList.size() >= 5) {
+                cAcademyList = academyService.overAcademies(closerAcademyList); //5개 오버하면 처리해주는거
+                model.addAttribute("cAcademyList", cAcademyList);
+                return "main";
+            } else {
+                cAcademyList = closerAcademyList;
+                model.addAttribute("cAcademyList", cAcademyList); //
+                // for (Academy academy : closerAcademyList) {
+                //    System.out.println(academy.getAcademyName());
+                // }
             }
-
-
-            model.addAttribute(closerAcademyList); // 이거 부르면 됌 없음 처리나 5개 처리는 아직이긴한데
-            for (Academy academy : closerAcademyList) {
-                System.out.println(academy.getAcademyName());
-            }
+            return "main";
         }
         return "main";
     }
