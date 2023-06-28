@@ -1,0 +1,38 @@
+body{height:100%;}
+
+h3 {
+    margin-left:30px;
+}
+.review-create {
+    width:90%;
+    height:300px;
+    border:1px solid lightgray;
+    border-radius:10px;
+    margin:20px auto;
+    position:relative;
+}
+.review-create input:nth-child(4) {
+    position:absolute;
+    left:0;
+    width:98%;
+    height:98%;
+    position:absolute;
+    border:none;
+    font-size:1rem;
+}
+.review-create input:last-child {
+    position:absolute;
+    width:100px;
+    height:45px;
+    padding:10px 20px;
+    font-size:1rem;
+    float:right;
+    right:0;
+    z-index:50;
+}
+.review-create select {
+    position:absolute;
+    left:0;
+    padding:12px;
+    z-index:50;
+}

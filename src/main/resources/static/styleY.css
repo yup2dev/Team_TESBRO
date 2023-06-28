@@ -222,6 +222,7 @@ cursor:pointer;}
 }
 
 .academy_box_text > .cardbody > h3{
+    margin-top:-30px;
   max-width:80%;
 }
 
@@ -231,6 +232,11 @@ cursor:pointer;}
 
 .test {
 color:red;
+}
+.voter {
+    align-self:center;
+    margin-left:-10px;
+    width:50px;
 }
 
 

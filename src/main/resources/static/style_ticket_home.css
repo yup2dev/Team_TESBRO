@@ -30,15 +30,14 @@ li {list-style:none; color:inherit;}
     margin-bottom:50px;
 }
 .container .left-box, .right-box {
-    border:1px solid red;
     width:50%;
 }
 .container .left-box .ticket-box {
-    border:1px solid orange;
     height:500px;
 }
 .left-box .ticket-box .select-ticket {
-    border:1px solid purple;
+    border-radius:10px;
+    background:lightgray;
     height:400px;
 }
 .left-box .ticket-box button {
@@ -46,7 +45,9 @@ li {list-style:none; color:inherit;}
     border-radius:5px;
     width:100%;
     font-size:1.2rem;
-    padding:10px 0;
+    padding:20px 0;
+    margin-top:30px;
+    cursor:pointer;
 }
 
 

@@ -217,8 +217,13 @@
 
                                     <!--        수정 -->
                                     <div>
-                                        <a href="@{|/review/modify/${review.id}|}" sec:authorize="isAuthenticated()"
-                                           th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="수정"></a>
+                                        <a href="#" class="modify-link"
+                                           th:data-review-id="${review.id}"
+                                           th:data-review-content="${review.content}"
+                                           th:data-review-username="${review.userId.username}"
+                                           sec:authorize="isAuthenticated()"
+                                           th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="수정">
+                                        </a>
                                     </div>
 
 
@@ -273,6 +278,33 @@
             <div id="map" style="width:100%; height:500px;"></div>
         </div>
 
+
+
+
+        <script>
+  document.querySelectorAll('.modify-link').forEach(link => {
+  link.addEventListener('click', function(event) {
+    event.preventDefault(); // 페이지 리로드 방지
+    const reviewId = event.target.getAttribute('data-review-id');
+    const reviewContent = event.target.getAttribute('data-review-content');
+    const reviewUsername = event.target.getAttribute('data-review-username');
+    openModifyPopup(reviewId, reviewContent, reviewUsername);
+  });
+});
+
+  function openModifyPopup(reviewId, reviewContent) {
+   localStorage.setItem("reviewContent", reviewContent);
+    var url = "/review/modify/" + reviewId;
+    var windowFeatures = "width=600, height=300, location=no, status=no, toolbar=no, scrollbars=yes";
+    const popup = window.open(url, "modifyReviewPopup", windowFeatures);
+
+    popup.onbeforeunload = function () {
+      location.reload();
+    };
+
+
+  }
+</script>
 
 
         <script>

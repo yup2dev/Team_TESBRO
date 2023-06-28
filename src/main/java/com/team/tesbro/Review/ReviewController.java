@@ -56,7 +56,7 @@ public class ReviewController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String answerModify(ReviewForm reviewForm, @PathVariable("id") Integer id, Principal principal) {
+    public String reviewModify(ReviewForm reviewForm, @PathVariable("id") Integer id, Principal principal) {
         Review review = this.reviewService.getReview(id);
         if (!review.getUserId().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
