@@ -23,6 +23,14 @@ public class LessonTicketController {
     private final String SECRET_KEY = "test_sk_Wd46qopOB89MKnbJobd8ZmM75y0v";
     private final LessonTicketService lessonTicketService;
     private final UserService userService;
+
+
+
+    @GetMapping("/ticket")
+    public String ticket() {
+        return "ticket_home";
+    }
+
     @GetMapping("/ticket/{id}")
     public String ticketa(Model model){
         return "ticket";
