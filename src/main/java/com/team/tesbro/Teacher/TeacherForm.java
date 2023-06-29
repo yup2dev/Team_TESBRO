@@ -12,4 +12,5 @@ public class TeacherForm {
     private String awards;
     private String introduction;
     private Academy academy;
+    private String imgLogo;
 }

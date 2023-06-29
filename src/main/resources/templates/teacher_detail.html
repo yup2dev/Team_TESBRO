@@ -4,6 +4,10 @@
   <div class="title">강사 등록하기</div>
   <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="post">
     <div class="mb-3">
+      <label for="imgLogo"><div class="form-label">학원로고</div></label>
+      <textarea th:field="*{imgLogo}" class="form-control" placeholder="url 첨부"></textarea>
+    </div>
+    <div class="mb-3">
       <label for="teacherName" class="form-label">강사 이름</label>
       <input type="text" th:field="*{teacherName}" name="teacherName" class="form-control">
     </div>

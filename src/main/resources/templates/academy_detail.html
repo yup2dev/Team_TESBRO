@@ -134,8 +134,7 @@
                             <div class="t-images">
                                 <div class="t-image" th:each="teacher, index : ${academy.teacherList}">
                                     <a onclick="getTeacherId(this)">
-                                        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MDZfMjc0%2FMDAxNjQ5MjQ3NzcyMzg4.O8z95BIjH9nFWCm0TYmFvGUJ8W0siFerxWEIDbDgFkkg.NRSXfzJWp_wlztY6ZkRvBekCurQtFS8rxfJfLEVLVQ0g.JPEG.healthboy_cityhall%2FKakaoTalk_20220406_202535829.jpg&type=a340"
-                                             alt="teacherPic">
+                                        <img th:src="${teacher.imgLogo}" alt="">
                                         <div th:text="${teacher.teacherName}"></div>
                                         <input type="hidden" th:value="${teacher.teacherName}" id="teacherName"/>
                                         <input type="hidden" th:value="${teacher.introduction}" id="teacherIntro"/>

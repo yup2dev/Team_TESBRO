@@ -48,7 +48,7 @@ public class TeacherController {
         }
 
         this.teacherService.create(teacherForm.getTeacherName(), teacherForm.getIntroduction(), teacherForm.getQualifications(),
-                teacherForm.getAwards()  , teacherForm.getAcademy());
+                teacherForm.getAwards()  , teacherForm.getAcademy(), teacherForm.getImgLogo());
         return String.format("redirect:/academy/detail/%d", teacherForm.getAcademy().getId());
     }
 }

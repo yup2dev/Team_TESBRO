@@ -27,4 +27,7 @@ public class Teacher {
 
     @ManyToOne
     private Academy academy;
+
+    @Column(columnDefinition = "TEXT")
+    private String imgLogo;
 }
