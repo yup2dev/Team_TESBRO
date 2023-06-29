@@ -11,25 +11,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class TesbroApplicationTests {
-
 	@Autowired
 	private AcademyService academyService;
 	@Autowired
 	private AcademyRepository academyRepository;
 	@Autowired
 	private TeacherRepository teacherRepository;
-
 	@Autowired
 	private ReviewService reviewService;
-
-
 	@Test
 	void contextLoads() {
 		Optional<Academy> oa = this.academyRepository.findById(1);

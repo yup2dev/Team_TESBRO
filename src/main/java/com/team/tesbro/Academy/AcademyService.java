@@ -153,7 +153,6 @@ public class AcademyService {
         reversedKeywords.replaceAll(keyword -> keyword.trim());
         Collections.reverse(reversedKeywords);
 
-        // 서버 다 터트리는 코딩 시발
         for (int i = 0; i < 5; i++) {
             if (i >= reversedKeywords.size()) {
                 break;
@@ -169,6 +168,8 @@ public class AcademyService {
         }
         List<Academy> uniqueAcademies = new ArrayList<>(new HashSet<>(academyList));
         // 여기 데이터가 일치하는 수가 많은 순으로 정렬이 필요하다
+        // 원래 구현하려는 기능 => 첫번째 인덱스로 조회해서 있으면 배열에 담고, 2번재 인덱스로 조회해서 있으면 담고 (그런데 한번에 여러개의 데이터가 조회되는 경우에는 처리하는 방식이
+        //      어떻게 되어야 할 지 잘 감이 안잡힘 ==> for문으로 해당 리스트를 또 돌려서 추가해준다??
         Collections.reverse(uniqueAcademies);
         return uniqueAcademies;
     }

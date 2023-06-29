@@ -93,6 +93,8 @@ public class AcademyController {
         return "academy_create_list";
     }
 
+
+
     // 학원계정 전용 파일 추가 매핑
     @GetMapping("detail/create/{id}")
     public String detailCre(@PathVariable("id") Integer id, Model model){
