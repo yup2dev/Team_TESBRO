@@ -135,6 +135,10 @@ public class AcademyService {
         return academyRepository.findMostjjimAcademy();
     }
 
+    public List<Academy> getRecentlyAcademy(){
+        return academyRepository.findMostRecentlyAcademy();
+    }
+
     // 왜 전체 주석이 안되지
     public List<Academy> getCloserAcademy2(String address) {
         //split

@@ -59,7 +59,7 @@ public class TesbroController {
                 }
                 return "main";
             } else {
-                cAcademyList = closerAcademyList;
+                cAcademyList = academyService.getRecentlyAcademy();
                 model.addAttribute("cAcademyList", cAcademyList); //
                 for (Academy academy : closerAcademyList) {
                     System.out.println(academy.getAcademyName());
