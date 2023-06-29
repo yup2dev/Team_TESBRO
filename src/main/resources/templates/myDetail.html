@@ -12,55 +12,55 @@
 <body>
 <div layout:fragment="content" class="content">
 
-  <div class="container">
-    <div class="top-box">마이페이지</div>
-    <div th:if="${}" class="branch">작성한 글 보기</div>
-    <div th:if="${}" class="branch">작성한 리뷰 보기</div>
-    <div th:if="${}" class="branch">내 수강권 보기</div>
-    <div th:if="${}" class="branch">예약 내역 보기 보기</div>
-    <div th:if="${}" class="branch">결제 정보 보기</div>
-    <div class="middle-box">
-      <table>
-        <thead>
-        <tr>
-          <th scope="col" class="th-item">번호</th>
-          <th scope="col" class="th-item">제목</th>
-          <th scope="col" class="th-item">작성일</th>
-        </tr>
-        </thead>
-        <td class="td-item" th:text="${}">d</td>
-        <td class="td-item" th:text="${}">d</td>
-        <td class="td-item" th:text="${}">d</td>
-      </table>
+    <div class="container">
+        <div class="top-box">마이페이지</div>
+        <div th:if="${}" class="branch">작성한 글 보기</div>
+        <div th:if="${}" class="branch">작성한 리뷰 보기</div>
+        <div th:if="${}" class="branch">내 수강권 보기</div>
+        <div th:if="${}" class="branch">예약 내역 보기 보기</div>
+        <div th:if="${}" class="branch">결제 정보 보기</div>
+        <div class="middle-box">
+            <table>
+                <thead>
+                <tr>
+                    <th scope="col" class="th-item">번호</th>
+                    <th scope="col" class="th-item">제목</th>
+                    <th scope="col" class="th-item">작성일</th>
+                </tr>
+                </thead>
+                <td class="td-item" th:text="${}">d</td>
+                <td class="td-item" th:text="${}">d</td>
+                <td class="td-item" th:text="${}">d</td>
+            </table>
+        </div>
+        <div class="type">
+            <tr>
+                <td>
+                    <a type="button">작성한 글 보기</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a type="button">작성한 리뷰 보기</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a type="button">내 수강권 보기</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a type="button">예약 내역 보기</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a type="button">결제 정보 보기</a>
+                </td>
+            </tr>
+        </div>
     </div>
-    <div class="type">
-      <tr>
-        <td>
-          <a type="button">작성한 글 보기</a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a type="button">작성한 리뷰 보기</a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a type="button">내 수강권 보기</a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a type="button">예약 내역 보기</a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a type="button">결제 정보 보기</a>
-        </td>
-      </tr>
-    </div>
-  </div>
 </div>
 </body>
 </html>

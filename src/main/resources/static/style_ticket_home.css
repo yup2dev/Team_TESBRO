@@ -41,6 +41,9 @@ li {list-style:none; color:inherit;}
     border:1px solid gray;
     border-radius:5px;
     height:400px;
+    text-align:center;
+    display:flex;
+    flex-direction: column;
 }
 .ticket-box button {
     border:1px solid rgb(30,90,30);
@@ -88,3 +91,15 @@ li {list-style:none; color:inherit;}
   cursor: pointer;
 }
 
+.contentA {
+display:flex;
+justify-content: center;
+}
+
+.contentA h3{
+text-align:center;
+}
+
+.content-detail{
+text-align:center;
+}
