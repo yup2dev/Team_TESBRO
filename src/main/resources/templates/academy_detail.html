@@ -66,6 +66,7 @@
                     <p class="academy_name" th:text="${academy.academyName}"></p>
                     <p th:text="${academy.ceoName}"></p>
                     <p th:text="${academy.academyTel}"></p>
+                    <p class="academy_address" th:text="${academy.academyAddress}" id="hide"></p>
                 </div>
                 <div class="besides">
                     <a href="javascript:void(0);" id="share-link">
@@ -337,6 +338,9 @@
 
   }
 
+
+
+
         </script>
 
 
@@ -355,6 +359,9 @@
         });
       }
     });
+
+
+
 
         </script>
 
@@ -413,11 +420,16 @@
         }
     }
 
+
+
+
         </script>
 
         <script type="text/javascript"
                 src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
         <script>
+        var addressElement = document.querySelector(".academy_address");
+addressElement.style.display = "none";
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -458,6 +470,9 @@ geocoder.addressSearch(address, function(result, status) {
 });
 
 
+
+
+
         </script>
 
         <!--  삭제  -->
@@ -495,6 +510,9 @@ geocoder.addressSearch(address, function(result, status) {
             };
         });
     });
+
+
+
 
         </script>
 
