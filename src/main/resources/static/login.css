@@ -67,7 +67,7 @@ body {
   display:flex;
   flex-direction:column;
   align-items:center;
-  margin-top: 95px;
+  margin-top: 105px;
 }
 .container .login-form img{
   transform:rotate(180deg);
