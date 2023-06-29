@@ -24,6 +24,8 @@ public class UserCreateForm {
     @Email
     private String email;
 
+    private String address;
+
     @NotEmpty
     private String confirmN;
 

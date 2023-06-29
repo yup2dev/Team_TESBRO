@@ -2,6 +2,7 @@ package com.team.tesbro.Review;
 
 import com.team.tesbro.Academy.Academy;
 import com.team.tesbro.Academy.AcademyService;
+import com.team.tesbro.Board.Board;
 import com.team.tesbro.DataNotFoundException;
 import com.team.tesbro.User.SiteUser;
 import lombok.RequiredArgsConstructor;
@@ -78,5 +79,9 @@ public class ReviewService {
 
     public List<Review> get4RecentReviews() {
         return reviewRepository.find4RecentReviews();
+    }
+
+    public List<Review> getReviewByUserId(String name){
+        return reviewRepository.findByUserId(name);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -110,5 +111,9 @@ public class BoardService {
 
     public Board getLastestNotice() {
         return boardRepository.findLatestNotice();
+    }
+
+    public List<Board> getBoardByUser(String name){
+        return boardRepository.findByAuthor(name);
     }
 }

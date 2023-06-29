@@ -1,12 +1,14 @@
 package com.team.tesbro.User;
 
 
+import com.team.tesbro.Board.Board;
 import com.team.tesbro.DataNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -16,16 +18,21 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+
     public SiteUser create(String username, String email, String password, UserRole role, String address) {
+
         SiteUser user = new SiteUser();
         user.setUsername(username);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
+        user.setAddress(address);
         user.setRole(role);
         user.setAddress(address);
         this.userRepository.save(user);
         return user;
     }
+
+
     public SiteUser getUser(String username) {
         Optional<SiteUser> siteUser = this.userRepository.findByusername(username);
         if (siteUser.isPresent()) {
