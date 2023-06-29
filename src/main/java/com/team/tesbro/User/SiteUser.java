@@ -22,6 +22,8 @@ public class SiteUser {
     @Column(unique = true)
     private String email;
 
+    private String address;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
     @ManyToMany(mappedBy = "ticketUsers")
