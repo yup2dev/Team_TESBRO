@@ -26,4 +26,6 @@ public class UserCreateForm {
 
     @NotEmpty
     private String confirmN;
+    @NotEmpty
+    private String address;
 }

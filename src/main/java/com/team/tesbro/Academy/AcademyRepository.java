@@ -68,4 +68,6 @@ public interface AcademyRepository extends JpaRepository<Academy, Integer> {
     List<Academy> findMostjjimAcademy();
 
     List<Academy> findTop5ByAcademyAddress(String address);
+
+    List<Academy> findByAcademyAddressContaining(String address);
 }
