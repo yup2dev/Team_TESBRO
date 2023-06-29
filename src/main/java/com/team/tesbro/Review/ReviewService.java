@@ -79,4 +79,8 @@ public class ReviewService {
     public List<Review> get4RecentReviews() {
         return reviewRepository.find4RecentReviews();
     }
+
+    public List<Review> getReviewByUserId(String name){
+        return reviewRepository.findByUserId(name);
+    }
 }

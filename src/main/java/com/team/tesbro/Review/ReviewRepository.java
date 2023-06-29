@@ -17,4 +17,6 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     @Query(value = "SELECT * FROM REVIEW ORDER BY CREATE_DATE DESC LIMIT 4", nativeQuery = true)
     List<Review> find4RecentReviews();
 
+    List<Review> findByUserId(String name);
+
 }

@@ -15,4 +15,7 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
 
     @Query(value = "SELECT * FROM board WHERE BOARD_CATEGORY   = 'notice' ORDER BY CREATE_DATE  DESC LIMIT 1", nativeQuery = true)
     Board findLatestNotice();
+
+    List<Board> findByAuthor(String name);
+
 }
