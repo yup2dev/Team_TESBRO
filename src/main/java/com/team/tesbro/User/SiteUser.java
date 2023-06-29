@@ -29,8 +29,6 @@ public class SiteUser {
     @Column
     private String address;
 
-    private String address;
-
     @Enumerated(EnumType.STRING)
     private UserRole role;
 

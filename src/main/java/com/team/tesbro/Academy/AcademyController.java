@@ -35,25 +35,19 @@ public class AcademyController {
     private final UserService userService;
 
     @RequestMapping("/list")
-
     public String academy(Model model,
                           @RequestParam(value="page", defaultValue="0") int page,
                           @RequestParam(value = "keyword", required = false) String keyword,
                           @RequestParam(value = "localKey", required = false) String localKey,
                           @RequestParam(value = "peopleCapacity", required = false) Integer pc) {
         Page<Academy> paging = this.academyService.getAcademyList(keyword, localKey, pc, page);
-
         model.addAttribute("paging", paging);
-
         List<Academy> academyList = this.academyService.getList(keyword);
         model.addAttribute("academyList", academyList);
         model.addAttribute("keyword", keyword);
-
         model.addAttribute("totalCount", paging.getTotalElements());
-
         long count = academyService.countAcademyIds();
         model.addAttribute("academyCount", count);
-
         return "list";
     }
 

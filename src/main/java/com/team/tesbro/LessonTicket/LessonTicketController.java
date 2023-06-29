@@ -24,23 +24,6 @@ public class LessonTicketController {
     private final LessonTicketService lessonTicketService;
     private final UserService userService;
 
-
-
-    @GetMapping("/ticket")
-    public String ticket() {
-        return "ticket_home";
-    }
-
-    @GetMapping("/ticket/{id}")
-    public String ticketa(Model model){
-        return "ticket";
-    }
-
-    @PostMapping("/ticket/{id}")
-    public String ticketb(Principal principal, Model model){
-        return "ticket";
-    }
-
     @GetMapping("/ticket/pay")
     public String ticketc(){
         return "ticket";

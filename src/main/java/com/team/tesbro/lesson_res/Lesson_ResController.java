@@ -2,8 +2,12 @@ package com.team.tesbro.lesson_res;
 
 import com.team.tesbro.Lesson.Lesson;
 import com.team.tesbro.Lesson.LessonRepository;
+import com.team.tesbro.LessonTicket.LessonTicket;
+import com.team.tesbro.LessonTicket.LessonTicketService;
 import com.team.tesbro.User.SiteUser;
 import com.team.tesbro.User.UserRepository;
+import com.team.tesbro.User.UserService;
+import com.team.tesbro.UserLessonTicket.UserLessonTicketService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,6 +36,9 @@ public class Lesson_ResController {
     private final Lesson_ResService lesson_resService;
     private final UserRepository userRepository;
     private final LessonRepository lessonRepository;
+    private final UserLessonTicketService userLessonTicketService;
+    private final UserService userService;
+    private final LessonTicketService lessonTicketService;
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/reserve/{id}")
@@ -49,6 +56,8 @@ public class Lesson_ResController {
         System.out.println(date);
         System.out.println(time);
 
+        SiteUser siteUser = userService.getUser(principal.getName());
+
         String currentUsername = principal.getName();
         Optional<SiteUser> currentUser = userRepository.findByusername(currentUsername);
         Integer currentUserId = currentUser.map(SiteUser::getId).orElse(null);
@@ -59,15 +68,17 @@ public class Lesson_ResController {
         System.out.println(lessonResDto);
 
         // 중복 체크 후 에러시 팝업 띄워주기
-        if (lesson_resService.findUsers(lessonId).contains(currentUserId)) {
-            System.out.println("유저 중복으로 불가능");
-            redirectAttributes.addFlashAttribute("popupMessage", "이미 예약된 회원입니다");
-            return "redirect:/academy/detail/{id}";
-        }
-
-        if (lesson.get().getCurrentCapacity() >= lesson.get().getPeopleCapacity()) {
+        if (!userLessonTicketService.checkUserLessonTicket(siteUser.getId())) {
+            System.out.println("구매필요함");
+            redirectAttributes.addFlashAttribute("popupMessage", "수강권 구매가 필요합니다");
+            return "redirect:/ticket";
+        } else if (lesson.get().getCurrentCapacity() >= lesson.get().getPeopleCapacity()) {
             System.out.println("꽉참");
             redirectAttributes.addFlashAttribute("popupMessage", "수용 인원을 초과했습니다");
+            return "redirect:/academy/detail/{id}";
+        } else if (lesson_resService.findUsers(lessonId).contains(currentUserId)) {
+            System.out.println("유저 중복으로 불가능");
+            redirectAttributes.addFlashAttribute("popupMessage", "이미 예약된 회원입니다");
             return "redirect:/academy/detail/{id}";
         } else {
             lesson.get().setCurrentCapacity(lesson.get().getCurrentCapacity() + 1);

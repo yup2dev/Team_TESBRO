@@ -8,7 +8,7 @@
 <body>
 <div layout:fragment="content" class="aContainer">
     <!--        이름이랑 정보 요약&찜/공유      -->
-    <div  class="content">
+    <div class="content">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link href="/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
         <!-- Air datepicker css -->
@@ -75,7 +75,8 @@
                     <a href="javascript:void(0);" class="like"
                        th:data-uri="@{|/academy/vote/${academy.id}|}">
                         <img src="https://cdn-icons-png.flaticon.com/128/4485/4485449.png" alt="like-icon">
-                        <img src="https://cdn-icons-png.flaticon.com/128/3670/3670159.png" alt="like-icon" style="display:none;">
+                        <img src="https://cdn-icons-png.flaticon.com/128/3670/3670159.png" alt="like-icon"
+                             style="display:none;">
                         <span class="badge" th:text="${#lists.size(academy.voter)}"></span>
                     </a>
                 </div>
@@ -96,13 +97,16 @@
                                         alt="">
                                 </div>
                                 <div class="image"><img
-                                        src="https://modo-phinf.pstatic.net/20220525_50/1653469046450KABSh_JPEG/mosa7CbDRb.jpeg?type=w720" alt="">
+                                        src="https://modo-phinf.pstatic.net/20220525_50/1653469046450KABSh_JPEG/mosa7CbDRb.jpeg?type=w720"
+                                        alt="">
                                 </div>
                                 <div class="image"><img
-                                        src="https://modo-phinf.pstatic.net/20220525_204/1653469045466p8VWE_JPEG/mosaqccN0t.jpeg?type=w720" alt="">
+                                        src="https://modo-phinf.pstatic.net/20220525_204/1653469045466p8VWE_JPEG/mosaqccN0t.jpeg?type=w720"
+                                        alt="">
                                 </div>
                                 <div class="image"><img
-                                        src="https://modo-phinf.pstatic.net/20220525_263/16534690449627vkst_JPEG/mosaannwSa.jpeg?type=w720" alt="">
+                                        src="https://modo-phinf.pstatic.net/20220525_263/16534690449627vkst_JPEG/mosaannwSa.jpeg?type=w720"
+                                        alt="">
                                 </div>
                             </div>
                             <button class="prev">◀</button>
@@ -147,7 +151,8 @@
                             <button class="t-next">▶</button>
                         </div>
                     </div>
-                    <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get" class="teacher-create">
+                    <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get"
+                          class="teacher-create">
                         <input type="submit" value="강사등록">
                     </form>
                 </div>
@@ -166,12 +171,14 @@
                     <div id="학원소개" class="d-content">
                         <p>학원소개</p>
                         <p th:text="${academy.introduction}"></p>
-                        <img src="https://static.wixstatic.com/media/1830b0_8875795da2c34a48aab3e3a632a84587~mv2.jpg/v1/crop/x_0,y_0,w_1366,h_7532/fill/w_979,h_5398,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/about-us-%EC%9B%90%EC%9E%A5%EC%86%8C%EA%B0%9C.jpg" alt="" width="900px"  >
+                        <img src="https://static.wixstatic.com/media/1830b0_8875795da2c34a48aab3e3a632a84587~mv2.jpg/v1/crop/x_0,y_0,w_1366,h_7532/fill/w_979,h_5398,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/about-us-%EC%9B%90%EC%9E%A5%EC%86%8C%EA%B0%9C.jpg"
+                             alt="" width="900px">
 
                     </div>
                     <div id="수업정보" class="d-content">
                         <p>수업정보</p>
-                        <img src="https://static.wixstatic.com/media/1830b0_d82b8ddae8544b6c80c614035e31bbba~mv2.png/v1/fill/w_897,h_676,al_c,q_90,enc_auto/%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%841.png" alt="" width="900px"  >
+                        <img src="https://static.wixstatic.com/media/1830b0_d82b8ddae8544b6c80c614035e31bbba~mv2.png/v1/fill/w_897,h_676,al_c,q_90,enc_auto/%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%841.png"
+                             alt="" width="900px">
 
                     </div>
                     <div id="취소환불" class="d-content">
@@ -181,7 +188,8 @@
                     </div>
                     <div id="후기" class="d-content">
                         <p>후기</p>
-                        <form th:action="@{|/review/create/${academy.id}|}" th:object="${reviewForm}" method="post" class="review-create">
+                        <form th:action="@{|/review/create/${academy.id}|}" th:object="${reviewForm}" method="post"
+                              class="review-create">
 
 
                             <select name="star_rating" id="star_rating">
@@ -220,7 +228,6 @@
                                     </div>
 
 
-
                                     <!--        수정 -->
                                     <div>
                                         <a href="#" class="modify-link"
@@ -228,26 +235,25 @@
                                            th:data-review-content="${review.content}"
                                            th:data-review-username="${review.userId.username}"
                                            sec:authorize="isAuthenticated()"
-                                           th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="수정">
+                                           th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}"
+                                           th:text="수정">
                                         </a>
                                     </div>
 
 
-
                                     <!--        삭제 -->
                                     <div>
-                                        <a href="javascript:void(0);" th:data-uri="@{|/review/delete/${review.id}|}" class="delete" sec:authorize="isAuthenticated()"
-                                           th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}" th:text="삭제"></a>
+                                        <a href="javascript:void(0);" th:data-uri="@{|/review/delete/${review.id}|}"
+                                           class="delete" sec:authorize="isAuthenticated()"
+                                           th:if="${review.userId != null and #authentication.getPrincipal().getUsername() == review.userId.username}"
+                                           th:text="삭제"></a>
                                     </div>
-
 
 
                                     <div th:text="${#temporals.format(review.createDate, 'yyyy-MM-dd HH:mm')}"></div>
                                     <div th:text="${review.content}"></div>
                                 </li>
                             </ul>
-
-
 
 
                             <div th:if="${!paging.isEmpty()}">
@@ -264,7 +270,8 @@
                                         <a th:text="${page}+1" class="page-link" th:href="@{|?page=${page}|}"></a>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link" th:if="${paging.hasNext()}" th:href="@{|?page=${paging.number+1}|}">
+                                        <a class="page-link" th:if="${paging.hasNext()}"
+                                           th:href="@{|?page=${paging.number+1}|}">
                                             <span>다음</span>
                                         </a>
                                     </li>
@@ -285,12 +292,7 @@
         </div>
 
 
-
-
         <script>
-
-
-
         $(document).ready(function() {
   $("#share-link").click(function() {
     var dummy = document.createElement('input');
@@ -334,7 +336,8 @@
 
 
   }
-</script>
+
+        </script>
 
 
         <script>
@@ -352,7 +355,8 @@
         });
       }
     });
-    </script>
+
+        </script>
 
         <script th:src="@{/academy.js}"></script>
         <script>
@@ -408,7 +412,8 @@
             console.log(starRating);
         }
     }
-    </script>
+
+        </script>
 
         <script type="text/javascript"
                 src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
@@ -452,7 +457,8 @@ geocoder.addressSearch(address, function(result, status) {
     }
 });
 
-</script>
+
+        </script>
 
         <!--  삭제  -->
         <!--  삭제  -->
@@ -489,7 +495,8 @@ geocoder.addressSearch(address, function(result, status) {
             };
         });
     });
-</script>
+
+        </script>
 
     </div>
 </div>
