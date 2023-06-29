@@ -27,20 +27,22 @@ li {list-style:none; color:inherit;}
 }
 .container .middle-box {
     display:flex;
+    justify-content:space-between;
     margin-bottom:50px;
+    margin-top:30px;
 }
-.container .left-box, .right-box {
-    width:50%;
+.container .left-box, .center-box, .right-box {
+    width:30%;
 }
-.container .left-box .ticket-box {
+.container .ticket-box {
     height:500px;
 }
-.left-box .ticket-box .select-ticket {
-    border-radius:10px;
-    background:lightgray;
+.ticket-box .ticket-item {
+    border:1px solid gray;
+    border-radius:5px;
     height:400px;
 }
-.left-box .ticket-box button {
+.ticket-box button {
     border:1px solid rgb(30,90,30);
     border-radius:5px;
     width:100%;
@@ -50,16 +52,3 @@ li {list-style:none; color:inherit;}
     cursor:pointer;
 }
 
-
-
-.middle-box .right-box h3 {
-    margin-left:30px;
-}
-.middle-box .right-box .myticket-box {
-    border:1px solid green;
-    border:1px solid lightgray;
-    border-radius:10px;
-    width:90%;
-    height:500px;
-    margin:0 auto;
-}
