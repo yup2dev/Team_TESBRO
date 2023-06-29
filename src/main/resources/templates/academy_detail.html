@@ -206,7 +206,7 @@
 
 
                         <div class="review_box">
-                            <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 후기가 있습니다.|"></div>
+                            <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 리뷰가 있습니다.|"></div>
                             <ul class="review-items" th:each="review : ${paging}">
                                 <a th:id="|review_${review.id}|"></a>
                                 <li>
