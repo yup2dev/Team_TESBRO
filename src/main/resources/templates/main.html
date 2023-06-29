@@ -165,7 +165,8 @@
 <div class="academy-list">
     <div class="academy-box">
         <div class="academy-items">
-            <div class="academy-item">내 주변 학원</div>
+            <div class="academy-item" sec:authorize="isAuthenticated()">내 주변 학원</div>
+            <div class="academy-item" sec:authorize="isAnonymous()">최근에 등록된 학원</div>
             <div th:if="${cAcademyList.isEmpty()}" class="empty-box">
                 <p>등록된 아카데미가 없습니다.</p>
             </div>
