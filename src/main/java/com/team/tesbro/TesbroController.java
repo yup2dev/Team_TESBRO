@@ -54,13 +54,16 @@ public class TesbroController {
             if (closerAcademyList.size() >= 5) {
                 cAcademyList = academyService.overAcademies(closerAcademyList); //5개 오버하면 처리해주는거
                 model.addAttribute("cAcademyList", cAcademyList);
+                for (Academy academy : closerAcademyList) {
+                    System.out.println(academy.getAcademyName());
+                }
                 return "main";
             } else {
                 cAcademyList = closerAcademyList;
                 model.addAttribute("cAcademyList", cAcademyList); //
-                // for (Academy academy : closerAcademyList) {
-                //    System.out.println(academy.getAcademyName());
-                // }
+                for (Academy academy : closerAcademyList) {
+                    System.out.println(academy.getAcademyName());
+                }
             }
             return "main";
         }

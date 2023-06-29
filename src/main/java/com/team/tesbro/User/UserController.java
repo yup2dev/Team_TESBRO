@@ -44,7 +44,7 @@ public class    UserController {
             UserRole role = userCreateForm.getUsername().startsWith("admin") ? UserRole.ADMIN : UserRole.USER;
 
             userService.create(userCreateForm.getUsername(),
-                    userCreateForm.getEmail(), userCreateForm.getPassword1(), role);
+                    userCreateForm.getEmail(), userCreateForm.getPassword1(), role, userCreateForm.getAddress());
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");

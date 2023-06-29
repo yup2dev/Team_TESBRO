@@ -166,61 +166,23 @@
     <div class="academy-box">
         <div class="academy-items">
             <div class="academy-item">내 주변 학원</div>
+            <div th:if="${cAcademyList.isEmpty()}">
+                <p>등록된 아카데미가 없습니다.</p>
+            </div>
             <ul>
                 <li>
-                    <div class="academy-card">
-                        <img src="https://cdn.pixabay.com/photo/2016/11/22/11/48/mountain-1849091_640.png" alt="academyLogo">
+                    <div th:each="academy : ${cAcademyList}" class="academy-card">
+                        <img src="https://cdn.pixabay.com/photo/2017/07/10/19/42/logo-2491236_640.png" alt="academyLogo">
                         <ul>
-                            <li>학원이름</li>
-                            <li>학원주소</li>
-                            <li>학원번호</li>
+                            <li th:text="${academy.academyName}"></li>
+                            <li th:text="${academy.academyAddress}"></li>
                         </ul>
-                        <button>자세히보기 ></button>
+                        <button th:attr="onclick=|location.href='/academy/detail/'+${academy.id}|">자세히보기 ></button>
                     </div>
                 </li>
-                <li>
-                    <div class="academy-card">
-                        <img src="https://cdn.pixabay.com/photo/2016/11/22/11/48/mountain-1849091_640.png" alt="academyLogo">
-                        <ul>
-                            <li>학원이름</li>
-                            <li>학원주소</li>
-                            <li>학원번호</li>
-                        </ul>
-                        <button>자세히보기 ></button>
-                    </div>
-                </li><li>
-                <div class="academy-card">
-                    <img src="https://cdn.pixabay.com/photo/2016/11/22/11/48/mountain-1849091_640.png" alt="academyLogo">
-                    <ul>
-                        <li>학원이름</li>
-                        <li>학원주소</li>
-                        <li>학원번호</li>
-                    </ul>
-                    <button>자세히보기 ></button>
-                </div>
-            </li><li>
-                <div class="academy-card">
-                    <img src="https://cdn.pixabay.com/photo/2016/11/22/11/48/mountain-1849091_640.png" alt="academyLogo">
-                    <ul>
-                        <li>학원이름</li>
-                        <li>학원주소</li>
-                        <li>학원번호</li>
-                    </ul>
-                    <button>자세히보기 ></button>
-                </div>
-            </li><li>
-                <div class="academy-card">
-                    <img src="https://cdn.pixabay.com/photo/2016/11/22/11/48/mountain-1849091_640.png" alt="academyLogo">
-                    <ul>
-                        <li>학원이름</li>
-                        <li>학원주소</li>
-                        <li>학원번호</li>
-                    </ul>
-                    <button>자세히보기 ></button>
-                </div>
-            </li>
             </ul>
         </div>
+
         <div class="academy-items">
             <div class="academy-item">인기 학원</div>
             <div th:if="${mostjjimAcademy.isEmpty()}">

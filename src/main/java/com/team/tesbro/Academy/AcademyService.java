@@ -176,6 +176,9 @@ public class AcademyService {
     public List<Academy> overAcademies(List<Academy> list){
         Academy[] academies = new Academy[5];
         for(int i = 0; i<= academies.length; i++){
+            if (i >= 5) {
+                break;
+            }
             academies[i] = list.get(i);
         }
         return List.of(academies);
