@@ -19,4 +19,5 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     List<Review> find4RecentReviews();
 
     List<Review> findByUserId(String name);
+
 }

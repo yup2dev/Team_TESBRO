@@ -83,6 +83,8 @@ public class    UserController {
     public String mail() {
         return "mail";
     }
+
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/my")
     public String my(Model model, Principal principal) {
         userService.getUser(principal.getName()).getUsername();

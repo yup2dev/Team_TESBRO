@@ -17,4 +17,5 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
     Board findLatestNotice();
 
     List<Board> findByAuthor(String name);
+
 }
