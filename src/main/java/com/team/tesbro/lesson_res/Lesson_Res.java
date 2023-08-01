@@ -1,7 +1,7 @@
 package com.team.tesbro.lesson_res;
 
-import com.team.tesbro.Lesson.Lesson;
-import com.team.tesbro.User.SiteUser;
+import com.team.tesbro.lesson.Lesson;
+import com.team.tesbro.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,13 +1,12 @@
 package com.team.tesbro.lesson_res;
 
-import com.team.tesbro.Lesson.Lesson;
-import com.team.tesbro.Lesson.LessonRepository;
-import com.team.tesbro.LessonTicket.LessonTicket;
-import com.team.tesbro.LessonTicket.LessonTicketService;
-import com.team.tesbro.User.SiteUser;
-import com.team.tesbro.User.UserRepository;
-import com.team.tesbro.User.UserService;
-import com.team.tesbro.UserLessonTicket.UserLessonTicketService;
+import com.team.tesbro.lesson.Lesson;
+import com.team.tesbro.lesson.LessonRepository;
+import com.team.tesbro.lesson_ticket.LessonTicketService;
+import com.team.tesbro.user.SiteUser;
+import com.team.tesbro.user.UserRepository;
+import com.team.tesbro.user.UserService;
+import com.team.tesbro.user_lesson_ticket.UserLessonTicketService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;

@@ -1,16 +1,14 @@
 package com.team.tesbro;
 
-import com.team.tesbro.Academy.Academy;
-import com.team.tesbro.Academy.AcademyService;
-import com.team.tesbro.Board.Board;
-import com.team.tesbro.Board.BoardService;
-import com.team.tesbro.Review.Review;
-import com.team.tesbro.Review.ReviewService;
-import com.team.tesbro.Teacher.TeacherService;
-import com.team.tesbro.User.UserService;
+import com.team.tesbro.academy.Academy;
+import com.team.tesbro.academy.AcademyService;
+import com.team.tesbro.board.Board;
+import com.team.tesbro.board.BoardService;
+import com.team.tesbro.review.Review;
+import com.team.tesbro.review.ReviewService;
+import com.team.tesbro.teacher.TeacherService;
+import com.team.tesbro.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

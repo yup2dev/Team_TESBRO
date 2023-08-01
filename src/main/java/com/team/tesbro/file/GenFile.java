@@ -1,8 +1,5 @@
 package com.team.tesbro.file;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.team.tesbro.Academy.Academy;
-import com.team.tesbro.Board.Board;
-import com.team.tesbro.User.SiteUser;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -10,9 +7,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 

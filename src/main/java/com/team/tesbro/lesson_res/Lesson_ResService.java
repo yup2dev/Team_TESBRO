@@ -1,10 +1,10 @@
 package com.team.tesbro.lesson_res;
 
 import com.team.tesbro.DataNotFoundException;
-import com.team.tesbro.Lesson.Lesson;
-import com.team.tesbro.Lesson.LessonRepository;
-import com.team.tesbro.User.SiteUser;
-import com.team.tesbro.User.UserRepository;
+import com.team.tesbro.lesson.Lesson;
+import com.team.tesbro.lesson.LessonRepository;
+import com.team.tesbro.user.SiteUser;
+import com.team.tesbro.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

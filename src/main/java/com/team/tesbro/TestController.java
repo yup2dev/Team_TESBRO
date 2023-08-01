@@ -1,20 +1,12 @@
 package com.team.tesbro;
 
-import com.team.tesbro.Academy.AcademyService;
-import com.team.tesbro.Email.EmailAuthRequestDto;
-import com.team.tesbro.Email.EmailService;
+import com.team.tesbro.academy.AcademyService;
 import com.team.tesbro.file.GenFile;
-import com.team.tesbro.file.GenFileRepository;
 import com.team.tesbro.file.GenFileService;
-import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor

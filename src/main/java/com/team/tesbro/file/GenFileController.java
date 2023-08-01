@@ -1,9 +1,9 @@
 package com.team.tesbro.file;
 
-import com.team.tesbro.Academy.Academy;
-import com.team.tesbro.Academy.AcademyRepository;
-import com.team.tesbro.Board.Board;
-import com.team.tesbro.Board.BoardRepository;
+import com.team.tesbro.academy.Academy;
+import com.team.tesbro.academy.AcademyRepository;
+import com.team.tesbro.board.Board;
+import com.team.tesbro.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
