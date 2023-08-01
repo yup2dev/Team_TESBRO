@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>수강권</title>
+</head>
+<body>
+<div layout:fragment="content" class="content">
+    <link rel="stylesheet" type="text/css" th:href="@{/style_ticket_home.css}">
+
+    <!--     팝업 에러 추가-->
+    <div id="popupModal" class="modal" th:if="${popupMessage}">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p th:text="${popupMessage}"></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="top-box">수강권</div>
+        <div class="middle-box">
+            <div class="left-box">
+                <div class="ticket-box">
+                    <div class="ticket-item">
+                        <h1>Basic</h1>
+                        <div class="contentA">
+                            <h3>금액 :</h3>
+                            <h3> 150,000</h3>
+                        </div>
+                        <div class="contentA">
+                            <h3>횟수 :</h3>
+                            <h3>20회</h3>
+                        </div>
+                        <div class="content-detail">
+                            <p>유효기간은 90일 입니다</p>
+                            <p>해당 기간이 지나면 예약이 불가능합니다</p>
+                            <p>학원 별 이용가능 수강권을 확인해주세요</p>
+                            <p>구매 시 단순 변심으로 인한 교환 및 환불은 불가합니다</p>
+                        </div>
+                    </div>
+                    <form th:action="@{/ticket/1}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <button type="submit">구매하기</button>
+                    </form>
+                </div>
+            </div>
+            <div class="center-box">
+                <div class="ticket-box">
+                    <div class="ticket-item"></div>
+                    <form th:action="@{/ticket/2}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <button type="submit">구매하기</button>
+                    </form>
+                </div>
+            </div>
+            <div class="right-box">
+                <div class="ticket-box">
+                    <div class="ticket-item"></div>
+                    <form th:action="@{/ticket/3}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <button type="submit">구매하기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+$(document).ready(function() {
+  var popupModal = $("#popupModal");
+  var closeBtn = $(".close");
+  if (popupModal.length) {
+    popupModal.show();
+  }
+  if (closeBtn.length) {
+    closeBtn.on("click", function() {
+      popupModal.hide();
+    });
+  }
+});
+
+
+
+
+
+    </script>
+
+</div>
+</body>
+</html>

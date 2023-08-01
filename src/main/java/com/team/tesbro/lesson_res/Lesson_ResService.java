@@ -65,7 +65,6 @@ public class Lesson_ResService {
             SiteUser user = userOptional.orElseThrow(() -> new DataNotFoundException("존재하지 않는 사용자 ID입니다"));
             lessonRes.getUsers().add(user);
         }
-
         lessonResRepository.save(lessonRes);
     }
 

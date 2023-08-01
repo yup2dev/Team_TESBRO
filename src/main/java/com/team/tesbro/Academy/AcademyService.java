@@ -72,7 +72,6 @@ public class AcademyService {
             return academyRepository.searchByC(null, null, peopleCapacity, pageable);
         }
         return academyRepository.findAll(pageable);
-
     }
 
     public List<Academy> getCloserAcademy(String address) {

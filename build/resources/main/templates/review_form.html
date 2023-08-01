@@ -1,21 +1,58 @@
-<!--<html layout:decorate="~{layout}">-->
-<!--<div layout:fragment="content" class="container">-->
-<!--  <h5>답변 수정</h5>-->
-<!--  <form th:action="@{|/review/create/${academy.id}|}" th:object="${reviewForm}" method="post">-->
-<!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-<!--    <div th:replace="~{form_errors :: formErrorsFragment}"></div>-->
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>리뷰수정</title>
+</head>
 
-<!--    <select name="star_rating" id="star_rating">-->
-<!--      <option value="5">⭐⭐⭐⭐⭐</option>-->
-<!--      <option value="4">⭐⭐⭐⭐</option>-->
-<!--      <option value="3">⭐⭐⭐</option>-->
-<!--      <option value="2">⭐⭐</option>-->
-<!--      <option value="1">⭐</option>-->
-<!--    </select>-->
-<!--    <input type="submit" value="리뷰등록">-->
-<!--    <textarea name="content" id="content" rows="12"></textarea>-->
+<div class="container">
+  <link rel="stylesheet" type="text/css" th:href="@{/review_form.css}">
+  <h3>리뷰 수정</h3>
+  <form th:object="${reviewForm}" method="post" class="review-create"  id="reviewForm">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <div th:replace="~{form_errors :: formErrorsFragment}"></div>
 
-<!--  </form>-->
-<!--</div>-->
-<!--</html>-->
-<h2>whyrano</h2>
+    <select name="star_rating" id="star_rating">
+      <option value="5">⭐⭐⭐⭐⭐</option>
+      <option value="4">⭐⭐⭐⭐</option>
+      <option value="3">⭐⭐⭐</option>
+      <option value="2">⭐⭐</option>
+      <option value="1">⭐</option>
+    </select>
+
+    <input type="text" id="content" name="content" value="">
+    <input type="submit" value="리뷰 수정" id="submitBtn">
+  </form>
+
+  <script>
+document.getElementById("content").value = localStorage.getItem("reviewContent");
+
+document.getElementById("submitBtn").addEventListener("click", function() {
+
+
+      const csrfToken = document.querySelector('[name="_csrf"]').value;
+      const starRating = document.getElementById("star_rating").value;
+      const content = document.getElementById("content").value;
+
+      $.ajax({
+        method: "POST",
+        headers: {
+          "X-CSRF-TOKEN": csrfToken
+        },
+        data: {
+          "star_rating": starRating,
+          "content": content
+        },
+        success: function() { // 데이터 전송 성공 시 창 닫기
+          window.close();
+        },
+        error: function(xhr, textStatus, errorThrown) { // 전송 실패 시 오류 메시지 출력
+          alert("리뷰 수정 실패: " + textStatus + ", " + errorThrown);
+        }
+      });
+    });
+</script>
+
+</div>
+</html>

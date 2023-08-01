@@ -1,32 +1,45 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/login.css}">
 </head>
 <body>
-<div class="container">
-    <!--   테스형 로고 -->
-    <div class="logo">
+<div class="login">
+    <div class="login-box">
+        <div class="bg-left">
+            <img src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=1687492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b" alt="login-bg">
+        </div>
+        <div class="bg-right"></div>
+
+
     </div>
-    <!--  테스형 로고 끝 -->
-    <!--   로그인 입력 시작 -->
-    <div class="login">
-        <form th:action="@{/user/login}" method="post">
+    <div class="container">
+        <!--   테스형 로고 -->
+        <div class="logo"><img src="https://velog.velcdn.com/images/jsr3643/post/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg" alt="TesbroLogo"></div>
+        <!--  테스형 로고 끝 -->
+        <!--   로그인 입력 시작 -->
+        <div class="login-form">
             <div th:if="${param.error}">
                 사용자ID 또는 비밀번호를 확인해 주세요.
             </div>
-            <label for="username" class="form-label"></label>
-            <input type="text" placeholder="아이디" id="username" name="username">
-            <label for="password" class="form-label"></label>
-            <input type="password" placeholder="비밀번호" name="password" id="password">
-            <span class="findID">아이디 찾기 <span>|</span> <span class="findPw">비밀번호 찾기</span></span>
-            <button id="login" type="submit">로그인</button>
-            <button>회원가입</button>
-            <button>소셜로그인</button>
-            <button>메인화면</button>
-        </form>
+            <form th:action="@{/user/login}" method="post">
+
+                <label for="username" class="form-label"></label>
+                <input type="text" placeholder="아이디" id="username" name="username">
+                <label for="password" class="form-label"></label>
+                <input type="password" placeholder="비밀번호" name="password" id="password">
+                <button id="login" type="submit">로그인</button>
+            </form>
+            <button onclick="location.href='/user/signup';" class="btn-1">회원가입</button>
+            <button class="btn-2">소셜로그인</button>
+            <button onclick="location.href='/tesbro';" class="btn-3">메인화면</button>
+            <img src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=1687492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b" alt="login-bg">
+
+        </div>
+        <!--   로그인 입력 끝 -->
     </div>
-    <!--   로그인 입력 끝 -->
+
+
 </div>
 </body>

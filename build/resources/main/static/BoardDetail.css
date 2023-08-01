@@ -1,0 +1,84 @@
+body {
+
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+button {
+    border:0;
+    background:inherit;
+}
+a{text-decoration:none;color:inherit;}
+li {list-style: none;}
+
+
+.noticeContainer {
+  width:100%;
+  min-width:1500px;
+  position:relative;
+}
+.container {
+  width: 1100px;
+  margin: 0 auto;
+}
+.container .notice-header {
+    position:relative;
+    height:200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.container .notice-header .notice-sub{
+    font-size: 1.5rem;
+    font-weight:bold;
+    margin-top:-120px;
+}
+.noticeContainer .notice-box {
+  border-top:5px double lightgray;
+  border-bottom:1px solid lightgray;
+  width:1100px;
+  margin:0 auto;
+  margin-top:-130px;
+  position:relative;
+}
+.notice-box div:first-child{
+  border-bottom:5px double lightgray;
+  font-size:1.2rem;
+  font-weight:bold;
+  padding:20px 10px;
+}
+.notice-box .content2 {
+  min-height:300px;
+  font-size:1rem;
+  padding:50px 10px;
+  margin-bottom:50px;
+}
+.notice-box .recommend {
+  border: 1px solid rgb(30,90,30);
+  border-radius:10px;
+  padding:10px;
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translatex(-50%);
+  width:70px;
+  text-align:center;
+}
+.notice-box .recommend:hover {
+  background: rgb(30,90,30);
+  color:white;
+
+}
+
+.container .back-btn {
+  background:gray;
+  color:white;
+  border-radius:10px;
+  padding:10px;
+  transform:translatex(-50%);
+  width:70px;
+  text-align:center;
+  margin:20px 95%;
+  cursor:pointer;
+}

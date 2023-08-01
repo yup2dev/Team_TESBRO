@@ -1,31 +1,55 @@
-<h1 th:text="${board.subject}">제목</h1>
-<div th:text="${board.managerName}">작성자</div>
-<div th:text="${board.content}">내용</div>
 
-<h2>답변</h2>
-<ul>
-    <li th:each="answer : ${board.answers}" th:text="${answer.content}"></li>
-</ul>
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>board_detail</title>
+</head>
 
-<form th:action="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:object="${answerForm}" method="post">
-    <input type="hidden" th:field="*{boardId}" th:value="${board.id}" />
-    <div>
-        <label for="content">답변 작성:</label>
-        <textarea id="content" name="content" rows="4" cols="50" th:field="*{content}"></textarea>
+
+<body>
+
+<div  layout:fragment="content"class="noticeContainer">
+    <link rel="stylesheet" type="text/css" th:href="@{/boardDetail.css}">
+    <div class="container">
+        <div class="notice-header">
+            <div class="notice-sub">공지사항</div>
+        </div>
+        <div class="notice-box">
+            <div th:text="${board.subject}">일단 대충 적어놓는 공지사항 제목</div>
+            <div class="content2" th:text="${board.content}"></div>
+            <a href="javascript:void(0);" class="recommend"
+               th:data-uri="@{|/board/vote/${board.id}|}">
+                추천
+                <span class="badge" th:text="${#lists.size(board.voter)}"></span>
+            </a>
+        </div>
+
+
+        <div class="back-btn">
+            <a th:if="${board.boardCategory == 'notice'}" th:href="@{/board/notice}" class="btn btn-primary">목륵</a>
+
+        </div>
     </div>
-    <button type="submit">답변 등록</button>
-</form>
-
-<a th:if="${board.boardCategory == 'notice'}" th:href="@{/board/notice}">돌아가기</a>
-<a th:if="${board.boardCategory == 'qna'}" th:href="@{/board/qna}">돌아가기</a>
-<a th:if="${board.boardCategory == 'event'}" th:href="@{/board/event}">돌아가기</a>
 
 
-<a th:href="@{/board/modify/{id}(id=${board.id})}" class="btn btn-primary">수정하기</a>
 
 
-<form th:action="@{'/board/delete/' + ${board.id}}" method="post">
-    <input type="hidden" name="_method" value="DELETE" />
-    <button type="submit">삭제</button>
+    <script>
+    function confirmDelete() {
+        var result = confirm("삭제하시겠습니까?");
+        return result;
+    }
+    const recommend_elements = document.getElementsByClassName("recommend");
+    Array.from(recommend_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("추천하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+</script>
 
-</form>
+</div>
+</body>
+</html>

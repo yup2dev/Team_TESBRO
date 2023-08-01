@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>학원등록</title>
+
+
+
+</head>
+<body>
+<div layout:fragment="content" class="content">
+    <link rel="stylesheet" type="text/css" th:href="@{/academyForm.css}">
+    <div class="container">
+        <div class="top-box">학원 등록하기</div>
+
+        <div class="middle-box">
+            <form th:action="@{/academy/create}" method="post" th:object="${AcademyForm}">
+                <div class="mb-3">
+                    <label for="imgLogo"><div class="form-label">학원로고</div></label>
+                    <textarea th:field="*{imgLogo}" class="form-control" placeholder="url 첨부"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="address"><div class="form-label">주소</div></label>
+                    <input type="text" id="address_kakao" name="address" readonly placeholder="주소 검색" th:field="*{academyAddress}"/>
+                </div>
+                <div class="mb-3">
+                    <label for="academyName"><div class="form-label">학원이름</div></label>
+                    <input type="text" th:field="*{academyName}" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="ceoName"><div class="form-label">대표</div></label>
+                    <input type="text" th:field="*{ceoName}" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="corNum"><div class="form-label">사업자등록번호</div></label>
+                    <input type="text" th:field="*{corNum}" class="form-control" id="bnoInput2">
+                    <button type="button" onclick="openPopup();">조회</button>
+                </div>
+                <div class="mb-3">
+                    <label for="academyTel"><div class="form-label">전화번호</div></label>
+                    <textarea th:field="*{academyTel}" class="form-control"></textarea>
+                </div>
+                <div>
+                    <input type="submit" value="등록하기" class="save">
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+
+
+
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+    window.onload = function(){
+        document.getElementById("address_kakao").addEventListener("click", function(){ // 주소 입력 칸을 클릭하면
+            // 카카오 지도 발생
+            var postcode = new daum.Postcode({
+                oncomplete: function(data) { // 선택 시 입력값 세팅
+                    document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                    document.querySelector("input[name=address_detail]").focus(); // 상세 입력 포커싱
+                    postcode.close();
+                }
+            });
+            postcode.open();
+        });
+    }
+</script>
+    <script>
+function openPopup() {
+    window.open('/user/sign', '사업자등록번호 조회', 'width=430, height=500, location=no, status=yes, scrollbars=yes');
+}
+
+function getUserData(bno) {
+    var inputField = document.querySelector('#bnoInput2');
+    if (inputField) {
+        inputField.value = bno;
+    }
+}
+</script>
+</div>
+</body>
+</html>

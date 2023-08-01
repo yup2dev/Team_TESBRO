@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>qna_detail</title>
+</head>
+
+<body>
+
+<div layout:fragment="content" class="qnaContainer">
+    <link rel="stylesheet" type="text/css" th:href="@{/qnaDetail.css}">
+    <div class="container">
+        <div class="qna-header">
+            <div class="qna-sub">문의하기</div>
+        </div>
+        <div class="qna-box">
+            <div th:text="${board.subject}">일단 대충 적어놓는 문의하기 제목</div>
+            <div class="content2" th:text="${board.content}"></div>
+            <a href="javascript:void(0);" class="recommend" th:data-uri="@{|/board/vote/${board.id}|}">
+                추천
+                <span class="badge" th:text="${#lists.size(board.voter)}"></span>
+            </a>
+        </div>
+
+        <div class="g-btn">
+            <div class="modi-btn">
+                <a th:href="@{/board/modify/{id}(id=${board.id})}" class="btn btn-primary">수정</a>
+            </div>
+            <div class="del-btn">
+                <form th:action="@{'/board/delete/' + ${board.id}}" method="post" style="display: inline-block;" onsubmit="return confirmDelete();">
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <a type="submit" class="btn btn-primary">삭제</a>
+                </form>
+            </div>
+            <div class="back-btn">
+                <a th:if="${board.boardCategory == 'qna'}" th:href="@{/board/qna}" class="btn btn-primary">목록</a>
+            </div>
+        </div>
+
+        <div class="answer-header">
+            <div class="answer-sub"> 답변</div>
+        </div>
+        <ul>
+            <li class="answer2" th:each="answer : ${board.answers}" th:text="${answer.content}"></li>
+        </ul>
+
+        <form th:action="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:object="${answerForm}" method="post">
+            <input type="hidden" th:field="*{boardId}" th:value="${board.id}" />
+            <div>
+                <label for="content"></label>
+                <textarea id="content" name="content" rows="4" cols="50" th:field="*{content}"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">답변 등록</button>
+        </form>
+
+
+    </div>
+    <script>
+    function confirmDelete() {
+        var result = confirm("삭제하시겠습니까?");
+        return result;
+    }
+    const recommend_elements = document.getElementsByClassName("recommend");
+    Array.from(recommend_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+            if(confirm("추천하시겠습니까?")) {
+                location.href = this.dataset.uri;
+            };
+        });
+    });
+
+</script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<body>
+<form id="lessonForm" th:action="@{|/lesson/create/${academy.id}/${tid}|}" th:object="${lessonForm}" method="post">
+    <div>
+        <label for="teacher">강사:</label>
+        <select id="teacher" name="teacherId" onchange="updateTid(this)">
+            <option value="">==강사를 선택하세요==</option>
+            <option th:each="teacher : ${academy.teacherList}" th:if="${teacher != null}" th:value="${teacher?.id}"
+                    th:text="${teacher?.teacherName}"></option>
+        </select>
+    </div>
+    <div>
+        <label for="lessonName">레슨 명:</label>
+        <input type="text" id="lessonName" name="lessonName"/>
+    </div>
+    <div>
+        <label for="peopleCapacity">수용 인원:</label>
+        <input type="number" id="peopleCapacity" name="peopleCapacity"/>
+    </div>
+    <div>
+        <label for="lessonDate">날짜:</label>
+        <input type="date" id="lessonDate" name="lessonDate"/>
+    </div>
+    <div>
+        <label for="lessonTime">시간:</label>
+        <input type="time" id="lessonTime" name="lessonTime"/>
+    </div>
+    <div>
+        <button type="submit">레슨 열기 ~~</button>
+    </div>
+</form>
+</body>
+
+<script th:inline="javascript">
+//  var academyId = parseInt('${academy.id}');
+function updateTid(selectElement) {
+    var tid = selectElement.value;
+  var actionUrl = '/lesson/create/' + [[${academy.id}]] + '/' + tid;
+  document.getElementById('lessonForm').action = actionUrl;
+}
+
+</script>

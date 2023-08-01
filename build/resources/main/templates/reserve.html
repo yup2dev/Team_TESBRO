@@ -2,28 +2,83 @@
 <html layout:decorate="~{layout}" lang="ko">
 <head>
     <meta charset="UTF-8">
+    <title>Reservation</title>
+
 </head>
 <body>
 <div layout:fragment="content" class="content">
-    <table>
-        <thead>
-        <tr>
-            <th>수업 명</th>
-            <th>예약일자</th>
-            <th>예약자</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="lessonRes : ${lessonResList}">
-            <td th:text="${lessonRes.lesson.lessonName}"></td>
-            <td th:text="${lessonRes.bookDate}"></td>
-            <td>
-                <ul>
-                    <li th:each="user : ${lessonRes.users}" th:text="${user.username}"></li>
-                </ul>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <link rel="stylesheet" type="text/css" th:href="@{/style_reserve.css}">
+    <div class="container">
+        <div class="top-box">예약확인</div>
+        <div class="middle-box">
+
+
+                <table>
+                    <thead>
+                            <th>학원명</th>
+                            <th>수업명</th>
+                            <th>강사명</th>
+                            <th>수업날짜</th>
+                            <th>수업시간</th>
+                            <th>예약일자</th>
+                            <th><a th:href="@{/academy/list}">학원 목록</a></th>
+
+                    </thead>
+                    <tbody>
+                        <tr th:each="lessonRes : ${lessonResList}">
+                            <td>
+                                <a th:href="@{|/academy/detail/${lessonRes.lesson.academy.Id}|}" th:text="${lessonRes.lesson.academy.academyName}"></a>
+                            </td>
+                            <td th:text="${lessonRes.lesson.lessonName}"></td>
+                            <td th:text="${lessonRes.lesson.teacher.teacherName}"></td>
+                            <td th:text="${lessonRes.lesson.lessonDate}"></td>
+                            <td th:text="${lessonRes.lesson.lessonTime}"></td>
+                            <td th:text="${#temporals.format(lessonRes.bookDate, 'MM-dd HH:mm')}"></td>
+                            <td>
+                                <a th:href="@{|/academy/detail/${lessonRes.lesson.academy.Id}#후기|}">리뷰 쓰러가기</a>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+        </div>
+
+        <div class="bottom-box">
+            <div class="recentAca-ment">다시 예약하기</div>
+            <div class="recentAca-box">
+                <div th:each="lessonRes, iStat : ${lessonResList}" th:remove="${iStat.index > 3} ? all : none" class="recentAca-card">
+                    <img src="https://cdn.pixabay.com/photo/2020/08/05/13/27/eco-5465459_640.png" alt="">
+                    <div class="recentAca-item"><a th:href="@{|/academy/detail/${lessonRes.lesson.academy.Id}|}" th:text="${lessonRes.lesson.academy.academyName}"></a></div>
+                    <div th:text="${lessonRes.lesson.academy.academyAddress}" class="recentAca-item"></div>
+                    <div th:text="${lessonRes.lesson.academy.academyTel}" class="recentAca-item"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // 이전에 출력된 academyName 저장 변수
+    var previousAcademyName = null;
+
+    // 반복문에서 academyName이 이전에 출력된 것과 겹치지 않을 때만 표시
+    var recentAcaCards = document.getElementsByClassName('recentAca-card');
+    for (var i = 0; i < recentAcaCards.length; i++) {
+        var currentAcademyName = recentAcaCards[i].querySelector('.recentAca-item a').textContent;
+        if (currentAcademyName !== previousAcademyName) {
+            previousAcademyName = currentAcademyName;
+        } else {
+            recentAcaCards[i].style.display = 'none';
+        }
+    }
+</script>
+
+
+
+
+
+
 </div>
 </body>
+</html>

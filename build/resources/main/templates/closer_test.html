@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <ul th:each="academy : ${closerAcademyList}">
+          <li th:text="${academy.academyName}"></li>
+          <li th:text="${academy.academyAddress}"></li>
+        </ul>
+</body>
+</html>

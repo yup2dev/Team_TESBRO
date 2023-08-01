@@ -1,0 +1,105 @@
+body {
+    padding:0;
+    margin:0;
+}
+a {text-decoration:none; color:inherit;}
+button{border:0; background:inherit;}
+li {list-style:none; color:inherit;}
+
+.content {
+    width:100%;
+    min-width:1500px;
+    position:relative;
+}
+.content .container {
+    width:1100px;
+    margin:0 auto;
+}
+.container .top-box {
+    width:100%;
+    height:80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    font-weight:bold;
+    border-bottom:5px double lightgray;
+}
+.container .middle-box {
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:50px;
+    margin-top:30px;
+}
+.container .left-box, .center-box, .right-box {
+    width:30%;
+}
+.container .ticket-box {
+    height:500px;
+}
+.ticket-box .ticket-item {
+    border:1px solid gray;
+    border-radius:5px;
+    height:400px;
+    text-align:center;
+    display:flex;
+    flex-direction: column;
+}
+.ticket-box button {
+    border:1px solid rgb(30,90,30);
+    border-radius:5px;
+    width:100%;
+    font-size:1.2rem;
+    padding:20px 0;
+    margin-top:30px;
+    cursor:pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+  text-align: center;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.contentA {
+display:flex;
+justify-content: center;
+}
+
+.contentA h3{
+text-align:center;
+}
+
+.content-detail{
+text-align:center;
+}

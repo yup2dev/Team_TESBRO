@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>문의하기</title>
+</head>
+
+<body>
+<div layout:fragment="content" class="notice-section">
+    <link rel="stylesheet" type="text/css" th:href="@{/style1.css}">
+    <div class="container">
+        <div class="notice-header">
+            <div class="notice-sub">문의하기</div>
+            <!-- 검색 -->
+            <div class="search-box">
+                <form class="search-form" th:action="@{/board/search}" method="get">
+                    <input type="text" name="keyword" placeholder="검색어를 입력하세요">
+                    <button type="submit"><img src="https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_1280.png" alt="searchIcon"></button>
+                </form>
+            </div>
+            <!-- 검색 끝 -->
+
+            <!-- 정렬 버튼들 -->
+            <div class="order-buttons">
+                <button class="order-button" onclick="handleOrderChange('outdated')">▼</button>
+                <button class="order-button" onclick="handleOrderChange('views')">▼</button>
+                <button class="order-button" onclick="handleOrderChange('voter')">▼</button>
+            </div>
+            <!-- 정렬 버튼들 끝 -->
+        </div>
+
+
+
+
+    </div>
+
+
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                <tr>
+                    <th scope="col" class="th-item">번호</th>
+                    <th scope="col" class="th-item">제목</th>
+                    <th scope="col" class="th-item">작성자</th>
+                    <th scope="col" class="th-item">작성일</th>
+                    <th scope="col" class="th-item">조회</th>
+                    <th scope="col" class="th-item">추천</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="board, loop : ${paging}">
+                    <td class="td-item" th:text="${paging.totalElements - (paging.pageable.pageNumber * paging.pageable.pageSize) - loop.index}"></td>
+                    <td class="td-item" >
+                        <a th:href="@{|/board/${board.BoardCategory}/detail/${board.id}|}" th:text="${board.subject}"></a>
+                        <span class="answer" th:if="${#lists.size(board.answers) > 0}"
+                              th:text="&#91;답변완료&#93;">
+          </span>
+                    </td>
+                    <td class="td-item" >
+                        <span th:if="${board.author != null}" th:text="${board.author.username}"></span>
+                    </td>
+                    <td class="td-item" th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                    <td class="td-item" th:text="${board.views}"></td>
+                    <td class="td-item" th:text="${#lists.size(board.voter)}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+
+            <div class="pagination">
+                <a th:href="@{|/board/${paging.content[0].boardCategory}/create|}" class="button">글쓰기</a>
+                <a th:if="${paging.hasPrevious()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.previousPageable().pageNumber}|}" class="prev">&lt;</a>
+                <span th:if="${paging.number >= 2}">
+          <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 2}|}" class="pager" th:text="${paging.number - 1}"></a>
+        </span>
+                <span th:if="${paging.number >= 1}">
+          <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number - 1}|}" class="pager" th:text="${paging.number}"></a>
+        </span>
+                <span class="current pager" th:text="${paging.number + 1}"></span>
+                <span th:if="${paging.number + 1 < paging.totalPages}">
+          <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number + 1}|}" class="pager" th:text="${paging.number + 2}"></a>
+        </span>
+                <span th:if="${paging.number + 2 < paging.totalPages}">
+          <a th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.number + 2}|}" class="pager" th:text="${paging.number + 3}"></a>
+        </span>
+                <a th:if="${paging.hasNext()}" th:href="@{|/board/${paging.content[0].boardCategory}?page=${paging.nextPageable().pageNumber}|}" class="next">&gt;</a>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+    function handleOrderChange(selectedOption) {
+      var currentUrl = window.location.href;
+      var updatedUrl;
+
+      if (currentUrl.includes("?")) {
+        if (currentUrl.includes("order=")) {
+          updatedUrl = currentUrl.replace(/order=[^&]+/, "order=" + selectedOption);
+        } else {
+          updatedUrl = currentUrl + "&order=" + selectedOption;
+        }
+      } else {
+        updatedUrl = currentUrl + "?order=" + selectedOption;
+      }
+
+      window.location.href = updatedUrl;
+    }
+  </script>
+</div>
+</body>
+</html>

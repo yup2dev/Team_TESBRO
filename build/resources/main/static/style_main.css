@@ -1,0 +1,647 @@
+body {margin:0; padding:0}
+a{text-decoration:none;color:inherit;}
+button{border:0;background:inherit;}
+
+
+
+
+
+
+.promotion {
+  width:100%;
+   min-width:1500px;
+  height: 800px;
+  position:absolute;
+  top:0;
+}
+.slider-section {
+  height: 800px;
+	position: relative;
+	overflow: hidden;
+}
+.slider-section > .slide-container {
+  width: 100%;
+	height: 800px;
+	margin: 0 auto;
+	position: relative;
+}
+.slider-section > .slide-container > .swiper {
+  position: absolute;
+	display: flex;
+	top: 0;
+	left:0;
+  width:100%;
+  height:800px;
+}
+
+
+
+
+.slide {
+  /* layout */
+  display: flex;
+  flex-wrap: nowrap;
+  /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
+  overflow: hidden;
+  position: relative;
+
+  /* size */
+  width: 100%;
+  min-width:1500px;
+
+  /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
+  user-select: none;
+}
+.slide_item {
+  /* layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
+  position: relative;
+  left: 0px;
+
+  /* size */
+  width: 100%;
+  height: 800px;
+  /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
+  flex-shrink: 0;
+  opacity: 1;
+    transition: opacity 1s ease;
+  }
+  .slide_item.active {
+    opacity: 1;
+  }
+.slide_button {
+  /* layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* position */
+  position: absolute;
+  /* 버튼이 중앙에 위치하게 하기위해 계산 */
+  top: calc(50% - 50px);
+
+  /* size */
+  width: 32px;
+  height: 100px;
+
+  /* style */
+  cursor: pointer;
+}
+
+.slide_prev_button {
+  left: 10px;
+}
+.slide_next_button {
+  right: 10px;
+}
+
+
+
+
+/* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
+.slide_item.item1 {
+  background-color: white;
+}
+.slide_item.item1 .fixed-item{
+  position:relative;
+  min-width: 1200px;
+}
+.slide_item.item1 .fixed-item div{
+  font-family: 'Humanbumsuk';
+  position:absolute;
+  top:270px;
+  left:80px;
+  font-size:3rem;
+}
+.slide_item.item1 .fixed-item input {
+   position:absolute;
+  top:400px;
+  left:100px;
+  width:380px;
+  font-size:1.1rem;
+  padding:5px 0;
+  text-align:center;
+  border:3px solid rgb(30,90,30);
+  border-radius:30px;
+}
+.slide_item.item1 .fixed-item button{
+     position:absolute;
+  width:40px;
+  height:40px;
+  top:400px;
+  left:440px;
+  background: inherit;
+  cursor:pointer;
+  border:0;
+}
+.slide_item.item1 .fixed-item > button > img{
+  width:25px;
+  height:25px;
+  position:absolute;
+  top:-94px;
+  left:-548px;
+}
+
+.slide_item.item1 .fixed-item img{
+  width:600px;
+  height:600px;
+  object-fit:contain;
+  margin-left: 550px;
+  margin-top:100px;
+  -webkit-user-drag: none;
+}
+
+
+
+
+
+/* 2번 */
+.slide_item.item2 {
+  background-color: #e9e9f1;
+}
+.slide_item.item2 .fixed-item{
+  position:relative;
+  width: 1200px;
+  height:700px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+}
+.slide_item.item2 .fixed-item img{
+  width:1200px;
+  height:500px;
+  object-fit:cover;
+-webkit-user-drag: none;
+}
+.slide_item.item2 .fixed-item div:first-child{
+  font-family: 'Humanbumsuk';
+  position:absolute;
+  top:120px;
+  left:50%;
+  transform:translatex(-50%);
+  font-size:3rem;
+}
+.slide_item.item2 .fixed-item div:nth-child(2){
+  font-family: 'Humanbumsuk';
+  position:absolute;
+  top:180px;
+  left:750px;
+  font-size:2rem;
+}
+
+
+
+/* 3번 */
+.slide_item.item3 {
+  background-color: #b77cf1;
+}
+.slide_item.item3 .fixed-item{
+  position:relative;
+  width: 1200px;
+  height:700px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+}
+.slide_item.item3 .fixed-item img{
+  width:500px;
+  height:500px;
+  object-fit:contain;
+  margin-left:400px;
+  -webkit-user-drag: none;
+}
+.slide_item.item3 .fixed-item div:first-child{
+  font-family: 'Humanbumsuk';
+  position:absolute;
+  top:30%;
+  left:25%;
+  transform:translatex(-50%);
+  font-size:3rem;
+  color:white;
+}
+.slide_item.item3 .fixed-item div:nth-child(2){
+  font-family: 'Humanbumsuk';
+  position:absolute;
+  top:40%;
+  left:25%;
+  font-size:2rem;
+  color:white;
+}
+
+
+
+
+
+
+/* 페이지네이션 스타일 */
+ul,
+li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.slide_pagination {
+
+  /* layout */
+  display: flex;
+  gap: 5px;
+
+  /* position */
+  position: absolute;
+  bottom: 0;
+  /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
+  left: 50%;
+  transform: translateX(-50%);
+}
+.slide_pagination > li {
+  /* 현재 슬라이드가 아닌 것은 투명도 부여 */
+  color: rgb(30,90,30);
+  cursor: pointer;
+  font-size: 25px;
+}
+.slide_pagination > li.active {
+  /* 현재 슬라이드 색상은 투명도 없이 */
+  color: seagreen;
+}
+
+.slide_item_duplicate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 0px;
+  width: 100%;
+  height: 300px;
+  flex-shrink: 0;
+}
+
+
+
+
+
+/* 공지사항 */
+.notice-box {
+  width:100%;
+  min-width:1500px;
+  height: 100px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:650px;
+}
+.notice-box .notice-items {
+  width:1200px;
+  border:1px solid lightgray;
+  border-radius:10px;
+  display:flex;
+  justify-content:space-between;
+
+}
+.notice-box .notice-items .notice-item {
+  padding:7px 40px;
+  display:inline-block;
+  font-size:1.1rem;
+}
+.notice-box .notice-items .notice-item:nth-child(2) {
+  width:700px;
+  margin-left:-200px;
+  font-size:1.1rem;
+}
+.notice-box .notice-items button {
+  border:0;
+  background: transparent;
+  font-size:1.2rem;
+  color:gray;
+  cursor:pointer;
+  margin-right:10px;
+}
+/* 공지끝 */
+
+
+
+
+/* 학원 */
+/* 이용자수 */
+.academy-list {
+  width:100%;
+  min-width:1500px;
+  position:relative;
+}
+.academy-list .total-size {
+  width:1200px;
+  height:300px;
+  border:1px solid lightgray;
+  border-radius:10px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-around;
+}
+.academy-list .total-size .size-item {
+  height:200px;
+  text-align:center;
+  margin:auto;
+}
+
+.academy-list .total-size .size-item img {
+  width:120px;
+}
+.academy-list .total-size .size-item div {
+  font-size:1rem;
+  margin:1px 0;
+}
+.academy-list .total-size .size-item div:last-child{
+  font-size:1.6rem;
+  font-weight:bold;
+  color:rgb(30,90,30);
+  margin-top:10px;
+}
+
+/* 이용자수 리스트끝*/
+
+/* 학원리스트 */
+.academy-list {
+   width:100%;
+  min-width:1500px;
+  position:relative;
+}
+.academy-list .academy-box {
+  width:1200px;
+  height:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  margin-top: 30px;
+  position:relative;
+}
+.academy-list .academy-box .academy-btn {
+  position:absolute;
+  width:200px;
+  height:50px;
+  font-size:1.1rem;
+  bottom:45px;
+  left:50%;
+  transform:translatex(-50%);
+  cursor:pointer;
+  border:1px solid lightgray;
+  background: transparent;
+}
+.academy-list .academy-box .academy-items .academy-item{
+  width:580px;
+  font-size:1.6rem;
+  font-weight:bold;
+  padding:30px 0;
+  border-bottom:1px solid lightgray;
+}
+.academy-list .academy-box .academy-items .academy-card {
+  border:1px solid lightgray;
+  border-radius:5px;
+  width:100%;
+  height:160px;
+  margin:30px 0;
+  display:flex;
+  align-items:center;
+  position:relative;
+
+}
+.academy-box .academy-items .academy-card img {
+  width:130px;
+  height:130px;
+  margin:0 30px;
+}
+.academy-items .academy-card li {
+  font-size:1.1rem;
+  padding:5px 0;
+}
+.academy-items .academy-card li:first-child {
+  font-weight:bold;
+  font-size:1.3rem;
+}
+.academy-items .academy-card button {
+  position:absolute;
+  right:20px;
+  padding:5px 0;
+  border:0;
+  background: transparent;
+  font-size: 0.9rem;
+  cursor:pointer;
+}
+/* 학원리스트 끝*/
+
+
+
+/* 리뷰시작 */
+.latest-review {
+  width:100%;
+  min-width:1500px;
+  position:relative;
+}
+.latest-review .review-box {
+/*   border:2px solid orange; */
+  width:1200px;
+  height:300px;
+  margin:0 auto;
+}
+.review-box .review-item {
+  font-size:1.6rem;
+  font-weight:bold;
+  padding-top:30px;
+}
+.review-box .review-items .review-cards {
+/*   border:2px solid purple; */
+  height:250px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  position:relative;
+}
+.review-items .review-cards .review-card {
+  border:1px solid lightgray;
+  border-radius:5px;
+  width:280px;
+  height:200px;
+  display:flex;
+  flex-direction:column;
+
+
+}
+.review-cards .review-card img {
+  width:50px;
+  height:50px;
+  background: white;
+  border:1px solid lightgray;
+  border-radius:5px;
+  object-fit:contain;
+  position:relative;
+  left:25px;
+  top:-25px;
+}
+.review-cards .review-card div {
+  margin-left:20px;
+}
+.review-cards .review-card div:last-child {
+  margin-top :15px;
+  margin-right:15px;
+  height:65px;
+  overflow:hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 표시할 줄 수 */
+  -webkit-box-orient: vertical;
+}
+.review-cards .review-card div:last-child p {
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 리뷰끝 */
+
+
+
+/* 버튼들 */
+.link-buttons {
+  width:100%;
+  min-width:1500px;
+  height: 730px;
+  position:relative;
+  margin-top:30px;
+
+}
+.link-buttons .lbtn-ment {
+  width:1200px;
+  margin:0 auto;
+  font-size:1.6rem;
+  font-weight:bold;
+  padding-top:30px;
+}
+.link-buttons .lbtn-area {
+  width:1200px;
+  height:600px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:30px;
+  position:relative;
+}
+.link-buttons .lbtn-area > button {
+  width:600px;
+  height:600px;
+  background: #feebdc;
+  cursor:pointer;
+}
+.link-buttons .lbtn-area .lbtn-area2 {
+  width:600px;
+  height:600px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  margin-left:20px;
+}
+.link-buttons .lbtn-area .lbtn-area2 button {
+  height:290px;
+  cursor:pointer;
+  background: #a5cdcd;
+}
+.link-buttons .lbtn-area .lbtn-area2 button:last-child {
+  background: #fffbe2;
+  overflow:hidden;
+}
+
+
+
+/* 버튼 안에 문구 설정 */
+.link-buttons .lbtn-area > button div:nth-child(2) {
+  position:absolute;
+  font-size:2.5rem;
+  font-weight:bold;
+  font-family: 'Humanbumsuk';
+  bottom:120px;
+  left:70px;
+}
+
+.link-buttons .lbtn-area > button div:last-child {
+  position:absolute;
+  font-size:1.5rem;
+  font-family: 'Humanbumsuk';
+  bottom:80px;
+  left:70px;
+}
+
+.link-buttons .lbtn-area2 > button:first-child .inbtn-ment:nth-child(2){
+  position:absolute;
+  font-size:2.5rem;
+  font-weight:bold;
+  font-family: 'Humanbumsuk';
+  top:110px;
+  left:650px;
+}
+.link-buttons .lbtn-area2 > button:first-child .inbtn-ment:last-child {
+  position:absolute;
+  font-size:1.5rem;
+  font-family: 'Humanbumsuk';
+  top:160px;
+  left:650px;
+}
+.link-buttons .lbtn-area2 > button:last-child .inbtn-ment:nth-child(2){
+  position:absolute;
+  font-size:2.5rem;
+  font-weight:bold;
+  font-family: 'Humanbumsuk';
+  top:420px;
+  left:650px;
+}
+.link-buttons .lbtn-area2 > button:last-child .inbtn-ment:last-child {
+  position:absolute;
+  font-size:1.5rem;
+  font-family: 'Humanbumsuk';
+  top:470px;
+  left:650px;
+}
+
+
+
+/* 버튼 안에 이미지 설정 */
+.link-buttons .lbtn-area > button div:first-child img{
+  width:500px;
+  margin-top:-80px;
+}
+.link-buttons .lbtn-area2 button:first-child div:first-child img {
+  width:250px;
+  margin-left:280px;
+
+}
+.lbtn-area .lbtn-area2 button:last-child div:first-child img {
+  width:350px;
+  margin-right:-200px;
+}
+
+
+
+
+@font-face {
+    font-family: 'KCCChassam';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/KCCChassam.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Humanbumsuk';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Humanbumsuk.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+

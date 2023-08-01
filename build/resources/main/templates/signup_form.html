@@ -1,28 +1,156 @@
-<div layout:fragment="content" class="container my-3">
-  <div class="my-3 border-bottom">
-    <div>
-      <h4>회원가입</h4>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/signup.css}">
+</head>
+<body>
+<div class="signup">
+    <div class="signup-box">
+        <div class="bg-left">
+            <img src="https://img.freepik.com/free-vector/green-and-blue-watercolor-style-background_53876-113885.jpg?w=740&t=st=1687492176~exp=16387492776~hmac=1882931a378bdb70b85299688481405fc89dfa2cfd55866adb682a5b1406aa2b"
+                 alt="login-bg">
+        </div>
+        <div class="bg-right"></div>
     </div>
-  </div>
-  <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
-    <div th:replace="~{form_errors :: formErrorsFragment}"></div>
-    <div class="mb-3">
-      <label for="username" class="form-label">사용자ID</label>
-      <input type="text" th:field="*{username}" class="form-control">
+
+    <div class="container">
+        <div class="form-left">
+            <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+                <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+                <div class="input-item">
+                    <label for="username" class="form-label">사용자ID</label>
+                    <input type="text" th:field="*{username}" class="form-control" name="username">
+                </div>
+                <div class="input-item">
+                    <label for="password1" class="form-label">비밀번호</label>
+                    <input type="password" th:field="*{password1}" class="form-control" name="password1">
+                </div>
+                <div class="input-item">
+                    <label for="password2" class="form-label">비밀번호 확인</label>
+                    <input type="password" th:field="*{password2}" class="form-control" name="password2">
+                </div>
+                <div class="input-item">
+                    <label for="send_box" class="form-label">이메일</label>
+                    <input type="email" th:field="*{email}" class="form-control" id="email">
+                    <button type="button" id="email-btn">발송</button>
+                </div>
+                <div class="input-item">
+                    <label for="confirmN" class="form-label">이메일 인증번호</label>
+                    <input type="text" th:field="*{confirmN}" class="form-control" id="confirmN">
+                    <button type="button" id="check_btn">확인</button>
+                </div>
+                <div class="input-item">
+                    <label for="address" class="form-label">주소</label>
+                    <input type="text" th:field="*{address}" id="address_kakao" name="address" readonly placeholder="주소 검색"/>
+                </div>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <button type="submit"> 회원가입</button>
+
+            </form>
+            <button onclick="location.href='/tesbro';" class="main-btn">메인화면</button>
+        </div>
+
+        <div class="form-right">
+            <div class="welcome-ment">환영합니다</div>
+            <div class="welcome-ment">TESBRO 입니다</div>
+            <div class="welcome-img"><img
+                    src="https://velog.velcdn.com/images/jsr3643/post/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg"
+                    alt="logo"></div>
+        </div>
     </div>
-    <div class="mb-3">
-      <label for="password1" class="form-label">비밀번호</label>
-      <input type="password" th:field="*{password1}" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="password2" class="form-label">비밀번호 확인</label>
-      <input type="password" th:field="*{password2}" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">이메일</label>
-      <input type="email" th:field="*{email}" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">회원가입</button>
-  </form>
 </div>
+</body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+        $(document).ready(function() {
+          $("#email-btn").click(function() {
+          alert("메일이 발송되었습니다");
+            $.ajax({
+              url: "/mailConfirm",
+              type: "POST",
+              data: { email: $("#email").val() },
+              beforeSend: function (xhr) {
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+                xhr.setRequestHeader(header, token);
+              },
+
+              success: function(response) {
+                console.log("Email was sent successfully");
+                console.log("Authorization code: " + response);
+              },
+              error: function(xhr, status, error) {
+                console.log("Failed to send email");
+                console.log("Error: " + error);
+              }
+            });
+          });
+        });
+  $("#check_btn").click(function() {
+        var verificationCode = $("#confirmN").val();
+        $.ajax({
+            url: "/mailConfirm/check",
+            type: "POST",
+            data: { verificationCode: verificationCode },
+                          beforeSend: function (xhr) {
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+                xhr.setRequestHeader(header, token);
+              },
+            success: function(response) {
+                 if (response === true) {
+                    // Action when verification code is valid
+                    console.log("Verification code is valid");
+                    // Open a pop-up or show a message indicating that the verification code matches
+                    alert("성공입니다이!");
+                } else {
+                    // Action when verification code is invalid
+                    console.log("Verification code is invalid");
+                     alert("실패입니다이 다시 하세요이");
+                }
+            },
+            error: function(xhr, status, error) {
+                // Action when verification code check fails
+                console.log("Verification code is invalid");
+                // Perform any desired action, such as showing an error message or clearing the input field
+            }
+        });
+  });
+window.onload = function(){
+    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var signupForm = document.querySelector('form');
+
+    signupForm.addEventListener('submit', function(e) {
+        var username = document.querySelector('[name="username"]').value.trim();
+        var password1 = document.querySelector('[name="password1"]').value.trim();
+        var password2 = document.querySelector('[name="password2"]').value.trim();
+        var email = document.querySelector('[name="email"]').value.trim();
+        var confirmN = document.querySelector('[name="confirmN"]').value.trim();
+        var address = document.querySelector('[name="address"]').value.trim();
+
+        if (!username || !password1 || !password2 || !email || !confirmN || !address) {
+            e.preventDefault();
+            alert("모든 입력란을 채워주시기 바랍니다.");
+        }
+    });
+});
+
+
+</script>
 </html>

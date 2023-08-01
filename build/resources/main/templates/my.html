@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mypage</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/my.css}">
+</head>
+
+<body>
+<div layout:fragment="content" class="content">
+
+  <a sec:authorize="isAuthenticated()">
+    <div class="container">
+      <div class="top-box">마이페이지</div>
+      <div class="branch">내 정보</div>
+      <div class="middle-box">
+        <table>
+          <thead>
+          <tr>
+            <th>아이디</th>
+            <td>
+              <div class="data-box" th:text="${siteUser.username}">아이디 값</div>
+            </td>
+          </tr>
+<!--          <tr>-->
+<!--            <th>비밀번호</th>-->
+<!--            <td>-->
+<!--              <div class="data-box" th:text="${siteUser.password}">비밀번호 값</div>-->
+<!--            </td>-->
+<!--          </tr>-->
+          <tr>
+            <th>이메일</th>
+            <td>
+              <div class="data-box" th:text="${siteUser.email}">이메일 값</div>
+            </td>
+          </tr>
+          <tr>
+            <th>주소</th>
+            <td>
+              <div class="data-box" th:text="${siteUser.address}">주소 값</div>
+            </td>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="g-btn">
+        <div class="modi-btn">
+          <a class="btn btn-primary">수정</a>
+        </div>
+        <div class="del-btn">
+          <a class="btn btn-primary">탈퇴</a>
+        </div>
+      </div>
+      <div class="type">
+        <tr>
+          <td>
+            <a type="button" >작성한 글 보기</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a type="button">작성한 리뷰 보기</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a type="button">내 수강권 보기</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a type="button">예약 내역 보기</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a type="button">결제 정보 보기</a>
+          </td>
+        </tr>
+      </div>
+    </div>
+  </a>
+</div>
+</body>
+</html>

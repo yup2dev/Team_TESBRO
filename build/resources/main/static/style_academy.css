@@ -1,4 +1,4 @@
-.aContainer {
+body {
   font-family: 'S-CoreDream-3Light';
   padding:0;
   margin:0;
@@ -26,6 +26,7 @@ select, textarea {
 }
 
 .content {
+  width:100%;
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
@@ -52,17 +53,25 @@ select, textarea {
   flex-wrap: wrap;
   position:relative;
   min-width:1100px;
-  max-width:1100px;
+  width:100%;
   height:200px;
 }
 .academy-top .academy-logo{
   display:inline-block;
   margin-left:30px;
 }
+.academy-top .top-box {
+  margin: 0 auto;
+  width:1200px;
+  display:flex;
+  align-items:center;
+  position:relative;
+}
 .academy-top .academy-logo img{
   width:130px;
   height:130px;
   object-fit:cover;
+  margin-left:50px;
 }
 .academy-top .atop-items {
   display:inline-block;
@@ -83,8 +92,8 @@ select, textarea {
 .besides {
   display:inline-block;
   position:absolute;
-  top:130px;
-  right:30px;
+  right:90px;
+  bottom:20px;
 }
 .besides a {
   border-radius:50px;
@@ -102,8 +111,7 @@ select, textarea {
 
 
 .academy-mid {
-  display: flex;
-  flex-wrap: wrap;
+  width:100%;
   min-width:1100px;
   max-width:1100px;
   border-top:1px solid lightgray;
@@ -202,7 +210,7 @@ select, textarea {
     margin-top:30px;
     margin-left:30px;
 }
-#t-slide{ width: 100%; margin: 0 auto;}
+#t-slide{ width: 1030px; margin: 0 auto;}
 .t-album{
   overflow: hidden;
   position:relative;
@@ -213,14 +221,15 @@ select, textarea {
     transition-duration: 1s;
 }
 .t-album .t-images .t-image {
-  margin-right:30px;
+  padding: 0 20px;
   text-align:center;
-  font-size:1.rem;
+  font-size:1rem;
   margin-bottom:10px;
   cursor:pointer;
+  margin-bottom:10px;
 }
 .t-album .t-images .t-image img {
-  width: 150px; height: 200px;
+  width: 170px; height: 200px;
   object-fit:cover;
 }
 
@@ -275,13 +284,17 @@ select, textarea {
 
 .academy-mid-3 .detail-contents .d-content {
   min-height:200px;
-  border:1px dotted orange;
   position:relative;
   margin:0 30px;
+
 }
 .academy-mid-3 .detail-contents .d-content p{
-  display:flex;
+display:flex;
   justify-content:center;
+}
+.academy-mid-3 .detail-contents .d-content img{
+    margin-left:50%;
+    transform:translatex(-50%);
 }
 .academy-mid-3 .detail-contents .d-content p:first-child {
   font-size: 1.1rem;
@@ -289,14 +302,25 @@ select, textarea {
   padding-bottom:5px;
   border-bottom:1px solid lightgray;
 }
-
-
+#copy-message {
+ position:absolute;
+ width: 200px;
+ top:-35px;
+ right:-35px;
+ background:lightgray;
+ border-radius:5px;
+ text-align:center;
+ padding:5px 0;
+ display:none;
+}
 
 
 .academy-mid-3 .detail-contents .d-content .review_box {
     width:90%;
-    margin:0 auto;
-margin-bottom:50px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:100px;
+
 }
 
 .academy-mid-3 .detail-contents .d-content .review-size{
@@ -325,43 +349,22 @@ margin-bottom:50px;
     padding:0 15px ;
 }
 
-.d-content .review_box .review-items li div:nth-child(5) {
-float:right;
- padding-right:10px;
+.d-content .review_box .review-items li div:nth-child(6) {
+    float:right;
+    padding-right:10px;
+}
+.d-content .review_box .review-items li div:nth-child(3) span{
+    padding-left:5px;
+    color:rgb(30,90,30);
 }
 .d-content .review_box .review-items li div:last-child {
     display:block;
     font-size:1rem;
     padding-top: 20px;
-        padding-bottom:20px;
-        min-height:100px;
-        border-top:1px solid lightgray;
+    padding-bottom:20px;
+    min-height:100px;
+    border-top:1px solid lightgray;
 }
-.review_box .review-items li div:nth-child(3) {
-    width:50px;
-    height:20px;
-    margin:0;
-    position:absolute;
-     top:10px;
-    right:150px;
-    text-align:center;
-    font-size:1rem;
-}
-.review_box .review-items li div:nth-child(4) {
-    width:50px;
-    height:20px;
-    margin:0;
-    position:absolute;
-    top:10px;
-    right:200px;
-    text-align:center;
-    font-size:1rem;
-
-}
-
-
-
-
 .d-content .review_box .pagination {
     display:flex;
     justify-content:center;
@@ -383,7 +386,9 @@ float:right;
   color:white;
 }
 
-
+disabled {
+  display:none;
+}
 
 
 
@@ -398,6 +403,7 @@ float:right;
     background:transparent;
     border-top:1px solid lightgray;
     border-radius:0 0 10px 10px;
+    font-size: 1rem;
 }
 .d-content .review-create input {
     padding:10px 20px;
@@ -406,7 +412,7 @@ float:right;
     border-left:1px solid lightgray;
 }
 .d-content .review-create select {
-    padding:10px;
+    padding:12px;
     border-right:1px solid lightgray;
     margin-left:5px;
 }
@@ -417,11 +423,10 @@ float:right;
 
 
 
+
 .academy-btm {
-  display: flex;
-  flex-wrap: nowrap;
   border:2px solid green;
-  min-width:1100px;
+  width:100%;
   height:500px;
 }
 
@@ -508,6 +513,9 @@ float:right;
   margin-top:10px;
 }
 
+
+
+
 .modal {
   display: none;
   position: fixed;
@@ -565,4 +573,3 @@ float:right;
      font-weight: 300;
      font-style: normal;
 }
-

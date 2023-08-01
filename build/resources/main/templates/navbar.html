@@ -1,26 +1,29 @@
 <div th:fragment="navbarFragment" class="navContainer">
+    <link rel="stylesheet" type="text/css" th:href="@{/style_navbar.css}">
     <div  class="navbar">
-        <link rel="stylesheet" type="text/css" th:href="@{/style_navbar.css}">
+
         <div class="nav-top">
-            <div class="brand-logo"><a href="#">TESBRO</a></div>
+            <div class="brand-logo"><a href="/tesbro">TESBRO</a></div>
             <div class="user-btns">
-                <div class="user-btn"><a href="#">기업 등록</a></div>
-                <div class="user-btn"><a href="/user/login">로그인</a></div>
-                <div class="user-btn"><a href="/user/signup">회원가입</a></div>
+                <div class="user-btn"><a th:href="@{/academy/create}">학원 등록</a></div>
+                <div class="user-btn">
+                    <a sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+                </div>
+                <div class="user-btn"><a th:href="@{/user/signup}">회원가입</a></div>
             </div>
         </div>
 
 
 
 
-    <div class="nav-btm">
-        <div class="nav-btn"><a href="/board/notice"><span>공지사항</span></a></div>
-        <div class="nav-btn"><a href="/academy/list"><span>학원 찾기</span></a></div>
-        <div class="nav-btn"><a href="#"><span>예약하기</span></a></div>
-        <div class="nav-btn"><a href="#"><span>수강권 구매</span></a></div>
-        <div class="nav-btn"><a href="/board/event"><span>이벤트</span></a></div>
-        <div class="nav-btn"><a href="/board/qna"><span>문의하기</span></a></div>
-        <div class="nav-btn"><a href="#"><span>마이페이지</span></a></div>
+        <div class="nav-btm">
+            <div class="nav-btn"><a href="/board/notice"><span>공지사항</span></a></div>
+            <div class="nav-btn"><a href="/academy/list"><span>학원 찾기</span></a></div>
+            <div class="nav-btn"><a href="/reserve"><span>예약확인</span></a></div>
+            <div class="nav-btn"><a href="/ticket"><span>수강권</span></a></div>
+            <div class="nav-btn"><a href="/board/qna"><span>문의하기</span></a></div>
+            <div class="nav-btn"><a href="/user/my"><span>마이페이지</span></a></div>
+        </div>
     </div>
-</div>
 </div>

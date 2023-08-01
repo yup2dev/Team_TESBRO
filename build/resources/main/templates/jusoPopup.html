@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Insert title here</title>
+    <script>
+    document.domain = "127.0.0.1:9000";
+        function init() {
+            var url = location.href;
+            var confmKey = "devU01TX0FVVEgyMDIzMDYxNjE1MzM1MDExMzg1NjY=";
+            var resultType = "4";
+            var inputYn = "<%=inputYn%>";
+
+            if (inputYn != "Y") {
+                document.form.confmKey.value = confmKey;
+                document.form.returnUrl.value = url;
+                document.form.resultType.value = resultType;
+                document.form.action = "https://business.juso.go.kr/addrlink/addrLinkUrl.do";
+                document.form.submit();
+            } else {
+                opener.jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail, roadAddrPart2, engAddr,
+                    jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn, detBdNmList,
+                    bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn,
+                    buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo);
+                window.close();
+            }
+        }
+    </script>
+</head>
+<body onload="init();">
+<form id="form" name="form" method="post">
+    <input type="hidden" id="confmKey" name="confmKey" value="devU01TX0FVVEgyMDIzMDYxNjE1MzM1MDExMzg1NjY=" />
+    <input type="hidden" id="returnUrl" name="returnUrl" value="127.0.0.1:9000" />
+    <input type="hidden" id="resultType" name="resultType" value="4" />
+</form>
+</body>
+</html>

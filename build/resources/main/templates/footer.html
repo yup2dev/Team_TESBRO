@@ -1,0 +1,38 @@
+
+<div th:fragment="footerFragment" class="footer">
+  <link rel="stylesheet" type="text/css" th:href="@{/style_footer.css}">
+  <div class="footer-box">
+    <div class="team-intro">
+      <img src="https://velog.velcdn.com/images/jsr3643/post/f2aee5c5-f557-4c45-bee9-c8d9367a08be/image.jpg" alt="TesbroLogo">
+      <ul>
+        <li>TESBRO 3조</li>
+        <li>김상엽 pos09072@gmail.com</li>
+        <li>김다은 gimdaeun215@gmail.com</li>
+        <li>이승열 irenesa1126@gmail.com</li>
+        <li>전세린 wtf7966@gmail.com</li>
+      </ul>
+    </div>
+    <div class="total-menu">
+      <ul>
+        <li>유저</li>
+        <li><a href="/user/login">로그인</a></li>
+        <li><a href="/user/signup">회원가입</a></li>
+        <li><a href="/academy/create">학원등록</a></li>
+        <li><a href="/user/my">마이페이지</a></li>
+      </ul>
+
+      <ul>
+        <li>필라테스</li>
+        <li><a href="/academy/list">학원찾기</a></li>
+        <li><a href="/reserve">예약확인</a></li>
+        <li><a href="#">수강권</a></li>
+      </ul>
+
+      <ul>
+        <li>게시판</li>
+        <li><a href="/board/notice">공지사항</a></li>
+        <li><a href="/board/qna">문의하기</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

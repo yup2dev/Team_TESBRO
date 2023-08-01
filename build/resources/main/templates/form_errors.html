@@ -1,4 +1,24 @@
-<div th:fragment="formErrorsFragment" class="alert alert-danger"
-     role="alert" th:if="${#fields.hasAnyErrors()}">
-  <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+<div th:fragment="formErrorsFragment">
+  <div class="alert" id="errorMessages" role="alert" th:if="${#fields.hasAnyErrors()}">
+    <div th:each="err : ${#fields.allErrors()}" th:text="${err}" style="display:none;"></div>
+  </div>
+
+  <script th:inline="javascript">
+        function showErrorMessage() {
+            var errorMessageElement = document.getElementById("errorMessages");
+            var errorMessages;
+
+            if (errorMessageElement && errorMessageElement.childElementCount > 0) {
+                errorMessages = Array.from(errorMessageElement.children).map(function (err) {
+                    return err.innerText;
+                }).join(", ");
+            }
+
+            // Display error messages in an alert
+            if (errorMessages) {
+                alert(errorMessages);
+            }
+        }
+        showErrorMessage();
+    </script>
 </div>
