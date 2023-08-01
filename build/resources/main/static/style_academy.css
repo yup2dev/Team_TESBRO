@@ -425,11 +425,26 @@ disabled {
 
 
 .academy-btm {
-  border:2px solid green;
   width:100%;
-  height:500px;
+  height:600px;
 }
-
+.academy-btm .bottom-box {
+  width:100%;
+  max-width:1100px;
+  border-top:1px solid lightgray;
+  position:relative;
+  z-index:0;
+  margin:0 auto;
+}
+.map {
+    font-size:1.2rem;
+    font-weight:bold;
+    margin:20px 0;
+}
+#map {
+    width:1100px;
+    height:500px;
+}
 
 
 

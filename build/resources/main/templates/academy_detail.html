@@ -59,8 +59,7 @@
 
             <div class="top-box">
                 <div class="academy-logo">
-                    <img src="https://m.designdaldal.com/web/product/big/202010/b7ac46136b68f51a05c904c378bed2d8.jpg"
-                         alt="academy-logo">
+                    <img th:src="${academy.imgLogo}" alt="">
                 </div>
                 <div class="atop-items">
                     <p class="academy_name" th:text="${academy.academyName}"></p>
@@ -152,10 +151,10 @@
                             <button class="t-next">▶</button>
                         </div>
                     </div>
-                    <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get"
-                          class="teacher-create">
-                        <input type="submit" value="강사등록">
-                    </form>
+<!--                    <form th:action="@{/teacher/create/{id}(id=${academy.id})}" th:object="${teacherForm}" method="get"-->
+<!--                          class="teacher-create">-->
+<!--                        <input type="submit" value="강사등록">-->
+<!--                    </form>-->
                 </div>
             </div>
 
@@ -166,7 +165,7 @@
                     <a href="#학원소개">학원소개</a>
                     <a href="#수업정보">수업정보</a>
                     <a href="#취소환불">취소/환불 규정</a>
-                    <a href="#후기">후기</a>
+                    <a href="#후기">리뷰</a>
                 </div>
                 <div class="detail-contents">
                     <div id="학원소개" class="d-content">
@@ -188,7 +187,7 @@
                         <p>취소도 불가</p>
                     </div>
                     <div id="후기" class="d-content">
-                        <p>후기</p>
+                        <p>리뷰</p>
                         <form th:action="@{|/review/create/${academy.id}|}" th:object="${reviewForm}" method="post"
                               class="review-create">
 
@@ -207,7 +206,7 @@
 
 
                         <div class="review_box">
-                            <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 후기가 있습니다.|"></div>
+                            <div class="review-size" th:text="|${#lists.size(academy.reviewList)}개의 리뷰가 있습니다.|"></div>
                             <ul class="review-items" th:each="review : ${paging}">
                                 <a th:id="|review_${review.id}|"></a>
                                 <li>
@@ -289,7 +288,10 @@
 
         <!--같은 동 다른 학원 목록. 이전 목록으로 가기 등등-->
         <div class="academy-btm">
-            <div id="map" style="width:100%; height:500px;"></div>
+            <div class="bottom-box">
+                <div class="map">위치보기</div>
+            <div id="map"></div>
+            </div>
         </div>
 
 

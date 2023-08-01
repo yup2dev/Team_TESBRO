@@ -424,6 +424,7 @@ li {
 .academy-items .academy-card button {
   position:absolute;
   right:20px;
+  top:10px;
   padding:5px 0;
   border:0;
   background: transparent;
