@@ -9,12 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
     Page<Review> findAllByAcademy(Academy academy, Pageable pageable);
 
 
-    @Query(value = "SELECT * FROM REVIEW ORDER BY CREATE_DATE DESC LIMIT 4", nativeQuery = true)
+    @Query("SELECT r FROM Review r ORDER BY r.createDate DESC LIMIT 4")
     List<Review> find4RecentReviews();
 
     List<Review> findByUserId(String name);

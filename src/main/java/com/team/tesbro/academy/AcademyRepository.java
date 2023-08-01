@@ -64,10 +64,10 @@ public interface AcademyRepository extends JpaRepository<Academy, Integer> {
 
 
 
-    @Query(value = "SELECT * FROM ACADEMY ORDER BY JJIM DESC LIMIT 5", nativeQuery = true)
-    List<Academy> findMostjjimAcademy();
+    @Query("SELECT a FROM Academy a ORDER BY a.jjim DESC LIMIT 5")
+    List<Academy> findMostJjimAcademy();
 
-    @Query(value = "SELECT * FROM ACADEMY ORDER BY CREATE_DATE DESC LIMIT 5", nativeQuery = true)
+    @Query("SELECT a FROM Academy a ORDER BY a.createDate DESC LIMIT 5")
     List<Academy> findMostRecentlyAcademy();
 
     List<Academy> findByAcademyAddressContaining(String address);

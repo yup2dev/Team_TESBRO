@@ -131,7 +131,7 @@ public class AcademyService {
 
 
     public List<Academy> getAcademyByVoter() {
-        return academyRepository.findMostjjimAcademy();
+        return academyRepository.findMostJjimAcademy();
     }
 
     public List<Academy> getRecentlyAcademy(){
