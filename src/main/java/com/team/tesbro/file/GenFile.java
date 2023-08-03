@@ -41,10 +41,9 @@ public class GenFile {
         return GenFileService.GEN_FILE_DIR_PATH + getBaseFileUri();
     }
 
+    // 이미지 경로 만들기
     @JsonIgnore
     public String getBaseFileUri() {
-        //img 안들어가서 추가함
-        // 이 파일 불러오면 사진 보여주기 됨
         return "/" + "img" + "/" + relTypeCode + "/" + fileDir + "/" + getFileName();
     }
 

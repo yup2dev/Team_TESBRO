@@ -19,8 +19,7 @@ public class Answer {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id")
+    @ManyToOne
     private Board board;
 
     @ManyToOne

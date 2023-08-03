@@ -14,7 +14,7 @@
         <div class="top-box">학원 등록하기</div>
 
         <div class="middle-box">
-            <form th:action="@{/academy/create}" method="post" th:object="${AcademyForm}">
+            <form th:action="@{/academy/create}" method="post" th:object="${academyForm}">
                 <div class="mb-3">
                     <label for="imgLogo"><div class="form-label">학원로고</div></label>
                     <textarea th:field="*{imgLogo}" class="form-control" placeholder="url 첨부"></textarea>

@@ -57,7 +57,7 @@ public class Lesson_ResController {
         SiteUser siteUser = userService.getUser(principal.getName());
 
         String currentUsername = principal.getName();
-        Optional<SiteUser> currentUser = userRepository.findByusername(currentUsername);
+        Optional<SiteUser> currentUser = userRepository.findByUsername(currentUsername);
         Integer currentUserId = currentUser.map(SiteUser::getId).orElse(null);
         lessonResDto.setBookedUsersId(Collections.singletonList(currentUserId));
 
@@ -94,7 +94,7 @@ public class Lesson_ResController {
     @GetMapping("/reserve")
     public String onlesson(Model model, Principal principal) {
         String currentUsername = principal.getName();
-        Optional<SiteUser> currentUser = userRepository.findByusername(currentUsername);
+        Optional<SiteUser> currentUser = userRepository.findByUsername(currentUsername);
 
         Integer currentUserId = currentUser.map(SiteUser::getId).orElse(null);
         List<Lesson_Res> lessonResList = lesson_resService.findUserRes(currentUserId);

@@ -17,23 +17,22 @@ import java.util.*;
 public class AcademyService {
     private final AcademyRepository academyRepository;
 
-    public List<Academy> getList(String keyword) {
+    public List<Academy> getListByKeyword(String keyword) {
         if (keyword != null) {
             return academyRepository.findByAcademyNameContaining(keyword);
         }
         return this.academyRepository.findAll();
     }
 
-    public void create(String academyName, String ceoName, String academyAddress, String academyTel, String introduction, String imgLogo, Long corNum) {
+    public void create(AcademyForm academyForm) {
         Academy academy = new Academy();
-        academy.setAcademyName(academyName);
-        academy.setCeoName(ceoName);
-        academy.setAcademyAddress(academyAddress);
-        academy.setAcademyTel(academyTel);
-        academy.setIntroduction(introduction);
-        academy.setImgLogo(imgLogo);
-        academy.setCorNum(corNum);
-
+        academy.setAcademyName(academyForm.getAcademyName());
+        academy.setCeoName(academyForm.getCeoName());
+        academy.setAcademyAddress(academyForm.getAcademyAddress());
+        academy.setAcademyTel(academyForm.getAcademyTel());
+        academy.setIntroduction(academyForm.getIntroduction());
+        academy.setImgLogo(academy.getImgLogo());
+        academy.setCorNum(academyForm.getCorNum());
         academy.setCreateDate(LocalDateTime.now());
         this.academyRepository.save(academy);
     }
@@ -55,7 +54,7 @@ public class AcademyService {
 
     public Page<Academy> getAcademyList(String keyword, String localKey, Integer peopleCapacity, int page) {
         Pageable pageable = PageRequest.of(page, 10);
-
+        // 조회될 수 있는 경우의 수를 고려하여 Repository에서 조회
         if (StringUtils.hasText(keyword) && StringUtils.hasText(localKey) && peopleCapacity != null) {
             return academyRepository.searchByKLC(keyword, localKey, peopleCapacity, pageable);
         } else if (StringUtils.hasText(keyword) && StringUtils.hasText(localKey)) {
@@ -177,7 +176,7 @@ public class AcademyService {
         return uniqueAcademies;
     }
 
-    public List<Academy> overAcademies(List<Academy> list){
+    public List<Academy> overCloserAcademies(List<Academy> list){
         Academy[] academies = new Academy[5];
         for(int i = 0; i<= academies.length; i++){
             if (i >= 5) {

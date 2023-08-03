@@ -25,7 +25,8 @@ public class BoardController {
 
     @GetMapping("/qna")
     public String getQnaList(@RequestParam(defaultValue = "latest") String order,
-                             @RequestParam(defaultValue = "0") int page, Model model) {
+                             @RequestParam(defaultValue = "0") int page,
+                             Model model) {
         Page<Board> boardPage = boardService.getBoardListByCategory("qna", order, page);
         model.addAttribute("paging", boardPage);
         model.addAttribute("boardcategory", "qna");
@@ -34,7 +35,8 @@ public class BoardController {
 
     @GetMapping("/notice")
     public String getNoticeList(@RequestParam(defaultValue = "latest") String order,
-                                @RequestParam(defaultValue = "0") int page, Model model) {
+                                @RequestParam(defaultValue = "0") int page,
+                                Model model) {
         Page<Board> boardPage = boardService.getBoardListByCategory("notice", order, page);
         model.addAttribute("paging", boardPage);
         model.addAttribute("boardcategory", "notice");
@@ -64,7 +66,7 @@ public class BoardController {
             return "board_form";
         }
         SiteUser siteUser = this.userService.getUser(principal.getName());
-        boardService.create(boardForm.getBoardCategory(), boardForm.getSubject(), boardForm.getContent(), siteUser);
+        boardService.create(boardForm.getCategory(), boardForm.getSubject(), boardForm.getContent(), siteUser);
         return "redirect:/board/" + boardCategory;
     }
 
@@ -142,26 +144,4 @@ public class BoardController {
         this.boardService.vote(board, siteUser);
         return String.format("redirect:/board/%s/detail/%d", board.getBoardCategory(), id);
     }
-
-    @GetMapping("/address")
-    public String address(){
-        return "juso";
-    }
-
-    @GetMapping("/address2")
-    public String address2(){
-        return "jusoPopup";
-    }
-
-    @PostMapping("/address")
-    public String addressPost(){
-        // POST 요청 처리 로직 작성
-        return "juso";
-    }
-
-    @PostMapping("/address2")
-    public String address2Post(){
-        return "jusoPopup";
-    }
-
 }

@@ -10,7 +10,6 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Integer> {
     Page<Board> findByBoardCategory(String boardCategory, Pageable pageable);
     Page<Board> findBySubjectContainingIgnoreCase(String keyword, Pageable pageable);
-
     @Query(value = "SELECT * FROM board WHERE BOARD_CATEGORY   = 'notice' ORDER BY CREATE_DATE  DESC LIMIT 1", nativeQuery = true)
     Board findLatestNotice();
 

@@ -16,16 +16,14 @@ public class EmailController {
     @PostMapping("/mailConfirm")
     @ResponseBody
     public String mailConfirm(@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException {
-        System.out.println(email);
         authCode = emailService.sendEmail(email);
-        System.out.println(authCode);
         return authCode;
     }
 
     @PostMapping("/mailConfirm/check")
     @ResponseBody
     public boolean checkVerificationCode(@RequestParam("verificationCode") String verificationCode) {
-        // Perform the logic to check the verification code
+        // 이메일 일치 여부 확인
         boolean isValid = verificationCode.equals(authCode);
         return isValid;
     }

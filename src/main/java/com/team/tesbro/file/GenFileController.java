@@ -36,7 +36,6 @@ public class GenFileController {
         }
 
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-
         List<Long> fileIds = new ArrayList<>();
 
         for (String fileInputName : fileMap.keySet()) {

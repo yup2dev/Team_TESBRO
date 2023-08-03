@@ -27,18 +27,6 @@ public class BoardService {
         return boardRepository.save(board);
     }
 
-    public Board createEvent(String subject, String content, SiteUser user) {
-        return create("event", subject, content, user);
-    }
-
-    public Board createQna(String subject, String content, SiteUser user) {
-        return create("qna", subject, content, user);
-    }
-
-    public Board createNotice(String subject, String content, SiteUser user) {
-        return create("notice", subject, content, user);
-    }
-
     public Board getBoard(Integer id) {
         return boardRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("Board not found with id: " + id));
