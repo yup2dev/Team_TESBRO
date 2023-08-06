@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html layout:decorate="~{layout}" lang="ko">
 <head>
@@ -16,7 +15,7 @@
             <div class="notice-sub">공지사항</div>
         </div>
         <div class="notice-box">
-            <div th:text="${board.subject}">일단 대충 적어놓는 공지사항 제목</div>
+            <div th:text="${board.subject}"></div>
             <div class="content2" th:text="${board.content}"></div>
             <a href="javascript:void(0);" class="recommend"
                th:data-uri="@{|/board/vote/${board.id}|}">
