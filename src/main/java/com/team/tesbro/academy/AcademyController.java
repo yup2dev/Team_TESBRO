@@ -87,7 +87,7 @@ public class AcademyController {
         return "detail_form_practice";
     }
 
-    @GetMapping("/academy/lesson")
+    @GetMapping("/lesson")
     public String handleSelectedData(Model model) {
         List<LocalDate> dateList = new ArrayList<>();
 
@@ -103,7 +103,7 @@ public class AcademyController {
     }
 
 
-    @GetMapping("/academy/detail/{id}")
+    @GetMapping("/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id, ReviewForm reviewForm, @RequestParam(value = "page", defaultValue = "0") int page) {
         Academy academy = this.academyService.getAcademy(id);
         model.addAttribute("academy", academy);
