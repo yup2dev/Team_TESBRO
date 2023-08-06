@@ -47,19 +47,10 @@ public class TesbroController {
 
         if (principal != null) {
             String userAddress = userService.getUser(principal.getName()).getAddress();
-            List<Academy> closerAcademyList = academyService.getCloserAcademy(userAddress);
-            if (closerAcademyList.size() >= 5) {
-                List<Academy> cAcademyList = academyService.overCloserAcademies(closerAcademyList); //5개 넘어갈 경우
-                model.addAttribute("cAcademyList", cAcademyList);
-                for (Academy academy : closerAcademyList) {
-                    System.out.println(academy.getAcademyName());
-                }
-                return "main";
-            } else {
-                model.addAttribute("cAcademyList", closerAcademyList); //
-            }
+            List<Academy> closerAcademyList = academyService.getCloserAcademy2(userAddress);
+            model.addAttribute("cAcademyList", closerAcademyList); //
             return "main";
-        } else{
+        } else {
             model.addAttribute("cAcademyList", academyService.getRecentlyAcademy());
         }
         return "main";

@@ -136,13 +136,13 @@ public class AcademyService {
         return academyRepository.findMostJjimAcademy();
     }
 
-    public List<Academy> getRecentlyAcademy(){
+    public List<Academy> getRecentlyAcademy() {
         return academyRepository.findMostRecentlyAcademy();
     }
 
-    // 왜 전체 주석이 안되지
+    // 주소로 유사도 찾기 ver2
     public List<Academy> getCloserAcademy2(String address) {
-        //split
+        // 주소를 split해서 쪼갬
         String splitNum = "";
         String[] splitAddress = address.split(" ");
         List<Academy> academyList = new ArrayList<>();
@@ -153,7 +153,7 @@ public class AcademyService {
             keyWordArray[i] = splitNum;
             System.out.println(splitNum);
         }
-
+        // 키워드 거꾸로 돌리고 마지막 띄워쓰기 없앰
         List<String> reversedKeywords = new ArrayList<>(Arrays.asList(keyWordArray));
         reversedKeywords.replaceAll(keyword -> keyword.trim());
         Collections.reverse(reversedKeywords);
@@ -164,33 +164,17 @@ public class AcademyService {
             }
             String keyword = reversedKeywords.get(i);
             List<Academy> matchingAcademies = academyRepository.findByAcademyAddressContaining(keyword);
-            for(int j = 0; j <= matchingAcademies.size(); j++){
-                if (j >= matchingAcademies.size()) {
-                    break;
-                }
-                academyList.add(matchingAcademies.get(j));
-            }
+            // 최대 5개 까지만
+            academyList.addAll(matchingAcademies.subList(0, Math.min(5, matchingAcademies.size())));
         }
+
         List<Academy> uniqueAcademies = new ArrayList<>(new HashSet<>(academyList));
-        // 여기 데이터가 일치하는 수가 많은 순으로 정렬이 필요하다
-        // 원래 구현하려는 기능 => 첫번째 인덱스로 조회해서 있으면 배열에 담고, 2번재 인덱스로 조회해서 있으면 담고 (그런데 한번에 여러개의 데이터가 조회되는 경우에는 처리하는 방식이
-        //      어떻게 되어야 할 지 잘 감이 안잡힘 ==> for문으로 해당 리스트를 또 돌려서 추가해준다??
         Collections.reverse(uniqueAcademies);
         return uniqueAcademies;
     }
 
-    public List<Academy> overCloserAcademies(List<Academy> list){
-        Academy[] academies = new Academy[5];
-        for(int i = 0; i<= academies.length; i++){
-            if (i >= 5) {
-                break;
-            }
-            academies[i] = list.get(i);
-        }
-        return List.of(academies);
-    }
 
-    public List<GenFile> getGenfileByAcademyId(Long id){
+    public List<GenFile> getGenfileByAcademyId(Long id) {
         return genFileRepository.findByAcademyId(id);
     }
 }
