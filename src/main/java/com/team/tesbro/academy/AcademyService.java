@@ -1,6 +1,8 @@
 package com.team.tesbro.academy;
 
 import com.team.tesbro.DataNotFoundException;
+import com.team.tesbro.file.GenFile;
+import com.team.tesbro.file.GenFileRepository;
 import com.team.tesbro.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import java.util.*;
 @Service
 public class AcademyService {
     private final AcademyRepository academyRepository;
+    private final GenFileRepository genFileRepository;
 
     public List<Academy> getListByKeyword(String keyword) {
         if (keyword != null) {
@@ -185,6 +188,10 @@ public class AcademyService {
             academies[i] = list.get(i);
         }
         return List.of(academies);
+    }
+
+    public List<GenFile> getGenfileByAcademyId(Long id){
+        return genFileRepository.findByAcademyId(id);
     }
 }
 

@@ -2,6 +2,7 @@ package com.team.tesbro.lesson;
 
 import com.team.tesbro.academy.Academy;
 import com.team.tesbro.academy.AcademyService;
+import com.team.tesbro.file.GenFile;
 import com.team.tesbro.review.Review;
 import com.team.tesbro.review.ReviewForm;
 import com.team.tesbro.review.ReviewService;
@@ -65,7 +66,27 @@ public class LessonController {
         Collections.sort(uniqueDateList);
         model.addAttribute("uniqueDateList", uniqueDateList);
 
+        List<GenFile> fileList = academyService.getGenfileByAcademyId(Long.valueOf(id));
+        Collections.sort(fileList, Comparator.comparingLong(GenFile::getId));
+        String file1 = null;
+        String file2 = null;
+        String file3 = null;
 
+        int fileListSize = fileList.size();
+        if (fileListSize >= 1) {
+            file1 = fileList.get(0).getBaseFileUri();
+        }
+        if (fileListSize >= 2) {
+            file2 = fileList.get(1).getBaseFileUri();
+        }
+        if (fileListSize >= 3) {
+            file3 = fileList.get(2).getBaseFileUri();
+        }
+
+        model.addAttribute("file1", file1);
+        model.addAttribute("file2", file2);
+        model.addAttribute("file3", file3);
+        System.out.println(file1 + "/" + file2 + "/" + file3);
         return "academy_detail";
     }
 

@@ -50,4 +50,4 @@ logging:
 server:
   port: '9000'
 custom:
-  genFileDirPath: C:\Users\onetw\Desktop\tesbro clone\serin\src\main\resources\static\img
+  genFileDirPath: C:\Users\onetw\Desktop\tesbro\src\main\resources\static\img
