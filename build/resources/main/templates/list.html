@@ -130,7 +130,6 @@
 
 
     <script>
-
     //검색한거 유지
     function storeInputValues() {
             localStorage.setItem('keyword', document.getElementById('box1_input').value);
@@ -157,19 +156,9 @@
             restoreInputValues();
         }
 
-
-
-
-
-
-
-
-
     function handleOrderChange(selectedOption) {
       var currentUrl = window.location.href;
       var updatedUrl;
-
-
 
       if (currentUrl.includes("?")) {
         if (currentUrl.includes("order=")) {
@@ -194,7 +183,6 @@
         document.getElementById("searchForm").submit();
     }
   </script>
-
 </div>
 </body>
 </html>
