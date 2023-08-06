@@ -1,6 +1,4 @@
 package com.team.tesbro.user;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class UserSecurityService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -31,7 +28,9 @@ public class UserSecurityService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         if ("admin".equals(username)) {
             authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
-        } else {
+        }
+        //  admin이 아니라면 일반 사용자로 권한 부여
+        else {
             authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
         }
         return new User(siteUser.getUsername(), siteUser.getPassword(), authorities);

@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserLessonTicketService {
     private final UserLessonTicketRepository userLessonTicketRepository;
-    private final UserRepository userRepository;
-    private final LessonTicketRepository lessonTicketRepository;
 
     public UserLessonTicket addUserLessonTicket(SiteUser siteUser, LessonTicket lessonTicket) {
         UserLessonTicket userLessonTicket = new UserLessonTicket();

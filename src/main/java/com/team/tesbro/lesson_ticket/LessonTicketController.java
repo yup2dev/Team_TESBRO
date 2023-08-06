@@ -18,10 +18,6 @@ import java.net.http.HttpResponse;
 @RequiredArgsConstructor
 public class LessonTicketController {
 
-    private final String SECRET_KEY = "test_sk_Wd46qopOB89MKnbJobd8ZmM75y0v";
-    private final LessonTicketService lessonTicketService;
-    private final UserService userService;
-
     @GetMapping("/ticket/pay")
     public String ticketc(){
         return "ticket";

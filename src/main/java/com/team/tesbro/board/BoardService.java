@@ -99,8 +99,4 @@ public class BoardService {
     public Board getLastestNotice() {
         return boardRepository.findLatestNotice();
     }
-
-    public List<Board> getBoardByUser(String name){
-        return boardRepository.findByAuthor(name);
-    }
 }

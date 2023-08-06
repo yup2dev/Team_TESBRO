@@ -36,13 +36,15 @@ public class Lesson_ResController {
     private final LessonRepository lessonRepository;
     private final UserLessonTicketService userLessonTicketService;
     private final UserService userService;
-    private final LessonTicketService lessonTicketService;
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/reserve/{id}")
-    public String reserveLesson(@RequestParam String datePicker, @RequestParam String childSelectBox,
-                                @PathVariable("id") Integer id, @Valid Lesson_ResDto lessonResDto,
-                                BindingResult bindingResult, RedirectAttributes redirectAttributes,
+    public String reserveLesson(@RequestParam String datePicker,
+                                @RequestParam String childSelectBox,
+                                @PathVariable("id") Integer id,
+                                @Valid Lesson_ResDto lessonResDto,
+                                BindingResult bindingResult,
+                                RedirectAttributes redirectAttributes,
                                 Principal principal) {
 
         // 유저 이름 필요

@@ -170,6 +170,26 @@ public class AcademyService {
 
         List<Academy> uniqueAcademies = new ArrayList<>(new HashSet<>(academyList));
         Collections.reverse(uniqueAcademies);
+        Collections.sort(uniqueAcademies, new Comparator<Academy>() {
+            @Override
+            public int compare(Academy a1, Academy a2) {
+                int overlapCount1 = getOverlapCount(a1, reversedKeywords);
+                int overlapCount2 = getOverlapCount(a2, reversedKeywords);
+
+                // 겹치는 횟수가 많은 순서대로 정렬
+                return Integer.compare(overlapCount2, overlapCount1);
+            }
+
+            private int getOverlapCount(Academy academy, List<String> reversedKeywords) {
+                int count = 0;
+                for (String keyword : reversedKeywords) {
+                    if (academy.getAcademyAddress().contains(keyword)) {
+                        count++;
+                    }
+                }
+                return count;
+            }
+        });
         return uniqueAcademies;
     }
 

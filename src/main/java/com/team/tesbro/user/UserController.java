@@ -20,17 +20,13 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
-public class    UserController {
+public class UserController {
 
     private final UserService userService;
 
     @GetMapping("/signup")
     public String signup(UserCreateForm userCreateForm, Model model) {
         return "signup_form";
-    }
-    @GetMapping("/sign")
-    public String sign(){
-        return "Bnum";
     }
 
     @PostMapping("/signup")
