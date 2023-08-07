@@ -14,10 +14,7 @@ import java.util.Random;
 @Service
 @RequiredArgsConstructor
 public class EmailService {
-
-    //의존성 주입을 통해서 필요한 객체를 가져온다.
     private final JavaMailSender emailSender;
-    // 타임리프를사용하기 위한 객체를 의존성 주입으로 가져온다
     private final SpringTemplateEngine templateEngine;
     private String authNum; //랜덤 인증 코드
 
@@ -50,7 +47,7 @@ public class EmailService {
         createCode(); //인증 코드 생성
         String setFrom = "creativethony@naver.com";
         String toEmail = email; //받는 사람
-        String title = "TESBRO 회원가입 인증 번호"; //제목
+        String title = "TESBRO 회원가입 인증 번호";
 
         MimeMessage message = emailSender.createMimeMessage();
         message.addRecipients(MimeMessage.RecipientType.TO, email); //보낼 이메일 설정

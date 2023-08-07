@@ -1,6 +1,8 @@
 package com.team.tesbro.academy;
 
 import com.team.tesbro.DataNotFoundException;
+import com.team.tesbro.file.GenFile;
+import com.team.tesbro.file.GenFileRepository;
 import com.team.tesbro.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,24 +18,24 @@ import java.util.*;
 @Service
 public class AcademyService {
     private final AcademyRepository academyRepository;
+    private final GenFileRepository genFileRepository;
 
-    public List<Academy> getList(String keyword) {
+    public List<Academy> getListByKeyword(String keyword) {
         if (keyword != null) {
             return academyRepository.findByAcademyNameContaining(keyword);
         }
         return this.academyRepository.findAll();
     }
 
-    public void create(String academyName, String ceoName, String academyAddress, String academyTel, String introduction, String imgLogo, Long corNum) {
+    public void create(AcademyForm academyForm) {
         Academy academy = new Academy();
-        academy.setAcademyName(academyName);
-        academy.setCeoName(ceoName);
-        academy.setAcademyAddress(academyAddress);
-        academy.setAcademyTel(academyTel);
-        academy.setIntroduction(introduction);
-        academy.setImgLogo(imgLogo);
-        academy.setCorNum(corNum);
-
+        academy.setAcademyName(academyForm.getAcademyName());
+        academy.setCeoName(academyForm.getCeoName());
+        academy.setAcademyAddress(academyForm.getAcademyAddress());
+        academy.setAcademyTel(academyForm.getAcademyTel());
+        academy.setIntroduction(academyForm.getIntroduction());
+        academy.setImgLogo(academy.getImgLogo());
+        academy.setCorNum(academyForm.getCorNum());
         academy.setCreateDate(LocalDateTime.now());
         this.academyRepository.save(academy);
     }
@@ -55,7 +57,7 @@ public class AcademyService {
 
     public Page<Academy> getAcademyList(String keyword, String localKey, Integer peopleCapacity, int page) {
         Pageable pageable = PageRequest.of(page, 10);
-
+        // 조회될 수 있는 경우의 수를 고려하여 Repository에서 조회
         if (StringUtils.hasText(keyword) && StringUtils.hasText(localKey) && peopleCapacity != null) {
             return academyRepository.searchByKLC(keyword, localKey, peopleCapacity, pageable);
         } else if (StringUtils.hasText(keyword) && StringUtils.hasText(localKey)) {
@@ -134,13 +136,13 @@ public class AcademyService {
         return academyRepository.findMostJjimAcademy();
     }
 
-    public List<Academy> getRecentlyAcademy(){
+    public List<Academy> getRecentlyAcademy() {
         return academyRepository.findMostRecentlyAcademy();
     }
 
-    // 왜 전체 주석이 안되지
+    // 주소로 유사도 찾기 ver2
     public List<Academy> getCloserAcademy2(String address) {
-        //split
+        // 주소를 split해서 쪼갬
         String splitNum = "";
         String[] splitAddress = address.split(" ");
         List<Academy> academyList = new ArrayList<>();
@@ -151,7 +153,7 @@ public class AcademyService {
             keyWordArray[i] = splitNum;
             System.out.println(splitNum);
         }
-
+        // 키워드 거꾸로 돌리고 마지막 띄워쓰기 없앰
         List<String> reversedKeywords = new ArrayList<>(Arrays.asList(keyWordArray));
         reversedKeywords.replaceAll(keyword -> keyword.trim());
         Collections.reverse(reversedKeywords);
@@ -162,30 +164,38 @@ public class AcademyService {
             }
             String keyword = reversedKeywords.get(i);
             List<Academy> matchingAcademies = academyRepository.findByAcademyAddressContaining(keyword);
-            for(int j = 0; j <= matchingAcademies.size(); j++){
-                if (j >= matchingAcademies.size()) {
-                    break;
-                }
-                academyList.add(matchingAcademies.get(j));
-            }
+            // 최대 5개 까지만
+            academyList.addAll(matchingAcademies.subList(0, Math.min(5, matchingAcademies.size())));
         }
+
         List<Academy> uniqueAcademies = new ArrayList<>(new HashSet<>(academyList));
-        // 여기 데이터가 일치하는 수가 많은 순으로 정렬이 필요하다
-        // 원래 구현하려는 기능 => 첫번째 인덱스로 조회해서 있으면 배열에 담고, 2번재 인덱스로 조회해서 있으면 담고 (그런데 한번에 여러개의 데이터가 조회되는 경우에는 처리하는 방식이
-        //      어떻게 되어야 할 지 잘 감이 안잡힘 ==> for문으로 해당 리스트를 또 돌려서 추가해준다??
         Collections.reverse(uniqueAcademies);
+        Collections.sort(uniqueAcademies, new Comparator<Academy>() {
+            @Override
+            public int compare(Academy a1, Academy a2) {
+                int overlapCount1 = getOverlapCount(a1, reversedKeywords);
+                int overlapCount2 = getOverlapCount(a2, reversedKeywords);
+
+                // 겹치는 횟수가 많은 순서대로 정렬
+                return Integer.compare(overlapCount2, overlapCount1);
+            }
+
+            private int getOverlapCount(Academy academy, List<String> reversedKeywords) {
+                int count = 0;
+                for (String keyword : reversedKeywords) {
+                    if (academy.getAcademyAddress().contains(keyword)) {
+                        count++;
+                    }
+                }
+                return count;
+            }
+        });
         return uniqueAcademies;
     }
 
-    public List<Academy> overAcademies(List<Academy> list){
-        Academy[] academies = new Academy[5];
-        for(int i = 0; i<= academies.length; i++){
-            if (i >= 5) {
-                break;
-            }
-            academies[i] = list.get(i);
-        }
-        return List.of(academies);
+
+    public List<GenFile> getGenfileByAcademyId(Long id) {
+        return genFileRepository.findByAcademyId(id);
     }
 }
 

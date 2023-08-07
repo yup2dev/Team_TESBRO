@@ -56,15 +56,11 @@ public class Academy {
     @OneToMany(mappedBy = "academy", cascade = CascadeType.REMOVE)
     private List<Lesson> lessonList;
 
-    @ManyToMany
-    @JoinTable(name = "GEN_FILE_ACADEMIES",
-            joinColumns = @JoinColumn(name = "academy_id"),
-            inverseJoinColumns = @JoinColumn(name = "gen_file_id"))
+    @OneToMany(mappedBy = "academy")
     private List<GenFile> genFiles;
 
     @ManyToMany
     Set<SiteUser> voter;
-
 
     public void updateJjim() {
         this.jjim = this.voter.size();

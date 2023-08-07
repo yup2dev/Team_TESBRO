@@ -34,12 +34,6 @@ public class LessonService {
         return lessonRepository.findByAcademyId(id);
     }
 
-    public List<Lesson> getTimeList(LocalDate data) {
-        if (data != null) {
-            return lessonRepository.findByLessonDate(data);
-        } return null;
-    }
-
     public List<LocalTime> getLessonTimes(LocalDate date, List<Lesson> lessonList) {
         List<LocalTime> timeList = new ArrayList<>();
         if (date != null && lessonList != null) {

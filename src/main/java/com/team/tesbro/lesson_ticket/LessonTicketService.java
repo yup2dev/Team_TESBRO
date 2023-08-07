@@ -10,12 +10,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LessonTicketService {
     private final LessonTicketRepository lessonTicketRepository;
-    private final UserRepository userRepository;
 
     public LessonTicket getLesson(Integer id){
         Optional<LessonTicket> optionalLessonTicket = lessonTicketRepository.findById(id);
         return optionalLessonTicket.get();
     }
-
 }
 

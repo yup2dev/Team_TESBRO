@@ -1,5 +1,6 @@
 package com.team.tesbro.file;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.team.tesbro.academy.Academy;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -29,6 +30,9 @@ public class GenFile {
     private String fileExt;
     private String fileDir;
     private String originFileName;
+    @ManyToOne
+    @JoinColumn(name = "academy_id")
+    private Academy academy;
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -41,10 +45,9 @@ public class GenFile {
         return GenFileService.GEN_FILE_DIR_PATH + getBaseFileUri();
     }
 
+    // 이미지 경로 만들기
     @JsonIgnore
     public String getBaseFileUri() {
-        //img 안들어가서 추가함
-        // 이 파일 불러오면 사진 보여주기 됨
         return "/" + "img" + "/" + relTypeCode + "/" + fileDir + "/" + getFileName();
     }
 

@@ -16,9 +16,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     public SiteUser create(String username, String email, String password, UserRole role, String address) {
-
         SiteUser user = new SiteUser();
         user.setUsername(username);
         user.setEmail(email);
@@ -32,7 +30,7 @@ public class UserService {
 
 
     public SiteUser getUser(String username) {
-        Optional<SiteUser> siteUser = this.userRepository.findByusername(username);
+        Optional<SiteUser> siteUser = this.userRepository.findByUsername(username);
         if (siteUser.isPresent()) {
             return siteUser.get();
         } else {
@@ -42,7 +40,7 @@ public class UserService {
 
     // 학원 관리자 업데이트
     private void updateAcademyUserRole(String username) {
-        Optional<SiteUser> siteUserOpt = userRepository.findByusername(username);
+        Optional<SiteUser> siteUserOpt = userRepository.findByUsername(username);
         if (siteUserOpt.isPresent()) {
             SiteUser siteUser = siteUserOpt.get();
             siteUser.setRole(UserRole.ACADEMY);

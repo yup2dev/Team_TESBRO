@@ -1,5 +1,6 @@
 package com.team.tesbro.file;
 
+import com.team.tesbro.academy.Academy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class GenFileService {
     }
 
     private long saveFile(String relTypeCode, int relId, String typeCode, String type2Code, int fileNo, String fileDir,
-                          String originFileName, String fileExtTypeCode, String fileExtType2Code, String fileExt, int fileSize) {
+                          String originFileName, String fileExtTypeCode, String fileExtType2Code, String fileExt, int fileSize, Academy academy) {
 
         GenFile genFile = GenFile
                 .builder()
@@ -40,18 +41,19 @@ public class GenFileService {
                 .fileSize(fileSize)
                 .build();
 
+        genFile.setAcademy(academy);
         genFileRepository.save(genFile);
 
         return genFile.getId();
     }
 
-    public Long saveFileOnDisk(MultipartFile multipartFile, String relTypeCode, int relId, String typeCode, String type2Code, int fileNo, String originFileName, String fileExtTypeCode, String fileExtType2Code, String fileExt, int fileSize) {
+    public Long saveFileOnDisk(MultipartFile multipartFile, String relTypeCode, int relId, String typeCode, String type2Code, int fileNo, String originFileName, String fileExtTypeCode, String fileExtType2Code, String fileExt, int fileSize, Academy academy) {
         // 새 파일이 저장될 폴더명 생성(연_월)
         String fileDir = Util.getNowYearMonthDateStr();
 
         // DB에 파일정보 등록(먼저 수행하는 이유는 파일을 생성할 때 파일명이 file 테이블의 주키 이기 때문에)
         long fileId = saveFile(relTypeCode, relId, typeCode, type2Code, fileNo, fileDir, originFileName, fileExtTypeCode,
-                fileExtType2Code, fileExt, fileSize);
+                fileExtType2Code, fileExt, fileSize, academy);
 
         // 새 파일이 저장될 폴더(io파일) 객체 생성
         String targetDirPath = GEN_FILE_DIR_PATH + "/" + relTypeCode + "/" + fileDir;

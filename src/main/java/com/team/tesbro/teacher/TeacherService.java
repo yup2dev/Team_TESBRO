@@ -18,14 +18,14 @@ import java.util.Optional;
 public class TeacherService {
     private final TeacherRepository teacherRepository;
 
-    public void create(String teacherName, String introduction, String qualifications, String awards, Academy academy, String imglogo) {
+    public void create(String teacherName, String introduction, String qualifications, String awards, Academy academy, String imgLogo) {
         Teacher teacher = new Teacher();
         teacher.setTeacherName(teacherName);
         teacher.setQualifications(qualifications);
         teacher.setAwards(awards);
         teacher.setIntroduction(introduction);
         teacher.setAcademy(academy);
-        teacher.setImgLogo(imglogo);
+        teacher.setImgLogo(imgLogo);
         this.teacherRepository.save(teacher);
     }
 

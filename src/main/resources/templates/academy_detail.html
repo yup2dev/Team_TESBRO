@@ -171,13 +171,13 @@
                     <div id="학원소개" class="d-content">
                         <p>학원소개</p>
                         <p th:text="${academy.introduction}"></p>
-                        <img src="https://static.wixstatic.com/media/1830b0_8875795da2c34a48aab3e3a632a84587~mv2.jpg/v1/crop/x_0,y_0,w_1366,h_7532/fill/w_979,h_5398,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/about-us-%EC%9B%90%EC%9E%A5%EC%86%8C%EA%B0%9C.jpg"
+                        <img th:src="${file1}"
                              alt="" width="900px">
 
                     </div>
                     <div id="수업정보" class="d-content">
                         <p>수업정보</p>
-                        <img src="https://static.wixstatic.com/media/1830b0_d82b8ddae8544b6c80c614035e31bbba~mv2.png/v1/fill/w_897,h_676,al_c,q_90,enc_auto/%EC%9A%B4%EC%98%81%EC%8B%9C%EA%B0%841.png"
+                        <img th:src="${file2}"
                              alt="" width="900px">
 
                     </div>
@@ -277,9 +277,7 @@
                                     </li>
                                 </ul>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -297,227 +295,197 @@
 
         <script>
         $(document).ready(function() {
-  $("#share-link").click(function() {
-    var dummy = document.createElement('input');
-    var text = window.location.href;
+          $("#share-link").click(function() {
+            var dummy = document.createElement('input');
+            var text = window.location.href;
 
-    document.body.appendChild(dummy);
-    dummy.value = text;
-    dummy.select();
-    document.execCommand('copy');
-    document.body.removeChild(dummy);
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
 
-    $("#copy-message").show().delay(2000).fadeOut(1000);
-  });
-});
+            $("#copy-message").show().delay(2000).fadeOut(1000);
+          });
+        });
 
+          document.querySelectorAll('.modify-link').forEach(link => {
+          link.addEventListener('click', function(event) {
+            event.preventDefault(); // 페이지 리로드 방지
+            const reviewId = event.target.getAttribute('data-review-id');
+            const reviewContent = event.target.getAttribute('data-review-content');
+            const reviewUsername = event.target.getAttribute('data-review-username');
+            openModifyPopup(reviewId, reviewContent, reviewUsername);
+          });
+        });
 
+          function openModifyPopup(reviewId, reviewContent) {
+           localStorage.setItem("reviewContent", reviewContent);
+            var url = "/review/modify/" + reviewId;
+            var windowFeatures = "width=600, height=300, location=no, status=no, toolbar=no, scrollbars=yes";
+            const popup = window.open(url, "modifyReviewPopup", windowFeatures);
 
-
-
-
-
-  document.querySelectorAll('.modify-link').forEach(link => {
-  link.addEventListener('click', function(event) {
-    event.preventDefault(); // 페이지 리로드 방지
-    const reviewId = event.target.getAttribute('data-review-id');
-    const reviewContent = event.target.getAttribute('data-review-content');
-    const reviewUsername = event.target.getAttribute('data-review-username');
-    openModifyPopup(reviewId, reviewContent, reviewUsername);
-  });
-});
-
-  function openModifyPopup(reviewId, reviewContent) {
-   localStorage.setItem("reviewContent", reviewContent);
-    var url = "/review/modify/" + reviewId;
-    var windowFeatures = "width=600, height=300, location=no, status=no, toolbar=no, scrollbars=yes";
-    const popup = window.open(url, "modifyReviewPopup", windowFeatures);
-
-    popup.onbeforeunload = function () {
-      location.reload();
-    };
-
-
-  }
-
-
-
-
+            popup.onbeforeunload = function () {
+              location.reload();
+            };
+        }
         </script>
 
 
         <script>
-    $(document).ready(function() {
-      var popupModal = $("#popupModal");
-      var closeBtn = $(".close");
+        $(document).ready(function() {
+          var popupModal = $("#popupModal");
+          var closeBtn = $(".close");
 
-      if (popupModal.length) {
-        popupModal.show();
-      }
+          if (popupModal.length) {
+            popupModal.show();
+          }
 
-      if (closeBtn.length) {
-        closeBtn.on("click", function() {
-          popupModal.hide();
+          if (closeBtn.length) {
+            closeBtn.on("click", function() {
+              popupModal.hide();
+            });
+          }
         });
-      }
-    });
-
-
-
-
         </script>
 
         <script th:src="@{/academy.js}"></script>
         <script>
-    $("#datePicker").datepicker({
-       language: 'ko',
-       onSelect: function(dateString) {
-                var thisParam = dateString;
-                $.ajax({
-                    url: "/multi_box_ajax",
-                    data : { "data" : thisParam },
-                    //dataType: "json",
-                    error: function(xhr, status, error) {
-                        console.log('통신실패!!');
-                        console.log('에러 메시지:', error);
-                    },
-                    success: function(response) {
-                        console.log("통신성공!!");
-                        console.log('서버 응답:', response);
-                        // 2차 박스 업데이트
-                        var childSelectBox = $("#childSelectBox");
-                        childSelectBox.empty();
-                        $.each(response, function(index, value) {
-                            childSelectBox.append('<option value="' + value + '">' + value + '</option>');
-                        });
-                    }
-                });
+        $("#datePicker").datepicker({
+           language: 'ko',
+           onSelect: function(dateString) {
+                    var thisParam = dateString;
+                    $.ajax({
+                        url: "/multi_box_ajax",
+                        data : { "data" : thisParam },
+                        //dataType: "json",
+                        error: function(xhr, status, error) {
+                            console.log('통신실패!!');
+                            console.log('에러 메시지:', error);
+                        },
+                        success: function(response) {
+                            console.log("통신성공!!");
+                            console.log('서버 응답:', response);
+                            // 2차 박스 업데이트
+                            var childSelectBox = $("#childSelectBox");
+                            childSelectBox.empty();
+                            $.each(response, function(index, value) {
+                                childSelectBox.append('<option value="' + value + '">' + value + '</option>');
+                            });
+                        }
+                    });
 
-         }
-    })
+             }
+        })
 
-    function getTeacherId(element) {
-        var teacherName = element.querySelector('#teacherName').value;
-        var teacherIntro = element.querySelector('#teacherIntro').value;
-        var teacherQualify = element.querySelector('#teacherQualify').value;
-        var teacherAwards = element.querySelector('#teacherAwards').value;
+        function getTeacherId(element) {
+            var teacherName = element.querySelector('#teacherName').value;
+            var teacherIntro = element.querySelector('#teacherIntro').value;
+            var teacherQualify = element.querySelector('#teacherQualify').value;
+            var teacherAwards = element.querySelector('#teacherAwards').value;
 
 
-        document.getElementById('teacherNameDisplay').textContent = teacherName;
-        document.getElementById('teacherIntroDisplay').textContent = teacherIntro;
-        var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
-        if (teacherQualifyDisplay) {
-            teacherQualifyDisplay.textContent = teacherQualify;
+            document.getElementById('teacherNameDisplay').textContent = teacherName;
+            document.getElementById('teacherIntroDisplay').textContent = teacherIntro;
+            var teacherQualifyDisplay = document.getElementById('teacherQualifyDisplay');
+            if (teacherQualifyDisplay) {
+                teacherQualifyDisplay.textContent = teacherQualify;
+            }
+            var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
+            if (teacherAwardsDisplay) {
+                teacherAwardsDisplay.textContent = teacherAwards;
+            }
+
+            document.getElementById('starRatingDisplay').textContent = starRating;
+            var starRatingDisplay = document.getElementById('starRatingDisplay');
+            if (starRatingDisplay) {
+                starRatingDisplay.textContent = starRating;
+                console.log(starRating);
+            }
         }
-        var teacherAwardsDisplay = document.getElementById('teacherAwardsDisplay');
-        if (teacherAwardsDisplay) {
-            teacherAwardsDisplay.textContent = teacherAwards;
-        }
-
-        document.getElementById('starRatingDisplay').textContent = starRating;
-        var starRatingDisplay = document.getElementById('starRatingDisplay');
-        if (starRatingDisplay) {
-            starRatingDisplay.textContent = starRating;
-            console.log(starRating);
-        }
-    }
-
-
-
-
         </script>
 
         <script type="text/javascript"
-                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=794a40541300254bb5698381e1789213&libraries=services"></script>
+                src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07364bdb392bfd2c64b51d46459ce511&libraries=services"></script>
         <script>
         var addressElement = document.querySelector(".academy_address");
-addressElement.style.display = "none";
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
+        addressElement.style.display = "none";
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
 
-// 지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption);
+        // 지도를 생성합니다
+        var map = new kakao.maps.Map(mapContainer, mapOption);
 
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
 
-// 주소로 좌표를 검색합니다
-var address = document.querySelector('.academy_address').innerText;
-geocoder.addressSearch(address, function(result, status) {
+        // 주소로 좌표를 검색합니다
+        var address = document.querySelector('.academy_address').innerText;
+        geocoder.addressSearch(address, function(result, status) {
 
-    // 정상적으로 검색이 완료됐으면
-     if (status === kakao.maps.services.Status.OK) {
+            // 정상적으로 검색이 완료됐으면
+             if (status === kakao.maps.services.Status.OK) {
 
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
+                // 결과값으로 받은 위치를 마커로 표시합니다
 
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">' + document.querySelector('.academy_name').innerText + '</div>'
+                });
+                infowindow.open(map, marker);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            }
         });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">' + document.querySelector('.academy_name').innerText + '</div>'
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    }
-});
-
-
-
-
-
         </script>
 
         <!--  삭제  -->
         <!--  삭제  -->
         <script type='text/javascript'>
-    const delete_elements = document.getElementsByClassName("delete");
-    Array.from(delete_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 삭제하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
+        const delete_elements = document.getElementsByClassName("delete");
+        Array.from(delete_elements).forEach(function(element) {
+            element.addEventListener('click', function() {
+                if(confirm("정말로 삭제하시겠습니까?")) {
+                    location.href = this.dataset.uri;
+                };
+            });
         });
-    });
-        const modify_elements = document.getElementsByClassName("modify");
-    Array.from(modify_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 수정하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
+            const modify_elements = document.getElementsByClassName("modify");
+        Array.from(modify_elements).forEach(function(element) {
+            element.addEventListener('click', function() {
+                if(confirm("정말로 수정하시겠습니까?")) {
+                    location.href = this.dataset.uri;
+                };
+            });
         });
-    });
-        const recommend_elements = document.getElementsByClassName("recommend");
-    Array.from(recommend_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 추천하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
+            const recommend_elements = document.getElementsByClassName("recommend");
+        Array.from(recommend_elements).forEach(function(element) {
+            element.addEventListener('click', function() {
+                if(confirm("정말로 추천하시겠습니까?")) {
+                    location.href = this.dataset.uri;
+                };
+            });
         });
-    });
-            const like_elements = document.getElementsByClassName("like");
-    Array.from(like_elements).forEach(function(element) {
-        element.addEventListener('click', function() {
-            if(confirm("정말로 찜 하시겠습니까?")) {
-                location.href = this.dataset.uri;
-            };
+                const like_elements = document.getElementsByClassName("like");
+        Array.from(like_elements).forEach(function(element) {
+            element.addEventListener('click', function() {
+                if(confirm("정말로 찜 하시겠습니까?")) {
+                    location.href = this.dataset.uri;
+                };
+            });
         });
-    });
-
-
-
-
         </script>
-
     </div>
 </div>
 </body>

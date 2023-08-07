@@ -28,43 +28,32 @@ public class TesbroController {
 
     @GetMapping("/tesbro")
     public String tesbroMain(Model model, Principal principal) {
+        // 가장 최근 공지사항 List
         Board latestNotice = boardService.getLastestNotice();
-
         model.addAttribute("latestNotice", latestNotice);
-
+        // 전체 등록된 학원 수
         long academyCount = academyService.countAcademyIds();
         model.addAttribute("academyCount", academyCount);
+        // 전체 등록된 강사 수
         long teacherCount = teacherService.countTeacherIds();
         model.addAttribute("teacherCount", teacherCount);
+        // 전체 등록된 리뷰 수
         long reviewCount = reviewService.countReviewIds();
         model.addAttribute("reviewCount", reviewCount);
-
+        // 가장 최근 달린 4개의 리뷰
         List<Review> recentReviews = reviewService.get4RecentReviews();
         model.addAttribute("recentReviews", recentReviews);
-
+        // 인기순을 출력하기 위한 학원 추천 순 List
         List<Academy> mostjjimAcademy = academyService.getAcademyByVoter();
         model.addAttribute("mostjjimAcademy", mostjjimAcademy);
-
+        // 로그인시 사용자의 주소를 기준으로 근처 학원 List
+        // 비로그인시 가장 최근에 등록된 학원 List
         if (principal != null) {
             String userAddress = userService.getUser(principal.getName()).getAddress();
-            List<Academy> closerAcademyList = academyService.getCloserAcademy(userAddress);
-            List<Academy> cAcademyList = new ArrayList<>();
-            if (closerAcademyList.size() >= 5) {
-                cAcademyList = academyService.overAcademies(closerAcademyList); //5개 오버하면 처리해주는거
-                model.addAttribute("cAcademyList", cAcademyList);
-                for (Academy academy : closerAcademyList) {
-                    System.out.println(academy.getAcademyName());
-                }
-                return "main";
-            } else {
-                cAcademyList = closerAcademyList;
-                model.addAttribute("cAcademyList", cAcademyList); //
-                for (Academy academy : closerAcademyList) {
-                    System.out.println(academy.getAcademyName());
-                }
-            }
+            List<Academy> closerAcademyList = academyService.getCloserAcademy2(userAddress);
+            model.addAttribute("cAcademyList", closerAcademyList); //
             return "main";
-        } else{
+        } else {
             model.addAttribute("cAcademyList", academyService.getRecentlyAcademy());
         }
         return "main";

@@ -20,19 +20,13 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
-public class    UserController {
+public class UserController {
 
     private final UserService userService;
-    private final BoardService boardService;
-    private final ReviewService reviewService;
 
     @GetMapping("/signup")
     public String signup(UserCreateForm userCreateForm, Model model) {
         return "signup_form";
-    }
-    @GetMapping("/sign")
-    public String sign(){
-        return "Bnum";
     }
 
     @PostMapping("/signup")
@@ -49,11 +43,8 @@ public class    UserController {
 
         try {
             UserRole role = userCreateForm.getUsername().startsWith("admin") ? UserRole.ADMIN : UserRole.USER;
-
             userService.create(userCreateForm.getUsername(),
-
                     userCreateForm.getEmail(), userCreateForm.getPassword1(), role, userCreateForm.getAddress());
-
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");

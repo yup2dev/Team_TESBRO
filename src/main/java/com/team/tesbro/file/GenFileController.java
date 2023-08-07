@@ -36,7 +36,6 @@ public class GenFileController {
         }
 
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-
         List<Long> fileIds = new ArrayList<>();
 
         for (String fileInputName : fileMap.keySet()) {
@@ -83,16 +82,15 @@ public class GenFileController {
                 // academy라면 해당 매핑테이블에 저장
                 if (relTypeCode.equals("academy")) {
                     long fileId = genFileService.saveFileOnDisk(multipartFile, relTypeCode, relId, typeCode, type2Code,
-                            fileNo, originFileName, fileExtTypeCode, fileExtType2Code, fileExt, fileSize);
+                            fileNo, originFileName, fileExtTypeCode, fileExtType2Code, fileExt, fileSize, academy);
 
                     fileIds.add(fileId);
                     GenFile genFile = genFileService.getGenFileById(fileId); // 수정된 부분
-                    academy.getGenFiles().add(genFile);
-                    academyRepository.save(academy);
+                    genFile.setAcademy(academy);
                     //board라면 해당 매핑테이블에 저장
                 } else if (relTypeCode.equals("board")) {
                     long fileId = genFileService.saveFileOnDisk(multipartFile, relTypeCode, relId, typeCode, type2Code,
-                            fileNo, originFileName, fileExtTypeCode, fileExtType2Code, fileExt, fileSize);
+                            fileNo, originFileName, fileExtTypeCode, fileExtType2Code, fileExt, fileSize, academy);
 
                     fileIds.add(fileId);
                     GenFile genFile = genFileService.getGenFileById(fileId);

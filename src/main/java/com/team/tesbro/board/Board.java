@@ -67,7 +67,6 @@ public class Board {
     public Integer getViews() {
         return views != null ? views : 0;
     }
-
     @ManyToMany
     Set<SiteUser> voter;
 }
