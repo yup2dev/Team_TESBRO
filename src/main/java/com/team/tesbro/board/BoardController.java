@@ -66,11 +66,7 @@ public class BoardController {
             return "board_form";
         }
         SiteUser siteUser = this.userService.getUser(principal.getName());
-<<<<<<< HEAD
         boardService.create(boardCategory, boardForm.getSubject(), boardForm.getContent(), siteUser);
-=======
-        boardService.create(boardForm.getCategory(), boardForm.getSubject(), boardForm.getContent(), siteUser);
->>>>>>> dc72cb64cbf7475b22a5231a2dab0e1f6e3106bc
         return "redirect:/board/" + boardCategory;
     }
 
