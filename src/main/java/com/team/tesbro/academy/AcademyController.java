@@ -110,7 +110,6 @@ public class AcademyController {
         Page<Review> paging = this.reviewService.getList(academy, page);
         model.addAttribute("paging", paging);
 
-
         List<Lesson> lessonList = lessonService.getAcLesson(id);
         List<LocalDate> dateList = new ArrayList<>();
         for (Lesson lesson : lessonList) {
@@ -149,8 +148,9 @@ public class AcademyController {
 
     @GetMapping("/multi_box_ajax")
     @ResponseBody
-    public List<LocalTime> getLessonTimeList(@RequestParam String data) {// lessonList를 모델에서 가져옴
-        List<LocalTime> lessonTimeList = lessonService.getLessonTimes(LocalDate.parse(data, DateTimeFormatter.ISO_DATE), lessonService.getList()); // lessonList를 전달하여 호출
+    public List<LocalTime> getLessonTimeList(@RequestParam String data, @RequestParam Integer id) {// lessonList를 모델에서 가져옴
+        System.out.println("통신");
+        List<LocalTime> lessonTimeList = lessonService.getLessonTimes(LocalDate.parse(data, DateTimeFormatter.ISO_DATE), lessonService.getAcLesson(id)); // lessonList를 전달하여 호출
         return lessonTimeList;
     }
 }

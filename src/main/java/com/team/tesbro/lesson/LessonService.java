@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +38,7 @@ public class LessonService {
             for (Lesson lesson : lessonList) {
                 if (lesson.getLessonDate().equals(date)) {
                     LocalTime lessonTime = lesson.getLessonTime();
+                    System.out.println(lessonTime);
                     timeList.add(lessonTime);
                 }
             }
